@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Montserrat&display=swap');
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+h1 {
+    font-family: 'Cookie', sans-serif;
+}
