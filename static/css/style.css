@@ -1,14 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Cookie&family=Montserrat&display=swap');
 
+/* General Styling */
+
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	text-align: center;
+	font-size: 16px;
+}
+
 html,
 body {
     height: 100%;
     width: 100%;
 }
 
-h1 {
+.content {
+    height: 85vh;
+    overflow: auto;
+}
+
+footer {
+    height: 5vh;
+}
+
+p {
+    margin: 0;
+}
+
+/* Font Styling */
+
+h1,
+h3 {
     font-family: 'Cookie', sans-serif;
 }
+
+p {
+    font-family: 'Montserra';
+}
+
+i {
+    font-size: 1.5rem;
+}
+
+
 
 /* Footer Styling */
 
@@ -16,3 +52,48 @@ h1 {
     display: flex;
     flex-flow: column;
 }
+
+.social-links ul {
+    margin:  0;
+    padding-inline-start: 0;
+    padding: 5px;
+}
+
+/* Home Section */
+
+.featured-container img {
+    max-width: 100%;
+}
+
+.recent-recipe {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    width: 25vw;
+}
+
+.recent-recipe img {
+    width: 90%;
+}
+
+.banner {
+    max-height: fit-content;
+    background: #64b5f6;
+    padding: 5px;
+}
+
+.banner form {
+    padding: 5px;
+}
+
+form #news-email {
+    width: 250px;
+    border-radius: 5px;
+}
+
+/* display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: flex-end; */
