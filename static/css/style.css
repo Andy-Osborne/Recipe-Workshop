@@ -9,3 +9,10 @@ body {
 h1 {
     font-family: 'Cookie', sans-serif;
 }
+
+/* Footer Styling */
+
+.site-links {
+    display: flex;
+    flex-flow: column;
+}
