@@ -26,6 +26,30 @@ def get_recipe():
     return render_template("public/recipe.html", recipes=mongo.db.recipe.find())
 
 
+@app.route("/register", methods=["GET", "POST"])
+def user_registration():
+
+    user = mongo.db.users
+    
+    if request.method == "POST":
+        req = request.form
+
+        username = req["username"]
+        email = req["email"]
+        password = req["password"]
+
+        new_user = {
+            "username" : username,
+            "email" : email,
+            "password" : password
+        }
+        user.insert_one(new_user)
+        print(new_user)
+        return redirect(request.url)
+
+    return render_template("public/register.html")
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
     port=os.environ.get('PORT'),
