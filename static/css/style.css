@@ -17,7 +17,6 @@ body {
 }
 
 .content {
-    height: 85vh;
     overflow: auto;
 }
 
@@ -32,6 +31,7 @@ p {
 /* Font Styling */
 
 h1,
+h2,
 h3 {
     font-family: 'Cookie', sans-serif;
 }
@@ -44,7 +44,11 @@ i {
     font-size: 1.5rem;
 }
 
+/* Navbar */
 
+.nav-bg {
+    background-color: #fcfaf4;
+}
 
 /* Footer Styling */
 
@@ -59,7 +63,36 @@ i {
     padding: 5px;
 }
 
+/* Button Styling */
+
+.search {
+    background-color: #4fc3f7;
+}
+
 /* Home Section */
+
+.home-image-outer {
+   height: 50vh;
+   overflow: hidden;
+   position: relative;
+}
+
+.search-field {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.home-image-inner {
+    background-image: url("/static/images/herbs.png");
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: translate(0%, -18%);
+}
 
 .featured-container img {
     max-width: 100%;
@@ -76,6 +109,7 @@ i {
 
 .recent-recipe img {
     width: 90%;
+    border-radius: 5px;
 }
 
 .banner {
@@ -93,7 +127,6 @@ form #news-email {
     border-radius: 5px;
 }
 
-/* display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: flex-end; */
+
+
+/* Media Queries */

@@ -3,11 +3,28 @@
 {% block title %}Home{% endblock %}
 
 {% block main %}
-<h1>Welcome to Recipe Workshop</h1>
+
+<div class="container-fluid p-0">
+    <div class="row no-gutters">
+        <div class="col-12 image-container">
+            <div class="home-image-outer">
+                <div class="home-image-inner"></div>
+            </div>
+            <div class="search-field d-inline-flex">
+                <form action="POST">
+                    <input class="form-control" type="search" name="" id="" placeholder="Search by Ingredient">
+                </form>
+                <button class="btn search" type="submit">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <section class="container-fluid">
-    <div class="row">
-        <div class="col-12">
+    <div class="row no-gutters">
+        <div class="col-12 text-center">
+            <h2>Recipes of the Week</h2>
             <div class="featured-container d-flex justify-content-center">
                 <img src="/static/images/brownie.png" alt="">
             </div>
