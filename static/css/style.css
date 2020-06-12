@@ -69,6 +69,16 @@ i {
     background-color: #4fc3f7;
 }
 
+.btn-add {
+    background-color: transparent;
+    color: #2e7d32;
+}
+
+.btn-remove {
+    background-color: transparent;
+    color: #c62828;
+}
+
 /* Home Section */
 
 .home-image-outer {
