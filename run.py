@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, url_for, redirect, request, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from datetime import datetime
 
 from os import path
 if path.exists("env.py"):
@@ -16,6 +17,12 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+# Global Variables
+
+new = mongo.db.recipes
+user = mongo.db.users
+
+
 @app.route('/')
 def index():
     return render_template("public/index.html")
@@ -28,11 +35,6 @@ def get_recipe():
 @app.route('/new_recipe', methods=["GET", "POST"])
 def new_recipe():
 
-    new = mongo.db.recipes
-
-    # if request.method == "POST":
-    #     req = request.form
-
     return render_template("public/new_recipe.html")
 
 
@@ -40,9 +42,7 @@ def new_recipe():
 
 @app.route('/register', methods=["GET", "POST"])
 def user_registration():
-
-    user = mongo.db.users
-    
+ 
     if request.method == "POST":
         req = request.form
 
@@ -61,6 +61,10 @@ def user_registration():
 
     return render_template("public/register.html")
 
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("public/404.html"), 404
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
