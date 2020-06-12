@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect, request, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
@@ -25,8 +25,20 @@ def get_recipe():
 
     return render_template("public/recipe.html", recipes=mongo.db.recipe.find())
 
+@app.route('/new_recipe', methods=["GET", "POST"])
+def new_recipe():
 
-@app.route("/register", methods=["GET", "POST"])
+    new = mongo.db.recipes
+
+    # if request.method == "POST":
+    #     req = request.form
+
+    return render_template("public/new_recipe.html")
+
+
+
+
+@app.route('/register', methods=["GET", "POST"])
 def user_registration():
 
     user = mongo.db.users
