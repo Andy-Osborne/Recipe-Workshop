@@ -12,4 +12,12 @@ $(document).ready(function(){
     $("#remove_ingredient").on("click", () => {
      $("#ingredient input:last-child").remove();   
     });
+
+    $("#add_step").on("click", () => {
+        $("#step_inputs").append('<input class="form-control" type="text" name="step">');
+    });
+
+    $("#remove_step").on("click", () => {
+        $("#step_inputs input:last-child").remove();
+    });
 });
