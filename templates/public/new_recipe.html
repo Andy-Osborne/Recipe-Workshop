@@ -11,7 +11,7 @@
         <form action="{{ url_for('new_recipe') }}" method="post">
             <div class="form-group">
                 <label for="recipe_name">Recipe Name</label>
-                <input type="text" name="recipe_name" id="recipe_name" placeholder="Cheesy Beans On Toast">    
+                <input class="form-control" type="text" name="recipe_name" id="recipe_name" placeholder="Cheesy Beans On Toast">    
             </div>
             <div class="form-group">
                 <label for="dish_type">What type of course is this?</label>
@@ -45,7 +45,7 @@
             </div>
             <div class="form-group">
                 <label for="description">Provide a description of this dish</label>
-                <textarea class="form-control" name="description" id="" cols="30" rows="5"></textarea>
+                <textarea class="form-control" name="description" id="description" cols="30" rows="5"></textarea>
             </div>
             <div class="form-group" id="step_inputs">
                 <label for="steps">Provide the steps to create your Recipe</label>
@@ -61,7 +61,7 @@
             <button class="btn-add" id="add_ingredient" type="button"><i class="fas fa-plus"></i></button>
             <button class="btn-remove" id="remove_ingredient" type="button"><i class="fas fa-minus"></i></button>
 
-
+            <button type="submit" class="btn btn-primary">Submit Your Recipe</button>
 
         </form>
     </div>
