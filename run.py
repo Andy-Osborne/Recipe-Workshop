@@ -19,7 +19,7 @@ mongo = PyMongo(app)
 
 # Global Variables
 
-new = mongo.db.recipes
+recipe = mongo.db.recipe
 user = mongo.db.users
 
 
@@ -33,7 +33,43 @@ def get_recipe():
     return render_template("public/recipe.html", recipes=mongo.db.recipe.find())
 
 @app.route('/new_recipe', methods=["GET", "POST"])
-def new_recipe():
+def add_recipe():
+
+    if request.method == "POST":
+        req = request.form
+        recipe_name = req["recipe_name"]
+        course = req["dish_type"]
+        prep_time = req["preparation_time"]
+        cook_time = req["cooking_time"]
+        effort = req["effort"]
+        servings = req["servings"]
+        description = req["description"]
+
+        ingredient_list = []
+        steps_list = []
+
+        for key in req.keys():
+            if key == "ingredients":
+                for value in req.getlist(key):
+                    ingredient_list.append(value)
+            elif key == "step":
+                for value in req.getlist(key):
+                    steps_list.append(value)
+
+        new_recipe = {
+            "recipe_name": recipe_name,
+            "recipe_course": course,
+            "prep_time": int(prep_time),
+            "cooking_time": int(cook_time),
+            "effort": effort,
+            "servings": int(servings),
+            "recipe_description" : description,
+            "steps": steps_list,
+            "ingredients": ingredient_list
+        }
+
+        recipe.insert_one(new_recipe)
+        return redirect("/")
 
     return render_template("public/new_recipe.html")
 
