@@ -123,18 +123,32 @@ def user_registration():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    form = UserLogin()
+
     if request.method == "POST":
-        req = request.form
+        if form.validate_on_submit():
+            req = request.form
+            existing_user = user.find_one({"email": req["email"]})
 
-  
-        password = req["password"]
+            if existing_user:
+                for fields in existing_user.items():
+                    if fields[0] == "password":
+                        print("Checking password match")
+                        if pbkdf2_sha256.verify(req["password"], fields[1]):
+                            print("You can Log In")
+                            
+                        else:
+                            print("Password incorrect")             
+            else:
+                print("Email not found")
 
-        existing_user = user.find_one({"username": req["username"]})
+            return render_template("public/login.html", title="Login", form=form)
 
+        else:
+            return render_template("public/login.html", title="Login", form=form)   
+           
     elif request.method == "GET":
-        form = UserLogin()
         return render_template("public/login.html", title="Login", form=form)   
-            
 
 
 @app.errorhandler(404)
