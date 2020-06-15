@@ -3,6 +3,8 @@ from flask import Flask, render_template, url_for, redirect, request, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from datetime import datetime
+from usercreation import UserRegistration, UserLogin
+from passlib.hash import pbkdf2_sha256
 
 from os import path
 if path.exists("env.py"):
@@ -32,7 +34,7 @@ def get_recipe():
 
     return render_template("public/recipe.html", recipes=mongo.db.recipe.find())
 
-@app.route('/new_recipe', methods=["GET", "POST"])
+@app.route('/create_recipe', methods=["GET", "POST"])
 def add_recipe():
 
     if request.method == "POST":
@@ -47,6 +49,10 @@ def add_recipe():
 
         ingredient_list = []
         steps_list = []
+
+        """The below for loop iterates over the form data and as the fields for 
+        ingredients and steps are dynamic, they will vary according the users needs, and it will 
+        add each corresponding value to the associated list which can then be submitted to the database."""
 
         for key in req.keys():
             if key == "ingredients":
@@ -71,31 +77,64 @@ def add_recipe():
         recipe.insert_one(new_recipe)
         return redirect("/")
 
-    return render_template("public/new_recipe.html")
-
-
+    return render_template("public/create_recipe.html")
 
 
 @app.route('/register', methods=["GET", "POST"])
 def user_registration():
- 
+    form = UserRegistration()
+
+    if request.method == "POST":
+        if form.validate_on_submit():
+            req = request.form
+
+            """ The username and email search checks the user colllection in the database and 
+            counts the amount of times it appears. This is then used in the if statement when
+            registering a new user. If the email count is greater than 0, it means that the user
+            already has an account and likewise, if the username count is greater than 0 then the
+            name has already been taken."""
+
+            username_search = user.count_documents({"username": req["username"]})
+            email_search = user.count_documents({"email": req["email"]})
+
+            if email_search <= 0 and username_search <= 0:
+                new_user = {
+                    "username" : req["username"],
+                    "email" : req["email"],
+                    "password" : pbkdf2_sha256.hash(req["password"])
+                    }    
+                user.insert_one(new_user)
+                print(new_user)
+                return redirect("/")
+
+            elif username_search > 0:
+                flash(f"Username already taken. Please choose a different username.", "error_username")
+                return redirect(request.url)
+
+            elif email_search > 0:
+                flash(f"Email already in use. Please use login.", "error_email")
+                return redirect(request.url)
+        else:
+            return render_template("public/register.html", title="Register", form=form)  
+            
+    elif request.method == "GET":
+        return render_template("public/register.html", title="Register", form=form)   
+        
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
     if request.method == "POST":
         req = request.form
 
-        username = req["username"]
-        email = req["email"]
+  
         password = req["password"]
 
-        new_user = {
-            "username" : username,
-            "email" : email,
-            "password" : password
-        }
-        user.insert_one(new_user)
-        print(new_user)
-        return redirect(request.url)
+        existing_user = user.find_one({"username": req["username"]})
 
-    return render_template("public/register.html")
+    elif request.method == "GET":
+        form = UserLogin()
+        return render_template("public/login.html", title="Login", form=form)   
+            
 
 
 @app.errorhandler(404)
