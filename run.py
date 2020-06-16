@@ -74,7 +74,8 @@ def add_recipe():
             "servings": int(servings),
             "recipe_description" : description,
             "steps": steps_list,
-            "ingredients": ingredient_list
+            "ingredients": ingredient_list,
+            "submitted" : datetime.today().strftime('%d-%m-%Y')
         }
 
         recipe.insert_one(new_recipe)
