@@ -34,6 +34,8 @@ def get_recipe():
 
     return render_template("public/recipe.html", recipes=mongo.db.recipe.find())
 
+# Handles the logic for adding a recipe to database
+
 @app.route('/create_recipe', methods=["GET", "POST"])
 def add_recipe():
 
@@ -63,6 +65,7 @@ def add_recipe():
                     steps_list.append(value)
 
         new_recipe = {
+            "recipe_author": session["username"],
             "recipe_name": recipe_name,
             "recipe_course": course,
             "prep_time": int(prep_time),
@@ -79,6 +82,7 @@ def add_recipe():
 
     return render_template("public/create_recipe.html")
 
+#H Handles the user registration logic
 
 @app.route('/register', methods=["GET", "POST"])
 def user_registration():
@@ -119,6 +123,7 @@ def user_registration():
     elif request.method == "GET":
         return render_template("public/register.html", title="Register", form=form)   
         
+# Handles the user login logic
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -134,16 +139,16 @@ def login():
                     if fields[0] == "username":
                         session_username = fields[1]
                     if fields[0] == "password":
-                        print("Checking password match")
                         if pbkdf2_sha256.verify(req["password"], fields[1]):
-                            print("You can Log In")
                             session['username'] =  session_username
+                            return redirect(url_for("profile", username=session['username']))
                         else:
-                            print("Password incorrect")
-                            session_username = ""
-                            print("Username is " + session_username)             
+                            flash(f"Incorrect e-mail/password combination. Please try again", "error")
+                            session_username = None
+                            return redirect(request.url)
             else:
-                print("Email not found")
+                flash(f"Incorrect e-mail/password combination. Please try again", "error")
+                return redirect(request.url)
 
             return render_template("public/login.html", title="Login", form=form)
 
@@ -152,6 +157,12 @@ def login():
            
     elif request.method == "GET":
         return render_template("public/login.html", title="Login", form=form)   
+
+
+@app.route("/logout", methods=["POST"])
+def logout():
+    session.pop("username", None)
+    return redirect(url_for("index"))
 
 
 @app.errorhandler(404)
