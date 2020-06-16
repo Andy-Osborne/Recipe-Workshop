@@ -4,11 +4,11 @@
 
 {%block main %}
 
-<div class="row">
+<div class="row no-gutters">
     <div class="col-lg-6 offset-lg-2 my-5">
         <h1>Add New Recipe</h1>
         <hr>
-        <form action="{{ url_for('new_recipe') }}" method="post">
+        <form action="{{ url_for('add_recipe') }}" method="post">
             <div class="form-group">
                 <label for="recipe_name">Recipe Name</label>
                 <input class="form-control" type="text" name="recipe_name" id="recipe_name" placeholder="Cheesy Beans On Toast">    
