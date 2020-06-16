@@ -158,10 +158,11 @@ def login():
     elif request.method == "GET":
         return render_template("public/login.html", title="Login", form=form)   
 
+# Handles logging out user by clearing session data.
 
-@app.route("/logout", methods=["POST"])
+@app.route("/logout", methods=["POST", "GET"])
 def logout():
-    session.pop("username", None)
+    session.clear()
     return redirect(url_for("index"))
 
 
