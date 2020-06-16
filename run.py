@@ -165,6 +165,13 @@ def logout():
     return redirect(url_for("index"))
 
 
+@app.route("/profile/<username>", methods=["GET"])
+def profile(username):
+    user_profile = user.find_one({"username": username})
+
+    return render_template("public/profile.html", username=user_profile, recipes=mongo.db.recipe.find())
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("public/404.html"), 404

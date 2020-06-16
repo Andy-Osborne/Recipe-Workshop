@@ -1,0 +1,25 @@
+{% extends 'public/template/public_base.html' %}
+
+{% block title %} Profile {% endblock %}
+
+{% block main %} 
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Welcome {{ username.username }}</h1>
+
+                <h2>Your Recipes</h2>
+
+                <p>The recipes created by {{username.username}} are:</p>
+
+                    {% for recipe in recipes %}
+                        {% if recipe.recipe_author == username.username %}
+                        <p>{{recipe.recipe_name}}</p>
+                        {% endif %}
+                    {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
