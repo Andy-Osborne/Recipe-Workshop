@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, url_for, redirect, request, flash
+from flask import Flask, render_template, url_for, redirect, request, flash, session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from datetime import datetime
@@ -104,7 +104,6 @@ def user_registration():
                     "password" : pbkdf2_sha256.hash(req["password"])
                     }    
                 user.insert_one(new_user)
-                print(new_user)
                 return redirect("/")
 
             elif username_search > 0:
@@ -132,13 +131,17 @@ def login():
 
             if existing_user:
                 for fields in existing_user.items():
+                    if fields[0] == "username":
+                        session_username = fields[1]
                     if fields[0] == "password":
                         print("Checking password match")
                         if pbkdf2_sha256.verify(req["password"], fields[1]):
                             print("You can Log In")
-                            
+                            session['username'] =  session_username
                         else:
-                            print("Password incorrect")             
+                            print("Password incorrect")
+                            session_username = ""
+                            print("Username is " + session_username)             
             else:
                 print("Email not found")
 
