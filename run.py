@@ -29,10 +29,13 @@ user = mongo.db.users
 def index():
     return render_template("public/index.html")
 
-@app.route('/recipe')
-def get_recipe():
+@app.route('/recipe/<recipe_id>/<recipe_name>')
+def get_recipe(recipe_id, recipe_name):
+    recipe_view = mongo.db.recipe.find_one({"_id":ObjectId(recipe_id)})
 
-    return render_template("public/recipe.html", recipes=mongo.db.recipe.find())
+    print(recipe_view)
+    print(recipe_name)
+    return render_template("public/recipe.html", recipe=recipe_view)
 
 # Handles the logic for adding a recipe to database
 
@@ -170,8 +173,9 @@ def logout():
 @app.route("/profile/<username>", methods=["GET"])
 def profile(username):
     user_profile = user.find_one({"username": username})
+    session_user = session["username"]
 
-    return render_template("public/profile.html", username=user_profile, recipes=mongo.db.recipe.find())
+    return render_template("public/profile.html", username=user_profile, recipes=mongo.db.recipe.find(), session_user=session_user)
 
 
 @app.errorhandler(404)
