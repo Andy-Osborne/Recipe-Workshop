@@ -1,0 +1,83 @@
+{% extends 'public/template/public_base.html' %}
+
+{% block title %}Recipe Workshop | {{recipe.recipe_name|title}}{% endblock %}
+
+{% block main %}
+
+<div class="row no-gutters">
+    <div class="col-12 d-flex justify-content-center">
+        <div class="col-8 text-center">
+            <h1>{{recipe.recipe_name|title}}</h1>
+            <h3>Recipe by {{recipe.recipe_author}}</h3>
+            <div class="container-fluid d-inline-flex">
+                <div class="col-8 text-left">
+                    <ul>
+                        <li>Effort Required: {{recipe.effort}}</li>
+                        <li>Preparation Time: {{recipe.preparation}} minutes</li>
+                        <li>Cooking Time: {{recipe.cooking}} minutes</li>
+                        <li>Serves: {{recipe.serving}}</li>
+                    </ul>
+
+                    <p>{{recipe.description|capitalize}}</p>
+                </div>
+                <div class="col-4">
+                    <img class="recipe-image" src="/static/images/brownie.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row no-gutters">
+    <div class="col-12 d-flex justify-content-center">
+        <div class="col-8 d-inline-flex">
+                <div class="col-4">
+                    <h3>Ingredients</h3>
+                    <ul>
+                        {% for ingredient in recipe.ingredients %}
+                        <li>{{ingredient}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-8">
+                    <h3>Steps</h3>
+                    <ul>
+                        {% for steps in recipe.steps %}
+                        <li>{{loop.index}} - {{steps}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- 
+    _id
+
+recipe_author
+
+recipe_name
+
+type
+
+preparation
+
+cooking
+
+effort
+
+serving
+
+description
+
+steps
+
+ingredients
+
+submitted -->
+
+
+{%endblock %}
