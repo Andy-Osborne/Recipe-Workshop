@@ -3,7 +3,7 @@ from flask import Flask, render_template, url_for, redirect, request, flash, ses
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from datetime import datetime
-from usercreation import UserRegistration, UserLogin
+from usercreation import UserRegistration, UserLogin, UserUpdate
 from passlib.hash import pbkdf2_sha256
 
 from os import path
@@ -32,9 +32,6 @@ def index():
 @app.route('/recipe/<recipe_id>/<recipe_name>')
 def get_recipe(recipe_id, recipe_name):
     recipe_view = mongo.db.recipe.find_one({"_id":ObjectId(recipe_id)})
-
-    print(recipe_view)
-    print(recipe_name)
     return render_template("public/recipe.html", recipe=recipe_view)
 
 # Handles the logic for adding a recipe to database
@@ -85,6 +82,39 @@ def add_recipe():
         return redirect("/")
 
     return render_template("public/create_recipe.html")
+
+# Handles the logic of a user liking or removing their like from a recipe
+
+@app.route("/like/<user_name>/<recipe_id>", methods=["GET", "POST"])
+def like(recipe_id, user_name):
+    find_recipe = recipe.find_one({"_id":ObjectId(recipe_id)})
+
+    """The below checks to see if the user who likes the recipe is already in the liked by
+    field within the recipes document. If the user is not, then it increments the likes by 1
+    and adds the username to liked_by. If the user is already in there, then it treats it as 
+    if the user is unliking it and removes their name and decrements the count by 1."""
+
+    if user_name not in find_recipe["liked_by"]:
+        recipe.update(
+            {'_id': ObjectId(recipe_id)},
+            {
+                
+                "$inc": {"likes": 1},
+                "$push" : {"liked_by": user_name}
+                
+        })
+    else:
+        recipe.update(
+            {'_id': ObjectId(recipe_id)},
+            {
+                
+                "$inc": {"likes": -1},
+                "$pull" : {"liked_by": user_name}
+                
+        })
+
+    return redirect(request.referrer)
+
 
 #H Handles the user registration logic
 
@@ -174,7 +204,7 @@ def logout():
 def profile(username):
     user_profile = user.find_one({"username": username})
     session_user = session["username"]
-
+    
     return render_template("public/profile.html", username=user_profile, recipes=mongo.db.recipe.find(), session_user=session_user)
 
 
@@ -186,3 +216,4 @@ if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
     port=os.environ.get('PORT'),
     debug=True)
+
