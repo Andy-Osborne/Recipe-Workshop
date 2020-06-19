@@ -6,7 +6,6 @@
 	margin: 0;
 	padding: 0;
 	border: 0;
-	text-align: center;
 	font-size: 16px;
 }
 
@@ -50,6 +49,10 @@ i {
     background-color: #fcfaf4;
 }
 
+.logo img {
+    width: 75px;
+}
+
 /* Footer Styling */
 
 .site-links {
@@ -74,14 +77,15 @@ i {
     color: #2e7d32;
 }
 
-.btn-remove {
+.btn-remove,
+.btn-like {
     background-color: transparent;
     color: #c62828;
 }
 
 /* Home Section */
 
-.home-image-outer {
+.image-outer {
    height: 50vh;
    overflow: hidden;
    position: relative;
@@ -135,6 +139,25 @@ i {
 form #news-email {
     width: 250px;
     border-radius: 5px;
+}
+
+
+/* Recipe Page */
+
+.recipe-image {
+    width: 250px;
+}
+
+
+/* 404 Page */
+
+.error-image-inner {
+    background-image: url("/static/images/404.png");
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: translate(0%, -18%);
 }
 
 
