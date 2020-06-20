@@ -43,11 +43,12 @@ def add_recipe():
         req = request.form
         recipe_name = req["recipe_name"]
         course = req["dish_type"]
+        description = req["description"]
+        image = req["recipe_image"]
         prep_time = req["preparation_time"]
         cook_time = req["cooking_time"]
         effort = req["effort"]
         servings = req["servings"]
-        description = req["description"]
 
         ingredient_list = []
         steps_list = []
@@ -68,14 +69,17 @@ def add_recipe():
             "recipe_author": session["username"],
             "recipe_name": recipe_name,
             "recipe_course": course,
+            "recipe_description" : description,
+            "recipe_image" : image,
             "prep_time": int(prep_time),
             "cooking_time": int(cook_time),
             "effort": effort,
             "servings": int(servings),
-            "recipe_description" : description,
             "steps": steps_list,
             "ingredients": ingredient_list,
-            "submitted" : datetime.today().strftime('%d-%m-%Y')
+            "submitted" : datetime.today().strftime('%d-%m-%Y'),
+            "likes" : 0,
+            "liked_by" : []
         }
 
         recipe.insert_one(new_recipe)
@@ -98,19 +102,15 @@ def like(recipe_id, user_name):
         recipe.update(
             {'_id': ObjectId(recipe_id)},
             {
-                
                 "$inc": {"likes": 1},
                 "$push" : {"liked_by": user_name}
-                
         })
     else:
         recipe.update(
             {'_id': ObjectId(recipe_id)},
             {
-                
                 "$inc": {"likes": -1},
                 "$pull" : {"liked_by": user_name}
-                
         })
 
     return redirect(request.referrer)
