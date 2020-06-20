@@ -13,15 +13,15 @@
                 <div class="col-8 text-left">
                     <ul>
                         <li>Effort Required: {{recipe.effort}}</li>
-                        <li>Preparation Time: {{recipe.preparation}} minutes</li>
-                        <li>Cooking Time: {{recipe.cooking}} minutes</li>
-                        <li>Serves: {{recipe.serving}}</li>
+                        <li>Preparation Time: {{recipe.prep_time}} minutes</li>
+                        <li>Cooking Time: {{recipe.cooking_time}} minutes</li>
+                        <li>Serves: {{recipe.servings}}</li>
                     </ul>
 
-                    <p>{{recipe.description|capitalize}}</p>
+                    <p>{{recipe.recipe_description|capitalize}}</p>
                 </div>
                 <div class="col-4">
-                    <img class="recipe-image" src="/static/images/brownie.png">
+                    <img class="recipe-image" src="{{recipe.recipe_image}}">
                 </div>
             </div>
         </div>
