@@ -29,8 +29,9 @@ user = mongo.db.users
 def index():
 
     highest_rated = recipe.find({"likes":{"$gt": 0}}).sort("likes").limit(1)
+    recent_recipes = recipe.find().sort("submitted", -1).limit(6)
 
-    return render_template("public/index.html", favourite=list(highest_rated))
+    return render_template("public/index.html", favourite=list(highest_rated), recent=list(recent_recipes))
 
 @app.route('/recipe/<recipe_id>/<recipe_name>')
 def get_recipe(recipe_id, recipe_name):

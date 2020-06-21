@@ -35,35 +35,17 @@
         </div>
     </div>
 </section>
+
 <section class="container-fluid">
     <div class="row">
         <div class="col-12">
             <h3>Recent Recipes</h3>
         </div>
+        {% for dict in recent %}
         <div class="col-6 col-lg-3 recent-recipe">
-            <a href="#"><img src="/static/images/brownie.png" alt=""></a>
+            <a href="{{url_for('get_recipe',recipe_id=dict['_id'],recipe_name=dict['recipe_name'])}}"><img src="{{dict['recipe_image']}}" alt="{{dict['recipe_name']}}"></a>
         </div>
-        <div class="col-6 col-lg-3 recent-recipe">
-            <a href="#"><img src="/static/images/brownie.png" alt=""></a>
-        </div>
-        <div class="col-6 col-lg-3 recent-recipe">
-            <a href="#"><img src="/static/images/brownie.png" alt=""></a>
-        </div>
-        <div class="col-6 col-lg-3 recent-recipe">
-            <a href="#"><img src="/static/images/brownie.png" alt=""></a>
-        </div>
-        <div class="col-6 col-lg-3 recent-recipe">
-            <a href="#"><img src="/static/images/brownie.png" alt=""></a>
-        </div>
-        <div class="col-6 col-lg-3 recent-recipe">
-            <a href="#"><img src="/static/images/brownie.png" alt=""></a>
-        </div>
-        <div class="col-6 col-lg-3 recent-recipe">
-            <a href="#"><img src="/static/images/brownie.png" alt=""></a>
-        </div>
-        <div class="col-6 col-lg-3 recent-recipe">
-            <a href="#"><img src="/static/images/brownie.png" alt=""></a>
-        </div>
+        {% endfor %}
 
     </div>
 
