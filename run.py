@@ -13,7 +13,7 @@ if path.exists("env.py"):
 
 app = Flask(__name__)
 
-app.config["MONGO_DBNAME"] = os.environ.get("NONGO_DBNAME")
+app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
@@ -27,7 +27,10 @@ user = mongo.db.users
 
 @app.route('/')
 def index():
-    return render_template("public/index.html")
+
+    highest_rated = recipe.find({"likes":{"$gt": 0}}).sort("likes").limit(1)
+
+    return render_template("public/index.html", favourite=list(highest_rated))
 
 @app.route('/recipe/<recipe_id>/<recipe_name>')
 def get_recipe(recipe_id, recipe_name):
@@ -44,7 +47,7 @@ def add_recipe():
         recipe_name = req["recipe_name"]
         course = req["dish_type"]
         description = req["description"]
-        image = req["recipe_image"]
+        image_url = req["recipe_image"]
         prep_time = req["preparation_time"]
         cook_time = req["cooking_time"]
         effort = req["effort"]
@@ -70,7 +73,7 @@ def add_recipe():
             "recipe_name": recipe_name,
             "recipe_course": course,
             "recipe_description" : description,
-            "recipe_image" : image,
+            "recipe_image" : image_url,
             "prep_time": int(prep_time),
             "cooking_time": int(cook_time),
             "effort": effort,

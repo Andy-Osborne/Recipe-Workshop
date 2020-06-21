@@ -7,7 +7,7 @@
 <div class="container-fluid p-0">
     <div class="row no-gutters">
         <div class="col-12 image-container">
-            <div class="home-image-outer">
+            <div class="image-outer">
                 <div class="home-image-inner"></div>
             </div>
             <div class="search-field d-inline-flex">
@@ -21,13 +21,17 @@
 </div>
 
 
+
 <section class="container-fluid">
     <div class="row no-gutters">
         <div class="col-12 text-center">
-            <h2>Recipes of the Week</h2>
+            <h2>Best Rated Recipe</h2>
+            {% for dict in favourite %}
             <div class="featured-container d-flex justify-content-center">
-                <img src="/static/images/brownie.png" alt="">
+                <a href="{{url_for('get_recipe',recipe_id=dict['_id'],recipe_name=dict['recipe_name'])}}"><img src="{{dict['recipe_image']}}" alt="{{dict['recipe_name']}}"></a>
             </div>
+            {% endfor %}
+
         </div>
     </div>
 </section>
