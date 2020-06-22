@@ -24,21 +24,41 @@ mongo = PyMongo(app)
 recipe = mongo.db.recipe
 user = mongo.db.users
 
+# Handles the logic for the front page and displays the highest rated recipe & 6 most recently added.
 
 @app.route('/')
 def index():
 
-    highest_rated = recipe.find({"likes":{"$gt": 0}}).sort("likes").limit(1)
+    highest_rated = recipe.find({"likes":{"$gt": 0}}).sort("likes", -1).limit(1)
     recent_recipes = recipe.find().sort("submitted", -1).limit(6)
 
     return render_template("public/index.html", favourite=list(highest_rated), recent=list(recent_recipes))
+
+@app.route('/search', methods=["POST"])
+def get_search():
+    return redirect(url_for("search_recipes", search_term=request.form.get("search_field")))
+
+@app.route('/search/<search_term>')
+def search_recipes(search_term):
+    print("You've reached me")
+    recipe.create_index([
+        ("recipe_name", "text"),
+        ("ingredients", "text"),
+        ("recipe_course", "text"),
+        ("recipe_description", "text"),
+        ("recipe_author", "text")
+    ])
+
+    search_result = recipe.find({"$text": {"$search": search_term}})
+    
+    return render_template('public/search.html', search_term=search_term, search_result=search_result)    
 
 @app.route('/recipe/<recipe_id>/<recipe_name>')
 def get_recipe(recipe_id, recipe_name):
     recipe_view = mongo.db.recipe.find_one({"_id":ObjectId(recipe_id)})
     return render_template("public/recipe.html", recipe=recipe_view)
 
-# Handles the logic for adding a recipe to database
+# Handles the logic for adding a recipe to database.
 
 @app.route('/create_recipe', methods=["GET", "POST"])
 def add_recipe():

@@ -11,10 +11,10 @@
                 <div class="home-image-inner"></div>
             </div>
             <div class="search-field d-inline-flex">
-                <form action="POST">
-                    <input class="form-control" type="search" name="" id="" placeholder="Search by Ingredient">
+                <form action="{{url_for('get_search')}}" method="POST">
+                    <input class="form-control" type="search" name="search_field" id="search_field" placeholder="Search by Ingredient">
+                    <button class="btn search" type="submit">Search</button>
                 </form>
-                <button class="btn search" type="submit">Search</button>
             </div>
         </div>
     </div>
@@ -25,12 +25,19 @@
 <section class="container-fluid">
     <div class="row no-gutters">
         <div class="col-12 text-center">
-            <h2>Best Rated Recipe</h2>
-            {% for dict in favourite %}
-            <div class="featured-container d-flex justify-content-center">
-                <a href="{{url_for('get_recipe',recipe_id=dict['_id'],recipe_name=dict['recipe_name'])}}"><img src="{{dict['recipe_image']}}" alt="{{dict['recipe_name']}}"></a>
+            <h2 class="front-header">Top Rated Recipe</h2>
+            <div class="front-imgblock">
+                {% for dict in favourite %}
+                <div class="featured-container d-flex justify-content-center">
+                    <a href="{{url_for('get_recipe',recipe_id=dict['_id'],recipe_name=dict['recipe_name'])}}"><img src="{{dict['recipe_image']}}" alt="{{dict['recipe_name']}}"></a>
+                </div>
+                
+                <div class="front-text">
+                    <h4>{{dict["recipe_name"]}}</h4>
+                    <p>{{dict["recipe_description"]}}</p>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
 
         </div>
     </div>
@@ -39,16 +46,14 @@
 <section class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <h3>Recent Recipes</h3>
+            <h3 class="front-header">Recently Added Recipes</h3>
         </div>
         {% for dict in recent %}
-        <div class="col-6 col-lg-3 recent-recipe">
+        <div class="col-6 col-lg-4 recent-recipe">
             <a href="{{url_for('get_recipe',recipe_id=dict['_id'],recipe_name=dict['recipe_name'])}}"><img src="{{dict['recipe_image']}}" alt="{{dict['recipe_name']}}"></a>
         </div>
         {% endfor %}
-
     </div>
-
 </section>
 
 <div class="banner d-flex justify-content-center align-items-center flex-column">
