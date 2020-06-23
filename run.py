@@ -34,13 +34,17 @@ def index():
 
     return render_template("public/index.html", favourite=list(highest_rated), recent=list(recent_recipes))
 
+
 @app.route('/search', methods=["POST"])
 def get_search():
     return redirect(url_for("search_recipes", search_term=request.form.get("search_field")))
 
+
 @app.route('/search/<search_term>')
 def search_recipes(search_term):
-    print("You've reached me")
+    
+    # The below creates the index for the text search and defines the fields to use.
+
     recipe.create_index([
         ("recipe_name", "text"),
         ("ingredients", "text"),
@@ -49,9 +53,15 @@ def search_recipes(search_term):
         ("recipe_author", "text")
     ])
 
-    search_result = recipe.find({"$text": {"$search": search_term}})
-    
-    return render_template('public/search.html', search_term=search_term, search_result=search_result)    
+    # The below uses the text search functionality, and then sorts the results by it's metascore
+
+    search_result = recipe.find({"$text": {"$search": search_term}}, 
+    {'score': {'$meta': 'textScore'}}).sort([('score', {'$meta': 'textScore'})])
+
+    search_count = recipe.count_documents({"$text": {"$search": search_term}})
+
+    return render_template('public/search.html', search_term=search_term, search_result=search_result, count=search_count)    
+
 
 @app.route('/recipe/<recipe_id>/<recipe_name>')
 def get_recipe(recipe_id, recipe_name):
@@ -138,7 +148,6 @@ def like(recipe_id, user_name):
         })
 
     return redirect(request.referrer)
-
 
 #H Handles the user registration logic
 
