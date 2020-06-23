@@ -85,6 +85,10 @@ i {
     margin: 5px;
 }
 
+.btn-zoom {
+    transform: scale(1.2);
+}
+
 .btn-remove,
 .btn-like {
     background-color: transparent;
