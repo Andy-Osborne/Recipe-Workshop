@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Montserrat&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;400;700&family=PT+Sans:ital@0;1&display=swap');
 /* General Styling */
 
 * {
@@ -36,11 +35,11 @@ p {
 h1,
 h2,
 h3 {
-    font-family: 'Cookie', sans-serif;
+    font-family: 'Averia Serif Libre', cursive;
 }
 
 p {
-    font-family: 'Montserra';
+    font-family: 'PT Sans', sans-serif;
 }
 
 i {
@@ -49,8 +48,8 @@ i {
 
 /* Navbar */
 
-.nav-bg {
-    background-color: #fcfaf4;
+.nav-colour {
+    background-color: #6ebdc7;
 }
 
 .logo img {
@@ -79,6 +78,11 @@ i {
 .btn-add {
     background-color: transparent;
     color: #2e7d32;
+}
+
+.btn-sign-up {
+    background-color: #ea9c76;
+    margin: 5px;
 }
 
 .btn-remove,
