@@ -36,5 +36,18 @@ $(document).ready(function(){
         $(event.currentTarget).removeClass("btn-zoom");
     });
 
-    
+    $(".index-image").on("mouseenter", event => {
+        $(event.currentTarget).addClass("index-image-zoom");
+    });
+
+    $(".index-image").on("mouseleave", event => {
+        $(event.currentTarget).removeClass("index-image-zoom");
+    });
+
+    // Below toggles the display of Ingredients / Steps within recipe view on small screen
+
+    $(".toggle-recipe-list").on("click", event => {
+        $(event.currentTarget).siblings().slideToggle(400);
+    })
+
 });
