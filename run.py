@@ -30,7 +30,7 @@ user = mongo.db.users
 def index():
 
     highest_rated = recipe.find({"likes":{"$gt": 0}}).sort("likes", -1).limit(1)
-    recent_recipes = recipe.find().sort("submitted", -1).limit(6)
+    recent_recipes = recipe.find().sort("submitted", -1).limit(8)
 
     return render_template("public/index.html", favourite=list(highest_rated), recent=list(recent_recipes))
 
