@@ -8,7 +8,8 @@
     <div class="col-12 d-flex justify-content-center">
         <div class="text-center">
             <h1>{{recipe.recipe_name|title}}</h1>
-            <h3>Recipe by <a class="profile-link" href="{{url_for('profile', username=recipe.recipe_author)}}">{{recipe.recipe_author}}</a></h3>
+            <h3>Recipe by <a class="profile-link"
+                    href="{{url_for('profile', username=recipe.recipe_author)}}">{{recipe.recipe_author}}</a></h3>
             <div class="container-fluid d-flex col-12 recipe-header">
                 <div class="recipe-overview col-md-7 col-lg-8">
                     <ul class="recipe-list">
@@ -22,7 +23,7 @@
                         <li>Serves: {{recipe.servings}}</li>
                     </ul>
 
-                    <p>{{recipe.recipe_description|capitalize}}</p>
+                    <p class="description">{{recipe.recipe_description|capitalize}}</p>
                 </div>
                 <div class="recipe-image-container">
                     <img class="recipe-image" src="{{recipe.recipe_image}}">
@@ -33,18 +34,21 @@
 </div>
 
 <div class="row no-gutters">
-    <div class="col-12 d-flex justify-content-center">
-        <div class="col-8 d-inline-flex">
-            <div class="col-4">
-                <h3>Ingredients</h3>
+
+    <!-- Desktop View -->
+
+    <div class="col-12 justify-content-center large-screen">
+        <div class="col-lg-8 d-lg-inline-flex">
+            <div class="col-lg-4">
+                <h3 class="methods-header">Ingredients</h3>
                 <ul class="list-group">
                     {% for ingredient in recipe.ingredients %}
                     <li class="list-group-item">{{ingredient}}</li>
                     {% endfor %}
                 </ul>
             </div>
-            <div class="col-8">
-                <h3>Steps</h3>
+            <div class="col-lg-8">
+                <h3 class="methods-header">Steps</h3>
                 <ul class="recipe-list">
                     {% for steps in recipe.steps %}
                     <li>{{loop.index}} - {{steps}}</li>
@@ -53,11 +57,42 @@
             </div>
         </div>
     </div>
+
+    <!-- Mobile View -->
+
+    <div class="col-12 justify-content-center small-screen">
+        <div class="col-lg-8 d-lg-inline-flex text-center">
+            <div class="col-lg-4">
+                <btn class="btn toggle-recipe-list" role="button">
+                    <h3 class="methods-header">Ingredients</h3>
+                </btn>
+                <div class="recipe-list-view" id="#recipe-ingredients">
+                    <ul class="list-group">
+                        {% for ingredient in recipe.ingredients %}
+                        <li class="list-group-item">{{ingredient}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <btn class="btn toggle-recipe-list" role="button">
+                    <h3 class="methods-header">Steps</h3>
+                </btn>
+                <div class="recipe-list-view r-steps" id="#recipe-steps">
+                    <ul class="recipe-list">
+                        {% for steps in recipe.steps %}
+                        <li>{{loop.index}} - {{steps}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row no-gutters text-center">
     <div class="col">
-        <h3>If you liked this recipe, why not show your appreciation and give it a like?</h3>
+        <h4>If you liked this recipe, why not show your appreciation and give it a like?</h4>
         <form action="{{url_for('like', recipe_id=recipe._id, user_name=session['username'])}}" method="POST">
             {% if not session["username"] %}
             <button class="btn-like disable" id="like" type="button"><i class="fas fa-heart"></i></button>
@@ -65,13 +100,13 @@
             <br>
             <small>Please log in to give this recipe a like</small>
             {% else %}
-                {% if session["username"] in recipe.liked_by %}
-                <button class="btn-like" id="like" type="submit"><i class="fas fa-heart"></i></button>
-                <small>{{recipe.likes}}</small>
-                {% else %}
-                <button class="btn-like" id="unlike" type="submit"><i class="far fa-heart"></i></button>
-                <small>{{recipe.likes}}</small>
-                {% endif %}
+            {% if session["username"] in recipe.liked_by %}
+            <button class="btn-like" id="like" type="submit"><i class="fas fa-heart"></i></button>
+            <small>{{recipe.likes}}</small>
+            {% else %}
+            <button class="btn-like" id="unlike" type="submit"><i class="far fa-heart"></i></button>
+            <small>{{recipe.likes}}</small>
+            {% endif %}
             {% endif %}
         </form>
     </div>
