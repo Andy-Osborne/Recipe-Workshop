@@ -46,6 +46,12 @@ i {
     font-size: 1.5rem;
 }
 
+.profile-link {
+    font-size: inherit;
+    text-decoration: none;
+    color: #947232;
+}
+
 /* Navbar */
 
 .nav-colour {
@@ -125,8 +131,20 @@ i {
     padding: 5px 0px;
 }
 
+.featured-container {
+    overflow: hidden;
+}
 .featured-container img {
     max-width: 100%;
+    border-radius: 15%;
+}
+
+.featured-container .index-image-zoom {
+    transition: transform 2s ease
+}
+
+.index-image-zoom {
+    transform: scale(1.2);
 }
 
 .recent-recipe {
@@ -136,6 +154,7 @@ i {
     align-items: center;
     margin: 10px auto;
     width: 25vw;
+    overflow: hidden;
 }
 
 .recent-recipe a img {
@@ -180,11 +199,20 @@ form #news-email {
 
 .recipe-image {
     width: 250px;
+    padding: 10px;
 }
 
 .recipe-list li {
     list-style-type: none;
+    padding: 5px;
+    margin-bottom: 5px;
 }
+
+.methods-header {
+    margin: 5px 0;
+    padding: 10px 0;
+}
+
 
 /* Registration/Login Pages */
 
@@ -217,6 +245,19 @@ form #news-email {
         width: 80vw;
         height: 8vh;
     }
+
+    .recipe-image-container {
+        order: 1;
+    }
+
+    .recipe-overview {
+        order: 2;
+    }
+
+    .recipe-header {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
 }
 
 @media only screen and (min-width: 300px) and (orientation: landscape) {
@@ -231,6 +272,23 @@ form #news-email {
         width: 80vw;
         height: 6vh;
     }
+
+    .recipe-image-container {
+        order: 1;
+    }
+
+    .recipe-overview {
+        order: 2;
+    }
+
+    .recipe-header {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .recipe-list {
+        text-align: center;
+    }
 }
 
 @media only screen and (min-width: 560px) and (orientation: landscape) {
@@ -240,14 +298,14 @@ form #news-email {
         height: auto;
     }
 }
-
+/* 
 @media only screen and (min-width: 760px) and (orientation: portrait) {
     .search-main {
         width: auto;
         min-width: 50vw;
         height: 4vh;
     }
-}
+} */
 
 @media only screen and (min-width: 760px) and (orientation: portrait) {
     .search-main {
@@ -256,7 +314,24 @@ form #news-email {
         height: auto;
     }
 
+    .recipe-image-container {
+        order: 2;
+    }
+
+    .recipe-overview {
+        order: 1;
+    }
+
+    .recipe-header {
+        justify-content: center;
+        flex-wrap: nowrap;
+    }
+
+    .recipe-list {
+        text-align: left;
+    }
 }
+
 
 @media only screen and (min-width: 760px) and (orientation: portrait) {
     .search-main {
