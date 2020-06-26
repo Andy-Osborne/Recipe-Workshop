@@ -12,15 +12,15 @@
                     href="{{url_for('profile', username=recipe.recipe_author)}}">{{recipe.recipe_author}}</a></h3>
             <div class="container-fluid d-flex col-12 recipe-header">
                 <div class="recipe-overview col-md-7 col-lg-8">
-                    <ul class="recipe-list">
-                        <li>Effort Required: {{recipe.effort|title}}</li>
-                        <li>Preparation Time: {{recipe.prep_time}} minutes</li>
+                    <ul class="recipe-list recipe-m-overview">
+                        <li><strong>Effort Required:</strong> {{recipe.effort|title}}</li>
+                        <li><strong>Preparation Time:</strong> {{recipe.prep_time}} minutes</li>
                         {% if recipe.cooking_time // 60 == 0 %}
-                        <li>Cooking Time: {{recipe.cooking_time}} minutes </li>
+                        <li><strong>Cooking Time:</strong> {{recipe.cooking_time}} minutes </li>
                         {% else %}
-                        <li>Cooking Time: {{recipe.cooking_time // 60}} hours {{recipe.cooking_time % 60}} minutes</li>
+                        <li><strong>Cooking Time:</strong> {{recipe.cooking_time // 60}} hours {{recipe.cooking_time % 60}} minutes</li>
                         {% endif %}
-                        <li>Serves: {{recipe.servings}}</li>
+                        <li><strong>Serves:</strong> {{recipe.servings}}</li>
                     </ul>
 
                     <p class="description">{{recipe.recipe_description|capitalize}}</p>
@@ -38,8 +38,8 @@
     <!-- Desktop View -->
 
     <div class="col-12 justify-content-center large-screen">
-        <div class="col-lg-8 d-lg-inline-flex">
-            <div class="col-lg-4">
+        <div class="col-lg-12 col-xl-8 d-lg-inline-flex">
+            <div class="col-lg-4 p-2 m-2">
                 <h3 class="methods-header">Ingredients</h3>
                 <ul class="list-group">
                     {% for ingredient in recipe.ingredients %}
@@ -47,11 +47,12 @@
                     {% endfor %}
                 </ul>
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-7">
                 <h3 class="methods-header">Steps</h3>
                 <ul class="recipe-list">
                     {% for steps in recipe.steps %}
-                    <li>{{loop.index}} - {{steps}}</li>
+                    <li><span class="recipe-index">{{loop.index}}</span> - {{steps}}</li>
+                    <hr>
                     {% endfor %}
                 </ul>
             </div>
@@ -81,7 +82,8 @@
                 <div class="recipe-list-view r-steps" id="#recipe-steps">
                     <ul class="recipe-list">
                         {% for steps in recipe.steps %}
-                        <li>{{loop.index}} - {{steps}}</li>
+                        <li><span class="recipe-index">{{loop.index}}</span> - {{steps}}</li>
+                        <hr>
                         {% endfor %}
                     </ul>
                 </div>
