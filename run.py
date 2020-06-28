@@ -26,7 +26,7 @@ user = mongo.db.users
 
 # Handles the logic for the front page and displays the highest rated recipe & 6 most recently added.
 
-@app.route('/')
+@app.route("/")
 def index():
 
     highest_rated = recipe.find({"likes":{"$gt": 0}}).sort("likes", -1).limit(1)
@@ -35,12 +35,12 @@ def index():
     return render_template("public/index.html", favourite=list(highest_rated), recent=list(recent_recipes))
 
 
-@app.route('/search', methods=["POST"])
+@app.route("/search", methods=["POST"])
 def get_search():
     return redirect(url_for("search_recipes", search_term=request.form.get("search_field")))
 
 
-@app.route('/search/<search_term>')
+@app.route("/search/<search_term>")
 def search_recipes(search_term):
     
     # The below creates the index for the text search and defines the fields to use.
@@ -63,14 +63,14 @@ def search_recipes(search_term):
     return render_template('public/search.html', search_term=search_term, search_result=search_result, count=search_count)    
 
 
-@app.route('/recipe/<recipe_id>/<recipe_name>')
+@app.route("/recipe/<recipe_id>/<recipe_name>")
 def get_recipe(recipe_id, recipe_name):
-    recipe_view = mongo.db.recipe.find_one({"_id":ObjectId(recipe_id)})
+    recipe_view = recipe.find_one({"_id":ObjectId(recipe_id)})
     return render_template("public/recipe.html", recipe=recipe_view)
 
 # Handles the logic for adding a recipe to database.
 
-@app.route('/create_recipe', methods=["GET", "POST"])
+@app.route("/create_recipe", methods=["GET", "POST"])
 def add_recipe():
 
     if request.method == "POST":
@@ -120,6 +120,62 @@ def add_recipe():
         return redirect("/")
 
     return render_template("public/create_recipe.html")
+
+# Displays the manage recipe page to user
+
+@app.route("/manage/<recipe_id>")
+def manage_recipe(recipe_id):
+
+    edit_recipe = recipe.find_one({"_id":ObjectId(recipe_id)})
+   
+    return render_template("public/manage_recipe.html", recipe=edit_recipe)
+
+
+# Handes the logic of updating a recipe
+
+@app.route("/update/<recipe_id>", methods=["GET", "POST"])
+def update_recipe(recipe_id):
+
+    if request.method == "POST":
+        req = request.form
+        recipe_name = req["recipe_name"]
+        course = req["dish_type"]
+        description = req["description"]
+        image_url = req["recipe_image"]
+        prep_time = req["preparation_time"]
+        cook_time = req["cooking_time"]
+        effort = req["effort"]
+        servings = req["servings"]
+
+        ingredient_list = []
+        steps_list = []
+
+
+        for key in req.keys():
+            if key == "ingredients":
+                for value in req.getlist(key):
+                    ingredient_list.append(value)
+            elif key == "step":
+                for value in req.getlist(key):
+                    steps_list.append(value)
+
+        recipe.update_one({"_id":ObjectId(recipe_id)},
+        {
+            "$set": {
+                "recipe_name": recipe_name,
+                "recipe_course": course,
+                "recipe_description" : description,
+                "recipe_image" : image_url,
+                "prep_time": int(prep_time),
+                "cooking_time": int(cook_time),
+                "effort": effort,
+                "servings": int(servings),
+                "steps": steps_list,
+                "ingredients": ingredient_list
+            }
+        })
+
+    return redirect(url_for("get_recipe", recipe_id=recipe_id,recipe_name=recipe_name))
 
 # Handles the logic of a user liking or removing their like from a recipe
 
