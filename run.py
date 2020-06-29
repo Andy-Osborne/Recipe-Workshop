@@ -127,6 +127,14 @@ def add_recipe():
 def manage_recipe(recipe_id):
 
     edit_recipe = recipe.find_one({"_id":ObjectId(recipe_id)})
+
+    """
+    If a user tries to enter the manage screen for a recipe they do not own, they are 
+    redirected to the home page
+    """
+
+    if session["username"] != edit_recipe["recipe_author"]:
+        return redirect("/")
    
     return render_template("public/manage_recipe.html", recipe=edit_recipe)
 
@@ -176,6 +184,24 @@ def update_recipe(recipe_id):
         })
 
     return redirect(url_for("get_recipe", recipe_id=recipe_id,recipe_name=recipe_name))
+
+@app.route("/delete/<recipe_id>")
+def delete_recipe(recipe_id):
+
+    recipe_check = recipe.find_one({"_id":ObjectId(recipe_id)})
+    """
+    If a user gets hold of the url for deleting the recipe, the below will check to see if
+    their logged in session is the same as the recipe author. If it is not, it will redirect
+    them to the home screen, otherwise it will allow them to delete the recipe.
+    """
+
+    if session["username"] != recipe_check["recipe_author"]:
+       return redirect("/")
+
+    recipe.delete_one({"_id":ObjectId(recipe_id)})
+    return redirect(url_for("profile", username=session["username"]))
+
+
 
 # Handles the logic of a user liking or removing their like from a recipe
 
