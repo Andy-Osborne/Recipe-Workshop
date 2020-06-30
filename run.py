@@ -321,6 +321,31 @@ def profile(username):
     
     return render_template("public/profile.html", username=user_profile, recipes=mongo.db.recipe.find())
 
+# Handles user creating their profile information.
+
+@app.route("/profile/update/<username>", methods=["POST", "GET"])
+def update_profile(username):
+    
+    user_profile = user.find_one({"username": username})
+
+    if session["username"] != user_profile["username"]:
+        return redirect("/")
+
+    if request.method == "POST":
+        req = request.form
+        profile_image = req["profile-image"]
+        profile_description = req["profile-description"]
+
+        user.update_one({"_id":ObjectId(user_profile["_id"])},
+        {
+            "$set": {
+                "profile_image": profile_image,
+                "profile_description": profile_description,
+            }
+        })
+
+    return redirect(request.referrer)
+
 
 @app.errorhandler(404)
 def page_not_found(e):
