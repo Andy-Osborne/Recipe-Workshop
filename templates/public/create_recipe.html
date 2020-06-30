@@ -4,70 +4,93 @@
 
 {%block main %}
 
-<div class="row no-gutters">
-    <div class="col-lg-6 offset-lg-2 my-5">
+<div class="row no-gutters text-center">
+    <div class="col-12 p-3">
         <h1>Add New Recipe</h1>
         <hr>
-        <form action="{{ url_for('add_recipe') }}" method="post">
-            <div class="form-group">
-                <label for="recipe_name">Recipe Name</label>
-                <input class="form-control" type="text" name="recipe_name" id="recipe_name" placeholder="Cheesy Beans On Toast" required>    
-            </div>
-            <div class="form-group">
-                <label for="dish_type">What type of course is this?</label>
-                <select name="dish_type" id="dish_type" required>
-                    <option value="Breakfast">Breakfast</option>
-                    <option value="Brunch">Brunch</option>
-                    <option value="Lunch">Lunch</option>
-                    <option value="Dinner">Dinner</option>
-                    <option value="Dessert">Dessert</option>
-                    <option value="Snack">Snack</option>               
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="description">Provide a description of this dish</label>
-                <textarea class="form-control" name="description" id="description" cols="30" rows="5" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="description">Provide a link to an image for this dish</label>
-                <input class="form-control" type="url" name="recipe_image" id="recipe_image" placeholder="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg" required>    
-            </div>
-            <div class="form-group"></div>
+
+        <div class="col-12 d-flex justify-content-center text-sm-center text-lg-left">
+            <form action="{{url_for('add_recipe')}}" method="POST">
+                <div class="form-group">
+                    <label for="recipe_name">Recipe Name</label>
+                    <input class="form-control" type="text" name="recipe_name" id="recipe_name"
+                        placeholder="Cheesy Beans On Toast" required>
+                </div>
+                <div class="form-group">
+                    <label for="dish_type">What is the meal type?</label>
+                    <select class="form-control" name="dish_type" id="dish_type" required>
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Brunch">Brunch</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Dinner">Dinner</option>
+                        <option value="Dessert">Dessert</option>
+                        <option value="Snack">Snack</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="description">Provide a description of this recipe</label>
+                    <textarea class="form-control" name="description" id="description" cols="30" rows="5"
+                        required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="description">Provide a link to an image for this recipe</label>
+                    <input class="form-control" type="url" name="recipe_image" id="recipe_image"
+                        placeholder="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg" required>
+                </div>
+                <div class="form-group"></div>
                 <label for="preparation_time">How much preparation time is needed?</label>
-                <input class="form-control" type="number" name="preparation_time" id="preparation_time" placeholder="15" min="0" required>
-            <div class="form-group">
-                <label for="cooking_time">How much cooking time does it need? Please enter in mins</label>
-                <input class="form-control" type="number" name="cooking_time" id="cooking_time" placeholder="120" min="0" required>
-            </div>
-            <div class="form-group">
-                <label for="effort">How complicated is this dish to make?</label>
-                <select class="form-control" name="effort" id="effort" required>
-                    <option value="easy">Easy</option>
-                    <option value="medium">Medium</option>
-                    <option value="hard">Hard</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="servings">How many servings will this make?</label>
-                <input class="form-control" type="number" name="servings" id="servings" placeholder="12" min="0" required>
-            </div>
-            <div class="form-group" id="step_inputs">
-                <label for="steps">Provide the steps to create your Recipe</label>
-                <input class="form-control" type="text" name="step" id="step" required>
-            </div>
-            <button class="btn-add" id="add_step" type="button"><i class="fas fa-plus"></i></button>
-            <button class="btn-remove" id="remove_step" type="button"><i class="fas fa-minus"></i></button>
-
-            <div class="form-group" id="ingredient">
-                <label for="ingredient_item">Provide the ingredients to create your Recipe</label>
-                <input class="form-control" type="text" name="ingredients" id="ingredient_item" required>
-            </div>
-            <button class="btn-add" id="add_ingredient" type="button"><i class="fas fa-plus"></i></button>
-            <button class="btn-remove" id="remove_ingredient" type="button"><i class="fas fa-minus"></i></button>
-
-            <button type="submit" class="btn btn-primary">Submit Your Recipe</button>
-
-        </form>
+                <input class="form-control" type="number" name="preparation_time" id="preparation_time" placeholder="15"
+                    min="0" required>
+                <div class="form-group">
+                    <label for="cooking_time">How much cooking time does it need? Please enter in mins</label>
+                    <input class="form-control" type="number" name="cooking_time" id="cooking_time" placeholder="60"
+                        min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="effort">How complicated is this dish to make?</label>
+                    <select class="form-control" name="effort" id="effort" required>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="servings">How many servings will this make?</label>
+                    <input class="form-control" type="number" name="servings" id="servings" placeholder="12" min="0"
+                        required>
+                </div>
+                <div class="form-group" id="step_inputs">
+                    <label for="steps">Provide the steps to create your recipe</label>
+                    <input class="form-control" type="text" name="step" id="step" required>
+                </div>
+                <div class="text-center">
+                    <small class="form-text text-muted">Need to add or remove a row?</small>
+                    <button class="btn-add" id="add_step" type="button">
+                        <i class="fas fa-plus-square"></i>
+                    </button>
+                    <button class="btn-remove" id="remove_step" type="button">
+                        <i class="fas fa-minus-square"></i>
+                    </button>
+                </div>
+                <div class="form-group" id="ingredient">
+                    <label for="ingredient_item">Provide the ingredients to create your recipe</label>
+                    <input class="form-control" type="text" name="ingredients" id="ingredient_item" required>
+                </div>
+                <div class="text-center">
+                    <small class="form-text text-muted">Need to add or remove a row?</small>
+                    <button class="btn-add" id="add_ingredient" type="button">
+                        <i class="fas fa-plus-square"></i>
+                    </button>
+                    <button class="btn-remove" id="remove_ingredient" type="button">
+                        <i class="fas fa-minus-square"></i>
+                    </button>
+                </div>
+                <br>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit Your Recipe</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
