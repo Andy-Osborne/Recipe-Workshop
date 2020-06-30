@@ -318,9 +318,8 @@ def logout():
 @app.route("/profile/<username>", methods=["GET"])
 def profile(username):
     user_profile = user.find_one({"username": username})
-    session_user = session["username"]
     
-    return render_template("public/profile.html", username=user_profile, recipes=mongo.db.recipe.find(), session_user=session_user)
+    return render_template("public/profile.html", username=user_profile, recipes=mongo.db.recipe.find())
 
 
 @app.errorhandler(404)
