@@ -12,7 +12,7 @@
             </div>
             <div class="search-field search-main form-inline text-center">
                 <form action="{{url_for('get_search')}}" method="POST">
-                    <input class="form-control text-center search-main" type="search" name="search_field" id="search_field" placeholder="Find your next feast" required>
+                    <input class="form-control text-center search-main" type="search" name="search_field" id="search_field" placeholder="Discover your next feast" required>
                     <button class="btn btn-search" type="submit">Search</button>
                 </form>
             </div>
@@ -26,17 +26,20 @@
     <div class="row no-gutters">
         <div class="col-12 text-center">
             <h2 class="front-header">Top Rated Recipe</h2>
-            <div class="front-imgblock">
-                {% for dict in favourite %}
-                <div class="featured-container d-flex justify-content-center">
-                    <a href="{{url_for('get_recipe',recipe_id=dict['_id'],recipe_name=dict['recipe_name'])}}"><img src="{{dict['recipe_image']}}" alt="{{dict['recipe_name']}}"></a>
-                </div>
-                
-                <div class="front-text">
-                    <h4>{{dict["recipe_name"]}}</h4>
-                    <p>{{dict["recipe_description"]}}</p>
-                </div>
-                {% endfor %}
+            <div class="col-12 d-flex justify-content-center">
+                <div class="col-12 col-md-3 front-imgblock">
+                    {% for dict in favourite %}
+                    <div class="featured-container d-flex justify-content-center">
+                        <a href="{{url_for('get_recipe',recipe_id=dict['_id'],recipe_name=dict['recipe_name'])}}"><img class="index-image" src="{{dict['recipe_image']}}" alt="{{dict['recipe_name']}}"></a>
+                    </div>
+                    
+                    <div class="front-text">
+                        <h4>{{dict["recipe_name"]|title}}</h4>
+                        <hr>
+                        <p>{{dict["recipe_description"]}}</p>
+                    </div>
+                    {% endfor %}
+                </div> 
             </div>
 
         </div>
@@ -46,11 +49,11 @@
 <section class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <h3 class="front-header">Recently Added Recipes</h3>
+            <h3 class="front-header">Recently Added</h3>
         </div>
         {% for dict in recent %}
-        <div class="col-6 col-lg-4 recent-recipe">
-            <a href="{{url_for('get_recipe',recipe_id=dict['_id'],recipe_name=dict['recipe_name'])}}"><img src="{{dict['recipe_image']}}" alt="{{dict['recipe_name']}}"></a>
+        <div class="col-6 col-lg-3 recent-recipe">
+            <a href="{{url_for('get_recipe',recipe_id=dict['_id'],recipe_name=dict['recipe_name'])}}"><img class="index-image" src="{{dict['recipe_image']}}" alt="{{dict['recipe_name']}}"></a>
         </div>
         {% endfor %}
     </div>
@@ -58,11 +61,11 @@
 
 <div class="banner d-flex justify-content-center align-items-center flex-column">
     <h5>Want the latest tips and recipes direct in your inbox?</h5>
-    <div class="d-lg-inline-flex"> 
-        <form action="POST" id="newsletter">
-            <input type="email" name="news-email" id="news-email" placeholder="Enter your email">
+    <div class="d-lg-inline-flex text-center"> 
+        <form class="form-group" action="POST" id="newsletter">
+            <input class="form-control"type="email" name="news-email" id="news-email" placeholder="Enter your email">
+            <button class="btn btn-primary" type="submit" form="newsletter">Join Now</button>
         </form>
-        <button class="btn btn-primary" type="submit" form="newsletter">Join Now</button>
     </div>
 
 </div>

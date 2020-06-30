@@ -142,12 +142,15 @@ i {
     padding: 5px 0px;
 }
 
+.front-text {
+    background-color: #92c5cc;
+}
+
 .featured-container {
     overflow: hidden;
 }
 .featured-container img {
     max-width: 100%;
-    border-radius: 15%;
 }
 
 .featured-container .index-image-zoom {
