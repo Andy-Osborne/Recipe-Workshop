@@ -238,6 +238,18 @@ form #news-email {
     width: 100vw;
 }
 
+/* Profile Page */
+
+.profile-image-container {
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+}
+
+.profile-image-container img {
+    width: 250px;
+}
+
 
 /* 404 Page */
 
