@@ -1,25 +1,141 @@
 {% extends 'public/template/public_base.html' %}
 
-{% block title %} Profile {% endblock %}
+{% block title %} Profile | {{username.username|title}} {% endblock %}
 
-{% block main %} 
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1>Welcome {{ username.username }}</h1>
+{% block main %}
+<div class="container">
+    <div class="row no-gutters">
+        <div class="col-12 text-center ">
 
-                <h2>Your Recipes</h2>
+            <!-- Check to see if user is profile owner -->
 
-                <p>The recipes created by {{username.username}} are:</p>
+            {% if session["username"] == username.username %}
+            <h1>Welcome {{ username.username }}</h1>
 
-                    {% for recipe in recipes %}
-                        {% if recipe.recipe_author == username.username %}
-                        <p>{{recipe.recipe_name}}</p>
-                        {% endif %}
-                    {% endfor %}
+            <button type="button" class="btn btn-sign-up" data-toggle="modal" data-target="#update-details">
+                Account Management
+            </button>
 
+            {% else %}
+
+            <h1>Welcome to the Profile of {{username.username}}</h1>
+
+            {% endif %}
+
+            <!-- Check to see if user has a profile image/description -->
+
+            {% if username.profile_image and username.profile_description %}
+            <div class="row no-gutters d-lg-flex justify-content-center align-items-center p-2 m-2">
+                <div class="col-12 col-lg-3 d-flex justify-content-center">
+                    <div class="profile-image-container">
+                        <img src="{{username.profile_image}}">
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 text-center">
+                    <div class="profile-description-container p-2 mb-2">
+                        <p>{{username.profile_description}}</p>
+                    </div>
+                </div>
+            </div>
+
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row no-gutters d-flex justify-content-center">
+        {% if session["username"] == username.username %}
+
+        {% if not username.profile_image and not username.profile_description %}
+
+        <div class="col-12 col-lg-6 text-center p-3 m-2 banner">
+
+            <p><strong>Why not update your profile to include a profile image and short description for your followers?</strong></p>
+            <button class="profile-form btn btn-sign-up" type="button">Update Now</button>
+
+            <!-- Create Profile Form -->
+
+            <div class="profile d-none">
+                <form action="{{ url_for('update_profile', username=username.username) }}" method="POST">
+                    <div class="form-group">
+                        <label for="profile-image">Provide a link for your profile image</label>
+                        <input class="form-control" type="url" name="profile-image" id="profile-image"
+                            placeholder="https://facebook.com/your_profile_picture" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-description"><strong>Write a short introduction about
+                                yourself</strong></label>
+                        <textarea class="form-control" name="profile-description" id="profile-description" cols="30"
+                            rows="5" required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Submit Your Recipe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {% endif %}
+
+        {% endif %}
+
+        {% if session["username"] == username.username %}
+
+        <div class="col-12 text-center p-2 m-2">
+            <h3>Your Recipes</h3>
+        </div>
+
+        {% else %}
+
+        <div class="col-12 text-center p-2 m-2">
+            <h3>The recipes created by {{username.username}} are:</h3>
+        </div>
+
+        {% endif %}
+
+        <div class="col-12 col-lg-6 text-center">
+            <ul class="recipe-list">
+                {% for recipe in recipes %}
+                {% if recipe.recipe_author == username.username %}
+                <li> <a href="{{url_for('get_recipe', recipe_id=recipe._id, recipe_name=recipe.recipe_name)}}">
+                        {{recipe.recipe_name}}
+                    </a> - submitted on {{recipe.submitted}}
+                </li>
+                <hr>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Modal For Account Management Options -->
+<div class="modal fade" id="update-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Account Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="POST">
+                    
+                    
+                </form>
+                {{username.email}}
+
+                {{username._id}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
+</div>
+
+</div>
 
 {% endblock %}

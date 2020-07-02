@@ -50,4 +50,8 @@ $(document).ready(function(){
         $(event.currentTarget).siblings().slideToggle(400);
     })
 
+    $(".profile-form").on("click", () => {
+        $(".profile").toggleClass("d-none");
+    })
+
 });
