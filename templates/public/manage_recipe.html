@@ -8,87 +8,90 @@
         <h1>Update Recipe</h1>
         <hr>
 
-        <div class="col-12 d-flex justify-content-center text-sm-center text-lg-left">
-            <form action="{{url_for('update_recipe', recipe_id=recipe._id)}}" method="POST">
-                <div class="form-group">
-                    <label for="recipe_name"><strong>Recipe Name</strong></label>
-                    <input class="form-control" type="text" name="recipe_name" id="recipe_name" value="{{recipe.recipe_name|title}}" required>    
-                </div>
-                <div class="form-group">
-                    <label for="dish_type"><strong>What is the meal type?</strong></label>
-                    <select class="form-control" name="dish_type" id="dish_type" required>
-                        <option value="Breakfast">Breakfast</option>
-                        <option value="Brunch">Brunch</option>
-                        <option value="Lunch">Lunch</option>
-                        <option value="Dinner">Dinner</option>
-                        <option value="Dessert">Dessert</option>
-                        <option value="Snack">Snack</option>               
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="description"><strong>Provide a description of this dish</strong></label>
-                    <textarea class="form-control" name="description" id="description" cols="30" rows="5" required>{{recipe.recipe_description}}</textarea>
-                </div>
-                <div class="form-group">
-                    <label for="description"><strong>Provide a link to an image for this dish</strong></label>
-                    <input class="form-control" type="url" name="recipe_image" id="recipe_image" value="{{recipe.recipe_image}}" required>    
-                </div>
-                <div class="form-group"></div>
-                    <label for="preparation_time"><strong>How much preparation time is needed? Enter as Minutes</strong></label>
-                    <input class="form-control" type="number" name="preparation_time" id="preparation_time" min="0" value="{{recipe.prep_time}}" required>
-                <div class="form-group">
-                    <label for="cooking_time"><strong>How much cooking time does it need? Enter as Minutes</strong></label>
-                    <input class="form-control" type="number" name="cooking_time" id="cooking_time" min="0" value="{{recipe.cooking_time}}" required>
-                </div>
-                <div class="form-group">
-                    <label for="effort"><strong>How complicated is this dish to make?</strong></label>
-                    <select class="form-control" name="effort" id="effort" required>
-                        <option value="easy">Easy</option>
-                        <option value="medium">Medium</option>
-                        <option value="hard">Hard</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="servings"><strong>How many servings will this make?</strong></label>
-                    <input class="form-control" type="number" name="servings" id="servings" min="0" value="{{recipe.servings}}" required>
-                </div>
-                <div class="form-group" id="step_inputs">
-                    <label for="steps"><strong>Provide the steps to create your Recipe</strong></label>
-                    {% for step in recipe.steps %}
-                    <input class="form-control" type="text" name="step" id="step" value="{{step}}" required>
-                    {% endfor %}
-                </div>
-                <div class="text-center">
-                    <small class="form-text text-muted">Need to add or remove a row?</small>
-                    <button class="btn-add" id="add_step" type="button">
-                        <i class="fas fa-plus-square"></i>
-                    </button>
-                    <button class="btn-remove" id="remove_step" type="button">
-                        <i class="fas fa-minus-square"></i>
-                    </button>
-                </div>
-                <div class="form-group" id="ingredient">
-                    <label for="ingredient_item"><strong>Provide the ingredients to create your Recipe</strong></label>
-                    {% for ingredient in recipe.ingredients %}
-                    <input class="form-control" type="text" name="ingredients" id="ingredient_item" value="{{ingredient}}" required>
-                    {% endfor %}
-                </div>
-                <div class="text-center">
-                    <small class="form-text text-muted">Need to add or remove a row?</small>
-                    <button class="btn-add" id="add_ingredient" type="button">
-                        <i class="fas fa-plus-square"></i>
-                    </button>
-                    <button class="btn-remove" id="remove_ingredient" type="button">
-                        <i class="fas fa-minus-square"></i>
-                    </button>    
-                </div>
-                <br>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Update Recipe</button>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">Delete Recipe</button>
-                </div>
-            </form>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center text-sm-center text-lg-left">
+                <form action="{{url_for('update_recipe', recipe_id=recipe._id)}}" method="POST">
+                    <div class="form-group">
+                        <label for="recipe_name"><strong>Recipe Name</strong></label>
+                        <input class="form-control" type="text" name="recipe_name" id="recipe_name" value="{{recipe.recipe_name|title}}" required>    
+                    </div>
+                    <div class="form-group">
+                        <label for="dish_type"><strong>What is the meal type?</strong></label>
+                        <select class="form-control" name="dish_type" id="dish_type" required>
+                            <option value="Breakfast">Breakfast</option>
+                            <option value="Brunch">Brunch</option>
+                            <option value="Lunch">Lunch</option>
+                            <option value="Dinner">Dinner</option>
+                            <option value="Dessert">Dessert</option>
+                            <option value="Snack">Snack</option>               
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description"><strong>Provide a description of this dish</strong></label>
+                        <textarea class="form-control" name="description" id="description" cols="30" rows="5" required>{{recipe.recipe_description}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="description"><strong>Provide a link to an image for this dish</strong></label>
+                        <input class="form-control" type="url" name="recipe_image" id="recipe_image" value="{{recipe.recipe_image}}" required>    
+                    </div>
+                    <div class="form-group"></div>
+                        <label for="preparation_time"><strong>How much preparation time is needed? Enter as Minutes</strong></label>
+                        <input class="form-control" type="number" name="preparation_time" id="preparation_time" min="0" value="{{recipe.prep_time}}" required>
+                    <div class="form-group">
+                        <label for="cooking_time"><strong>How much cooking time does it need? Enter as Minutes</strong></label>
+                        <input class="form-control" type="number" name="cooking_time" id="cooking_time" min="0" value="{{recipe.cooking_time}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="effort"><strong>How complicated is this dish to make?</strong></label>
+                        <select class="form-control" name="effort" id="effort" required>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="servings"><strong>How many servings will this make?</strong></label>
+                        <input class="form-control" type="number" name="servings" id="servings" min="0" value="{{recipe.servings}}" required>
+                    </div>
+                    <div class="form-group" id="step_inputs">
+                        <label for="steps"><strong>Provide the steps to create your Recipe</strong></label>
+                        {% for step in recipe.steps %}
+                        <input class="form-control" type="text" name="step" id="step" value="{{step}}" required>
+                        {% endfor %}
+                    </div>
+                    <div class="text-center">
+                        <small class="form-text text-muted">Need to add or remove a row?</small>
+                        <button class="btn-add" id="add_step" type="button">
+                            <i class="fas fa-plus-square"></i>
+                        </button>
+                        <button class="btn-remove" id="remove_step" type="button">
+                            <i class="fas fa-minus-square"></i>
+                        </button>
+                    </div>
+                    <div class="form-group" id="ingredient">
+                        <label for="ingredient_item"><strong>Provide the ingredients to create your Recipe</strong></label>
+                        {% for ingredient in recipe.ingredients %}
+                        <input class="form-control" type="text" name="ingredients" id="ingredient_item" value="{{ingredient}}" required>
+                        {% endfor %}
+                    </div>
+                    <div class="text-center">
+                        <small class="form-text text-muted">Need to add or remove a row?</small>
+                        <button class="btn-add" id="add_ingredient" type="button">
+                            <i class="fas fa-plus-square"></i>
+                        </button>
+                        <button class="btn-remove" id="remove_ingredient" type="button">
+                            <i class="fas fa-minus-square"></i>
+                        </button>    
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Update Recipe</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">Delete Recipe</button>
+                    </div>
+                </form>
+            </div>
         </div>
+            
 
         <!-- Delete Button Modal -->
 
@@ -110,10 +113,7 @@
                 </div>
               </div>
             </div>
-          </div>
-
-  
-        
+          </div>        
     </div>
 </div>
 
