@@ -230,8 +230,15 @@ form #news-email {
 
 /* Registration/Login Pages */
 
-.b-image {
+.login-image {
     background-image: url("/static/images/board.png");
+}
+
+.register-image {
+    background-image: url("/static/images/asparagus.jpg")
+}
+
+.b-image {
     background-size: cover;
     background-repeat: no-repeat;
     height: 85vh;
