@@ -261,7 +261,7 @@ def user_registration():
                     "password" : pbkdf2_sha256.hash(req["password"])
                     }    
                 user.insert_one(new_user)
-                return redirect("/")
+                return redirect("/login")
 
             elif username_search > 0:
                 flash(f"Username already taken. Please choose a different username.", "error_username")
