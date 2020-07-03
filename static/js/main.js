@@ -6,11 +6,11 @@ $(document).ready(function(){
     */
     
     $("#add_ingredient").on("click", () => {
-        $("#ingredient").append('<input class="form-control" type="text" name="ingredients">');
+        $("#ingredient").append('<input class="form-control" type="text" name="ingredients" required>');
     });
 
     $("#add_step").on("click", () => {
-        $("#step_inputs").append('<input class="form-control" type="text" name="step">');
+        $("#step_inputs").append('<input class="form-control" type="text" name="step" required>');
     });
     
     /* 
