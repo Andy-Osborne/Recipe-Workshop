@@ -5,6 +5,9 @@ from bson.objectid import ObjectId
 from datetime import datetime
 from usercreation import UserRegistration, UserLogin, UserUpdate
 from passlib.hash import pbkdf2_sha256
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 from os import path
 if path.exists("env.py"):
@@ -16,6 +19,7 @@ app = Flask(__name__)
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
+app.config["CLOUDINARY_URL"] = os.environ.get("CLOUDINARY_UR")
 
 mongo = PyMongo(app)
 
