@@ -3,7 +3,7 @@ from flask import Flask, render_template, url_for, redirect, request, flash, ses
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from datetime import datetime
-from usercreation import UserRegistration, UserLogin, UserUpdate
+from usercreation import UserRegistration, UserLogin
 from passlib.hash import pbkdf2_sha256
 import cloudinary
 import cloudinary.uploader
