@@ -31,7 +31,7 @@
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <form class="form-inline my-2 my-lg-0" action="{{url_for('get_search')}}" method="POST">
-                <input class="form-control mr-sm-2" type="search" placeholder="Ingredient, Dish, Course.." aria-label="Search" name="search_field" required>
+                <input class="form-control mr-sm-2" type="search" placeholder="Ingredient, Dish, Course" aria-label="Search" name="search_field" required>
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
               </form>
           <ul class="navbar-nav ml-auto">
@@ -41,7 +41,7 @@
               <a class="nav-link btn btn-sign-up" href="/register">Sign Up</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link btn btn-login" href="/login">Login</a>
+              <a class="nav-link btn btn-sign-up" href="/login">Login</a>
             </li>
 
             {% else %}
