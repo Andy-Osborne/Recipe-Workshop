@@ -97,7 +97,7 @@
                 {% for recipe in recipes %}
                 {% if recipe.recipe_author == username.username %}
                 <li> <a href="{{url_for('get_recipe', recipe_id=recipe._id, recipe_name=recipe.recipe_name)}}">
-                        {{recipe.recipe_name}}
+                        {{recipe.recipe_name | title}}
                     </a> - submitted on {{recipe.submitted}}
                 </li>
                 <hr>
