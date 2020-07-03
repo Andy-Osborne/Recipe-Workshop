@@ -52,6 +52,15 @@ i {
     color: #947232;
 }
 
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ea9c76;
+    text-decoration: none;
+}
+
 .recipe-index {
     font-size: 1.3rem;
     font-weight: bold;
