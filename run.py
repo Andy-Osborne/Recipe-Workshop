@@ -34,7 +34,7 @@ user = mongo.db.users
 def index():
 
     highest_rated = recipe.find({"likes":{"$gt": 0}}).sort("likes", -1).limit(1)
-    recent_recipes = recipe.find().sort("submitted", -1).limit(8)
+    recent_recipes = recipe.find().sort("submitted", 1).limit(8)
 
     return render_template("public/index.html", favourite=list(highest_rated), recent=list(recent_recipes))
 
@@ -79,10 +79,12 @@ def add_recipe():
 
     if request.method == "POST":
         req = request.form
+        reqf = request.files
+
         recipe_name = req["recipe_name"]
         course = req["dish_type"]
         description = req["description"]
-        image_url = req["recipe_image"]
+        image = reqf["recipe_image"]
         prep_time = req["preparation_time"]
         cook_time = req["cooking_time"]
         effort = req["effort"]
@@ -103,6 +105,14 @@ def add_recipe():
                 for value in req.getlist(key):
                     steps_list.append(value)
 
+        # Cloudinary Image Upload Code
+
+        uploaded_image = cloudinary.uploader.upload(image, width=800, quality="auto", 
+            folder="Recipe_Workshop/recipe/")
+        image_url = uploaded_image.get('secure_url')
+
+        print(uploaded_image)
+        
         new_recipe = {
             "recipe_author": session["username"],
             "recipe_name": recipe_name,
