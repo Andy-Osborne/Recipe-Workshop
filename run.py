@@ -109,16 +109,17 @@ def add_recipe():
 
         uploaded_image = cloudinary.uploader.upload(image, width=800, quality="auto", 
             folder="Recipe_Workshop/recipe/")
-        image_url = uploaded_image.get('secure_url')
-
-        print(uploaded_image)
+        image_url = uploaded_image.get("secure_url")
+        image_id = uploaded_image.get("public_id")
         
+      
         new_recipe = {
             "recipe_author": session["username"],
             "recipe_name": recipe_name,
             "recipe_course": course,
             "recipe_description" : description,
             "recipe_image" : image_url,
+            "image_id": image_id,
             "prep_time": int(prep_time),
             "cooking_time": int(cook_time),
             "effort": effort,
@@ -160,10 +161,11 @@ def update_recipe(recipe_id):
 
     if request.method == "POST":
         req = request.form
+        reqf = request.files
+
         recipe_name = req["recipe_name"]
         course = req["dish_type"]
         description = req["description"]
-        image_url = req["recipe_image"]
         prep_time = req["preparation_time"]
         cook_time = req["cooking_time"]
         effort = req["effort"]
@@ -181,21 +183,61 @@ def update_recipe(recipe_id):
                 for value in req.getlist(key):
                     steps_list.append(value)
 
-        recipe.update_one({"_id":ObjectId(recipe_id)},
-        {
-            "$set": {
-                "recipe_name": recipe_name,
-                "recipe_course": course,
-                "recipe_description" : description,
-                "recipe_image" : image_url,
-                "prep_time": int(prep_time),
-                "cooking_time": int(cook_time),
-                "effort": effort,
-                "servings": int(servings),
-                "steps": steps_list,
-                "ingredients": ingredient_list
-            }
-        })
+        """The below checks to see if there is a file request in the form upload.
+            If there is not, it will update the recipe and exclude updating the image.
+            If there is, it will delete the old image from cloudinary, upload the new image,
+            and assign the new url and public id for the image to the recipe in the database. 
+        """
+
+        if not reqf:
+            
+            recipe.update_one({"_id":ObjectId(recipe_id)},
+            {
+                "$set": {
+                    "recipe_name": recipe_name,
+                    "recipe_course": course,
+                    "recipe_description" : description,
+                    "prep_time": int(prep_time),
+                    "cooking_time": int(cook_time),
+                    "effort": effort,
+                    "servings": int(servings),
+                    "steps": steps_list,
+                    "ingredients": ingredient_list
+                }
+            })
+
+        else:
+            # The below gets the public id related to the recipe, then deletes image from cloudinary
+            
+            id_find = recipe.find_one({"_id":ObjectId(recipe_id)},{"image_id":1})
+            public_id = id_find["image_id"]
+            cloudinary.uploader.destroy(public_id)
+
+            # The below uploads the new recipe image to clouidnary, saves the image URL and public ID
+
+            image = reqf["recipe_image"]
+            uploaded_image = cloudinary.uploader.upload(image, width=800, quality="auto", 
+                folder="Recipe_Workshop/recipe/")
+            image_url = uploaded_image.get("secure_url")
+            image_id = uploaded_image.get("public_id")
+
+            recipe.update_one({"_id":ObjectId(recipe_id)},
+                {
+                    "$set": {
+                        "recipe_name": recipe_name,
+                        "recipe_course": course,
+                        "recipe_description" : description,
+                        "recipe_image" : image_url,
+                        "image_id": image_id,
+                        "prep_time": int(prep_time),
+                        "cooking_time": int(cook_time),
+                        "effort": effort,
+                        "servings": int(servings),
+                        "steps": steps_list,
+                        "ingredients": ingredient_list
+                    }
+                })
+
 
     return redirect(url_for("get_recipe", recipe_id=recipe_id,recipe_name=recipe_name))
 
