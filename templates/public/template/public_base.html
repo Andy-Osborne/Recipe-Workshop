@@ -18,9 +18,9 @@
     <link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename='images/favicons/apple-icon-60x60.png')}}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/favicons/apple-icon-180x180.png')}}">
     <link rel="icon" type="image/png" sizes="36x36" href="{{ url_for('static', filename='images/favicons/android-icon-36x36.png')}}">
-    <link rel="icon" type="image/png" sizes="36x36" href="{{ url_for('static', filename='images/favicons/android-icon-60x60.png')}}">
-    <link rel="icon" type="image/png" sizes="36x36" href="{{ url_for('static', filename='images/favicons/favicon-32x32.png')}}">
-    <link rel="icon" type="image/png" sizes="36x36" href="{{ url_for('static', filename='images/favicons/favicon-16x16.png')}}">
+    <link rel="icon" type="image/png" sizes="60x60" href="{{ url_for('static', filename='images/favicons/android-icon-60x60.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicons/favicon-16x16.png')}}">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg nav-colour">
@@ -32,7 +32,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <form class="form-inline my-2 my-lg-0" action="{{url_for('get_search')}}" method="POST">
                 <input class="form-control mr-sm-2" type="search" placeholder="Ingredient, Dish, Course" aria-label="Search" name="search_field" required>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-sign-up my-2 my-sm-0" type="submit">Search</button>
               </form>
           <ul class="navbar-nav ml-auto">
             {% if not session["username"] %}
