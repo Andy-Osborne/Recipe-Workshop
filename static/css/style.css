@@ -2,28 +2,28 @@
 /* General Styling */
 
 * {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 16px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 16px;
 }
 
-html, 
+html,
 body {
-  height: 100%;
+    height: 100%;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .content {
-  flex: 1 0 auto;
+    flex: 1 0 auto;
 }
 
 .footer {
-  flex-shrink: 0;
+    flex-shrink: 0;
 }
 
 p {
@@ -66,6 +66,10 @@ a:hover {
     font-weight: bold;
 }
 
+.front-text {
+    background-color: #92c5cc;
+}
+
 /* Navbar */
 
 .nav-colour {
@@ -84,7 +88,7 @@ a:hover {
 }
 
 .social-links ul {
-    margin:  0;
+    margin: 0;
     padding-inline-start: 0;
     padding: 5px;
 }
@@ -95,10 +99,10 @@ a:hover {
     background-color: #4fc3f7;
 }
 
-.btn-add ,
+.btn-add,
 .btn-remove {
     padding: 5px;
-} 
+}
 
 .btn-add {
     background-color: transparent;
@@ -116,7 +120,8 @@ a:hover {
 }
 
 .btn-remove,
-.btn-like {
+.btn-like,
+.heart {
     background-color: transparent;
     color: #c62828;
 }
@@ -124,9 +129,9 @@ a:hover {
 /* Home Section */
 
 .image-outer {
-   height: 50vh;
-   overflow: hidden;
-   position: relative;
+    height: 50vh;
+    overflow: hidden;
+    position: relative;
 }
 
 .search-field {
@@ -151,13 +156,10 @@ a:hover {
     padding: 5px 0px;
 }
 
-.front-text {
-    background-color: #92c5cc;
-}
-
 .featured-container {
     overflow: hidden;
 }
+
 .featured-container img {
     max-width: 100%;
 }
@@ -202,21 +204,22 @@ form #news-email {
 
 /* Search Result Page */
 
-.search-img-container {
-    float: left;
-    padding: 5px;
-    overflow: hidden;
-}
 
-.search-img-container a img {
-    width: 250px;
-    height: 250px;
+.search-image {
+    padding: 10px;
+    width: 100%;
 }
 
 .search-header {
     font-size: inherit;
-  
 }
+
+.search-list li {
+    list-style-type: none;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
 
 /* Recipe Page */
 
@@ -323,12 +326,11 @@ form #news-email {
     .small-screen {
         display: flex;
     }
-    
+
     .toggle-recipe-list {
         width: 80vw;
     }
 
-    
 }
 
 @media only screen and (min-width: 300px) and (orientation: landscape) {
@@ -409,6 +411,7 @@ form #news-email {
         text-align: left;
     }
 
+
 }
 
 
@@ -419,10 +422,13 @@ form #news-email {
         height: auto;
     }
 
-    .recipe-list-view.r-steps{
+    .recipe-list-view.r-steps {
         display: flex;
     }
-    
+
+    .front-text {
+        margin: 0 5px;
+    }
 
 }
 

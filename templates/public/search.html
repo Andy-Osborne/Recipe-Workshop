@@ -4,34 +4,32 @@
 
 {% block main %}
 
-
 <div class="row no-gutters">
     {% if count == 0 %}
-    <p>Sorry, no results found</p>
+    <small>Sorry, no results found</small>
+
     {% else %}
 
-    <p>We found {{count}} results for the search "{{search_term|title}}"</p>
-
+    <small class="p-2">We found {{count}} results for the search <strong>"{{search_term|title}}"</strong></small>
 
     <div class="col-12">
-        <div class="row no-gutters">
+        <div class="row no-gutters text-center justify-content-center">
 
             {% for result in search_result %}
-            <div class="col-12 col-lg-4 d-flex flex-wrap justify-content-center p-3">
-                <div class="search-img-container">
+            <div class="col-12 col-md-6 col-xl-3">
+                <div class="featured-container">
                     <a href="{{url_for('get_recipe',recipe_id=result['_id'],recipe_name=result['recipe_name'])}}"><img
-                            class="recipe-image" src="{{result['recipe_image']}}" alt="{{result['recipe_name']}}"></a>
+                            class="search-image" src="{{result['recipe_image']}}" alt="{{result['recipe_name']}}"></a>
                 </div>
-                <div>
-                    <a class="search-header"
-                        href="{{url_for('get_recipe',recipe_id=result['_id'],recipe_name=result['recipe_name'])}}">{{result['recipe_name']}}
+                <div class="front-text px-2 mx-2">
+                    <a href="{{url_for('get_recipe',recipe_id=result['_id'],recipe_name=result['recipe_name'])}}">
+                        <h3>{{result['recipe_name']|title}}</h3>
                     </a>
-
-                    <ul>
-                        <li>Recipe Rating: {{result["likes"]}}</li>
-                        <li>Time Required: {{result["cooking_time"] + result["prep_time"]}}</li>
-                        <li>Effort Required: {{result["effort"]|title}}</li>
-                        <li>Course Style: {{result["recipe_course"]}} </li>
+                    <ul class="search-list">
+                        <li><i class="fas fa-heart heart"></i> by {{result["likes"]}} users</li>
+                        <li><strong>Total Time: {{result["cooking_time"] + result["prep_time"]}}mins |
+                                Effort: {{result["effort"]|title}}</strong></li>
+                        <li>{{result["recipe_description"]|truncate(90)}} </li>
                     </ul>
 
                 </div>
@@ -39,14 +37,7 @@
             {% endfor %}
         </div>
     </div>
-
-
-
     {% endif %}
-
-
-
-
 </div>
 
 
