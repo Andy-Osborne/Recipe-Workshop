@@ -189,9 +189,7 @@ def update_recipe(recipe_id):
             and assign the new url and public id for the image to the recipe in the database. 
         """
 
-        if not reqf:
-            
-            recipe.update_one({"_id":ObjectId(recipe_id)},
+        recipe.update_one({"_id":ObjectId(recipe_id)},
             {
                 "$set": {
                     "recipe_name": recipe_name,
@@ -205,8 +203,9 @@ def update_recipe(recipe_id):
                     "ingredients": ingredient_list
                 }
             })
-
-        else:
+        
+        if reqf:
+        
             # The below gets the public id related to the recipe, then deletes image from cloudinary
             
             id_find = recipe.find_one({"_id":ObjectId(recipe_id)},{"image_id":1})
@@ -224,17 +223,9 @@ def update_recipe(recipe_id):
             recipe.update_one({"_id":ObjectId(recipe_id)},
                 {
                     "$set": {
-                        "recipe_name": recipe_name,
-                        "recipe_course": course,
-                        "recipe_description" : description,
                         "recipe_image" : image_url,
-                        "image_id": image_id,
-                        "prep_time": int(prep_time),
-                        "cooking_time": int(cook_time),
-                        "effort": effort,
-                        "servings": int(servings),
-                        "steps": steps_list,
-                        "ingredients": ingredient_list
+                        "image_id": image_id
+                        
                     }
                 })
 
@@ -261,7 +252,7 @@ def delete_recipe(recipe_id):
             
         public_id = recipe_check["image_id"]
         cloudinary.uploader.destroy(public_id)
-        
+
     return redirect(url_for("profile", username=session["username"]))
 
 
