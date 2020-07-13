@@ -254,7 +254,14 @@ def delete_recipe(recipe_id):
     if session["username"] != recipe_check["recipe_author"]:
        return redirect("/")
 
-    recipe.delete_one({"_id":ObjectId(recipe_id)})
+    else:
+        recipe.delete_one({"_id":ObjectId(recipe_id)})
+         
+         # The below gets the public id related to the recipe, then deletes image from cloudinary
+            
+        public_id = recipe_check["image_id"]
+        cloudinary.uploader.destroy(public_id)
+        
     return redirect(url_for("profile", username=session["username"]))
 
 
