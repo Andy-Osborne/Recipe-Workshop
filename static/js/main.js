@@ -52,6 +52,32 @@ $(document).ready(function(){
 
     $(".profile-form").on("click", () => {
         $(".profile").toggleClass("d-none");
-    })
+    });
+
+    /*
+    The below is linked to the manage recipe form and allows the user to upload a new image.
+    If the user wants to upload a new image, they can click on the button to upload new image
+    which then appends the label and input to the form, adds the relevant enctype to the form/
+    If the user presses the cancel button then it removes the above from the form.
+    */
+
+    $("#change").on("click", () => {
+        $("#current-image").append('<label for="description">Provide an image for this dish</label>');
+        $("#current-image").append('<input class="form-control" type="file" name="recipe_image" id="recipe_image" accept="image/*" required>');
+        $("#manage-recipe").attr("enctype","multipart/form-data");
+        $("#cancel-change").removeClass("d-none");
+        $("#change-image-text").addClass("d-none");
+        $("#change").addClass("d-none");
+    });
+
+    $("#cancel-change").on("click", () => {
+        $("#current-image label").remove();
+        $("#current-image input").remove();
+        $("#manage-recipe").removeAttr("enctype","multipart/form-data");
+        $("#cancel-change").addClass("d-none");
+        $("#change-image-text").removeClass("d-none");
+        $("#change").removeClass("d-none");
+
+    });
 
 });

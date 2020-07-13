@@ -8,9 +8,9 @@
         <h1>Update Recipe</h1>
         <hr>
 
-        <div class="row">
+        <div class="row no-gutters">
             <div class="col-12 d-flex justify-content-center text-sm-center text-lg-left">
-                <form action="{{url_for('update_recipe', recipe_id=recipe._id)}}" method="POST">
+                <form action="{{url_for('update_recipe', recipe_id=recipe._id)}}" method="POST" id="manage-recipe">
                     <div class="form-group">
                         <label for="recipe_name"><strong>Recipe Name</strong></label>
                         <input class="form-control" type="text" name="recipe_name" id="recipe_name" value="{{recipe.recipe_name|title}}" required>    
@@ -30,10 +30,19 @@
                         <label for="description"><strong>Provide a description of this dish</strong></label>
                         <textarea class="form-control" name="description" id="description" cols="30" rows="5" required>{{recipe.recipe_description}}</textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="description"><strong>Provide a link to an image for this dish</strong></label>
-                        <input class="form-control" type="url" name="recipe_image" id="recipe_image" value="{{recipe.recipe_image}}" required>    
+                    <div class="form-group" id="current-image">
+                        
                     </div>
+                    <div class="text-center">
+                        <small class="form-text text-muted" id="change-image-text">Do you want to change the image?</small>
+                        <button class="btn-add" id="change" type="button">
+                            Upload New Image
+                        </button>
+                        <button class="btn-remove d-none" id="cancel-change" type="button">
+                            Cancel</i>
+                        </button>
+                    </div>
+
                     <div class="form-group"></div>
                         <label for="preparation_time"><strong>How much preparation time is needed? Enter as Minutes</strong></label>
                         <input class="form-control" type="number" name="preparation_time" id="preparation_time" min="0" value="{{recipe.prep_time}}" required>
