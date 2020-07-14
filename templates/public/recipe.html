@@ -8,25 +8,25 @@
     <div class="col-12 d-flex justify-content-center">
         <div class="text-center">
             <h1>{{recipe.recipe_name|title}}</h1>
-            <h3>Recipe by 
+            <h3>Recipe by
                 <a class="profile-link"
                     href="{{url_for('profile', username=recipe.recipe_author)}}">{{recipe.recipe_author}}</a>
             </h3>
             {% if session["username"] == recipe.recipe_author %}
 
-            <a class="btn btn-sign-up"
-            href="{{url_for('manage_recipe', recipe_id=recipe._id)}}">Manage Your Recipe</a>
+            <a class="btn btn-sign-up" href="{{url_for('manage_recipe', recipe_id=recipe._id)}}">Manage Your Recipe</a>
 
             {% endif %}
-            <div class="container-fluid d-flex col-12 recipe-header">
-                <div class="recipe-overview col-md-7 col-lg-8">
+            <div class="container-fluid d-flex col-12 justify-content-center recipe-header">
+                <div class="recipe-overview col-md-7 col-lg-6">
                     <ul class="recipe-list recipe-m-overview">
                         <li><strong>Effort Required:</strong> {{recipe.effort|title}}</li>
                         <li><strong>Preparation Time:</strong> {{recipe.prep_time}} minutes</li>
                         {% if recipe.cooking_time // 60 == 0 %}
                         <li><strong>Cooking Time:</strong> {{recipe.cooking_time}} minutes </li>
                         {% else %}
-                        <li><strong>Cooking Time:</strong> {{recipe.cooking_time // 60}} hours {{recipe.cooking_time % 60}} minutes</li>
+                        <li><strong>Cooking Time:</strong> {{recipe.cooking_time // 60}} hours
+                            {{recipe.cooking_time % 60}} minutes</li>
                         {% endif %}
                         <li><strong>Serves:</strong> {{recipe.servings}}</li>
                     </ul>
