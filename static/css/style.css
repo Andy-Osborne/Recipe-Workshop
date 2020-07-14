@@ -116,7 +116,7 @@ a:hover {
 }
 
 .btn-zoom {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 .btn-remove,
@@ -337,6 +337,18 @@ form #news-email {
     .search-main {
         width: auto;
         height: 13vh;
+    }
+
+    .large-screen {
+        display: none;
+    }
+
+    .toggle-recipe-list {
+        width: 40%;
+    }
+
+    .recipe-list-view {
+        display: none;
     }
 }
 
