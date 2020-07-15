@@ -50,10 +50,6 @@ $(document).ready(function(){
         $(event.currentTarget).siblings().slideToggle(400);
     })
 
-    $(".profile-form").on("click", () => {
-        $(".profile").toggleClass("d-none");
-    });
-
     /*
     The below is linked to the manage recipe form and allows the user to upload a new image.
     If the user wants to upload a new image, they can click on the button to upload new image
@@ -80,4 +76,79 @@ $(document).ready(function(){
 
     });
 
+    // Below toggles the profile update form on a new users profile to allow them to update it.
+    
+    $(".profile-form").on("click", () => {
+        $(".profile").toggleClass("d-none");
+    });
+
+    // The below toggles the required inputs in account management for a user to change their password
+
+    $("#change-pass").on("click", () => {
+        $(".email-change").after('<div class="form-group pass-input"></div>').after('<div class="form-group conf-input"></div>');
+        $(".pass-input").append('<label for="password"><strong>New Password</strong></label>').append('<input class="form-control" type="password" name="new-password" id="new-password" required>');
+        $(".conf-input").append('<label for="password"><strong>Confirm New Password</strong></label>').append('<input class="form-control" type="password" name="password-conf" id="conf-password" required>');
+        $("#cancel-pass").removeClass("d-none");
+        $("#change-pass-text").addClass("d-none");
+        $("#change-pass").addClass("d-none");
+    });
+
+    $("#cancel-pass").on("click", () => {
+        $(".pass-input").remove();
+        $(".conf-input").remove();
+        $("#cancel-pass").addClass("d-none");
+        $("#change-pass-text").removeClass("d-none");
+        $("#change-pass").removeClass("d-none");
+
+    });
+
+    $("#submit-changes").on("click", function(event) {
+
+        event.preventDefault();
+        
+        let user_id = $(this).attr("user_id");
+        let email = $("#account-email").val();
+        let password = $("#current-password").val();
+        let newPassword = $("#new-password").val();
+        let confPassword = $("#conf-password").val();
+
+        if (newPassword == "") {
+            req = $.ajax({
+                url : '/profile/account_management',
+                type : 'POST',
+                data : {email : email, password : password, user_id : user_id}
+            }).done(function(req) {
+                if (req.error) {
+                    $("#change-error").text(req.error).removeClass("d-none");
+                    $("#change-success").addClass("d-none");
+                }
+                else {
+                    $("#change-success").text(req.success).removeClass("d-none");
+                    $("#change-error").text(req.error).addClass("d-none");
+                }
+            });
+        }
+        else {
+            req = $.ajax({
+                url : '/profile/account_management',
+                type : 'POST',
+                data : {
+                    email : email,
+                    "new-password" : newPassword,
+                    "conf-password" : confPassword, 
+                    password : password,
+                    user_id : user_id
+                }
+            }).done(function(req) {
+                if (req.error) {
+                    $("#change-error").text(req.error).removeClass("d-none");
+                    $("#change-success").addClass("d-none");
+                }
+                else {
+                    $("#change-success").text(req.success).removeClass("d-none");
+                    $("#change-error").text(req.error).addClass("d-none");
+                }
+            });
+        }
+    });
 });
