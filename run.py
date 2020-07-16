@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, url_for, redirect, request, flash, session
+from flask import Flask, render_template, url_for, redirect, request, flash, session, jsonify
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from datetime import datetime
@@ -256,7 +256,6 @@ def delete_recipe(recipe_id):
     return redirect(url_for("profile", username=session["username"]))
 
 
-
 # Handles the logic of a user liking or removing their like from a recipe
 
 @app.route("/like/<user_name>/<recipe_id>", methods=["GET", "POST"])
@@ -399,6 +398,79 @@ def update_profile(username):
         })
 
     return redirect(request.referrer)
+
+# Handles the logic for updating a users account information
+
+@app.route("/profile/account_management", methods=["POST"])
+def update_account():
+    req = request.form
+
+    user_id = req["user_id"]
+    new_email = req["email"]
+    password = req["password"]
+    new_password = ""
+
+    for keys in req.items():
+        if keys[0] == "new-password":
+            new_password = req["new-password"]
+        if keys[0] == "conf-password":
+            conf_password = req["conf-password"]
+
+
+    user_profile = user.find_one({"_id":ObjectId(user_id)})
+
+    # Check to see if no new pasword has been submitted and email has not changed
+
+    if new_password == "" and new_email == user_profile["email"]:
+        return jsonify({ 'error': "No new information has been provided. Account not updated." })
+
+    # If the above is false then the below will update account
+
+    if pbkdf2_sha256.verify(password, user_profile["password"]):
+
+        if new_email != user_profile["email"]:
+            if new_password != "":
+                if new_password == conf_password:
+                    email_update(user_id, new_email)
+                    password_update(user_id, new_password)
+                    return jsonify({ 'success': "Account successfully updated!" })
+                else:
+                    return jsonify({ 'error': "New password and confirmation password do not match." })
+            else:
+                email_update(user_id, new_email)
+                return jsonify({ 'success': "Email successfully updated!" })
+        
+        elif new_password != "":
+            if new_password == conf_password:
+                password_update(user_id, new_password)
+                return jsonify({ 'success': "Password successfully updated!" })
+
+            else:
+                return jsonify({ 'error': "New password and confirmation password do not match." })
+    
+    else:
+        return jsonify({ 'error': "Incorrect current password entered." })       
+
+    return redirect(request.referrer)
+        
+# Account Update Functions
+
+def email_update(user_id, new_email):
+    user.update_one({"_id":ObjectId(user_id)},
+        {
+            "$set": {
+            "email": new_email,
+            }
+        })
+
+
+def password_update(user_id, new_password):
+    user.update_one({"_id":ObjectId(user_id)},
+        {
+            "$set": {
+            "password" : pbkdf2_sha256.hash(new_password)
+            }
+        })
 
 
 @app.errorhandler(404)
