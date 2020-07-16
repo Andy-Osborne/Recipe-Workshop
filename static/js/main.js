@@ -85,7 +85,8 @@ $(document).ready(function(){
     // The below toggles the required inputs in account management for a user to change their password
 
     $("#change-pass").on("click", () => {
-        $(".email-change").after('<div class="form-group pass-input"></div>').after('<div class="form-group conf-input"></div>');
+        $(".email-change").after('<div class="form-group pass-input"></div>');
+        $(".pass-input").after('<div class="form-group conf-input"></div>');
         $(".pass-input").append('<label for="password"><strong>New Password</strong></label>').append('<input class="form-control" type="password" name="new-password" id="new-password" required>');
         $(".conf-input").append('<label for="password"><strong>Confirm New Password</strong></label>').append('<input class="form-control" type="password" name="password-conf" id="conf-password" required>');
         $("#cancel-pass").removeClass("d-none");
@@ -102,53 +103,64 @@ $(document).ready(function(){
 
     });
 
+    /*
+    The below AJAX function handles the form request for account update and determines the information sent to 
+    server as the account update fields are dynamic and then returns if there is any errors and shows
+    in the account update MSFIDOCredentialAssertion. In addition, it disabled the default function of
+    the submit button 
+    */ 
+
     $("#submit-changes").on("click", function(event) {
-
-        event.preventDefault();
         
-        let user_id = $(this).attr("user_id");
-        let email = $("#account-email").val();
-        let password = $("#current-password").val();
-        let newPassword = $("#new-password").val();
-        let confPassword = $("#conf-password").val();
+        let validForm = this.form.checkValidity();
 
-        if (newPassword == "") {
-            req = $.ajax({
-                url : '/profile/account_management',
-                type : 'POST',
-                data : {email : email, password : password, user_id : user_id}
-            }).done(function(req) {
-                if (req.error) {
-                    $("#change-error").text(req.error).removeClass("d-none");
-                    $("#change-success").addClass("d-none");
-                }
-                else {
-                    $("#change-success").text(req.success).removeClass("d-none");
-                    $("#change-error").text(req.error).addClass("d-none");
-                }
-            });
-        }
-        else {
-            req = $.ajax({
-                url : '/profile/account_management',
-                type : 'POST',
-                data : {
-                    email : email,
-                    "new-password" : newPassword,
-                    "conf-password" : confPassword, 
-                    password : password,
-                    user_id : user_id
-                }
-            }).done(function(req) {
-                if (req.error) {
-                    $("#change-error").text(req.error).removeClass("d-none");
-                    $("#change-success").addClass("d-none");
-                }
-                else {
-                    $("#change-success").text(req.success).removeClass("d-none");
-                    $("#change-error").text(req.error).addClass("d-none");
-                }
-            });
-        }
+        if (validForm) {
+            event.preventDefault();
+        
+            let user_id = $(this).attr("user_id");
+            let email = $("#account-email").val();
+            let password = $("#current-password").val();
+            let newPassword = $("#new-password").val();
+            let confPassword = $("#conf-password").val();
+
+            if (newPassword == "") {
+                req = $.ajax({
+                    url : '/profile/account_management',
+                    type : 'POST',
+                    data : {email : email, password : password, user_id : user_id}
+                }).done(function(req) {
+                    if (req.error) {
+                        $("#change-error").text(req.error).removeClass("d-none");
+                        $("#change-success").addClass("d-none");
+                    }
+                    else {
+                        $("#change-success").text(req.success).removeClass("d-none");
+                        $("#change-error").text(req.error).addClass("d-none");
+                    }
+                });
+            }
+            else {
+                req = $.ajax({
+                    url : '/profile/account_management',
+                    type : 'POST',
+                    data : {
+                        email : email,
+                        "new-password" : newPassword,
+                        "conf-password" : confPassword, 
+                        password : password,
+                        user_id : user_id
+                    }
+                }).done(function(req) {
+                    if (req.error) {
+                        $("#change-error").text(req.error).removeClass("d-none");
+                        $("#change-success").addClass("d-none");
+                    }
+                    else {
+                        $("#change-success").text(req.success).removeClass("d-none");
+                        $("#change-error").text(req.error).addClass("d-none");
+                    }
+                });
+            }
+        }        
     });
 });
