@@ -212,7 +212,7 @@ def update_recipe(recipe_id):
             public_id = id_find["image_id"]
             cloudinary.uploader.destroy(public_id)
 
-            # The below uploads the new recipe image to clouidnary, saves the image URL and public ID
+            # The below uploads the new recipe image to cloudinary, saves the image URL and public ID
 
             image = reqf["recipe_image"]
             uploaded_image = cloudinary.uploader.upload(image, width=800, quality="auto", 
@@ -385,15 +385,22 @@ def update_profile(username):
         return redirect("/")
 
     if request.method == "POST":
-        req = request.form
-        profile_image = req["profile-image"]
-        profile_description = req["profile-description"]
+        
+        # Cloudinary Image Upload Code
+
+        profile_image = request.files["profile-image"]
+
+        uploaded_profile_image = cloudinary.uploader.upload(profile_image, width=800, quality="auto", 
+            folder="Recipe_Workshop/profile/")
+        profile_image_url = uploaded_profile_image.get("secure_url")
+        profile_image_id = uploaded_profile_image.get("public_id")
 
         user.update_one({"_id":ObjectId(user_profile["_id"])},
         {
             "$set": {
-                "profile_image": profile_image,
-                "profile_description": profile_description,
+                "profile_image": profile_image_url,
+                "profile_image_id" : profile_image_id, 
+                "profile_description": request.form["profile-description"]
             }
         })
 

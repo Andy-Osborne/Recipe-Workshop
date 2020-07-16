@@ -39,6 +39,7 @@
             </div>
 
             {% endif %}
+
         </div>
     </div>
 
@@ -49,18 +50,21 @@
 
         <div class="col-12 col-lg-6 text-center p-3 m-2 banner">
 
-            <p><strong>Why not update your profile to include a profile image and short description for your
-                    followers?</strong></p>
-            <button class="profile-form btn btn-sign-up" type="button">Update Now</button>
+            <div class="new-profile-info">
+                <p><strong>Why not update your profile to include a profile image and short description for your
+                        followers?</strong></p>
+                <button class="profile-form btn btn-sign-up" type="button">Add Now</button>
 
+            </div>
             <!-- Create Profile Form -->
 
             <div class="profile d-none">
-                <form action="{{ url_for('update_profile', username=username.username) }}" method="POST">
+                <form action="{{ url_for('update_profile', username=username.username) }}" method="POST"
+                    enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="profile-image">Provide a link for your profile image</label>
-                        <input class="form-control" type="url" name="profile-image" id="profile-image"
-                            placeholder="https://facebook.com/your_profile_picture" required>
+                        <label for="profile-image"><strong>Please upload a profile image</strong></label>
+                        <input class="form-control" type="file" name="profile-image" id="profile-image" accept="image/*"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="profile-description"><strong>Write a short introduction about
@@ -69,7 +73,7 @@
                             rows="5" required></textarea>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Submit Your Recipe</button>
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
                     </div>
                 </form>
             </div>
@@ -109,18 +113,16 @@
     </div>
 </div>
 
-
-
 {% if username.username == session["username"] %}
 
 <!-- Modal For Account Management Options Generates if session user & profile user are the same -->
 
-<div class="modal fade" id="update-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="update-details" tabindex="-1" role="dialog" aria-labelledby="account-management"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Account Details</h5>
+                <h5 class="modal-title" id="account-management">Account Details</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -155,7 +157,7 @@
                     <!-- Information Alerts  -->
 
                     <div class="alert alert-success d-none" id="change-success" role="alert"></div>
-	                <div class="alert alert-danger d-none" id="change-error" role="alert"></div>
+                    <div class="alert alert-danger d-none" id="change-error" role="alert"></div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
