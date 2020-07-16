@@ -28,11 +28,11 @@ $(document).ready(function(){
 
     // The below applies/removes the zoom class on the nav buttons when the mouse enters/leaves
 
-    $(".btn-sign-up").on("mouseenter", event => {
+    $(".btn-main").on("mouseenter", event => {
         $(event.currentTarget).addClass("btn-zoom");
     });
 
-    $(".btn-sign-up").on("mouseleave", event => {
+    $(".btn-main").on("mouseleave", event => {
         $(event.currentTarget).removeClass("btn-zoom");
     });
 

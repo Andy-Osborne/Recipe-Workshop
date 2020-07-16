@@ -14,7 +14,7 @@
             </h3>
             {% if session["username"] == recipe.recipe_author %}
 
-            <a class="btn btn-sign-up" href="{{url_for('manage_recipe', recipe_id=recipe._id)}}">Manage Your Recipe</a>
+            <a class="btn btn-main" href="{{url_for('manage_recipe', recipe_id=recipe._id)}}">Manage Your Recipe</a>
 
             {% endif %}
             <div class="container-fluid d-flex col-12 justify-content-center recipe-header">
