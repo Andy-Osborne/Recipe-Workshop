@@ -38,7 +38,8 @@ h3 {
     font-family: 'Averia Serif Libre', cursive;
 }
 
-p {
+p,
+li {
     font-family: 'PT Sans', sans-serif;
 }
 
