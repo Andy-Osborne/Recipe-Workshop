@@ -76,10 +76,11 @@ $(document).ready(function(){
 
     });
 
-    // Below toggles the profile update form on a new users profile to allow them to update it.
+    // Below shows profile update form on a new users profile to allow them to update it.
     
     $(".profile-form").on("click", () => {
         $(".profile").toggleClass("d-none");
+        $(".new-profile-info").addClass("d-none");
     });
 
     // The below toggles the required inputs in account management for a user to change their password
