@@ -38,19 +38,19 @@
             {% if not session["username"] %}
 
             <li class="nav-item">
-              <a class="nav-link btn btn-main" href="/register">Sign Up</a>
+              <a class="nav-link btn btn-main {% if page == 'register' %}active-page{% endif %}" href="/register">Sign Up</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link btn btn-main" href="/login">Login</a>
+              <a class="nav-link btn btn-main {% if page == 'login' %}active-page{% endif %}" href="/login">Login</a>
             </li>
 
             {% else %}
             
             <li class="nav-item">
-                <a class="nav-link btn btn-main" href="{{url_for('add_recipe')}}">Add Recipe</a>
+                <a class="nav-link btn btn-main {% if page == 'add_recipe' %}active-page{% endif %}" href="{{url_for('add_recipe')}}">Add Recipe</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link btn btn-main" href="{{url_for('profile', username=session['username'])}}">Profile</a>
+                <a class="nav-link btn btn-main {% if page == 'profile' %}active-page{% endif %}" href="{{url_for('profile', username=session['username'])}}">Profile</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link btn btn-main" href="{{url_for('logout')}}">Logout</a>

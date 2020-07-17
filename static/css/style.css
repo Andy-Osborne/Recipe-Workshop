@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;400;700&family=PT+Sans:ital@0;1&display=swap');
+
 /* General Styling */
 
 * {
@@ -79,6 +80,10 @@ a:hover {
 
 .logo img {
     width: 75px;
+}
+
+.nav-item .active-page {
+    background-color: #b0efda;
 }
 
 /* Footer Styling */
@@ -205,7 +210,6 @@ form #news-email {
 
 /* Search Result Page */
 
-
 .search-image {
     width: 100%;
 }
@@ -219,7 +223,6 @@ form #news-email {
     padding: 5px;
     margin-bottom: 5px;
 }
-
 
 /* Recipe Page */
 
@@ -238,7 +241,6 @@ form #news-email {
     margin: 5px 0;
     padding: 10px 0;
 }
-
 
 /* Registration/Login Pages */
 
@@ -278,7 +280,6 @@ form #news-email {
     width: 250px;
 }
 
-
 /* 404 Page */
 
 .error-image-inner {
@@ -289,8 +290,6 @@ form #news-email {
     background-size: cover;
     transform: translate(0%, -18%);
 }
-
-
 
 /* Media Queries */
 
