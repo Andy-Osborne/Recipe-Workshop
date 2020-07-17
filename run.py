@@ -134,7 +134,7 @@ def add_recipe():
         recipe.insert_one(new_recipe)
         return redirect("/")
 
-    return render_template("public/create_recipe.html")
+    return render_template("public/create_recipe.html", page="add_recipe")
 
 # Displays the manage recipe page to user
 
@@ -318,12 +318,9 @@ def user_registration():
 
             elif email_search > 0:
                 flash(f"Email already in use. Please use login.", "error_email")
-                return redirect(request.url)
-        else:
-            return render_template("public/register.html", title="Register", form=form)  
+                return redirect(request.url) 
             
-    elif request.method == "GET":
-        return render_template("public/register.html", title="Register", form=form)   
+    return render_template("public/register.html", title="Register", form=form, page="register")   
         
 # Handles the user login logic
 
@@ -351,14 +348,8 @@ def login():
             else:
                 flash(f"Incorrect e-mail/password combination. Please try again", "error")
                 return redirect(request.url)
-
-            return render_template("public/login.html", title="Login", form=form)
-
-        else:
-            return render_template("public/login.html", title="Login", form=form)   
-           
-    elif request.method == "GET":
-        return render_template("public/login.html", title="Login", form=form)   
+          
+    return render_template("public/login.html", title="Login", form=form, page="login")   
 
 # Handles logging out user by clearing session data.
 
@@ -372,7 +363,7 @@ def logout():
 def profile(username):
     user_profile = user.find_one({"username": username})
     
-    return render_template("public/profile.html", username=user_profile, recipes=mongo.db.recipe.find())
+    return render_template("public/profile.html", username=user_profile, recipes=mongo.db.recipe.find(), page="profile")
 
 # Handles user creating their profile information.
 
