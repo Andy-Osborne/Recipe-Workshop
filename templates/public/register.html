@@ -4,13 +4,13 @@
 
 {% block main %}
 <div class="row no-gutters register-image b-image d-flex justify-content-center">
-    <div class="col-12 col-lg-3 text-center">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-3 text-center">
         <div class="container-fluid center-form">
             <div class="header">
                 <h1>Sign Up</h1>
             </div>
-            <div class="row">
-                <div class="col-12 d-flex justify-content-center text-sm-center text-lg-left">
+            <div class="row no-gutters">
+                <div class="col-12 d-flex justify-content-center text-sm-center text-lg-left p-3">
                     <form action="/register" method="POST">
                         {{ form.hidden_tag() }}
                         <fieldset class="form-group">
