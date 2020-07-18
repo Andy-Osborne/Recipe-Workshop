@@ -30,11 +30,18 @@
         </button>
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="form-inline my-2 my-lg-0" action="{{url_for('get_search')}}" method="POST">
-                <input class="form-control mr-sm-2" type="search" placeholder="Ingredient, Dish, Course" aria-label="Search" name="search_field" required>
-                <button class="btn btn-main my-2 my-sm-0" type="submit">Search</button>
+            
+            {% if page != "index" %}
+
+            <form class="form-group d-flex flex-row m-2" action="{{url_for('get_search')}}" method="POST">
+                <input class="form-control" type="search" placeholder="Ingredient, Dish, Course" aria-label="Search" name="search_field" required>
+                <button class="btn btn-main m-0" type="submit">Search</button>
               </form>
+
+            {% endif %}
+
           <ul class="navbar-nav ml-auto">
+
             {% if not session["username"] %}
 
             <li class="nav-item">
