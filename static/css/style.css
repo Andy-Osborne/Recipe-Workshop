@@ -330,6 +330,18 @@ form #news-email {
         width: 80vw;
     }
 
+    .b-image {
+        height: 95vh;
+    }
+
+    .logo {
+        margin-bottom: 0.5rem;
+    }
+
+    .navbar-nav li:last-child {
+        margin-bottom: 10px;
+    }
+
 }
 
 @media only screen and (min-width: 300px) and (orientation: landscape) {
