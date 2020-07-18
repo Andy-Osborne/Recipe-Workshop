@@ -249,7 +249,7 @@ form #news-email {
 }
 
 .register-image {
-    background-image: url("/static/images/asparagus.jpg")
+    background-image: url("/static/images/asparagus.jpg");
 }
 
 .b-image {
@@ -342,6 +342,11 @@ form #news-email {
         margin-bottom: 10px;
     }
 
+    .login-image,
+    .register-image {
+        background-image: none;
+    }
+
 }
 
 @media only screen and (min-width: 300px) and (orientation: landscape) {
@@ -361,6 +366,7 @@ form #news-email {
     .recipe-list-view {
         display: none;
     }
+
 }
 
 @media only screen and (min-width: 375px) and (orientation: portrait) {
@@ -407,6 +413,7 @@ form #news-email {
         min-width: 50vw;
         height: auto;
     }
+    
 }
 
 
@@ -434,7 +441,6 @@ form #news-email {
         text-align: left;
     }
 
-
 }
 
 
@@ -453,6 +459,10 @@ form #news-email {
         margin: 0 5px;
     }
 
+    .nav-item {
+        width: 25%;
+    }
+
 }
 
 @media only screen and (min-width: 1024px) {
@@ -469,4 +479,5 @@ form #news-email {
     .small-screen {
         display: none;
     }
+
 }
