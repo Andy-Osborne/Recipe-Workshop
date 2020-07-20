@@ -79,7 +79,7 @@ a:hover {
 }
 
 .logo img {
-    width: 75px;
+    width: 100px;
 }
 
 .nav-item .active-page {
@@ -148,6 +148,11 @@ a:hover {
     transform: translate(-50%, -50%);
 }
 
+.search-main {
+    width: 80vw;
+    height: 6vh;
+}
+
 .home-image-inner {
     background-image: url("/static/images/herbs.png");
     height: 100vh;
@@ -193,6 +198,7 @@ a:hover {
     width: 90%;
     border-radius: 5px;
 }
+
 
 .banner {
     max-height: fit-content;
@@ -267,20 +273,17 @@ form #news-email {
     background-image: url("/static/images/asparagus.jpg");
 }
 
-.b-image {
+.b-reg-image,
+.b-login-image {
     background-size: cover;
     background-repeat: no-repeat;
-    height: 85vh;
     width: 100vw;
 }
 
-.center-form {
+.center-form,
+.center-form-login {
     background-color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+    width: fit-content
 }
 
 /* Profile Page */
@@ -308,206 +311,124 @@ form #news-email {
 
 /* Media Queries */
 
-@media only screen and (max-width: 374px) and (orientation: portrait) {
-    .search-main {
-        width: 80vw;
-        height: 8vh;
-    }
-
-    .recipe-image-container {
-        order: 1;
-    }
-
-    .recipe-overview {
-        order: 2;
-    }
-
-    .recipe-m-overview {
-        background-color: #92c5cc;
-        border-radius: 10px;
-    }
-
-    .recipe-header {
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .recipe-list-view,
-    .large-screen {
-        display: none;
-    }
-
-    .small-screen {
-        display: flex;
-    }
-
-    .toggle-recipe-list {
-        width: 80vw;
-    }
-
-    .b-image {
-        height: 95vh;
-    }
-
-    .logo {
-        margin-bottom: 0.5rem;
-    }
-
-    .navbar-nav li:last-child {
-        margin-bottom: 10px;
-    }
-
-    .login-image,
-    .register-image {
+@media only screen and (max-width: 376px) and (orientation: portrait) {
+    .register-image,
+    .login-image {
         background-image: none;
     }
-
-    .no-results-container {
-        position: relative;
-        height: 70vh;
-    }
     
+    .b-login-image {
+        height: 75vh;
+    }
 
+    .center-form-login {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+    }
+
+    
 }
 
-@media only screen and (min-width: 300px) and (orientation: landscape) {
-    .search-main {
-        width: auto;
-        height: 13vh;
+@media only screen and (min-width: 400px) and (orientation: portrait) {
+    .b-reg-image {
+        height: 80vh;
     }
 
-    .large-screen {
-        display: none;
+    .b-login-image {
+        height: 75vh;
     }
 
-    .toggle-recipe-list {
-        width: 40%;
-    }
-
-    .recipe-list-view {
-        display: none;
-    }
-
-}
-
-@media only screen and (min-width: 375px) and (orientation: portrait) {
-    .search-main {
-        width: 80vw;
-        height: 6vh;
-    }
-
-    .recipe-image-container {
-        order: 1;
-    }
-
-    .recipe-overview {
-        order: 2;
-    }
-
-    .recipe-header {
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .recipe-list {
-        text-align: center;
-    }
-
-    .recipe-list-view,
-    .large-screen {
-        display: none;
-    }
-
-    .small-screen {
-        display: flex;
-    }
-
-    .toggle-recipe-list {
-        width: 80vw;
+    .center-form,
+    .center-form-login {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
     }
 
 }
 
-@media only screen and (min-width: 560px) and (orientation: landscape) {
+@media only screen and (min-width: 500px) and (max-width: 767px) and (orientation: landscape) {
     .search-main {
         width: auto;
         min-width: 50vw;
         height: auto;
     }
 
+    .col-8-land {
+        -ms-flex: 0 0 66.666667%;
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%;
+    }
 }
 
 
-@media only screen and (min-width: 760px) and (orientation: portrait) {
-    .search-main {
-        width: auto;
-        min-width: 50vw;
-        height: auto;
-    }
-
-    .recipe-image-container {
-        order: 2;
-    }
-
-    .recipe-overview {
-        order: 1;
-    }
-
-    .recipe-header {
-        justify-content: center;
-        flex-wrap: nowrap;
-    }
-
-    .recipe-list {
-        text-align: left;
-    }
-
-}
-
-
-@media only screen and (min-width: 760px) and (orientation: portrait) {
-    .search-main {
-        width: auto;
-        min-width: 50vw;
-        height: auto;
-    }
-
-    .recipe-list-view.r-steps {
-        display: flex;
-    }
-
-    .front-text {
-        margin: 0 5px;
+@media only screen and (min-width: 768px) {
+    .b-reg-image,
+    .b-login-image {
+        height: 85vh;
     }
 
     .nav-item {
         width: 25%;
     }
 
-}
-
-@media only screen and (min-width: 1024px) {
     .search-main {
         width: auto;
-        min-width: 30vw;
+        min-width: 50vw;
         height: auto;
     }
 
-    .large-screen {
-        display: flex;
+}
+
+@media only screen and (min-width: 800px) and (orientation: landscape) {
+    .b-reg-image,
+    .b-login-image {
+        height: fit-content;
     }
 
-    .small-screen {
-        display: none;
+}
+
+@media only screen and (min-width: 1024px) {
+    .b-reg-image,
+    .b-login-image {
+        height: 90vh;
+    }
+
+    .center-form,
+    .center-form-login {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
     }
 
     .nav-item {
         width: initial;
     }
 
+    .search-main {
+        width: auto;
+        min-width: 30vw;
+        height: auto;
+    }
+
     .recent-recipe a img {
         width: calc(25vw - 2rem);
         height: calc(20vh - 0.5rem);
+    }
+
+}
+
+@media only screen and (min-width: 1366px) {
+    .b-reg-image,
+    .b-login-image {
+        height: 85vh;
     }
 
 }
@@ -521,4 +442,5 @@ form #news-email {
         width: calc(25vw - 2rem);
         height: calc(30vh - 0.5rem);
     }
+    
 }
