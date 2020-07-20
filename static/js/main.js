@@ -107,8 +107,7 @@ $(document).ready(function(){
     /*
     The below AJAX function handles the form request for account update and determines the information sent to 
     server as the account update fields are dynamic and then returns if there is any errors and shows
-    in the account update MSFIDOCredentialAssertion. In addition, it disabled the default function of
-    the submit button 
+    in the account update modal. In addition, it disabled the default function of the submit button 
     */ 
 
     $("#submit-changes").on("click", function(event) {
@@ -164,4 +163,29 @@ $(document).ready(function(){
             }
         }        
     });
+
+    /*
+    The below AJAX function handles when a user likes or unlikes a recipe and sends the information
+    to the backend, then receives a response where it updates the likes value and the html of the
+    button.
+    */ 
+
+    $("#react").on("click", function(event) {
+        let recipeId = $(this).attr("recipe");
+        let url = `/like/${recipeId}`
+        $.ajax({
+            url : url,
+            type : 'POST',
+        }).done((data) => {
+            if (data.add) {
+                $("#react").html('<i class="fas fa-heart"></i>');
+                $("#like-count").text(data.add)
+            }
+            else {
+                $("#react").html('<i class="far fa-heart"></i>');
+                $("#like-count").text(data.remove)
+            }
+        });
+    });
+
 });
