@@ -185,6 +185,7 @@ a:hover {
     align-items: center;
     margin: 10px auto;
     width: 25vw;
+    height: 20vh;
     overflow: hidden;
 }
 
@@ -504,4 +505,20 @@ form #news-email {
         width: initial;
     }
 
+    .recent-recipe a img {
+        width: calc(25vw - 2rem);
+        height: calc(20vh - 0.5rem);
+    }
+
+}
+
+@media only screen and (min-width: 1800px) {
+    .recent-recipe {
+        height: 30vh;
+    }
+
+    .recent-recipe a img {
+        width: calc(25vw - 2rem);
+        height: calc(30vh - 0.5rem);
+    }
 }
