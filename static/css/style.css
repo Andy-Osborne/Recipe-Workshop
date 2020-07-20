@@ -212,6 +212,7 @@ form #news-email {
 
 .search-image {
     width: 100%;
+    min-height: 250px;
 }
 
 .search-header {
@@ -222,6 +223,19 @@ form #news-email {
     list-style-type: none;
     padding: 5px;
     margin-bottom: 5px;
+}
+
+.no-results-container {
+    position: relative;
+    height: 85vh;
+}
+
+.no-results {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Recipe Page */
@@ -347,6 +361,12 @@ form #news-email {
         background-image: none;
     }
 
+    .no-results-container {
+        position: relative;
+        height: 70vh;
+    }
+    
+
 }
 
 @media only screen and (min-width: 300px) and (orientation: landscape) {
@@ -413,7 +433,7 @@ form #news-email {
         min-width: 50vw;
         height: auto;
     }
-    
+
 }
 
 
@@ -478,6 +498,10 @@ form #news-email {
 
     .small-screen {
         display: none;
+    }
+
+    .nav-item {
+        width: initial;
     }
 
 }
