@@ -103,22 +103,20 @@
 <div class="row no-gutters text-center">
     <div class="col">
         <h4>If you liked this recipe, why not show your appreciation and give it a like?</h4>
-        <form action="{{url_for('like', recipe_id=recipe._id, user_name=session['username'])}}" method="POST">
             {% if not session["username"] %}
-            <button class="btn-like disable" id="like" type="button"><i class="fas fa-heart"></i></button>
+            <button class="btn-like disable" type="button"><i class="fas fa-heart"></i></button>
             <small>{{recipe.likes}}</small>
             <br>
             <small>Please log in to give this recipe a like</small>
             {% else %}
             {% if session["username"] in recipe.liked_by %}
-            <button class="btn-like" id="like" type="submit"><i class="fas fa-heart"></i></button>
-            <small>{{recipe.likes}}</small>
+            <button class="btn-like" id="react" type="button" recipe="{{recipe._id}}"><i class="fas fa-heart"></i></button>
+            <small id="like-count">{{recipe.likes}}</small>
             {% else %}
-            <button class="btn-like" id="unlike" type="submit"><i class="far fa-heart"></i></button>
-            <small>{{recipe.likes}}</small>
+            <button class="btn-like" id="react" type="button" recipe="{{recipe._id}}"><i class="far fa-heart"></i></button>
+            <small id="like-count">{{recipe.likes}}</small>
             {% endif %}
             {% endif %}
-        </form>
     </div>
 </div>
 
