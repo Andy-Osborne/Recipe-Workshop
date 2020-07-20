@@ -44,12 +44,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="preparation_time"><strong>How much preparation time is needed? Enter as Minutes</strong></label>
-                        <input class="form-control" type="number" name="preparation_time" id="preparation_time" min="0" value="{{recipe.prep_time}}" required>
+                        <label for="preparation_time"><strong>How much preparation time is needed? Enter in minutes</strong></label>
+                        <input class="form-control" type="number" name="preparation_time" id="preparation_time" min="0" max="1800" value="{{recipe.prep_time}}" required>
                     </div>
                         <div class="form-group">
-                        <label for="cooking_time"><strong>How much cooking time does it need? Enter as Minutes</strong></label>
-                        <input class="form-control" type="number" name="cooking_time" id="cooking_time" min="0" value="{{recipe.cooking_time}}" required>
+                        <label for="cooking_time"><strong>How much cooking time does it need? Enter in minutes</strong></label>
+                        <input class="form-control" type="number" name="cooking_time" id="cooking_time" min="0" max="1800" value="{{recipe.cooking_time}}" required>
                     </div>
                     <div class="form-group">
                         <label for="effort"><strong>How complicated is this dish to make?</strong></label>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="form-group">
                         <label for="servings"><strong>How many servings will this make?</strong></label>
-                        <input class="form-control" type="number" name="servings" id="servings" min="0" value="{{recipe.servings}}" required>
+                        <input class="form-control" type="number" name="servings" id="servings" min="0" max="100" value="{{recipe.servings}}" required>
                     </div>
                     <div class="form-group" id="step_inputs">
                         <label for="steps"><strong>Provide the steps to create your Recipe</strong></label>
