@@ -258,31 +258,35 @@ def delete_recipe(recipe_id):
 
 # Handles the logic of a user liking or removing their like from a recipe
 
-@app.route("/like/<user_name>/<recipe_id>", methods=["GET", "POST"])
-def like(recipe_id, user_name):
+@app.route("/like/<recipe_id>", methods=["GET", "POST"])
+def like(recipe_id):
     find_recipe = recipe.find_one({"_id":ObjectId(recipe_id)})
+
 
     """The below checks to see if the user who likes the recipe is already in the liked by
     field within the recipes document. If the user is not, then it increments the likes by 1
     and adds the username to liked_by. If the user is already in there, then it treats it as 
     if the user is unliking it and removes their name and decrements the count by 1."""
 
-    if user_name not in find_recipe["liked_by"]:
-        recipe.update(
+    if session["username"] not in find_recipe["liked_by"]:
+        recipe.update_one(
             {'_id': ObjectId(recipe_id)},
             {
                 "$inc": {"likes": 1},
-                "$push" : {"liked_by": user_name}
+                "$push" : {"liked_by": session["username"]}
         })
+        new_like = recipe.find_one({"_id":ObjectId(recipe_id)})["likes"]
+        return jsonify({ 'add': new_like })
     else:
-        recipe.update(
+        recipe.update_one(
             {'_id': ObjectId(recipe_id)},
             {
                 "$inc": {"likes": -1},
-                "$pull" : {"liked_by": user_name}
+                "$pull" : {"liked_by": session["username"]}
         })
+        new_like = recipe.find_one({"_id":ObjectId(recipe_id)})["likes"]
+        return jsonify({ 'remove': new_like })
 
-    return redirect(request.referrer)
 
 #H Handles the user registration logic
 
