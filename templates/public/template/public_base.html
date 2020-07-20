@@ -41,6 +41,9 @@
             {% endif %}
 
           <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link btn btn-main {% if page == 'index' %}active-page{% endif %}" href="/">Home</a>
+              </li>
 
             {% if not session["username"] %}
 
