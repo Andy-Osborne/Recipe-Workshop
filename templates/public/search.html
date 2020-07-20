@@ -6,12 +6,24 @@
 
 <div class="row no-gutters">
     {% if count == 0 %}
+    <div class="col-12">
+        <div class="no-results-container">
+            <div class="no-results p-2 text-center">
+                <p>Sorry, no results found</p>
 
-    <small class="p-2">Sorry, no results found</small>
+                {% if session["username"] %}
+                <p>Why not add your own recipe for others to see when looking for "<strong>{{search_term|title}}</strong>"?</p>
+                {% else %}
+                <p>Why not login and add your own recipe for others to see when looking for "<strong>{{search_term|title}}</strong>"?</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
 
     {% else %}
 
-    <small class="p-2">We found {{count}} results for the search <strong>"{{search_term|title}}"</strong></small>
+    <small class="p-2">We found {{count}} results for the search "<strong>{{search_term|title}}</strong>"</small>
 
     <div class="col-12">
         <div class="row no-gutters text-center justify-content-center">
@@ -28,10 +40,10 @@
                         <h3>{{result['recipe_name']|title}}</h3>
                     </a>
                     <ul class="search-list">
-                        <li><i class="fas fa-heart heart"></i> by {{result["likes"]}} users</li>
+                        <li><i class="fas fa-heart heart"></i> by {% if result["likes"] == 0 %} {{result["likes"]}} user{% else %} {{result["likes"]}} users{% endif %}</li>
                         <li><strong>Total Time: {{result["cooking_time"] + result["prep_time"]}}mins |
                                 Effort: {{result["effort"]|title}}</strong></li>
-                        <li>{{result["recipe_description"]|truncate(90)}} </li>
+                        <li>{{result["recipe_description"]|truncate(60)}} </li>
                     </ul>
                 </div>
             </div>
