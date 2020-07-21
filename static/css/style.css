@@ -49,6 +49,10 @@ i {
     font-size: 1.5rem;
 }
 
+.btn-like i {
+    font-size: 2rem;
+}
+
 .profile-link {
     font-size: inherit;
     text-decoration: none;
@@ -269,10 +273,23 @@ form #news-email {
     margin-bottom: 5px;
 }
 
+.recipe-list-view ul li:last-child {
+    margin-bottom: 1rem;
+}
+
 .methods-header {
     margin: 5px 0;
     padding: 10px 0;
 }
+
+.small-screen {
+    display: flex;
+}
+
+.recipe-list-view,
+.large-screen {
+        display: none;
+    }
 
 /* Registration/Login Pages */
 
@@ -340,6 +357,27 @@ form #news-email {
         transform: translate(-50%, -50%);
     }
 
+    .recipe-image-container {
+        order: 1;
+    }
+
+    .recipe-overview {
+        order: 2;
+    }
+
+    .recipe-m-overview {
+        background-color: #92c5cc;
+        border-radius: 10px;
+    }
+
+    .recipe-header {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .toggle-recipe-list {
+        width: 80vw;
+    }
     
 }
 
@@ -379,6 +417,32 @@ form #news-email {
         height: 25vh;
     }
 
+    .recipe-image-container {
+        order: 1;
+    }
+
+    .recipe-overview {
+        order: 2;
+    }
+
+    .recipe-m-overview {
+        background-color: #92c5cc;
+        border-radius: 10px;
+    }
+
+    .recipe-header {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .recipe-list {
+        text-align: center;
+    }
+
+    .toggle-recipe-list {
+        width: 80vw;
+    }
+
 }
 
 @media only screen and (min-width: 500px) and (orientation: landscape) {
@@ -404,6 +468,10 @@ form #news-email {
     
     .search-text {
         height: 55vh;
+    }
+
+    .toggle-recipe-list {
+        width: 35vw;
     }
 
 }
@@ -447,6 +515,35 @@ form #news-email {
     
     .search-text {
         height: 18vh;
+    }
+
+    .recipe-image-container {
+        order: 2;
+    }
+
+    .recipe-overview {
+        order: 1;
+    }
+
+    .recipe-m-overview {
+        background-color: initial;
+        border-radius: 0;
+    }
+
+    .recipe-header {
+        justify-content: center;
+        flex-wrap: nowrap;
+    }
+
+    .recipe-list {
+        text-align: left;
+        padding: 0 1rem;
+        margin: 0 2rem
+    }
+
+    .list-group {
+        padding: 0 1rem;
+        margin: 0 2rem
     }
 
 }
@@ -513,6 +610,20 @@ form #news-email {
     
     .search-text {
         height: 12vh;
+    }
+
+    .large-screen {
+        display: flex;
+    }
+
+    .small-screen {
+        display: none;
+    }
+
+    .list-group, 
+    .recipe-list {
+        padding: 0;
+        margin: 0;
     }
 
 }
