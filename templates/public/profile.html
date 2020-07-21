@@ -5,7 +5,7 @@
 {% block main %}
 <div class="container">
     <div class="row no-gutters">
-        <div class="col-12 text-center ">
+        <div class="col-12 text-center mt-3">
 
             <!-- Check to see if user is profile owner -->
 
@@ -25,15 +25,30 @@
             <!-- Check to see if user has a profile image/description -->
 
             {% if username.profile_image and username.profile_description %}
-            <div class="row no-gutters d-lg-flex justify-content-center align-items-center p-2 m-2">
-                <div class="col-12 col-lg-3 d-flex justify-content-center">
+            <div class="row no-gutters justify-content-center align-items-center p-2 m-2">
+                <div class="col-12 col-lg-3">
                     <div class="profile-image-container">
-                        <img src="{{username.profile_image}}">
+                        <img src="{{username.profile_image}}" alt="Profile picture of {{username.username}}">
                     </div>
                 </div>
                 <div class="col-12 col-lg-3 text-center">
                     <div class="profile-description-container p-2 mb-2">
                         <p>{{username.profile_description}}</p>
+                    </div>
+                </div>
+            </div>
+
+            {% else %} 
+
+            <div class="row no-gutters justify-content-center align-items-center p-2 m-2">
+                <div class="col-12 col-lg-3">
+                    <div class="profile-image-container">
+                        <img src="https://res.cloudinary.com/andy-osborne/image/upload/v1595347834/Recipe_Workshop/profile/default.jpg" alt="Default profile picture">
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 text-center">
+                    <div class="profile-description-container p-2 mb-2">
+                        <p>Welcome to my profile! I am just getting started and haven't updated my about me section yet but come check back soon!</p>
                     </div>
                 </div>
             </div>
@@ -52,7 +67,7 @@
 
             <div class="new-profile-info">
                 <p><strong>Why not update your profile to include a profile image and short description for your
-                        followers?</strong></p>
+                        readers?</strong></p>
                 <button class="profile-form btn btn-main" type="button">Add Now</button>
 
             </div>
@@ -68,7 +83,7 @@
                     </div>
                     <div class="form-group">
                         <label for="profile-description"><strong>Write a short introduction about
-                                yourself</strong></label>
+                                yourself - what inspired you to cook? What are your favourite dishes?</strong></label>
                         <textarea class="form-control" name="profile-description" id="profile-description" cols="30"
                             rows="5" required></textarea>
                     </div>
@@ -86,19 +101,37 @@
         {% if session["username"] == username.username %}
 
         <div class="col-12 text-center p-2 m-2">
-            <h3>Your Recipes</h3>
+            <h3>My Recipes</h3>
+        
         </div>
-
         {% else %}
 
         <div class="col-12 text-center p-2 m-2">
-            <h3>The recipes created by {{username.username}} are:</h3>
+            <h3>Their recipe creations:</h3>
+        
         </div>
-
         {% endif %}
 
+        {% if recipe_count == 0 %}
+            {% if username.username == session["username"] %}
+
+        <div class="col-12 text-center p-2 mb-2">
+            <p>It doesn't look like you've created any recipes yet. Why not create your first one now?</p>
+            <a class="btn btn-main" href="{{url_for('add_recipe')}}">Add Recipe</a>
+        </div>
+
+            {% else %}
+
+        <div class="col-12 text-center p-2 mb-2">
+            <p>Looks like they're still firing up the stove and haven't had a chance to write up their latest creations! </p>
+        </div>
+
+            {% endif %}
+        
+        {% else %}
+
         <div class="col-12 col-lg-6 text-center">
-            <ul class="recipe-list">
+            <ul class="profile-recipe-list">
                 {% for recipe in recipes %}
                 {% if recipe.recipe_author == username.username %}
                 <li> <a href="{{url_for('get_recipe', recipe_id=recipe._id, recipe_name=recipe.recipe_name)}}">
@@ -110,6 +143,9 @@
                 {% endfor %}
             </ul>
         </div>
+
+        {% endif %}
+
     </div>
 </div>
 
