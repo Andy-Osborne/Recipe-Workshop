@@ -6,7 +6,7 @@
 
 <div class="row no-gutters">
     <div class="col-12 d-flex justify-content-center">
-        <div class="text-center">
+        <div class="text-center my-3">
             <h1>{{recipe.recipe_name|title}}</h1>
             <h3>Recipe by
                 <a class="profile-link"
@@ -101,7 +101,7 @@
 </div>
 
 <div class="row no-gutters text-center">
-    <div class="col">
+    <div class="col-12 p-2 my-3">
         <h4>If you liked this recipe, why not show your appreciation and give it a like?</h4>
             {% if not session["username"] %}
             <button class="btn-like disable" type="button"><i class="fas fa-heart"></i></button>
