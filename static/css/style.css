@@ -101,7 +101,6 @@ a:hover {
 
 .social-links ul {
     margin: 0;
-    padding-inline-start: 0;
     padding: 5px;
 }
 
@@ -170,7 +169,7 @@ a:hover {
 
 .front-header {
     margin-top: 8px;
-    padding: 5px 0px;
+    padding: 5px 0;
 }
 
 .featured-container {
@@ -264,7 +263,7 @@ form #news-email {
 
 .recipe-image {
     width: 250px;
-    padding: 10px;
+    padding: 0.5rem;
 }
 
 .recipe-list li {
@@ -317,13 +316,20 @@ form #news-email {
 /* Profile Page */
 
 .profile-image-container {
-    width: 250px;
-    height: 250px;
+    width: 100%;
+    height: 35vh;
     overflow: hidden;
 }
 
 .profile-image-container img {
-    width: 250px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.profile-recipe-list {
+    list-style-type: none;
+    padding: 5px;
+    margin-bottom: 5px;
 }
 
 /* 404 Page */
@@ -389,6 +395,10 @@ form #news-email {
     .search-text {
         height: 23vh;
     }
+
+    .profile-image-container {
+        height: 25vh;
+    }
 }
 
 @media only screen and (min-width: 400px) and (orientation: portrait) {
@@ -435,12 +445,17 @@ form #news-email {
         flex-wrap: wrap;
     }
 
+    .profile-recipe-list
     .recipe-list {
         text-align: center;
     }
 
     .toggle-recipe-list {
         width: 80vw;
+    }
+
+    .profile-image-container {
+        height: 30vh;
     }
 
 }
@@ -472,6 +487,10 @@ form #news-email {
 
     .toggle-recipe-list {
         width: 35vw;
+    }
+
+    .profile-image-container {
+        max-height: 60vh;
     }
 
 }
@@ -546,6 +565,10 @@ form #news-email {
         margin: 0 2rem
     }
 
+    .profile-image-container {
+        max-height: 25vh;
+    }
+
 }
 
 @media only screen and (min-width: 800px) and (orientation: landscape) {
@@ -570,6 +593,11 @@ form #news-email {
     
     .search-text {
         height: 50vh;
+    }
+
+    .profile-image-container {
+        min-height: 40vh;
+        max-height: 50vh;
     }
 
 }
@@ -626,6 +654,10 @@ form #news-email {
         margin: 0;
     }
 
+    .profile-image-container {
+        height: 15vh;
+        max-height: 15vh;
+    }
 }
 
 @media only screen and (min-width: 1024px) and (orientation: landscape) {
@@ -645,6 +677,11 @@ form #news-email {
     
     .search-text {
         height: 22vh;
+    }
+
+    .profile-image-container {
+        min-height: 20vh;
+        max-height: 35vh;
     }
 
 }
