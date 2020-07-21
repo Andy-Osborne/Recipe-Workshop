@@ -3,14 +3,14 @@
 {% block title%}RW | Login{% endblock%}
 
 {% block main %}
-<div class="row no-gutters login-image b-login-image d-flex justify-content-center">
+<div class="row no-gutters login-image b-login-image justify-content-center mt-2">
     <div class="col-12 col-md-8 col-lg-6 col-xl-3 text-center">
         <div class="container-fluid center-form-login">
             <div class="header">
                 <h1>Login</h1>
             </div>
             <div class="row no-gutters">
-                <div class="col-12 d-flex justify-content-center text-sm-center text-lg-left p-3">
+                <div class="col-12 justify-content-center text-sm-center text-lg-left p-3">
                     <form action="/login" method="POST">
                         {{ form.hidden_tag() }}
                         <fieldset class="form-group">
