@@ -1,6 +1,6 @@
 {% extends 'public/template/public_base.html' %}
 
-{% block title%} Search {% endblock%}
+{% block title%}RW | Search {% endblock%}
 
 {% block main %}
 
@@ -16,6 +16,8 @@
                 {% else %}
                 <p>Why not login and add your own recipe for others to see when looking for "<strong>{{search_term|title}}</strong>"?</p>
                 {% endif %}
+
+                <img src="/static/images/logo.png" alt="Recipe Workshop">
             </div>
         </div>
     </div>
