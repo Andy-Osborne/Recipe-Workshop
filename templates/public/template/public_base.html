@@ -24,7 +24,7 @@
 </head>
 <body>
     <nav class="navbar fixed-top navbar-expand-lg nav-colour">
-        <a class="navbar-brand logo" href="/"><img src="/static/images/logo.png" alt="Recipe Workshop"></a>
+        <a class="navbar-brand logo" href="{{url_for('index')}}"><img src="/static/images/logo.png" alt="Recipe Workshop"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars navbar-toggler-icon"></i>
         </button>
@@ -42,16 +42,16 @@
 
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link btn btn-main {% if page == 'index' %}active-page{% endif %}" href="/">Home</a>
+                <a class="nav-link btn btn-main {% if page == 'index' %}active-page{% endif %}" href="{{url_for('index')}}">Home</a>
               </li>
 
             {% if not session["username"] %}
 
             <li class="nav-item">
-              <a class="nav-link btn btn-main {% if page == 'register' %}active-page{% endif %}" href="/register">Sign Up</a>
+              <a class="nav-link btn btn-main {% if page == 'register' %}active-page{% endif %}" href="{{url_for('register')}}">Sign Up</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link btn btn-main {% if page == 'login' %}active-page{% endif %}" href="/login">Login</a>
+              <a class="nav-link btn btn-main {% if page == 'login' %}active-page{% endif %}" href="{{url_for('login')}}">Login</a>
             </li>
 
             {% else %}
@@ -115,7 +115,7 @@
                 <div class="col-12 col-md-3">
                     <div class="site-links text-center">
                         <a href="#">Advertise With Us</a>
-                        <a href="#">Privacy Policy</a>
+                        <a href="{{url_for('privacy')}}">Privacy Policy</a>
                     </div>
                 </div>
             </div>
