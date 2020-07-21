@@ -364,6 +364,16 @@ form #news-email {
         flex: 0 0 66.666667%;
         max-width: 66.666667%;
     }
+
+    .recent-recipe {
+        width: 25vw;
+        height: 40vh;
+    }
+
+    .recent-recipe a img {
+        width: calc(40vw - 2rem);
+        height: calc(45vh - 0.5rem);
+    }
 }
 
 
@@ -389,6 +399,16 @@ form #news-email {
     .b-reg-image,
     .b-login-image {
         height: fit-content;
+    }
+
+    .recent-recipe {
+        width: 25vw;
+        height: 40vh;
+    }
+
+    .recent-recipe a img {
+        width: calc(40vw - 2rem);
+        height: calc(45vh - 0.5rem);
     }
 
 }
@@ -423,6 +443,18 @@ form #news-email {
         height: calc(20vh - 0.5rem);
     }
 
+}
+
+@media only screen and (min-width: 1024px) and (orientation: landscape) {
+    .recent-recipe {
+        width: 22vw;
+        height: 20vh;
+    }
+
+    .recent-recipe a img {
+        width: calc(25vw - 2rem);
+        height: calc(25vh - 0.5rem);
+    }
 }
 
 @media only screen and (min-width: 1366px) {
