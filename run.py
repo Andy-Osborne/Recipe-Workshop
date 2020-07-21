@@ -325,7 +325,7 @@ def user_registration():
                 flash(f"Email already in use. Please use login.", "error_email")
                 return redirect(request.url) 
             
-    return render_template("public/register.html", title="Register", form=form, page="register")   
+    return render_template("public/register.html", form=form, page="register")   
         
 # Handles the user login logic
 
@@ -354,7 +354,7 @@ def login():
                 flash(f"Incorrect e-mail/password combination. Please try again", "error")
                 return redirect(request.url)
           
-    return render_template("public/login.html", title="Login", form=form, page="login")   
+    return render_template("public/login.html", form=form, page="login")   
 
 # Handles logging out user by clearing session data.
 
@@ -475,6 +475,11 @@ def password_update(user_id, new_password):
             "password" : pbkdf2_sha256.hash(new_password)
             }
         })
+
+@app.route("/privacy")
+def privacy():
+
+    return render_template("public/privacy.html")
 
 
 @app.errorhandler(404)
