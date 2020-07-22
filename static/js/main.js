@@ -66,6 +66,7 @@ $(document).ready(function () {
 
     $("#change").on("click", () => {
         $("#current-image").removeClass("d-none");
+        $("#recipe_image").attr("required", "required")
         $("#manage-recipe").attr("enctype", "multipart/form-data");
         $("#cancel-change").removeClass("d-none");
         $("#change-image-text").addClass("d-none");
@@ -74,6 +75,7 @@ $(document).ready(function () {
 
     $("#cancel-change").on("click", () => {
         $("#current-image").addClass("d-none");
+        $("#recipe_image").removeAttr("required", "required")
         $("#manage-recipe").removeAttr("enctype", "multipart/form-data");
         $("#cancel-change").addClass("d-none");
         $("#change-image-text").removeClass("d-none");
