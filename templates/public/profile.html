@@ -38,17 +38,19 @@
                 </div>
             </div>
 
-            {% else %} 
+            {% else %}
 
             <div class="row no-gutters justify-content-center align-items-center p-2 m-2">
                 <div class="col-12 col-lg-3">
                     <div class="profile-image-container">
-                        <img src="https://res.cloudinary.com/andy-osborne/image/upload/v1595347834/Recipe_Workshop/profile/default.jpg" alt="Default profile picture">
+                        <img src="https://res.cloudinary.com/andy-osborne/image/upload/v1595347834/Recipe_Workshop/profile/default.jpg"
+                            alt="Default profile picture">
                     </div>
                 </div>
                 <div class="col-12 col-lg-3 text-center">
                     <div class="profile-description-container p-2 mb-2">
-                        <p>Welcome to my profile! I am just getting started and haven't updated my about me section yet but come check back soon!</p>
+                        <p>Welcome to my profile! I am just getting started and haven't updated my about me section yet
+                            but come check back soon!</p>
                     </div>
                 </div>
             </div>
@@ -64,13 +66,13 @@
         {% if not username.profile_image and not username.profile_description %}
 
         <div class="col-12 col-lg-6 text-center p-3 m-2 banner">
-
             <div class="new-profile-info">
                 <p><strong>Why not update your profile to include a profile image and short description for your
                         readers?</strong></p>
                 <button class="profile-form btn btn-main" type="button">Add Now</button>
 
             </div>
+
             <!-- Create Profile Form -->
 
             <div class="profile d-none">
@@ -78,8 +80,8 @@
                     enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="profile-image"><strong>Please upload a profile image</strong></label>
-                        <input class="form-control image-upload" type="file" name="profile-image" id="profile-image" accept="image/*"
-                            required>
+                        <input class="form-control image-upload" type="file" name="profile-image" id="profile-image"
+                        accept=".png, .jpg, .jpeg" required>
                     </div>
                     <div class="p-2 text-center">
                         <p><strong class="warning"></strong></p>
@@ -106,32 +108,31 @@
 
         <div class="col-12 text-center p-2 m-2">
             <h3>My Recipes</h3>
-        
         </div>
         {% else %}
 
         <div class="col-12 text-center p-2 m-2">
             <h3>Their recipe creations:</h3>
-        
         </div>
         {% endif %}
 
         {% if recipe_count == 0 %}
-            {% if username.username == session["username"] %}
+        {% if username.username == session["username"] %}
 
         <div class="col-12 text-center p-2 mb-2">
             <p>It doesn't look like you've created any recipes yet. Why not create your first one now?</p>
             <a class="btn btn-main" href="{{url_for('add_recipe')}}">Add Recipe</a>
         </div>
 
-            {% else %}
+        {% else %}
 
         <div class="col-12 text-center p-2 mb-2">
-            <p>Looks like they're still firing up the stove and haven't had a chance to write up their latest creations! </p>
+            <p>Looks like they're still firing up the stove and haven't had a chance to write up their latest creations!
+            </p>
         </div>
 
-            {% endif %}
-        
+        {% endif %}
+
         {% else %}
 
         <div class="col-12 col-lg-6 text-center">
@@ -142,7 +143,6 @@
                         {{recipe.recipe_name | title}}
                     </a> - submitted on {{recipe.submitted}}
                 </li>
-                <hr>
                 {% endif %}
                 {% endfor %}
             </ul>
@@ -170,13 +170,15 @@
             <div class="modal-body">
                 <form action="{{url_for('update_account')}}" method="POST">
                     <p>Please update the information below to change your account information.</p>
+                    <input id="user_id" name="user_id" type="hidden" value="{{username._id}}">
                     <div class="form-group email-change">
-                        <label for="email"><strong>Change Email</strong></label>
+                        <label for="account-email"><strong>Change Email</strong></label>
                         <input class="form-control" type="email" name="email" id="account-email"
                             value="{{username.email}}" required>
                     </div>
 
                     <!-- Change Password Control Buttons -->
+
                     <div class="text-center">
                         <small class="form-text text-muted" id="change-pass-text">Do you want to change your
                             password?</small>
@@ -184,7 +186,7 @@
                             Change Password
                         </button>
                         <button class="btn-remove d-none" id="cancel-pass" type="button">
-                            Cancel</i>
+                            Cancel
                         </button>
                     </div>
 
@@ -201,18 +203,16 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" id="submit-changes" class="btn btn-primary"
-                            user_id="{{username._id}}">Save changes</button>
+                        <button type="submit" id="submit-changes" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 </div>
 
 {% endif %}
 
-</div>
+
 
 {% endblock %}
