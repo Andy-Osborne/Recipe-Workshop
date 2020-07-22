@@ -35,8 +35,12 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Provide an image for this dish</label>
-                        <input class="form-control" type="file" name="recipe_image" id="recipe_image" accept="image/*"
+                        <input class="form-control image-upload" type="file" name="recipe_image" id="recipe_image" accept="image/png, image/jpeg, image/jpg"
                             required>
+                    </div>
+                    <div class="p-2 text-center">
+                        <p><strong class="warning"></strong></p>
+                        <p><strong class="successful"></strong></p>
                     </div>
                     <div class="form-group">
                         <label for="preparation_time">How much preparation time is needed? Enter in minutes</label>
@@ -89,7 +93,7 @@
                     </div>
                     <br>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Submit Your Recipe</button>
+                        <button type="submit" class="btn btn-primary submit-btn recipe-submit">Submit Your Recipe</button>
                     </div>
                 </form>
             </div>
