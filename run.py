@@ -27,6 +27,7 @@ mongo = PyMongo(app)
 
 recipe = mongo.db.recipe
 user = mongo.db.users
+newsletter = mongo.db.newsletter
 
 # Handles the logic for the front page and displays the highest rated recipe & 6 most recently added.
 
@@ -36,7 +37,25 @@ def index():
     highest_rated = recipe.find({"likes":{"$gt": 0}}).sort("likes", -1).limit(1)
     recent_recipes = recipe.find().sort("submitted", 1).limit(8)
 
-    return render_template("public/index.html", favourite=list(highest_rated), recent=list(recent_recipes), page="index")
+    """
+    The checks to see if a username is in session. If it's not, then signups gets assigned none.
+    If there is, then it checks to see if that username is in the newsletter collection.
+    If the username is not, an error is caught and signups is assigned none. Else, it is assigned the username.
+    """
+    
+    if "username" in session:
+        signups = newsletter.find_one({"username" : session["username"]})
+        try:
+            session["username"] in signups
+        except:
+            signups = "None"
+        else:
+            signups = session["username"]
+            
+    else:
+        signups = "None"
+
+    return render_template("public/index.html", favourite=list(highest_rated), recent=list(recent_recipes), signups=signups, page="index")
 
 
 @app.route("/search", methods=["POST"])
@@ -476,10 +495,59 @@ def password_update(user_id, new_password):
             }
         })
 
+
 @app.route("/privacy")
 def privacy():
 
     return render_template("public/privacy.html")
+
+
+
+@app.route("/newsletter",  methods=["POST"])
+def newsletter_register():
+
+    email = request.form["email"]
+
+    duplicate_search = newsletter.find_one({"email": email})
+
+    if "username" in session:
+        username = session["username"]
+    else:
+        username = ""
+
+
+    if not duplicate_search:
+        if username == "":
+            new_signup = {
+                "email" : email
+            }
+
+            newsletter.insert_one(new_signup)
+            return jsonify({ 'success': "Thank you! We had added you to our newsletter list." })
+
+        else:
+            new_signup = {
+                "email" : email,
+                "username" : username
+            }
+
+            newsletter.insert_one(new_signup)
+            return jsonify({ 'success': "Thank you! We had added you to our newsletter list." })
+    else:
+        if username:
+            newsletter.update_one({"_id":ObjectId(duplicate_search["_id"])},
+            {
+                "$set": {
+                "username" : username
+                }
+            })
+            
+            return jsonify({ 'error': "Looks like you're already in our newsletter list!" })
+           
+        else:
+            return jsonify({ 'error': "Looks like you're already in our newsletter list!" })
+
+
 
 
 @app.errorhandler(404)
