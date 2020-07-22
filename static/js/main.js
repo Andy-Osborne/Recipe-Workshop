@@ -33,7 +33,6 @@ $(document).ready(function () {
         $(this).closest("form").submit();
     });
 
-
     // The below applies/removes the zoom class on the nav buttons when the mouse enters/leaves
 
     $(".btn-main").on("mouseenter", event => {
