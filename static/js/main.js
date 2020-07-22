@@ -1,10 +1,10 @@
-$(document).ready(function(){
-    
+$(document).ready(function () {
+
     /*
     The below adds an extra line for recipe ingredient/step form in the new_recipe.html
     when the corresponding button is clicked.
     */
-    
+
     $("#add_ingredient").on("click", () => {
         $("#ingredient").append('<input class="form-control my-2" type="text" name="ingredients" required>');
     });
@@ -12,19 +12,27 @@ $(document).ready(function(){
     $("#add_step").on("click", () => {
         $("#step_inputs").append('<input class="form-control my-2" type="text" name="step" required>');
     });
-    
+
     /* 
     The below removes a line for recipe ingredient/step form in the new_recipe.html
     when the corresponding button is clicked.
     */
 
     $("#remove_ingredient").on("click", () => {
-     $("#ingredient input:last-child").remove();   
+        $("#ingredient input:last-child").remove();
     });
 
     $("#remove_step").on("click", () => {
         $("#step_inputs input:last-child").remove();
     });
+
+    // The below disables the ability for a user to submit the same recipe twice upon creation.
+
+    $(".recipe-submit").on("click", function (event) {
+        $(this).attr("disabled", "disabled");
+        $(this).closest("form").submit();
+    });
+
 
     // The below applies/removes the zoom class on the nav buttons when the mouse enters/leaves
 
@@ -59,7 +67,7 @@ $(document).ready(function(){
 
     $("#change").on("click", () => {
         $("#current-image").removeClass("d-none");
-        $("#manage-recipe").attr("enctype","multipart/form-data");
+        $("#manage-recipe").attr("enctype", "multipart/form-data");
         $("#cancel-change").removeClass("d-none");
         $("#change-image-text").addClass("d-none");
         $("#change").addClass("d-none");
@@ -67,7 +75,7 @@ $(document).ready(function(){
 
     $("#cancel-change").on("click", () => {
         $("#current-image").addClass("d-none");
-        $("#manage-recipe").removeAttr("enctype","multipart/form-data");
+        $("#manage-recipe").removeAttr("enctype", "multipart/form-data");
         $("#cancel-change").addClass("d-none");
         $("#change-image-text").removeClass("d-none");
         $("#change").removeClass("d-none");
@@ -86,15 +94,15 @@ $(document).ready(function(){
         $(".submit-btn").removeAttr("disabled", "disabled");
         $(".warning").empty();
         $(".successful").empty();
-        
-        let fileCheck =  $(".image-upload").val();
+
+        let fileCheck = $(".image-upload").val();
         let fileSize = $(".image-upload")[0].files[0].size;
         let extensionCheck = fileCheck.split(".").pop().toLowerCase();
-        
+
         const extensions = ["jpeg", "jpg", "png"];
 
-        if(extensions.includes(extensionCheck)) {
-            if(fileSize <= 2097152 ) {
+        if (extensions.includes(extensionCheck)) {
+            if (fileSize <= 2097152) {
                 $(".successful").text("Image Accepted");
             } else {
                 $(".warning").text("Maximum file size is 2mb. Please upload a smaller file.");
@@ -108,7 +116,7 @@ $(document).ready(function(){
     });
 
     // Below shows profile update form on a new users profile to allow them to update it.
-    
+
     $(".profile-form").on("click", () => {
         $(".profile").toggleClass("d-none");
         $(".new-profile-info").addClass("d-none");
@@ -139,15 +147,15 @@ $(document).ready(function(){
     The below AJAX function handles the form request for account update and determines the information sent to 
     server as the account update fields are dynamic and then returns if there is any errors and shows
     in the account update modal. In addition, it disabled the default function of the submit button 
-    */ 
+    */
 
-    $("#submit-changes").on("click", function(event) {
-        
+    $("#submit-changes").on("click", function (event) {
+
         let validForm = this.form.checkValidity();
 
         if (validForm) {
             event.preventDefault();
-        
+
             let user_id = $(this).attr("user_id");
             let email = $("#account-email").val();
             let password = $("#current-password").val();
@@ -156,65 +164,65 @@ $(document).ready(function(){
 
             if (newPassword == "") {
                 req = $.ajax({
-                    url : '/profile/account_management',
-                    type : 'POST',
-                    data : {email : email, password : password, user_id : user_id}
-                }).done(function(req) {
+                    url: '/profile/account_management',
+                    type: 'POST',
+                    data: {
+                        email: email,
+                        password: password,
+                        user_id: user_id
+                    }
+                }).done(function (req) {
                     if (req.error) {
                         $("#change-error").text(req.error).removeClass("d-none");
                         $("#change-success").addClass("d-none");
-                    }
-                    else {
+                    } else {
                         $("#change-success").text(req.success).removeClass("d-none");
                         $("#change-error").text(req.error).addClass("d-none");
                     }
                 });
-            }
-            else {
+            } else {
                 req = $.ajax({
-                    url : '/profile/account_management',
-                    type : 'POST',
-                    data : {
-                        email : email,
-                        "new-password" : newPassword,
-                        "conf-password" : confPassword, 
-                        password : password,
-                        user_id : user_id
+                    url: '/profile/account_management',
+                    type: 'POST',
+                    data: {
+                        email: email,
+                        "new-password": newPassword,
+                        "conf-password": confPassword,
+                        password: password,
+                        user_id: user_id
                     }
-                }).done(function(req) {
+                }).done(function (req) {
                     if (req.error) {
                         $("#change-error").text(req.error).removeClass("d-none");
                         $("#change-success").addClass("d-none");
-                    }
-                    else {
+                    } else {
                         $("#change-success").text(req.success).removeClass("d-none");
                         $("#change-error").text(req.error).addClass("d-none");
                     }
                 });
             }
-        }        
+        }
     });
 
     /*
     The below AJAX function handles when a user likes or unlikes a recipe and sends the information
     to the backend, then receives a response where it updates the likes value and the html of the
     button.
-    */ 
+    */
 
-    $("#react").on("click", function(event) {
+    $("#react").on("click", function (event) {
         let recipeId = $(this).attr("recipe");
-        let url = `/like/${recipeId}`
+        let url = `/like/${recipeId}`;
         $.ajax({
-            url : url,
-            type : 'POST',
+            url: url,
+            type: 'POST',
         }).done((data) => {
             if (data.add) {
                 $("#react").html('<i class="fas fa-heart"></i>');
-                $("#like-count").text(data.add)
-            }
-            else {
+                $("#like-count").text(data.add);
+            } else {
                 $("#react").html('<i class="far fa-heart"></i>');
-                $("#like-count").text(data.remove)
+                $("#like-count").text(data.remove);
             }
         });
     });
