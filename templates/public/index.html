@@ -54,23 +54,54 @@
         <div class="col-6 col-lg-3 recent-recipe">
             <a href="{{url_for('get_recipe',recipe_id=dict['_id'],recipe_name=dict['recipe_name'])}}">
                 <img class="index-image" src="{{dict['recipe_image']}}" alt="{{dict['recipe_name']}}">
-            </a>          
+            </a>
         </div>
         {% endfor %}
     </div>
 </section>
 
+
+{% if not session["username"] %}
+
 <div class="banner d-flex text-center align-items-center flex-column">
-    <h5>Want the latest tips and recipes direct to your inbox?</h5>
+    <div class="newsletter-text">
+        <h5>Want the latest tips and recipes direct to your inbox?</h5>
+    </div>
+
     <div class="d-lg-inline-flex text-center">
-        <form action="" id="newsletter">
-            <div class="form-group d-md-flex flex-wrap">
-                <input class="form-control" type="email" name="news-email" id="news-email"
-                    placeholder="Enter your email">
-                <button class="btn btn-primary" type="submit" form="newsletter">Join Now</button>
+        <form action="{{url_for('newsletter_register')}}" method="POST" id="newsletter">
+            <div class="form-group form-inline">
+                <input class="form-control" type="email" name="email" id="email" placeholder="Enter your email"
+                    required>
+                <button class="btn btn-news" type="submit" form="newsletter">Join Now</button>
             </div>
         </form>
+        <h2><strong class="message"></strong></h2>
     </div>
 </div>
+
+{% elif session["username"] != signups %}
+
+<div class="banner d-flex text-center align-items-center flex-column">
+    <div class="newsletter-text">
+        <h5>Want the latest tips and recipes direct to your inbox?</h5>
+    </div>
+
+    <div class="d-lg-inline-flex text-center">
+        <form action="{{url_for('newsletter_register')}}" method="POST" id="newsletter">
+            <div class="form-group form-inline">
+                <input class="form-control" type="email" name="email" id="email" placeholder="Enter your email"
+                    required>
+                <button class="btn btn-news" type="submit" form="newsletter">Join Now</button>
+            </div>
+        </form>
+        <h2><strong class="message"></strong></h2>
+    </div>
+</div>
+
+{% else %}
+
+{% endif %}
+
 
 {% endblock %}
