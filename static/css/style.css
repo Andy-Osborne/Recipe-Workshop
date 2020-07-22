@@ -248,7 +248,7 @@ form #news-email {
 
 .no-results-container {
     position: relative;
-    height: 85vh;
+    height: 65vh;
 }
 
 .no-results {
@@ -257,6 +257,11 @@ form #news-email {
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
+}
+
+.no-results-logo {
+    height: 15vh;
+    padding: 0.5rem;
 }
 
 /* Recipe Page */
@@ -287,8 +292,8 @@ form #news-email {
 
 .recipe-list-view,
 .large-screen {
-        display: none;
-    }
+    display: none;
+}
 
 /* Registration/Login Pages */
 
@@ -350,7 +355,7 @@ form #news-email {
     .login-image {
         background-image: none;
     }
-    
+
     .b-login-image {
         height: 75vh;
     }
@@ -384,14 +389,14 @@ form #news-email {
     .toggle-recipe-list {
         width: 80vw;
     }
-    
+
 }
 
 @media only screen and (min-width: 375px) and (min-height: 812px) {
     .search-image {
         height: 32vh;
     }
-    
+
     .search-text {
         height: 23vh;
     }
@@ -422,7 +427,7 @@ form #news-email {
     .search-image {
         height: 35vh;
     }
-    
+
     .search-text {
         height: 25vh;
     }
@@ -445,7 +450,7 @@ form #news-email {
         flex-wrap: wrap;
     }
 
-    .profile-recipe-list
+    .profile-recipe-list, 
     .recipe-list {
         text-align: center;
     }
@@ -480,9 +485,17 @@ form #news-email {
     .search-image {
         height: 70vh;
     }
-    
+
     .search-text {
         height: 55vh;
+    }
+
+    .no-results-container {
+        height: 50vh;
+    }
+
+    .no-results-logo {
+        height: 20vh;
     }
 
     .toggle-recipe-list {
@@ -504,13 +517,11 @@ form #news-email {
 }
 
 @media only screen and (min-width: 700px) and (orientation: landscape) {
-    
     .search-text {
         height: 45vh;
     }
 
 }
-
 
 @media only screen and (min-width: 768px) {
     .b-reg-image,
@@ -531,9 +542,13 @@ form #news-email {
     .search-image {
         height: 26vh;
     }
-    
+
     .search-text {
         height: 18vh;
+    }
+
+    .no-results-logo {
+        padding: 1.5rem;
     }
 
     .recipe-image-container {
@@ -590,9 +605,18 @@ form #news-email {
     .search-image {
         height: 65vh;
     }
-    
+
     .search-text {
         height: 50vh;
+    }
+
+    .no-results-container {
+        height: 65vh;
+    }
+
+    .no-results-logo {
+        height: 20vh;
+        padding: .5rem;
     }
 
     .profile-image-container {
@@ -635,7 +659,7 @@ form #news-email {
     .search-image {
         height: 25vh;
     }
-    
+
     .search-text {
         height: 12vh;
     }
@@ -648,7 +672,7 @@ form #news-email {
         display: none;
     }
 
-    .list-group, 
+    .list-group,
     .recipe-list {
         padding: 0;
         margin: 0;
@@ -674,9 +698,17 @@ form #news-email {
     .search-image {
         height: 40vh;
     }
-    
+
     .search-text {
         height: 22vh;
+    }
+
+    .no-results-container {
+        height: 80vh;
+    }
+
+    .no-results-logo {
+        padding: 1.5rem;
     }
 
     .profile-image-container {
@@ -699,7 +731,7 @@ form #news-email {
     .search-image {
         height: 25vh;
     }
-    
+
     .search-text {
         height: 18vh;
     }
@@ -719,5 +751,5 @@ form #news-email {
     .search-image {
         height: 35vh;
     }
-    
+
 }
