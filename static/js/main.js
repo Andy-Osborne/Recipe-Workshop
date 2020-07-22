@@ -210,8 +210,8 @@ $(document).ready(function () {
     */
 
     $("#react").on("click", function (event) {
-        let recipeId = $(this).attr("recipe");
-        let url = `/like/${recipeId}`;
+        event.preventDefault();
+        let url = $(this).attr("href");
         $.ajax({
             url: url,
             type: 'POST',
