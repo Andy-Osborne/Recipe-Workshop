@@ -83,7 +83,7 @@
                     <div class="form-group" id="step_inputs">
                         <label for="step"><strong>Provide the steps to create your Recipe</strong></label>
                         {% for step in recipe.steps %}
-                        <input class="form-control" type="text" name="step" id="step" value="{{step}}" required>
+                        <input class="form-control" type="text" name="step" {% if loop.index == 1 %}id="step"{% endif %} value="{{step}}" required>
                         {% endfor %}
                     </div>
                     <div class="text-center">
@@ -99,7 +99,7 @@
                         <label for="ingredient_item"><strong>Provide the ingredients to create your
                                 Recipe</strong></label>
                         {% for ingredient in recipe.ingredients %}
-                        <input class="form-control" type="text" name="ingredients" id="ingredient_item"
+                        <input class="form-control" type="text" name="ingredients" {% if loop.index == 1 %}id="ingredient_item"{% endif %}
                             value="{{ingredient}}" required>
                         {% endfor %}
                     </div>
