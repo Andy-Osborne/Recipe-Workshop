@@ -88,7 +88,7 @@ a:hover {
 /* Navbar */
 
 .nav-colour {
-    background-color: #6ebdc7;
+    background-color: #91ccd4;
 }
 
 .logo img {
@@ -138,8 +138,19 @@ a:hover {
     transform: scale(1.1);
 }
 
+.btn-news {
+    color: #0e0e0e;
+    background-color: #e2c19c;
+    margin: 0.5rem;
+}
+
+.btn-news:hover {
+    color: #0e0e0e;
+    background-color: #ea9c76;
+}
+
 .btn-remove,
-.btn-like,
+.btn-like i,
 .heart {
     background-color: transparent;
     color: #c62828;
@@ -284,6 +295,11 @@ form #news-email {
     margin-bottom: 5px;
 }
 
+.r-steps .recipe-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0,0,0,.125)
+}
+
 .recipe-list-view ul li:last-child {
     margin-bottom: 1rem;
 }
@@ -342,6 +358,11 @@ form #news-email {
     list-style-type: none;
     padding: 5px;
     margin-bottom: 5px;
+}
+
+.profile-recipe-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0,0,0,.125)
 }
 
 /* 404 Page */
@@ -473,7 +494,8 @@ form #news-email {
 }
 
 @media only screen and (min-width: 500px) and (orientation: landscape) {
-    .btn-search {
+    .btn-search,
+    .btn-news {
         margin: 0;
     }
 
@@ -535,7 +557,8 @@ form #news-email {
 }
 
 @media only screen and (min-width: 768px) {
-    .btn-search {
+    .btn-search,
+    .btn-news {
         margin: 0;
     }
 
