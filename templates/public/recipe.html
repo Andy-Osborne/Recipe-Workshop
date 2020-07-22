@@ -34,7 +34,7 @@
                     <p class="description">{{recipe.recipe_description|capitalize}}</p>
                 </div>
                 <div class="recipe-image-container">
-                    <img class="recipe-image" src="{{recipe.recipe_image}}">
+                    <img class="recipe-image" src="{{recipe.recipe_image}}" alt="Image of {{recipe.recipe_name}}">
                 </div>
             </div>
         </div>
@@ -55,12 +55,11 @@
                     {% endfor %}
                 </ul>
             </div>
-            <div class="col-lg-7 p-2 m-2">
+            <div class="col-lg-7 r-steps p-2 m-2">
                 <h3 class="methods-header">Steps</h3>
                 <ul class="recipe-list">
                     {% for steps in recipe.steps %}
                     <li><span class="recipe-index">{{loop.index}}</span> - {{steps}}</li>
-                    <hr>
                     {% endfor %}
                 </ul>
             </div>
@@ -72,9 +71,9 @@
     <div class="col-12 justify-content-center small-screen">
         <div class="col-lg-8 d-lg-inline-flex text-center">
             <div class="col-lg-4">
-                <btn class="btn toggle-recipe-list" role="button">
+                <a class="btn toggle-recipe-list" role="button">
                     <h3 class="methods-header">Ingredients</h3>
-                </btn>
+                </a>
                 <div class="recipe-list-view" id="#recipe-ingredients">
                     <ul class="list-group">
                         {% for ingredient in recipe.ingredients %}
@@ -84,14 +83,13 @@
                 </div>
             </div>
             <div class="col-lg-8">
-                <btn class="btn toggle-recipe-list" role="button">
+                <a class="btn toggle-recipe-list" role="button">
                     <h3 class="methods-header">Steps</h3>
-                </btn>
+                </a>
                 <div class="recipe-list-view r-steps" id="#recipe-steps">
                     <ul class="recipe-list">
                         {% for steps in recipe.steps %}
                         <li><span class="recipe-index">{{loop.index}}</span> - {{steps}}</li>
-                        <hr>
                         {% endfor %}
                     </ul>
                 </div>
@@ -103,20 +101,22 @@
 <div class="row no-gutters text-center">
     <div class="col-12 p-2 my-3">
         <h4>If you liked this recipe, why not show your appreciation and give it a like?</h4>
-            {% if not session["username"] %}
-            <button class="btn-like disable" type="button"><i class="fas fa-heart"></i></button>
-            <small>{{recipe.likes}}</small>
-            <br>
-            <small>Please log in to give this recipe a like</small>
-            {% else %}
-            {% if session["username"] in recipe.liked_by %}
-            <button class="btn-like" id="react" type="button" recipe="{{recipe._id}}"><i class="fas fa-heart"></i></button>
-            <small id="like-count">{{recipe.likes}}</small>
-            {% else %}
-            <button class="btn-like" id="react" type="button" recipe="{{recipe._id}}"><i class="far fa-heart"></i></button>
-            <small id="like-count">{{recipe.likes}}</small>
-            {% endif %}
-            {% endif %}
+        {% if not session["username"] %}
+        <a class="btn-like disable" role="button"><i class="fas fa-heart"></i></a>
+        <small>{{recipe.likes}}</small>
+        <br>
+        <small>Please log in to give this recipe a like</small>
+        {% else %}
+        {% if session["username"] in recipe.liked_by %}
+        <a class="btn-like" href="{{url_for('like', recipe_id=recipe._id)}}" id="react" role="button"><i
+                class="fas fa-heart"></i></a>
+        <small id="like-count">{{recipe.likes}}</small>
+        {% else %}
+        <a class="btn-like" href="{{url_for('like', recipe_id=recipe._id)}}" id="react" role="button"><i
+                class="far fa-heart"></i></a>
+        <small id="like-count">{{recipe.likes}}</small>
+        {% endif %}
+        {% endif %}
     </div>
 </div>
 
