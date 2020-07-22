@@ -226,4 +226,38 @@ $(document).ready(function () {
         });
     });
 
+    /*
+    The below AJAX function handles when a user signs up for the newsletter 
+    */
+
+    $(".btn-news").on("click", function (event) {
+
+        let validForm = this.form.checkValidity();
+
+        if (validForm) {
+            event.preventDefault();
+
+            let email = $("#email").val();
+            let url = $(this.form).attr("action");
+
+            req = $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    email: email,
+                }
+            }).done(function (req) {
+                if (req.error) {
+                    $(".newsletter-text").addClass("d-none");
+                    $("#newsletter").addClass("d-none");
+                    $(".message").text(req.error);
+                } else {
+                    $(".newsletter-text").addClass("d-none");
+                    $("#newsletter").addClass("d-none");
+                    $(".message").text(req.success);
+                }
+            });
+        }
+    });
+
 });
