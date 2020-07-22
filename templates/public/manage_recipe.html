@@ -19,13 +19,13 @@
                     <div class="form-group">
                         <label for="dish_type"><strong>What is the meal type?</strong></label>
                         <select class="form-control" name="dish_type" id="dish_type" required>
-                            <option value="" disabled selected hidden>Please choose a type</option>
-                            <option value="Breakfast">Breakfast</option>
-                            <option value="Brunch">Brunch</option>
-                            <option value="Lunch">Lunch</option>
-                            <option value="Dinner">Dinner</option>
-                            <option value="Dessert">Dessert</option>
-                            <option value="Snack">Snack</option>
+                            <option value="" disabled hidden>Please choose a type</option>
+                            <option value="Breakfast" {% if recipe.recipe_course == 'Breakfast'%}selected{% endif %}>Breakfast</option>
+                            <option value="Brunch" {% if recipe.recipe_course == 'Brunch'%}selected{% endif %}>Brunch</option>
+                            <option value="Lunch" {% if recipe.recipe_course == 'Lunch'%}selected{% endif %}>Lunch</option>
+                            <option value="Dinner" {% if recipe.recipe_course == 'Dinner'%}selected{% endif %}>Dinner</option>
+                            <option value="Dessert" {% if recipe.recipe_course == 'Dessert'%}selected{% endif %}>Dessert</option>
+                            <option value="Snack" {% if recipe.recipe_course == 'Snack'%}selected{% endif %}>Snack</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -69,10 +69,10 @@
                     <div class="form-group">
                         <label for="effort"><strong>How complicated is this dish to make?</strong></label>
                         <select class="form-control" name="effort" id="effort" required>
-                            <option value="" disabled selected hidden>Please choose a difficulty</option>
-                            <option value="easy">Easy</option>
-                            <option value="medium">Medium</option>
-                            <option value="hard">Hard</option>
+                            <option value="" disabled hidden>Please choose a difficulty</option>
+                            <option value="easy" {% if recipe.effort == 'easy'%}selected{% endif %}>Easy</option>
+                            <option value="medium" {% if recipe.effort == 'medium'%}selected{% endif %}>Medium</option>
+                            <option value="hard" {% if recipe.effort == 'hard'%}selected{% endif %}>Hard</option>
                         </select>
                     </div>
                     <div class="form-group">
