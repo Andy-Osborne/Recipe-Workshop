@@ -155,7 +155,7 @@ $(document).ready(function () {
         if (validForm) {
             event.preventDefault();
 
-            let user_id = $(this).attr("user_id");
+            let user_id = $("#user_id").val();
             let email = $("#account-email").val();
             let password = $("#current-password").val();
             let newPassword = $("#new-password").val();
