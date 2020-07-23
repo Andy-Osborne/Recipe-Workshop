@@ -587,6 +587,10 @@ form #news-email {
         height: auto;
     }
 
+    .featured-container {
+        height: 25vh;
+    }
+
     .recent-recipe {
         height: 20vh;
     }
@@ -642,6 +646,10 @@ form #news-email {
     .b-reg-image,
     .b-login-image {
         height: fit-content;
+    }
+
+    .featured-container {
+        height: 55vh;
     }
 
     .recent-recipe {
@@ -703,6 +711,10 @@ form #news-email {
         height: auto;
     }
 
+    .featured-container {
+        height: 20vh;
+    }
+
     .recent-recipe {
         height: 15vh;
     }
@@ -741,6 +753,10 @@ form #news-email {
 }
 
 @media only screen and (min-width: 1024px) and (orientation: landscape) {
+    .featured-container {
+        height: 35vh;
+    }
+    
     .recent-recipe {
         width: 22vw;
         height: 20vh;
@@ -784,6 +800,10 @@ form #news-email {
         height: 20vh;
     }
 
+    .featured-container {
+        height: 25vh;
+    }
+
     .search-image {
         height: 25vh;
     }
@@ -795,13 +815,17 @@ form #news-email {
 }
 
 @media only screen and (min-width: 1800px) {
+    .featured-container {
+        height: 40vh;
+    }
+    
     .recent-recipe {
         height: 30vh;
     }
 
     .recent-recipe a img {
         width: calc(25vw - 2rem);
-        height: calc(30vh - 0.5rem);
+        height: calc(40vh - 0.5rem);
     }
 
     .search-image {
