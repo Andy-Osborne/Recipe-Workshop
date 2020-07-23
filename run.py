@@ -35,7 +35,7 @@ newsletter = mongo.db.newsletter
 def index():
 
     highest_rated = recipe.find({"likes":{"$gt": 0}}).sort("likes", -1).limit(1)
-    recent_recipes = recipe.find().sort("submitted", 1).limit(8)
+    recent_recipes = recipe.find().sort("submitted", -1).limit(8)
 
     """
     The checks to see if a username is in session. If it's not, then signups gets assigned none.
@@ -126,7 +126,7 @@ def add_recipe():
 
         # Cloudinary Image Upload Code
 
-        uploaded_image = cloudinary.uploader.upload(image, width=800, quality="auto", 
+        uploaded_image = cloudinary.uploader.upload(image, width=500, height=500, quality="auto", 
             folder="Recipe_Workshop/recipe/")
         image_url = uploaded_image.get("secure_url")
         image_id = uploaded_image.get("public_id")
@@ -145,7 +145,7 @@ def add_recipe():
             "servings": int(servings),
             "steps": steps_list,
             "ingredients": ingredient_list,
-            "submitted" : datetime.today().strftime('%d-%m-%Y'),
+            "submitted" : datetime.now(),
             "likes" : 0,
             "liked_by" : []
         }
@@ -234,7 +234,7 @@ def update_recipe(recipe_id):
             # The below uploads the new recipe image to cloudinary, saves the image URL and public ID
 
             image = reqf["recipe_image"]
-            uploaded_image = cloudinary.uploader.upload(image, width=800, quality="auto", 
+            uploaded_image = cloudinary.uploader.upload(image, width=500, height=500, quality="auto", 
                 folder="Recipe_Workshop/recipe/")
             image_url = uploaded_image.get("secure_url")
             image_id = uploaded_image.get("public_id")
@@ -406,7 +406,7 @@ def update_profile(username):
 
         profile_image = request.files["profile-image"]
 
-        uploaded_profile_image = cloudinary.uploader.upload(profile_image, width=800, quality="auto", 
+        uploaded_profile_image = cloudinary.uploader.upload(profile_image, width=250, height=250, quality="auto", 
             folder="Recipe_Workshop/profile/")
         profile_image_url = uploaded_profile_image.get("secure_url")
         profile_image_id = uploaded_profile_image.get("public_id")
@@ -547,8 +547,14 @@ def newsletter_register():
         else:
             return jsonify({ 'error': "Looks like you're already in our newsletter list!" })
 
+# Below code taken from https://riptutorial.com/flask/example/4779/format-datetime-in-a-jinja2-template
 
-
+@app.template_filter('formatdatetime')
+def format_datetime(value, format="%d %b %Y"):
+    """Format a date time to (Default): d Mon YYYY HH:MM P"""
+    if value is None:
+        return ""
+    return value.strftime(format)
 
 @app.errorhandler(404)
 def page_not_found(e):
