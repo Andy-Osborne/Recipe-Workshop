@@ -2,6 +2,9 @@
 
 {% block title%}RW | Search {% endblock%}
 
+{% block mdescription %}Find the latest recipes uploaded by our users and start making them today!{% endblock %}
+
+
 {% block main %}
 
 <div class="row no-gutters">
@@ -55,5 +58,15 @@
     {% endif %}
 </div>
 
+<div class="row no-gutters text-center justify-content-center">
+            <div class="col-12 col-8-land col-sm-8 col-md-6 col-xl-3 mb-3">
+                
+                {{ pagination.links }}
+               
+            </div>
+        </div>
+
+
 
 {% endblock %}
+
