@@ -80,7 +80,7 @@ $(document).ready(function () {
 
     $("#cancel-change").on("click", () => {
         $("#current-image").addClass("d-none");
-        $("#recipe_image").removeAttr("required", "required")
+        $("#recipe_image").removeAttr("required", "required");
         $("#manage-recipe").removeAttr("enctype", "multipart/form-data");
         $("#cancel-change").addClass("d-none");
         $("#change-image-text").removeClass("d-none");
@@ -109,7 +109,7 @@ $(document).ready(function () {
 
         if (extensions.includes(extensionCheck)) {
             if (fileSize <= 2097152) {
-                $(".successful").text("Image Accepted");
+                $(".successful").text("Valid Image Uploaded");
             } else {
                 $(".warning").text("Maximum file size is 2mb. Please upload a smaller file.");
                 $(".submit-btn").attr("disabled", "disabled");
