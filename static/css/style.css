@@ -162,6 +162,16 @@ a:hover {
     color: #c62828;
 }
 
+/* Pagination Styling */
+
+.pagination {
+    justify-content: center;
+}
+
+.pagination li {
+    padding: 1rem;
+}
+
 /* Home Section */
 
 .image-outer {
@@ -261,7 +271,7 @@ form #news-email {
 
 .search-text {
     overflow: hidden;
-    height: 32vh;
+    height: 35vh;
 }
 
 .search-list li {
@@ -372,6 +382,12 @@ form #news-email {
 }
 
 /* 404 Page */
+
+.error-outer {
+    height: 70vh;
+    overflow: hidden;
+    position: relative;
+}
 
 .error-image-inner {
     background-image: url("/static/images/404.png");
