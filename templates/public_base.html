@@ -60,7 +60,7 @@
                 <a class="nav-link btn btn-main {% if page == 'add_recipe' %}active-page{% endif %}" href="{{url_for('add_recipe')}}">Add Recipe</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link btn btn-main {% if page == 'profile' %}active-page{% endif %}" href="{{url_for('profile', username=session['username'])}}">Profile</a>
+                <a class="nav-link btn btn-main {% if page == 'profile' and session['username'] == username.username %}active-page{% endif %}" href="{{url_for('profile', username=session['username'])}}">Profile</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link btn btn-main" href="{{url_for('logout')}}">Logout</a>
