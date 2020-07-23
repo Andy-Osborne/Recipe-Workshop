@@ -64,7 +64,8 @@ a {
 }
 
 .social-links a,
-.site-links a {
+.site-links a,
+.profile-recipe-list a {
     color: #275f9a;
 }
 
