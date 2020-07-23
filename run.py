@@ -56,7 +56,7 @@ def index():
     else:
         signups = "None"
 
-    return render_template("public/index.html", favourite=list(highest_rated), recent=list(recent_recipes), signups=signups, page="index")
+    return render_template("index.html", favourite=list(highest_rated), recent=list(recent_recipes), signups=signups, page="index")
 
 
 @app.route("/search", methods=["POST"])
@@ -103,13 +103,13 @@ def search_recipes(search_term):
 
     pagination = Pagination(page=page, per_page=per_page, total=search_count, search=search, record_name='search_result', css_framework='bootstrap4')
 
-    return render_template('public/search.html', search_term=search_term, search_result=search_result, count=search_count, pagination=pagination)    
+    return render_template('search.html', search_term=search_term, search_result=search_result, count=search_count, pagination=pagination)    
 
 
 @app.route("/recipe/<recipe_id>/<recipe_name>")
 def get_recipe(recipe_id, recipe_name):
     recipe_view = recipe.find_one({"_id":ObjectId(recipe_id)})
-    return render_template("public/recipe.html", recipe=recipe_view)
+    return render_template("recipe.html", recipe=recipe_view)
 
 # Handles the logic for adding a recipe to database.
 
@@ -173,7 +173,7 @@ def add_recipe():
         recipe.insert_one(new_recipe)
         return redirect("/")
 
-    return render_template("public/create_recipe.html", page="add_recipe")
+    return render_template("create_recipe.html", page="add_recipe")
 
 # Displays the manage recipe page to user
 
@@ -190,7 +190,7 @@ def manage_recipe(recipe_id):
     if session["username"] != edit_recipe["recipe_author"]:
         return redirect("/")
    
-    return render_template("public/manage_recipe.html", recipe=edit_recipe)
+    return render_template("manage_recipe.html", recipe=edit_recipe)
 
 # Handes the logic of updating a recipe
 
@@ -364,7 +364,7 @@ def user_registration():
                 flash(f"Email already in use. Please use login.", "error_email")
                 return redirect(request.url) 
             
-    return render_template("public/register.html", form=form, page="register")   
+    return render_template("register.html", form=form, page="register")   
         
 # Handles the user login logic
 
@@ -393,7 +393,7 @@ def login():
                 flash(f"Incorrect e-mail/password combination. Please try again", "error")
                 return redirect(request.url)
           
-    return render_template("public/login.html", form=form, page="login")   
+    return render_template("login.html", form=form, page="login")   
 
 # Handles logging out user by clearing session data.
 
@@ -408,7 +408,7 @@ def profile(username):
     user_profile = user.find_one({"username": username})
     recipe_count = recipe.count_documents({"recipe_author": username})
     
-    return render_template("public/profile.html", username=user_profile, recipes=recipe.find(), recipe_count=recipe_count, page="profile")
+    return render_template("profile.html", username=user_profile, recipes=recipe.find(), recipe_count=recipe_count, page="profile")
 
 # Handles user creating their profile information.
 
@@ -519,7 +519,7 @@ def password_update(user_id, new_password):
 @app.route("/privacy")
 def privacy():
 
-    return render_template("public/privacy.html")
+    return render_template("privacy.html")
 
 
 @app.route("/newsletter",  methods=["POST"])
@@ -577,7 +577,7 @@ def format_datetime(value, format="%d %b %Y"):
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template("public/404.html"), 404
+    return render_template("404.html"), 404
 
 
 if __name__ == '__main__':
