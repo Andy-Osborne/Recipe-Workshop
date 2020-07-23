@@ -29,8 +29,13 @@ $(document).ready(function () {
     // The below disables the ability for a user to submit the same recipe twice upon creation.
 
     $(".recipe-submit").on("click", function (event) {
-        $(this).attr("disabled", "disabled");
-        $(this).closest("form").submit();
+        let validForm = this.form.checkValidity();
+
+        if (validForm) {
+            event.preventDefault();
+            $(this).attr("disabled", "disabled");
+            $(this).closest("form").submit();
+        };
     });
 
     // The below applies/removes the zoom class on the nav buttons when the mouse enters/leaves
