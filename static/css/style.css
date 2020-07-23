@@ -67,7 +67,13 @@ i {
     color: #947232;
 }
 
-a {
+.header-link,
+.header-link:hover {
+    color: initial;
+}
+
+a,
+.header-link {
     text-decoration: none;
 }
 
@@ -228,14 +234,17 @@ a:hover {
     padding: 5px 0;
 }
 
+.recent-recipe,
 .featured-container {
     overflow: hidden;
 }
 
+.recent-recipe,
 .featured-container img {
     max-width: 100%;
 }
 
+.recent-recipe .index-image-zoom,
 .featured-container .index-image-zoom {
     -webkit-transition: -webkit-transform 2s ease;
     transition: -webkit-transform 2s ease;
@@ -251,25 +260,18 @@ a:hover {
 }
 
 .recent-recipe {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    text-align: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    margin: 10px auto;
-    width: 25vw;
     height: 15vh;
     overflow: hidden;
 }
 
 .recent-recipe a img {
-    width: 90%;
-    border-radius: 5px;
+    width: 100%;
+}
+
+.recent-text {
+    max-width: 100%;
+    height: 15vh;
+    overflow: hidden;
 }
 
 .banner {
@@ -463,6 +465,21 @@ form #news-email {
                 transform: translate(-50%, -50%);
     }
 
+    .recent-recipe {
+        width: 45vw;
+    }
+
+    .recent-text {
+        height: 20vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .recent-description {
+        display: none;
+    }
+
     .recipe-image-container {
         -webkit-box-ordinal-group: 2;
             -ms-flex-order: 1;
@@ -532,6 +549,17 @@ form #news-email {
                 transform: translate(-50%, -50%);
     }
 
+    .recent-text {
+        height: 15vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .recent-description {
+        display: none;
+    }
+
     .search-image {
         height: 35vh;
     }
@@ -593,13 +621,18 @@ form #news-email {
     }
 
     .recent-recipe {
-        width: 25vw;
-        height: 40vh;
+        height: 50vh;
     }
 
-    .recent-recipe a img {
-        width: calc(40vw - 2rem);
-        height: calc(45vh - 0.5rem);
+    .recent-text {
+        height: 15vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .recent-description {
+        display: none;
     }
 
     .search-image {
@@ -663,6 +696,15 @@ form #news-email {
         width: auto;
         min-width: 50vw;
         height: auto;
+    }
+
+    .recent-text {
+        height: 17vh;
+        display: block;
+    }
+
+    .recent-description {
+        display: block;
     }
 
     .featured-container {
@@ -740,13 +782,18 @@ form #news-email {
     }
 
     .recent-recipe {
-        width: 25vw;
-        height: 40vh;
+        height: 50vh;
     }
 
-    .recent-recipe a img {
-        width: calc(40vw - 2rem);
-        height: calc(45vh - 0.5rem);
+    .recent-text {
+        height: 15vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .recent-description {
+        display: none;
     }
 
     .search-image {
@@ -808,11 +855,6 @@ form #news-email {
         height: 15vh;
     }
 
-    .recent-recipe a img {
-        width: calc(25vw - 2rem);
-        height: calc(20vh - 0.5rem);
-    }
-
     .search-image {
         height: 25vh;
     }
@@ -849,13 +891,16 @@ form #news-email {
     }
     
     .recent-recipe {
-        width: 22vw;
         height: 20vh;
     }
 
-    .recent-recipe a img {
-        width: calc(25vw - 2rem);
-        height: calc(25vh - 0.5rem);
+    .recent-text {
+        height: 30vh;
+        display: block;
+    }
+
+    .recent-description {
+        display: block;
     }
 
     .search-image {
@@ -887,6 +932,10 @@ form #news-email {
         height: 85vh;
     }
 
+    .recent-text {
+        height: 20vh;
+    }
+
     .search-text {
         height: 20vh;
     }
@@ -911,12 +960,12 @@ form #news-email {
     }
     
     .recent-recipe {
+        width: initial;
         height: 30vh;
     }
 
     .recent-recipe a img {
-        width: calc(25vw - 2rem);
-        height: calc(40vh - 0.5rem);
+        height: 40vh;
     }
 
     .search-image {
