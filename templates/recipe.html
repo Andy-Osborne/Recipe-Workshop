@@ -1,6 +1,9 @@
-{% extends 'public/template/public_base.html' %}
+{% extends 'public_base.html' %}
 
 {% block title %}RW | {{recipe.recipe_name|title}}{% endblock %}
+
+{% block mdescription %}{{recipe.recipe_name|title}} - {{recipe.recipe_description|capitalize}}.{% endblock %}
+
 
 {% block main %}
 
