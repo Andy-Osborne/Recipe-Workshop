@@ -2,7 +2,8 @@
 
 {% block title %}RW | Home{% endblock %}
 
-{% block mdescription %}Check out out now to view the latest recipes, upload your own creations and share with others.{% endblock %}
+{% block mdescription %}Check out out now to view the latest recipes, upload your own creations and share with
+others.{% endblock %}
 
 
 {% block main %}
@@ -36,7 +37,8 @@
                                 class="index-image" src="{{dict['recipe_image']}}" alt="{{dict['recipe_name']}}"></a>
                     </div>
 
-                    <a class="header-link" href="{{url_for('get_recipe',recipe_id=dict['_id'],recipe_name=dict['recipe_name'])}}">
+                    <a class="header-link"
+                        href="{{url_for('get_recipe',recipe_id=dict['_id'],recipe_name=dict['recipe_name'])}}">
                         <div class="front-text p-2">
                             <h4>{{dict["recipe_name"]|title}}</h4>
                             <hr>
@@ -63,12 +65,15 @@
                         <img class="index-image" src="{{dict['recipe_image']}}" alt="{{dict['recipe_name']}}">
                     </a>
                 </div>
-    
-                <div class="front-text text-center recent-text p-1">
-                    <h5>{{dict["recipe_name"]|title}}</h5>
-                    <hr class="recent-description">
-                    <p class="recent-description">{{dict["recipe_description"]}}</p>
-                </div>    
+
+                <a class="header-link"
+                    href="{{url_for('get_recipe',recipe_id=dict['_id'],recipe_name=dict['recipe_name'])}}">
+                    <div class="front-text text-center recent-text p-1">
+                        <h5>{{dict["recipe_name"]|title}}</h5>
+                        <hr class="recent-description">
+                        <p class="recent-description">{{dict["recipe_description"]}}</p>
+                    </div>
+                </a>
             </div>
         </div>
         {% endfor %}
@@ -86,8 +91,8 @@
     <div class="form-inline">
         <form action="{{url_for('newsletter_register')}}" method="POST" id="newsletter">
             <div class="form-group">
-                <input class="form-control text-center" type="email" name="email" id="email" placeholder="Enter your email"
-                    required>
+                <input class="form-control text-center" type="email" name="email" id="email"
+                    placeholder="Enter your email" required>
                 <button class="btn btn-news" type="submit" form="newsletter">Join Now</button>
             </div>
         </form>
@@ -105,8 +110,8 @@
     <div class="form-inline">
         <form action="{{url_for('newsletter_register')}}" method="POST" id="newsletter">
             <div class="form-group form-inline">
-                <input class="form-control text-center" type="email" name="email" id="email" placeholder="Enter your email"
-                    required>
+                <input class="form-control text-center" type="email" name="email" id="email"
+                    placeholder="Enter your email" required>
                 <button class="btn btn-news" type="submit" form="newsletter">Join Now</button>
             </div>
         </form>
