@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, url_for, redirect, request, flash, session, jsonify
 from flask_pymongo import PyMongo
+from flask_paginate import Pagination, get_page_parameter
 from bson.objectid import ObjectId
 from datetime import datetime
 from usercreation import UserRegistration, UserLogin
@@ -76,14 +77,33 @@ def search_recipes(search_term):
         ("recipe_author", "text")
     ])
 
-    # The below uses the text search functionality, and then sorts the results by it's metascore
+   # Below is used for flask-paginate
+  
+    search = False
+    q = request.args.get('q')
+    if q:
+        search = True
+
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+
+    # Restricts the amount of results per page
+
+    per_page = 4
+
+    """The below uses the text search functionality, sorts the results by it's metascore, 
+    # skips a certain amount judging by page variable less 1, and limits the returned n results
+    # on each page based on the variable per_page"""
 
     search_result = recipe.find({"$text": {"$search": search_term}}, 
-    {'score': {'$meta': 'textScore'}}).sort([('score', {'$meta': 'textScore'})])
+    {'score': {'$meta': 'textScore'}}).sort([('score', {'$meta': 'textScore'})]).skip((page - 1) * per_page).limit(per_page)
 
+    # Records the amount of items that match the search criteria 
+    
     search_count = recipe.count_documents({"$text": {"$search": search_term}})
 
-    return render_template('public/search.html', search_term=search_term, search_result=search_result, count=search_count)    
+    pagination = Pagination(page=page, per_page=per_page, total=search_count, search=search, record_name='search_result', css_framework='bootstrap4')
+
+    return render_template('public/search.html', search_term=search_term, search_result=search_result, count=search_count, pagination=pagination)    
 
 
 @app.route("/recipe/<recipe_id>/<recipe_name>")
@@ -172,7 +192,6 @@ def manage_recipe(recipe_id):
    
     return render_template("public/manage_recipe.html", recipe=edit_recipe)
 
-
 # Handes the logic of updating a recipe
 
 @app.route("/update/<recipe_id>", methods=["GET", "POST"])
@@ -250,6 +269,7 @@ def update_recipe(recipe_id):
 
 
     return redirect(url_for("get_recipe", recipe_id=recipe_id,recipe_name=recipe_name))
+
 
 @app.route("/delete/<recipe_id>")
 def delete_recipe(recipe_id):
@@ -502,7 +522,6 @@ def privacy():
     return render_template("public/privacy.html")
 
 
-
 @app.route("/newsletter",  methods=["POST"])
 def newsletter_register():
 
@@ -547,18 +566,19 @@ def newsletter_register():
         else:
             return jsonify({ 'error': "Looks like you're already in our newsletter list!" })
 
-# Below code taken from https://riptutorial.com/flask/example/4779/format-datetime-in-a-jinja2-template
+# Below code taken from a rip tutorial and edited to only show the DD/MM/YYYY
 
 @app.template_filter('formatdatetime')
 def format_datetime(value, format="%d %b %Y"):
-    """Format a date time to (Default): d Mon YYYY HH:MM P"""
     if value is None:
         return ""
     return value.strftime(format)
 
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("public/404.html"), 404
+
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
