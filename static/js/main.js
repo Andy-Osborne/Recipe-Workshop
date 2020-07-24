@@ -35,7 +35,7 @@ $(document).ready(function () {
             event.preventDefault();
             $(this).attr("disabled", "disabled");
             $(this).closest("form").submit();
-        };
+        }
     });
 
     // The below applies/removes the zoom class on the nav buttons when the mouse enters/leaves
@@ -71,7 +71,7 @@ $(document).ready(function () {
 
     $("#change").on("click", () => {
         $("#current-image").removeClass("d-none");
-        $("#recipe_image").attr("required", "required")
+        $("#recipe_image").attr("required", "required");
         $("#manage-recipe").attr("enctype", "multipart/form-data");
         $("#cancel-change").removeClass("d-none");
         $("#change-image-text").addClass("d-none");
@@ -158,6 +158,9 @@ $(document).ready(function () {
     $("#submit-changes").on("click", function (event) {
 
         let validForm = this.form.checkValidity();
+
+        $("#change-error").empty().addClass("d-none");
+        $("#change-success").empty().addClass("d-none");
 
         if (validForm) {
             event.preventDefault();
