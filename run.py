@@ -6,7 +6,7 @@ from flask_paginate import Pagination, get_page_parameter
 from bson.objectid import ObjectId
 from datetime import datetime
 from usercreation import UserRegistration, UserLogin
-from passlib.hash import pbkdf2_sha256
+from passlib.hash import pbkdf2_sha256 as p256
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -366,42 +366,41 @@ def like(recipe_id):
 def user_registration():
     form = UserRegistration()
 
-    if request.method == "POST":
-        if form.validate_on_submit():
-            req = request.form
+    if request.method == "POST" and form.validate_on_submit():
+        req = request.form
 
-            """ The username and email search checks the user colllection in
-            the database and counts the amount of times it appears. This is
-            then used in the if statement when registering a new user. If the
-            email count is greater than 0, it means that the user already has
-            an account and likewise, if the username count is greater than 0
-            then the name has already been taken."""
+        """ The username and email search checks the user colllection in
+        the database and counts the amount of times it appears. This is
+        then used in the if statement when registering a new user. If the
+        email count is greater than 0, it means that the user already has
+        an account and likewise, if the username count is greater than 0
+        then the name has already been taken."""
 
-            username_search = user.count_documents(
-                {"username": req["username"]})
+        username_search = user.count_documents(
+            {"username": req["username"]})
 
-            email_search = user.count_documents({"email": req["email"]})
+        email_search = user.count_documents({"email": req["email"]})
 
-            if email_search <= 0 and username_search <= 0:
-                new_user = {
-                    "username": req["username"],
-                    "email": req["email"],
-                    "password": pbkdf2_sha256.hash(req["password"])
-                    }
-                user.insert_one(new_user)
-                session['username'] = req["username"]
-                return redirect(url_for("profile",
-                                        username=session['username']))
+        if email_search <= 0 and username_search <= 0:
+            new_user = {
+                "username": req["username"],
+                "email": req["email"],
+                "password": p256.hash(req["password"])
+                }
+            user.insert_one(new_user)
+            session['username'] = req["username"]
+            return redirect(url_for("profile",
+                                    username=session['username']))
 
-            elif username_search > 0:
-                flash(u"Username already taken. Choose a different username.",
-                      "error_username")
-                return redirect(request.url)
+        elif username_search > 0:
+            flash(u"Username already taken. Choose a different username.",
+                  "error_username")
+            return redirect(request.url)
 
-            elif email_search > 0:
-                flash(u"Email already in use. Please use login.",
-                      "error_email")
-                return redirect(request.url)
+        elif email_search > 0:
+            flash(u"Email already in use. Please use login.",
+                  "error_email")
+            return redirect(request.url)
 
     return render_template("register.html", form=form, page="register")
 
@@ -412,30 +411,45 @@ def user_registration():
 def login():
     form = UserLogin()
 
-    if request.method == "POST":
-        if form.validate_on_submit():
-            req = request.form
-            existing_user = user.find_one({"email": req["email"]})
+    if request.method == "POST" and form.validate_on_submit():
 
-            if existing_user:
-                for fields in existing_user.items():
-                    if fields[0] == "username":
-                        session_username = fields[1]
-                    if fields[0] == "password":
-                        if pbkdf2_sha256.verify(req["password"], fields[1]):
-                            session['username'] = session_username
-                            return redirect(
+        req = request.form
+        email = req["email"]
+        password = req["password"]
+
+        existing_user = user.find_one({"email": email})
+
+        """
+        If a user is found then their hashed password is assigned to the
+        variable and it moves into the next layer.
+
+        If no user was found, then it flashes incorrect password/email combo
+        message.
+        """
+
+        if existing_user is not None:
+            c_password = existing_user["password"]
+
+            """
+            Checks submitted password against database. If correct, it logs
+            the user in, sets session variable and redirects to profile.
+
+            If incorrect, it flashes incorrect password/email combo message.
+            """
+
+            if p256.verify(password, c_password):
+                session["username"] = existing_user["username"]
+                return redirect(
                                 url_for("profile", username=session['username']
                                         ))
-                        else:
-                            flash(u"Incorrect e-mail/password combination.",
-                                  "error")
-                            session_username = None
-                            return redirect(request.url)
             else:
                 flash(u"Incorrect e-mail/password combination.",
                       "error")
                 return redirect(request.url)
+        else:
+            flash(u"Incorrect e-mail/password combination.",
+                  "error")
+            return redirect(request.url)
 
     return render_template("login.html", form=form, page="login")
 
