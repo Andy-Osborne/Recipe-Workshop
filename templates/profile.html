@@ -176,8 +176,8 @@
                     <input id="user_id" name="user_id" type="hidden" value="{{username._id}}">
                     <div class="form-group email-change">
                         <label for="account-email"><strong>Change Email</strong></label>
-                        <input class="form-control" type="email" name="email" id="account-email"
-                            value="{{username.email}}" required>
+                        <input class="form-control" type="email" name="account-email" id="account-email"
+                            value="{{username.email}}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                     </div>
 
                     <!-- Change Password Control Buttons -->
