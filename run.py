@@ -31,7 +31,7 @@ user = mongo.db.users
 newsletter = mongo.db.newsletter
 cloud = cloudinary.uploader
 
-# Handles landing page logic
+# Landing Page
 
 
 @app.route("/")
@@ -64,7 +64,7 @@ def index():
                            recent=list(recent_recipes), signups=signups,
                            page="index")
 
-# The below is the view for the search bars.
+# Search Form
 
 
 @app.route("/search", methods=["POST"])
@@ -72,7 +72,7 @@ def get_search():
     return redirect(url_for("search_recipes",
                             search_term=request.form.get("search_field")))
 
-# The below generates the search page based on the search term.
+# Search Results Page
 
 
 @app.route("/search/<search_term>")
@@ -124,7 +124,7 @@ def search_recipes(search_term):
                            search_result=search_result, count=search_count,
                            pagination=pagination)
 
-# Handles logic for displaying recipes
+# Recipe Page
 
 
 @app.route("/recipe/<recipe_id>/<recipe_name>")
@@ -132,7 +132,7 @@ def get_recipe(recipe_id, recipe_name):
     recipe_view = recipe.find_one({"_id": ObjectId(recipe_id)})
     return render_template("recipe.html", recipe=recipe_view)
 
-# Handles the logic for adding a recipe to database.
+# Add Recipe Page
 
 
 @app.route("/create_recipe", methods=["GET", "POST"])
@@ -186,7 +186,7 @@ def add_recipe():
 
     return render_template("create_recipe.html", page="add_recipe")
 
-# Displays the manage recipe page to user
+# Manage Recipe
 
 
 @app.route("/manage/<recipe_id>")
@@ -201,7 +201,7 @@ def manage_recipe(recipe_id):
 
     return render_template("manage_recipe.html", recipe=edit_recipe)
 
-# Handes the logic of updating a recipe
+# Updating Recipe
 
 
 @app.route("/update/<recipe_id>", methods=["GET", "POST"])
@@ -324,7 +324,7 @@ def like(recipe_id):
         return jsonify({'remove': new_like})
 
 
-# Handles the user registration logic
+# Registration
 
 @app.route('/register', methods=["GET", "POST"])
 def user_registration():
@@ -367,7 +367,7 @@ def user_registration():
 
     return render_template("register.html", form=form, page="register")
 
-# Handles the user login logic
+# Login
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -408,7 +408,7 @@ def login():
 
     return render_template("login.html", form=form, page="login")
 
-# Handles logging out user by clearing session data.
+# Logout
 
 
 @app.route("/logout", methods=["POST", "GET"])
@@ -416,7 +416,7 @@ def logout():
     session.clear()
     return redirect(url_for("index"))
 
-# Handles the logic of generating user profile and displaying recipes
+# User Profile Page
 
 
 @app.route("/profile/<username>", methods=["GET"])
@@ -428,7 +428,7 @@ def profile(username):
                            recipes=recipe.find(), recipe_count=recipe_count,
                            page="profile")
 
-# Handles user adding their profile information.
+# Update User Profile
 
 
 @app.route("/profile/update/<username>", methods=["POST", "GET"])
@@ -462,7 +462,7 @@ def update_profile(username):
 
     return redirect(request.referrer)
 
-# Handles the logic for updating a users account information
+# Update User Account Information
 
 
 @app.route("/profile/account_management", methods=["POST"])
@@ -470,41 +470,42 @@ def update_account():
     req = request.form
 
     user_id = req["user_id"]
-    n_email = req["email"]
+    new_email = req["email"]
     password = req["password"]
-    n_password = ""
+    new_pass = ""
+    conf_pass = ""
 
     # Checks to see if a new password has been submitted
 
     if "new-password" in req:
-        n_password = req["new-password"]
-        c_password = req["conf-password"]
+        new_pass = req["new-password"]
+        conf_pass = req["conf-password"]
 
     user_profile = user.find_one({"_id": ObjectId(user_id)})
-    u_pass = user_profile["password"]
-    u_email = user_profile["email"]
+    current_pass = user_profile["password"]
+    current_email = user_profile["email"]
 
     # Check to see if no new pasword and email has not changed
 
-    if u_email == n_email and n_password == "":
+    if no_change_check(current_email, new_email, current_pass, new_pass):
         return jsonify(
             {'error': "Account not updated - no new information given."})
 
     # Verifies the password entered matches the one registered
 
-    if p256.verify(password, u_pass):
+    if p256.verify(password, current_pass):
 
         # Checks to see if a new email and pass has been entered
 
-        if u_email != n_email and n_password != "":
+        if current_email != new_email and new_pass != "":
 
             # If new pass and email, checks to see if they match
 
-            if new_pass_check(n_password, c_password):
+            if new_pass_check(new_pass, conf_pass):
 
                 # If new pass match then it updates email and pass
-                email_update(user_id, n_email)
-                password_update(user_id, n_password)
+                email_update(user_id, new_email)
+                password_update(user_id, new_pass)
                 return jsonify(
                     {'success': "Account successfully updated!"})
             else:
@@ -513,17 +514,17 @@ def update_account():
 
         # If no new password is entered, it runs the update email function
 
-        elif u_email != n_email:
+        elif current_email != new_email:
 
-            email_update(user_id, n_email)
+            email_update(user_id, new_email)
             return jsonify({'success': "Email successfully updated!"})
 
         # If no new email entered, checks to see if new password was entered
 
-        elif new_pass_check(n_password, c_password):
+        elif new_pass_check(new_pass, conf_pass):
 
             # If new pass match then it updates pass
-            password_update(user_id, n_password)
+            password_update(user_id, new_pass)
             return jsonify(
                 {'success': "Password successfully updated!"})
 
@@ -537,14 +538,14 @@ def update_account():
         return jsonify({'error': "Incorrect current password entered."})
 
 
-# Below view is for  the privacy page
+# Privacy Page
 
 
 @app.route("/privacy")
 def privacy():
     return render_template("privacy.html")
 
-# Below is the logic that handles the newsletter signup
+# Newsletter Sign Up Logic
 
 
 @app.route("/newsletter",  methods=["POST"])
@@ -618,7 +619,7 @@ def format_datetime(value, format="%d %b %Y"):
         return ""
     return value.strftime(format)
 
-# Below is the logic for dealing with 404 errors
+# 404 Page
 
 
 @app.errorhandler(404)
@@ -679,8 +680,23 @@ def upload_image(vairable, folder_string):
 
 # Account Update Helper Functions
 
+def no_change_check(email, new_email, password, new_pass):
+    # checks if new password has not been entered
+    old_pass = True if new_pass == "" else False
+    # checks if new password entered matches existing password
+    pass_verify = True if not old_pass and p256.verify(new_pass, password) else False
+    # checks if the email has not changed
+    same_email = True if email == new_email else False
+
+    # checks if it's the same email and no new pass
+    if same_email and old_pass or same_email and pass_verify:
+        return True
+    else:
+        return False
+
 
 def new_pass_check(new, conf):
+    # checks if new and conf passwords match
     if new == conf:
         return True
     else:
