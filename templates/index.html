@@ -5,7 +5,6 @@
 {% block mdescription %}Check out out now to view the latest recipes, upload your own creations and share with
 others.{% endblock %}
 
-
 {% block main %}
 
 <div class="container-fluid p-0">
@@ -17,7 +16,8 @@ others.{% endblock %}
             <div class="search-field search-main form-inline text-center">
                 <form action="{{url_for('get_search')}}" method="POST">
                     <input class="form-control text-center search-main" type="search" name="search_field"
-                        id="search_field" placeholder="Discover your next feast" aria-label="Search" title="Search for a recipe" required>
+                        id="search_field" placeholder="Discover your next feast" aria-label="Search"
+                        title="Search for a recipe" required>
                     <button class="btn btn-search" type="submit">Search</button>
                 </form>
             </div>
@@ -80,8 +80,9 @@ others.{% endblock %}
     </div>
 </section>
 
-
 {% if not session["username"] %}
+
+<!-- Shows newsletter banner if no user logged in -->
 
 <div class="banner d-flex text-center align-items-center flex-column">
     <div class="newsletter-text">
@@ -92,7 +93,8 @@ others.{% endblock %}
         <form action="{{url_for('newsletter_register')}}" method="POST" id="newsletter">
             <div class="form-group">
                 <input class="form-control text-center" type="email" name="email" id="email"
-                    placeholder="Enter your email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                    placeholder="Enter your email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    aria-label="Newsletter Sign up" title="Enter email to join newsletter" required>
                 <button class="btn btn-news" type="submit" form="newsletter">Join Now</button>
             </div>
         </form>
@@ -101,6 +103,8 @@ others.{% endblock %}
 </div>
 
 {% elif session["username"] != signups %}
+
+<!-- Shows newsletter banner if user is logged in and has not signed up for newsletter before -->
 
 <div class="banner d-flex text-center align-items-center flex-column">
     <div class="newsletter-text">
@@ -111,7 +115,8 @@ others.{% endblock %}
         <form action="{{url_for('newsletter_register')}}" method="POST" id="newsletter">
             <div class="form-group form-inline">
                 <input class="form-control text-center" type="email" name="email" id="email"
-                    placeholder="Enter your email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                    placeholder="Enter your email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    aria-label="Newsletter Sign up" title="Enter email to join newsletter" required>
                 <button class="btn btn-news" type="submit" form="newsletter">Join Now</button>
             </div>
         </form>
@@ -122,6 +127,5 @@ others.{% endblock %}
 {% else %}
 
 {% endif %}
-
 
 {% endblock %}
