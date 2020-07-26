@@ -17,7 +17,7 @@
                     <div class="form-group">
                         <label for="recipe_name"><strong>Recipe Name</strong></label>
                         <input class="form-control" type="text" name="recipe_name" id="recipe_name"
-                            value="{{recipe.recipe_name|title}}" required>
+                            value="{{recipe.recipe_name|title}}" minlength="3" maxlength="35" required>
                         <div class="text-remaining text-left p-2">
                             <small class="recipe-name-count"><span class="recipe-count">35</span> characters
                                 remaining</small>
