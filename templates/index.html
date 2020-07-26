@@ -17,7 +17,7 @@ others.{% endblock %}
             <div class="search-field search-main form-inline text-center">
                 <form action="{{url_for('get_search')}}" method="POST">
                     <input class="form-control text-center search-main" type="search" name="search_field"
-                        id="search_field" placeholder="Discover your next feast" required>
+                        id="search_field" placeholder="Discover your next feast" aria-label="Search" title="Search for a recipe" required>
                     <button class="btn btn-search" type="submit">Search</button>
                 </form>
             </div>
