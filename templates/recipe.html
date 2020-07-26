@@ -11,10 +11,10 @@
     <div class="col-12 d-flex justify-content-center">
         <div class="text-center my-3">
             <h1>{{recipe.recipe_name|title}}</h1>
-            <h3>Recipe by
+            <h2>Recipe by
                 <a class="profile-link"
                     href="{{url_for('profile', username=recipe.recipe_author)}}">{{recipe.recipe_author}}</a>
-            </h3>
+            </h2>
             {% if session["username"] == recipe.recipe_author %}
 
             <a class="btn btn-main" href="{{url_for('manage_recipe', recipe_id=recipe._id)}}">Manage Your Recipe</a>

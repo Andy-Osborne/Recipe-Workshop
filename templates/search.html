@@ -46,7 +46,7 @@
                 <a class="header-link"
                     href="{{url_for('get_recipe',recipe_id=result['_id'],recipe_name=result['recipe_name'])}}">
                     <div class="search-text px-2 mx-3">
-                        <h4>{{result['recipe_name']|title|truncate(26)}}</h4>
+                        <p class="recipe-title">{{result['recipe_name']|title|truncate(26)}}</p>
 
                         <ul class="search-list">
                             <li><i class="fas fa-heart heart"></i> by {% if result["likes"] == 0 %} {{result["likes"]}}

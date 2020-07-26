@@ -44,7 +44,9 @@ p {
 
 h1,
 h2,
-h3 {
+h3,
+.recipe-title,
+.featured-title {
     font-family: 'Averia Serif Libre', cursive;
 }
 
@@ -53,8 +55,13 @@ li {
     font-family: 'PT Sans', sans-serif;
 }
 
-i {
+i,
+.featured-title {
     font-size: 1.5rem;
+}
+
+.recipe-title {
+    font-size: 1.25rem;
 }
 
 .btn-like i {

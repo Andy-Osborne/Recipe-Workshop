@@ -28,7 +28,7 @@ others.{% endblock %}
 <section class="container-fluid">
     <div class="row no-gutters">
         <div class="col-12 text-center">
-            <h2 class="front-header">Top Rated Recipe</h2>
+            <h1 class="front-header">Top Rated Recipe</h1>
             <div class="row no-gutters d-flex justify-content-center">
                 <div class="col-12 col-8-land col-sm-8 col-md-5 col-lg-4 col-xl-3">
                     {% for dict in favourite %}
@@ -40,7 +40,7 @@ others.{% endblock %}
                     <a class="header-link"
                         href="{{url_for('get_recipe',recipe_id=dict['_id'],recipe_name=dict['recipe_name'])}}">
                         <div class="front-text p-2">
-                            <h4>{{dict["recipe_name"]|title}}</h4>
+                            <p class="featured-title">{{dict["recipe_name"]|title}}</p>
                             <hr>
                             <p>{{dict["recipe_description"]}}</p>
                         </div>
@@ -55,7 +55,7 @@ others.{% endblock %}
 <section class="container-fluid">
     <div class="row no-gutters">
         <div class="col-12">
-            <h3 class="front-header">Recently Added</h3>
+            <h2 class="front-header">Recently Added</h2>
         </div>
         {% for dict in recent %}
         <div class="col-6 col-lg-3">
@@ -69,7 +69,7 @@ others.{% endblock %}
                 <a class="header-link"
                     href="{{url_for('get_recipe',recipe_id=dict['_id'],recipe_name=dict['recipe_name'])}}">
                     <div class="front-text text-center recent-text p-1">
-                        <h5>{{dict["recipe_name"]|title}}</h5>
+                        <p class="recipe-title">{{dict["recipe_name"]|title}}</p>
                         <hr class="recent-description">
                         <p class="recent-description">{{dict["recipe_description"]}}</p>
                     </div>
@@ -85,7 +85,7 @@ others.{% endblock %}
 
 <div class="banner d-flex text-center align-items-center flex-column">
     <div class="newsletter-text">
-        <h5>Want the latest tips and recipes direct to your inbox?</h5>
+        <h3>Want the latest tips and recipes direct to your inbox?</h3>
     </div>
 
     <div class="form-inline">
@@ -96,7 +96,7 @@ others.{% endblock %}
                 <button class="btn btn-news" type="submit" form="newsletter">Join Now</button>
             </div>
         </form>
-        <h2><strong class="message"></strong></h2>
+        <p class="recipe-title"><strong class="message"></strong></p>
     </div>
 </div>
 
@@ -104,7 +104,7 @@ others.{% endblock %}
 
 <div class="banner d-flex text-center align-items-center flex-column">
     <div class="newsletter-text">
-        <h5>Want the latest tips and recipes direct to your inbox?</h5>
+        <h3>Want the latest tips and recipes direct to your inbox?</h3>
     </div>
 
     <div class="form-inline">
@@ -115,7 +115,7 @@ others.{% endblock %}
                 <button class="btn btn-news" type="submit" form="newsletter">Join Now</button>
             </div>
         </form>
-        <h2><strong class="message"></strong></h2>
+        <p class="recipe-title"><strong class="message"></strong></p>
     </div>
 </div>
 
