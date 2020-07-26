@@ -260,7 +260,6 @@ a:hover {
 }
 
 .recent-recipe {
-    height: 15vh;
     overflow: hidden;
 }
 
@@ -465,10 +464,6 @@ form #news-email {
                 transform: translate(-50%, -50%);
     }
 
-    .recent-recipe {
-        width: 45vw;
-    }
-
     .recent-text {
         height: 20vh;
         display: flex;
@@ -518,10 +513,6 @@ form #news-email {
 
     .search-text {
         height: 23vh;
-    }
-
-    .recent-recipe {
-        height: 13vh;
     }
 
     .profile-image-container {
@@ -620,10 +611,6 @@ form #news-email {
         height: auto;
     }
 
-    .recent-recipe {
-        height: 50vh;
-    }
-
     .recent-text {
         height: 15vh;
         display: flex;
@@ -707,14 +694,6 @@ form #news-email {
         display: block;
     }
 
-    .featured-container {
-        height: 25vh;
-    }
-
-    .recent-recipe {
-        height: 20vh;
-    }
-
     .search-image {
         height: 26vh;
     }
@@ -775,14 +754,6 @@ form #news-email {
         height: -webkit-fit-content;
         height: -moz-fit-content;
         height: fit-content;
-    }
-
-    .featured-container {
-        height: 55vh;
-    }
-
-    .recent-recipe {
-        height: 50vh;
     }
 
     .recent-text {
@@ -847,14 +818,6 @@ form #news-email {
         height: auto;
     }
 
-    .featured-container {
-        height: 20vh;
-    }
-
-    .recent-recipe {
-        height: 15vh;
-    }
-
     .search-image {
         height: 25vh;
     }
@@ -886,14 +849,6 @@ form #news-email {
 }
 
 @media only screen and (min-width: 1024px) and (orientation: landscape) {
-    .featured-container {
-        height: 35vh;
-    }
-    
-    .recent-recipe {
-        height: 20vh;
-    }
-
     .recent-text {
         height: 30vh;
         display: block;
@@ -940,10 +895,6 @@ form #news-email {
         height: 20vh;
     }
 
-    .featured-container {
-        height: 25vh;
-    }
-
     .search-image {
         height: 25vh;
     }
@@ -955,17 +906,8 @@ form #news-email {
 }
 
 @media only screen and (min-width: 1800px) {
-    .featured-container {
-        height: 40vh;
-    }
-    
     .recent-recipe {
         width: initial;
-        height: 30vh;
-    }
-
-    .recent-recipe a img {
-        height: 40vh;
     }
 
     .search-image {
