@@ -4,7 +4,6 @@
 
 {% block mdescription %}Find the latest recipes uploaded by our users and start making them today!{% endblock %}
 
-
 {% block main %}
 
 <div class="row no-gutters">
@@ -27,13 +26,12 @@
         </div>
     </div>
 
-
     {% else %}
 
     <small class="p-2">We found {{count}} results for the search "<strong>{{search_term|title}}</strong>"</small>
 
     <div class="col-12">
-        <div class="row no-gutters text-center justify-content-center">
+        <div class="row no-gutters text-center justify-content-center mx-2">
 
             {% for result in search_result %}
 
@@ -71,7 +69,5 @@
 
     </div>
 </div>
-
-
 
 {% endblock %}
