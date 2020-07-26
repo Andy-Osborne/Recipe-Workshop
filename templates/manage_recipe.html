@@ -18,23 +18,37 @@
                         <label for="recipe_name"><strong>Recipe Name</strong></label>
                         <input class="form-control" type="text" name="recipe_name" id="recipe_name"
                             value="{{recipe.recipe_name|title}}" required>
+                        <div class="text-remaining text-left p-2">
+                            <small class="recipe-name-count"><span class="recipe-count">35</span> characters
+                                remaining</small>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="dish_type"><strong>What is the meal type?</strong></label>
                         <select class="form-control" name="dish_type" id="dish_type" required>
                             <option value="" disabled hidden>Please choose a type</option>
-                            <option value="Breakfast" {% if recipe.recipe_course == 'Breakfast'%}selected{% endif %}>Breakfast</option>
-                            <option value="Brunch" {% if recipe.recipe_course == 'Brunch'%}selected{% endif %}>Brunch</option>
-                            <option value="Lunch" {% if recipe.recipe_course == 'Lunch'%}selected{% endif %}>Lunch</option>
-                            <option value="Dinner" {% if recipe.recipe_course == 'Dinner'%}selected{% endif %}>Dinner</option>
-                            <option value="Dessert" {% if recipe.recipe_course == 'Dessert'%}selected{% endif %}>Dessert</option>
-                            <option value="Snack" {% if recipe.recipe_course == 'Snack'%}selected{% endif %}>Snack</option>
+                            <option value="Breakfast" {% if recipe.recipe_course == 'Breakfast'%}selected{% endif %}>
+                                Breakfast</option>
+                            <option value="Brunch" {% if recipe.recipe_course == 'Brunch'%}selected{% endif %}>Brunch
+                            </option>
+                            <option value="Lunch" {% if recipe.recipe_course == 'Lunch'%}selected{% endif %}>Lunch
+                            </option>
+                            <option value="Dinner" {% if recipe.recipe_course == 'Dinner'%}selected{% endif %}>Dinner
+                            </option>
+                            <option value="Dessert" {% if recipe.recipe_course == 'Dessert'%}selected{% endif %}>Dessert
+                            </option>
+                            <option value="Snack" {% if recipe.recipe_course == 'Snack'%}selected{% endif %}>Snack
+                            </option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="description"><strong>Provide a description of this dish</strong></label>
-                        <textarea class="form-control" name="description" id="description" cols="30" rows="5"
-                            required>{{recipe.recipe_description}}</textarea>
+                        <label for="description"><strong>Provide a short description of this dish</strong></label>
+                        <textarea class="form-control" name="description" id="description" cols="30" rows="3"
+                            minlength="15" maxlength="150" required>{{recipe.recipe_description}}</textarea>
+                        <div class="text-remaining text-left p-2">
+                            <small class="recipe-description-count"><span class="description-count">150</span>
+                                characters remaining</small>
+                        </div>
                     </div>
                     <div class="form-group d-none" id="current-image">
                         <label for="recipe_image">Provide an image for this dish</label>
@@ -87,7 +101,8 @@
                     <div class="form-group" id="step_inputs">
                         <label for="step"><strong>Provide the steps to create your Recipe</strong></label>
                         {% for step in recipe.steps %}
-                        <input class="form-control {% if loop.index != 1 %}my-2{% endif %}" type="text" name="step" {% if loop.index == 1 %}id="step"{% endif %} value="{{step}}" required>
+                        <input class="form-control {% if loop.index != 1 %}my-2{% endif %}" type="text" name="step"
+                            {% if loop.index == 1 %}id="step" {% endif %} value="{{step}}" required>
                         {% endfor %}
                     </div>
                     <div class="text-center">
@@ -103,7 +118,8 @@
                         <label for="ingredient_item"><strong>Provide the ingredients to create your
                                 Recipe</strong></label>
                         {% for ingredient in recipe.ingredients %}
-                        <input class="form-control {% if loop.index != 1 %}my-2{% endif %}" type="text" name="ingredients" {% if loop.index == 1 %}id="ingredient_item"{% endif %}
+                        <input class="form-control {% if loop.index != 1 %}my-2{% endif %}" type="text"
+                            name="ingredients" {% if loop.index == 1 %}id="ingredient_item" {% endif %}
                             value="{{ingredient}}" required>
                         {% endfor %}
                     </div>

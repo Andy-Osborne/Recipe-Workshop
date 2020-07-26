@@ -17,7 +17,11 @@
                     <div class="form-group">
                         <label for="recipe_name">Recipe Name</label>
                         <input class="form-control" type="text" name="recipe_name" id="recipe_name"
-                            placeholder="Cheesy Beans On Toast" required>
+                            placeholder="Cheesy Beans On Toast" maxlength="35" required>
+                        <div class="text-remaining text-left p-2">
+                            <small class="recipe-name-count"><span class="recipe-count">35</span> characters
+                                remaining</small>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="dish_type">What is the meal type?</label>
@@ -32,9 +36,13 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="description">Provide a description of this dish</label>
-                        <textarea class="form-control" name="description" id="description" cols="30" rows="5"
-                            required></textarea>
+                        <label for="description">Provide short a description of this dish</label>
+                        <textarea class="form-control" name="description" id="description" cols="30" rows="3"
+                            minlength="15" maxlength="150" required></textarea>
+                        <div class="text-remaining text-left p-2">
+                            <small class="recipe-description-count"><span class="description-count">150</span>
+                                characters remaining</small>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="description">Provide an image for this dish</label>
