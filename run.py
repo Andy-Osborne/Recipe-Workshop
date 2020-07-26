@@ -196,7 +196,12 @@ def manage_recipe(recipe_id):
 
     # Prevents user who is not recipe owner from editing recipe
 
-    if session["username"] != edit_recipe["recipe_author"]:
+    if "username" in session:
+        username = session["username"]
+    else:
+        username = ""
+
+    if username != edit_recipe["recipe_author"]:
         return redirect("/")
 
     return render_template("manage_recipe.html", recipe=edit_recipe)
@@ -278,7 +283,12 @@ def delete_recipe(recipe_id):
 
     # Prevents user who is not recipe owner from deleting recipe
 
-    if session["username"] != recipe_check["recipe_author"]:
+    if "username" in session:
+        username = session["username"]
+    else:
+        username = ""
+
+    if username != recipe_check["recipe_author"]:
         return redirect("/")
 
     else:
@@ -438,7 +448,12 @@ def update_profile(username):
 
     # Prevents user who is not profile owner from updating it
 
-    if session["username"] != user_profile["username"]:
+    if "username" in session:
+        username = session["username"]
+    else:
+        username = ""
+
+    if username != user_profile["username"]:
         return redirect("/")
 
     if request.method == "POST":
