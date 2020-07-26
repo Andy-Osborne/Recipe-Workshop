@@ -4,7 +4,6 @@
 
 {% block mdescription %}View the latest recipes created by {{username.username|title}}.{% endblock %}
 
-
 {% block main %}
 <div class="container">
     <div class="row no-gutters">
@@ -42,6 +41,8 @@
             </div>
 
             {% else %}
+
+            <!-- If user has not set a profile picture & description then default image and text shown -->
 
             <div class="row no-gutters justify-content-center align-items-center p-2 m-2">
                 <div class="col-12 col-lg-3">
@@ -84,7 +85,7 @@
                     <div class="form-group">
                         <label for="profile-image"><strong>Please upload a profile image</strong></label>
                         <input class="form-control image-upload" type="file" name="profile-image" id="profile-image"
-                        accept=".png, .jpg, .jpeg" required>
+                            accept=".png, .jpg, .jpeg" required>
                     </div>
                     <div class="p-2 text-center">
                         <p><strong class="warning"></strong></p>
@@ -120,7 +121,10 @@
         {% endif %}
 
         {% if recipe_count == 0 %}
+
         {% if username.username == session["username"] %}
+
+        <!-- If user is profile owner and has not created any recipes below is shown -->
 
         <div class="col-12 text-center p-2 mb-2">
             <p>It doesn't look like you've created any recipes yet. Why not create your first one now?</p>
@@ -128,6 +132,8 @@
         </div>
 
         {% else %}
+
+        <!-- If not profile owner and there are no recipes to display then below is shown -->
 
         <div class="col-12 text-center p-2 mb-2">
             <p>Looks like they're still firing up the stove and haven't had a chance to write up their latest creations!
@@ -137,6 +143,8 @@
         {% endif %}
 
         {% else %}
+
+        <!-- If there are recipes then the below is shown -->
 
         <div class="col-12 col-lg-6 text-center">
             <ul class="profile-recipe-list">
@@ -215,7 +223,5 @@
 </div>
 
 {% endif %}
-
-
 
 {% endblock %}

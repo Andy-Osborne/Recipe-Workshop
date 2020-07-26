@@ -7,7 +7,11 @@
 {% block main %}
 
 <div class="row no-gutters">
+
     {% if count == 0 %}
+
+    <!-- If no results are found for search then the below is shown -->
+
     <div class="col-12">
         <div class="no-results-container">
             <div class="no-results p-2 text-center">
@@ -27,6 +31,8 @@
     </div>
 
     {% else %}
+
+    <!-- If results are found for search then the below is shown -->
 
     <small class="p-2">We found {{count}} results for the search "<strong>{{search_term|title}}</strong>"</small>
 
@@ -61,6 +67,8 @@
     </div>
     {% endif %}
 </div>
+
+<!-- Below generates the pagination links based on amount of search results -->
 
 <div class="row no-gutters text-center justify-content-center">
     <div class="col-12 col-8-land col-sm-8 col-md-6 col-xl-3 mb-3">
