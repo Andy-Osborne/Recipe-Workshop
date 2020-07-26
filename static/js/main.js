@@ -1,6 +1,36 @@
 $(document).ready(function () {
 
     /*
+    Functions below take the amount of characters the user has inputted into
+    the form input for recipe name or description. This calculates the remaining
+    characters left and edits HTML to show user this.   
+    */
+
+    $("#recipe_name").on("keyup input", event => {
+        let recipeName = $(event.currentTarget).val();
+        let remaining = 35 - recipeName.length;
+        $(".recipe-count").html(remaining);
+
+        if (remaining <= 0) {
+            $(".recipe-name-count").addClass("warning");
+        } else {
+            $(".recipe-name-count").removeClass("warning");
+        }
+    });
+
+    $("#description").on("keyup input", event => {
+        let descriptionName = $(event.currentTarget).val();
+        let remaining = 150 - descriptionName.length;
+        $(".description-count").html(remaining);
+
+        if (remaining <= 0) {
+            $(".recipe-description-count").addClass("warning");
+        } else {
+            $(".recipe-description-count").removeClass("warning");
+        }
+    });
+    
+    /*
     The below adds an extra line for recipe ingredient/step form in the new_recipe.html
     when the corresponding button is clicked.
     */
