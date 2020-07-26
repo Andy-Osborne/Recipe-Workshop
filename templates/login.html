@@ -4,8 +4,8 @@
 
 {% block mdescription %}Sign into your Recipe Workshop account to upload your latest recipe.{% endblock %}
 
-
 {% block main %}
+
 <div class="row no-gutters login-image b-login-image justify-content-center mt-2">
     <div class="col-12 col-md-8 col-lg-6 col-xl-3 text-center">
         <div class="container-fluid center-form-login">
@@ -61,15 +61,14 @@
                             {{ form.submit(class="btn btn-recipe") }}
                         </div>
                         <div class="text-center">
-                            <small>Don't have an account? <a href="{{ url_for('user_registration')}}">Sign Up Here</a></small>
-                        </div>    
+                            <small>Don't have an account? <a href="{{ url_for('user_registration')}}">Sign Up
+                                    Here</a></small>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 
 {% endblock %}
