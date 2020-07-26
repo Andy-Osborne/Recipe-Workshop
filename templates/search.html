@@ -15,9 +15,11 @@
                 <p>Sorry, no results found</p>
 
                 {% if session["username"] %}
-                <p>Why not add your own recipe for others to see when looking for "<strong>{{search_term|title}}</strong>"?</p>
+                <p>Why not add your own recipe for others to see when looking for
+                    "<strong>{{search_term|title}}</strong>"?</p>
                 {% else %}
-                <p>Why not login and add your own recipe for others to see when looking for "<strong>{{search_term|title}}</strong>"?</p>
+                <p>Why not login and add your own recipe for others to see when looking for
+                    "<strong>{{search_term|title}}</strong>"?</p>
                 {% endif %}
 
                 <img class="no-results-logo" src="/static/images/logo.png" alt="Recipe Workshop">
@@ -40,17 +42,21 @@
                     <a href="{{url_for('get_recipe',recipe_id=result['_id'],recipe_name=result['recipe_name'])}}"><img
                             class="search-image" src="{{result['recipe_image']}}" alt="{{result['recipe_name']}}"></a>
                 </div>
-                <div class="search-text px-2 mx-3">
-                    <a href="{{url_for('get_recipe',recipe_id=result['_id'],recipe_name=result['recipe_name'])}}">
+
+                <a class="header-link"
+                    href="{{url_for('get_recipe',recipe_id=result['_id'],recipe_name=result['recipe_name'])}}">
+                    <div class="search-text px-2 mx-3">
                         <h4>{{result['recipe_name']|title|truncate(26)}}</h4>
-                    </a>
-                    <ul class="search-list">
-                        <li><i class="fas fa-heart heart"></i> by {% if result["likes"] == 0 %} {{result["likes"]}} user{% else %} {{result["likes"]}} users{% endif %}</li>
-                        <li><strong>Total Time: {{result["cooking_time"] + result["prep_time"]}}mins |
-                                Effort: {{result["effort"]|title}}</strong></li>
-                        <li>{{result["recipe_description"]|truncate(60)}} </li>
-                    </ul>
-                </div>
+
+                        <ul class="search-list">
+                            <li><i class="fas fa-heart heart"></i> by {% if result["likes"] == 0 %} {{result["likes"]}}
+                                user{% else %} {{result["likes"]}} users{% endif %}</li>
+                            <li><strong>Total Time: {{result["cooking_time"] + result["prep_time"]}}mins |
+                                    Effort: {{result["effort"]|title}}</strong></li>
+                            <li>{{result["recipe_description"]|truncate(60)}} </li>
+                        </ul>
+                    </div>
+                </a>
             </div>
             {% endfor %}
         </div>
@@ -59,14 +65,13 @@
 </div>
 
 <div class="row no-gutters text-center justify-content-center">
-            <div class="col-12 col-8-land col-sm-8 col-md-6 col-xl-3 mb-3">
-                
-                {{ pagination.links }}
-               
-            </div>
-        </div>
+    <div class="col-12 col-8-land col-sm-8 col-md-6 col-xl-3 mb-3">
+
+        {{ pagination.links }}
+
+    </div>
+</div>
 
 
 
 {% endblock %}
-
