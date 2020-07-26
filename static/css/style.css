@@ -20,20 +20,20 @@ body {
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
 }
 
 .content {
     -webkit-box-flex: 1;
-        -ms-flex: 1 0 auto;
-            flex: 1 0 auto;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
     padding-top: 80px;
 }
 
 .footer {
     -ms-flex-negative: 0;
-        flex-shrink: 0;
+    flex-shrink: 0;
 }
 
 p {
@@ -101,6 +101,7 @@ a:hover {
 .warning {
     color: #a51e1e;
 }
+
 .successful {
     color: #1a841a;
 }
@@ -127,8 +128,8 @@ a:hover {
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-flow: column;
-            flex-flow: column;
+    -ms-flex-flow: column;
+    flex-flow: column;
 }
 
 .social-links ul {
@@ -156,8 +157,8 @@ a:hover {
 
 .btn-zoom {
     -webkit-transform: scale(1.1);
-        -ms-transform: scale(1.1);
-            transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .btn-search,
@@ -186,8 +187,8 @@ a:hover {
 
 .pagination {
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
 
 .pagination li {
@@ -208,8 +209,8 @@ a:hover {
     left: 50%;
     margin-right: -50%;
     -webkit-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 .search-main {
@@ -225,8 +226,8 @@ a:hover {
     background-position: center;
     background-size: cover;
     -webkit-transform: translate(0%, -18%);
-        -ms-transform: translate(0%, -18%);
-            transform: translate(0%, -18%);
+    -ms-transform: translate(0%, -18%);
+    transform: translate(0%, -18%);
 }
 
 .front-header {
@@ -255,8 +256,8 @@ a:hover {
 
 .index-image-zoom {
     -webkit-transform: scale(1.2);
-        -ms-transform: scale(1.2);
-            transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
 }
 
 .recent-recipe {
@@ -268,6 +269,7 @@ a:hover {
 }
 
 .recent-text {
+    word-break: break-word;
     max-width: 100%;
     height: 15vh;
     overflow: hidden;
@@ -298,7 +300,6 @@ form #news-email {
 
 .search-image {
     width: 100%;
-    height: 40vh;
 }
 
 .search-header {
@@ -307,7 +308,8 @@ form #news-email {
 
 .search-text {
     overflow: hidden;
-    height: 35vh;
+    height: 40vh;
+    padding-top: 0.5rem;
 }
 
 .search-list li {
@@ -327,8 +329,8 @@ form #news-email {
     left: 50%;
     margin-right: -50%;
     -webkit-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 .no-results-logo {
@@ -351,7 +353,7 @@ form #news-email {
 
 .r-steps .recipe-list li {
     padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(0,0,0,.125)
+    border-bottom: 1px solid rgba(0, 0, 0, .125)
 }
 
 .recipe-list-view ul li:last-child {
@@ -420,7 +422,7 @@ form #news-email {
 
 .profile-recipe-list li {
     padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(0,0,0,.125)
+    border-bottom: 1px solid rgba(0, 0, 0, .125)
 }
 
 /* 404 Page */
@@ -438,8 +440,8 @@ form #news-email {
     background-repeat: no-repeat;
     background-size: cover;
     -webkit-transform: translate(0%, -18%);
-        -ms-transform: translate(0%, -18%);
-            transform: translate(0%, -18%);
+    -ms-transform: translate(0%, -18%);
+    transform: translate(0%, -18%);
 }
 
 /* Media Queries */
@@ -460,14 +462,20 @@ form #news-email {
         left: 50%;
         margin-right: -50%;
         -webkit-transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-                transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
     }
 
     .recent-text {
         height: 20vh;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
         justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
         align-items: center;
     }
 
@@ -477,14 +485,14 @@ form #news-email {
 
     .recipe-image-container {
         -webkit-box-ordinal-group: 2;
-            -ms-flex-order: 1;
-                order: 1;
+        -ms-flex-order: 1;
+        order: 1;
     }
 
     .recipe-overview {
         -webkit-box-ordinal-group: 3;
-            -ms-flex-order: 2;
-                order: 2;
+        -ms-flex-order: 2;
+        order: 2;
     }
 
     .recipe-m-overview {
@@ -494,10 +502,10 @@ form #news-email {
 
     .recipe-header {
         -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
         -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
+        flex-wrap: wrap;
     }
 
     .toggle-recipe-list {
@@ -506,18 +514,22 @@ form #news-email {
 
 }
 
-@media only screen and (min-width: 375px) and (min-height: 812px) {
-    .search-image {
-        height: 32vh;
+@media only screen and (min-width: 360px) and (orientation: portrait) {
+    .search-text {
+        height: 35vh;
     }
 
+}
+
+@media only screen and (min-width: 375px) and (min-height: 812px) {
     .search-text {
-        height: 23vh;
+        height: 26vh;
     }
 
     .profile-image-container {
         height: 25vh;
     }
+
 }
 
 @media only screen and (min-width: 400px) and (orientation: portrait) {
@@ -536,23 +548,25 @@ form #news-email {
         left: 50%;
         margin-right: -50%;
         -webkit-transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-                transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
     }
 
     .recent-text {
         height: 15vh;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
         justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
         align-items: center;
     }
 
     .recent-description {
         display: none;
-    }
-
-    .search-image {
-        height: 35vh;
     }
 
     .search-text {
@@ -561,14 +575,14 @@ form #news-email {
 
     .recipe-image-container {
         -webkit-box-ordinal-group: 2;
-            -ms-flex-order: 1;
-                order: 1;
+        -ms-flex-order: 1;
+        order: 1;
     }
 
     .recipe-overview {
         -webkit-box-ordinal-group: 3;
-            -ms-flex-order: 2;
-                order: 2;
+        -ms-flex-order: 2;
+        order: 2;
     }
 
     .recipe-m-overview {
@@ -578,13 +592,13 @@ form #news-email {
 
     .recipe-header {
         -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
         -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
+        flex-wrap: wrap;
     }
 
-    .profile-recipe-list, 
+    .profile-recipe-list,
     .recipe-list {
         text-align: center;
     }
@@ -594,6 +608,13 @@ form #news-email {
     }
 
     .profile-image-container {
+        height: 30vh;
+    }
+
+}
+
+@media only screen and (min-width: 450px) and (orientation: portrait) {
+    .search-text {
         height: 30vh;
     }
 
@@ -613,8 +634,14 @@ form #news-email {
 
     .recent-text {
         height: 15vh;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
         justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
         align-items: center;
     }
 
@@ -622,12 +649,8 @@ form #news-email {
         display: none;
     }
 
-    .search-image {
-        height: 70vh;
-    }
-
     .search-text {
-        height: 55vh;
+        height: 65vh;
     }
 
     .no-results-container {
@@ -652,12 +675,27 @@ form #news-email {
     .col-8-land {
         -ms-flex: 0 0 66.666667%;
         -webkit-box-flex: 0;
-                flex: 0 0 66.666667%;
+        flex: 0 0 66.666667%;
         max-width: 66.666667%;
     }
+
 }
 
-@media only screen and (min-width: 700px) and (orientation: landscape) {
+@media only screen and (min-width: 600px) and (orientation: landscape) {
+    .search-text {
+        height: 45vh;
+    }
+
+}
+
+@media only screen and (min-width: 640px) and (orientation: landscape) {
+    .search-text {
+        height: 55vh;
+    }
+
+}
+
+@media only screen and (min-width: 711px) and (orientation: landscape) {
     .search-text {
         height: 45vh;
     }
@@ -694,10 +732,6 @@ form #news-email {
         display: block;
     }
 
-    .search-image {
-        height: 26vh;
-    }
-
     .search-text {
         height: 18vh;
     }
@@ -708,14 +742,14 @@ form #news-email {
 
     .recipe-image-container {
         -webkit-box-ordinal-group: 3;
-            -ms-flex-order: 2;
-                order: 2;
+        -ms-flex-order: 2;
+        order: 2;
     }
 
     .recipe-overview {
         -webkit-box-ordinal-group: 2;
-            -ms-flex-order: 1;
-                order: 1;
+        -ms-flex-order: 1;
+        order: 1;
     }
 
     .recipe-m-overview {
@@ -725,10 +759,10 @@ form #news-email {
 
     .recipe-header {
         -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
         -ms-flex-wrap: nowrap;
-            flex-wrap: nowrap;
+        flex-wrap: nowrap;
     }
 
     .recipe-list {
@@ -758,17 +792,19 @@ form #news-email {
 
     .recent-text {
         height: 15vh;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
         justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
         align-items: center;
     }
 
     .recent-description {
         display: none;
-    }
-
-    .search-image {
-        height: 65vh;
     }
 
     .search-text {
@@ -804,8 +840,8 @@ form #news-email {
         left: 50%;
         margin-right: -50%;
         -webkit-transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-                transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
     }
 
     .nav-item {
@@ -818,12 +854,8 @@ form #news-email {
         height: auto;
     }
 
-    .search-image {
-        height: 25vh;
-    }
-
     .search-text {
-        height: 12vh;
+        height: 14vh;
     }
 
     .large-screen {
@@ -846,6 +878,7 @@ form #news-email {
         height: 15vh;
         max-height: 15vh;
     }
+
 }
 
 @media only screen and (min-width: 1024px) and (orientation: landscape) {
@@ -856,10 +889,6 @@ form #news-email {
 
     .recent-description {
         display: block;
-    }
-
-    .search-image {
-        height: 40vh;
     }
 
     .search-text {
@@ -892,15 +921,7 @@ form #news-email {
     }
 
     .search-text {
-        height: 20vh;
-    }
-
-    .search-image {
-        height: 25vh;
-    }
-
-    .search-text {
-        height: 18vh;
+        height: 22vh;
     }
 
 }
@@ -910,8 +931,8 @@ form #news-email {
         width: initial;
     }
 
-    .search-image {
-        height: 35vh;
+    .recent-text {
+        height: 15vh;
     }
 
 }
