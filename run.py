@@ -684,7 +684,9 @@ def no_change_check(email, new_email, password, new_pass):
     # checks if new password has not been entered
     old_pass = True if new_pass == "" else False
     # checks if new password entered matches existing password
-    pass_verify = True if not old_pass and p256.verify(new_pass, password) else False
+    pass_verify = (True if not old_pass
+                   and p256.verify(new_pass, password)
+                   else False)
     # checks if the email has not changed
     same_email = True if email == new_email else False
 
