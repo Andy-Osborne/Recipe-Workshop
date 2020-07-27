@@ -16,7 +16,9 @@
                     <div class="form-group">
                         <label for="recipe_name"><strong>Recipe Name</strong></label>
                         <input class="form-control" type="text" name="recipe_name" id="recipe_name"
-                            value="{{recipe.recipe_name|title}}" minlength="3" maxlength="35" required>
+                            value="{{recipe.recipe_name|title}}" minlength="3" maxlength="35"
+                            pattern="^[a-zA-Z]+( [a-zA-Z]+)*$" title="Only use uppercase and lowercase letters"
+                            required>
 
                         <!-- Message area for recipe name remaining characters -->
 
@@ -47,7 +49,9 @@
                     <div class="form-group">
                         <label for="description"><strong>Provide a short description of this dish</strong></label>
                         <textarea class="form-control" name="description" id="description" cols="30" rows="3"
-                            minlength="15" maxlength="150" required>{{recipe.recipe_description}}</textarea>
+                            minlength="15" maxlength="150" pattern="^[a-zA-Z]+( [a-zA-Z.]+)*$"
+                            title="Only use uppercase, lowercase letters and periods."
+                            required>{{recipe.recipe_description}}</textarea>
 
                         <!-- Message area for description remaining characters -->
 
@@ -115,7 +119,10 @@
                         <label for="step"><strong>Provide the steps to create your Recipe</strong></label>
                         {% for step in recipe.steps %}
                         <input class="form-control {% if loop.index != 1 %}my-2{% endif %}" type="text" name="step"
-                            {% if loop.index == 1 %}id="step" {% endif %} value="{{step}}" required>
+                            {% if loop.index == 1 %}id="step" {% endif %} value="{{step}}"
+                            pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9.z\(\)\-]+)*$"
+                            title="Must start with an uppercase or lowercase word. Can accept numbers, brackets, hyphens and periods."
+                            required>
                         {% endfor %}
                     </div>
 
@@ -136,7 +143,9 @@
                         {% for ingredient in recipe.ingredients %}
                         <input class="form-control {% if loop.index != 1 %}my-2{% endif %}" type="text"
                             name="ingredients" {% if loop.index == 1 %}id="ingredient_item" {% endif %}
-                            value="{{ingredient}}" required>
+                            value="{{ingredient}}" pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9.z\(\)\-]+)*$"
+                            title="Must start with an uppercase or lowercase word. Can accept numbers, brackets, hyphens and periods."
+                            required>
                         {% endfor %}
                     </div>
 
