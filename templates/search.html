@@ -6,76 +6,84 @@
 
 {% block main %}
 
-<div class="row no-gutters">
+<div class="container-fluid">
+    <div class="row no-gutters">
 
-    {% if count == 0 %}
+        {% if count == 0 %}
 
-    <!-- If no results are found for search then the below is shown -->
+        <!-- If no results are found for search then the below is shown -->
 
-    <div class="col-12">
-        <div class="no-results-container">
-            <div class="no-results p-2 text-center">
-                <p>Sorry, no results found</p>
+        <div class="col-12">
+            <div class="no-results-container">
+                <div class="no-results p-2 text-center">
+                    <p>Sorry, no results found</p>
 
-                {% if session["username"] %}
-                <p>Why not add your own recipe for others to see when looking for
-                    "<strong>{{search_term|title}}</strong>"?</p>
-                {% else %}
-                <p>Why not login and add your own recipe for others to see when looking for
-                    "<strong>{{search_term|title}}</strong>"?</p>
-                {% endif %}
+                    {% if session["username"] %}
+                    <p>Why not add your own recipe for others to see when looking for
+                        "<strong>{{search_term|title}}</strong>"?</p>
+                    {% else %}
+                    <p>Why not login and add your own recipe for others to see when looking for
+                        "<strong>{{search_term|title}}</strong>"?</p>
+                    {% endif %}
 
-                <img class="no-results-logo" src="/static/images/logo.png" alt="Recipe Workshop">
-            </div>
-        </div>
-    </div>
-
-    {% else %}
-
-    <!-- If results are found for search then the below is shown -->
-
-    <small class="p-2">We found {{count}} results for the search "<strong>{{search_term|title}}</strong>"</small>
-
-    <div class="col-12">
-        <div class="row no-gutters text-center justify-content-center mx-2">
-
-            {% for result in search_result %}
-
-            <div class="col-12 col-8-land col-sm-8 col-md-6 col-xl-3 mb-3">
-                <div class="search-container px-2 mx-2">
-                    <a href="{{url_for('get_recipe',recipe_id=result['_id'],recipe_name=result['recipe_name'])}}"><img
-                            class="search-image" src="{{result['recipe_image']}}" alt="{{result['recipe_name']}}"></a>
+                    <img class="no-results-logo" src="/static/images/logo.png" alt="Recipe Workshop">
                 </div>
-
-                <a class="header-link"
-                    href="{{url_for('get_recipe',recipe_id=result['_id'],recipe_name=result['recipe_name'])}}">
-                    <div class="search-text px-2 mx-3">
-                        <p class="recipe-title">{{result['recipe_name']|title|truncate(26)}}</p>
-
-                        <ul class="search-list">
-                            <li><i class="fas fa-heart heart"></i> by {% if result["likes"] == 0 %} {{result["likes"]}}
-                                user{% else %} {{result["likes"]}} users{% endif %}</li>
-                            <li><strong>Total Time: {{result["cooking_time"] + result["prep_time"]}}mins |
-                                    Effort: {{result["effort"]|title}}</strong></li>
-                            <li>{{result["recipe_description"]|truncate(60)}} </li>
-                        </ul>
-                    </div>
-                </a>
             </div>
-            {% endfor %}
         </div>
+
+        {% else %}
+
+        <!-- If results are found for search then the below is shown -->
+
+        <small class="p-2">We found {{count}} results for the search "<strong>{{search_term|title}}</strong>"</small>
+
+        <div class="col-12">
+            <div class="row no-gutters text-center justify-content-center mx-2">
+
+                {% for result in search_result %}
+
+                <div class="col-12 col-8-land col-sm-8 col-md-6 col-xl-3 mb-3">
+                    <div class="search-container px-2 mx-2">
+                        <a href="{{url_for('get_recipe',recipe_id=result['_id'],recipe_name=result['recipe_name'])}}"><img
+                                class="search-image" src="{{result['recipe_image']}}"
+                                alt="{{result['recipe_name']}}"></a>
+                    </div>
+
+                    <a class="header-link"
+                        href="{{url_for('get_recipe',recipe_id=result['_id'],recipe_name=result['recipe_name'])}}">
+                        <div class="search-text px-2 mx-3">
+                            <p class="recipe-title">{{result['recipe_name']|title|truncate(26)}}</p>
+
+                            <ul class="search-list">
+                                <li><i class="fas fa-heart heart"></i> by {% if result["likes"] == 0 %}
+                                    {{result["likes"]}}
+                                    user{% else %} {{result["likes"]}} users{% endif %}</li>
+                                <li><strong>Total Time: {{result["cooking_time"] + result["prep_time"]}}mins |
+                                        Effort: {{result["effort"]|title}}</strong></li>
+                                <li>{{result["recipe_description"]|truncate(60)}} </li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
 </div>
+
 
 <!-- Below generates the pagination links based on amount of search results -->
 
-<div class="row no-gutters text-center justify-content-center">
-    <div class="col-12 col-8-land col-sm-8 col-md-6 col-xl-3 mb-3">
+<div class="container">
+    <div class="row no-gutters text-center justify-content-center">
+        <div class="col-12 col-8-land col-sm-8 col-md-6 col-xl-3 mb-3">
 
-        {{ pagination.links }}
+            {{ pagination.links }}
 
+        </div>
     </div>
 </div>
+
 
 {% endblock %}
