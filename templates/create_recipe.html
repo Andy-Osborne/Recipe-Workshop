@@ -134,3 +134,9 @@
 </div>
 
 {% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/recipe-form.js')}}"></script>
+<script src="{{ url_for('static', filename='js/file-validation.js')}}"></script>
+<script src="{{ url_for('static', filename='js/form-validation.js')}}"></script>
+{% endblock %}

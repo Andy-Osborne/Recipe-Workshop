@@ -9,7 +9,7 @@
 <div class="row no-gutters">
     <div class="col-12 d-flex justify-content-center">
         <div class="text-center my-3">
-            <h1>{{recipe.recipe_name|title}}</h1>
+            <h1 class="mt-4">{{recipe.recipe_name|title}}</h1>
             <h2>Recipe by
                 <a class="profile-link"
                     href="{{url_for('profile', username=recipe.recipe_author)}}">{{recipe.recipe_author}}</a>
@@ -123,3 +123,7 @@
 </div>
 
 {%endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/form-validation.js')}}"></script>
+{% endblock %}

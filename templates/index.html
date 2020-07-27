@@ -58,8 +58,7 @@ others.{% endblock %}
             <h2 class="front-header">Recently Added</h2>
         </div>
         {% for dict in recent %}
-        <div class="col-6 col-lg-3">
-            <div class="m-2">
+        <div class="col-6 col-lg-3 p-2">
                 <div class="recent-recipe">
                     <a href="{{url_for('get_recipe',recipe_id=dict['_id'],recipe_name=dict['recipe_name'])}}">
                         <img class="index-image" src="{{dict['recipe_image']}}" alt="{{dict['recipe_name']}}">
@@ -74,7 +73,6 @@ others.{% endblock %}
                         <p class="recent-description">{{dict["recipe_description"]}}</p>
                     </div>
                 </a>
-            </div>
         </div>
         {% endfor %}
     </div>
@@ -128,4 +126,8 @@ others.{% endblock %}
 
 {% endif %}
 
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/form-validation.js')}}"></script>
 {% endblock %}
