@@ -36,11 +36,11 @@ $(document).ready(function () {
     */
 
     $("#add_ingredient").on("click", () => {
-        $("#ingredient").append('<input class="form-control my-2" type="text" name="ingredients" pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9.z\(\)\-]+)*$" title="Must start with an uppercase or lowercase word. Can accept numbers, brackets, hyphens and periods." required>');
+        $("#ingredient").append('<input class="form-control my-2" type="text" name="ingredients" pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9.z\(\)\-]+)*$" title=""Must start with an uppercase or lowercase word. Acceptable characters are -, ., and (). Cannot start with a space." required>');
     });
 
     $("#add_step").on("click", () => {
-        $("#step_inputs").append('<input class="form-control my-2" type="text" name="step" pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9.z\(\)\-]+)*$" title="Must start with an uppercase or lowercase word. Can accept numbers, brackets, hyphens and periods." required>');
+        $("#step_inputs").append('<input class="form-control my-2" type="text" name="step" pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9.z\(\)\-]+)*$" title=""Must start with an uppercase or lowercase word. Acceptable characters are -, ., and (). Cannot start with a space." required>');
     });
 
     /* 

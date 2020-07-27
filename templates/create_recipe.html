@@ -18,7 +18,7 @@
                         <label for="recipe_name">Recipe Name</label>
                         <input class="form-control" type="text" name="recipe_name" id="recipe_name"
                             placeholder="Cheesy Beans On Toast" minlength="3" maxlength="35"
-                            pattern="^[a-zA-Z]+( [a-zA-Z]+)*$" title="Only use uppercase and lowercase letters"
+                            pattern="^[a-zA-Z]+( [a-zA-Z]+)*$" title="Only use uppercase and lowercase letters. Cannot start with a space."
                             required>
 
                         <!-- Message area for recipe name remaining characters -->
@@ -45,7 +45,7 @@
                         <label for="description">Provide short a description of this dish</label>
                         <textarea class="form-control" name="description" id="description" cols="30" rows="3"
                             minlength="15" maxlength="150" pattern="^[a-zA-Z]+( [a-zA-Z.]+)*$"
-                            title="Only use uppercase, lowercase letters and periods." required></textarea>
+                            title="Only use uppercase, lowercase letters and periods. Only use uppercase and lowercase letters. Name cannot start with a space." required></textarea>
 
                         <!-- Message area for description remaining characters -->
 
@@ -95,7 +95,7 @@
                         <label for="step">Provide the steps to create your recipe</label>
                         <input class="form-control" type="text" name="step" id="step"
                             pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9.z\(\)\-]+)*$"
-                            title="Must start with an uppercase or lowercase word. Can accept numbers, brackets, hyphens and periods."
+                            title="Must start with an uppercase or lowercase word. Acceptable characters are -, ., and (). Cannot start with a space."
                             required>
                     </div>
 
@@ -115,7 +115,7 @@
                         <label for="ingredient_item">Provide the ingredients to create your recipe</label>
                         <input class="form-control" type="text" name="ingredients" id="ingredient_item"
                             pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9.z\(\)\-]+)*$"
-                            title="Must start with an uppercase or lowercase word. Can accept numbers, brackets, hyphens and periods."
+                            title="Must start with an uppercase or lowercase word. Acceptable characters are -, ., and (). Cannot start with a space."
                             required>
                     </div>
 
