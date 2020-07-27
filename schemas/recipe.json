@@ -1,0 +1,32 @@
+    [{
+        "_id": {
+            "$oid": "<objectid>"
+        },
+        "recipe_author": "<string>",
+        "recipe_name": "<string>",
+        "recipe_course": "<string>",
+        "recipe_description": "<string>",
+        "recipe_image": "<string>",
+        "image_id": "<string>",
+        "prep_time": {
+            "$numberInt": "<integer>"
+        },
+        "cooking_time": {
+            "$numberInt": "<integer>"
+        },
+        "effort": "<string>",
+        "servings": {
+            "$numberInt": "<integer>"
+        },
+        "steps": ["<string>"],
+        "ingredients": ["<string>"],
+        "submitted": {
+            "$date": {
+                "$numberLong": "<date>"
+            }
+        },
+        "likes": {
+            "$numberInt": "<integer>"
+        },
+        "liked_by": ["<string>"]
+    }]

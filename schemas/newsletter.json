@@ -1,0 +1,7 @@
+[{
+    "_id":{
+        "$oid":"<objectid>"
+        },
+        "email":"<string>",
+        "username":"<string>"
+}]
