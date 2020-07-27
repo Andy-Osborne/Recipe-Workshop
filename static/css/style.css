@@ -356,6 +356,7 @@ form #news-email {
     padding: 0.5rem;
 }
 
+.recipe-info li,
 .recipe-list li {
     list-style-type: none;
     padding: 5px;
@@ -377,9 +378,7 @@ form #news-email {
 }
 
 .small-screen {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+    display: block;
 }
 
 .recipe-list-view,
@@ -610,7 +609,8 @@ form #news-email {
     }
 
     .profile-recipe-list,
-    .recipe-list {
+    .recipe-list,
+    .recipe-info {
         text-align: center;
     }
 
@@ -788,6 +788,11 @@ form #news-email {
         flex-wrap: nowrap;
     }
 
+    .recipe-info {
+        text-align: left;
+        padding: 1rem 0;
+    }
+
     .recipe-list {
         text-align: left;
         padding: 0 1rem;
@@ -882,9 +887,7 @@ form #news-email {
     }
 
     .large-screen {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
+        display: block;
     }
 
     .small-screen {
@@ -892,7 +895,8 @@ form #news-email {
     }
 
     .list-group,
-    .recipe-list {
+    .recipe-list,
+    .recipe-info {
         padding: 0;
         margin: 0;
     }

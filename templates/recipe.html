@@ -26,7 +26,7 @@
 <div class="container-fluid">
     <div class="row no-gutters justify-content-center recipe-header mb-3">
         <div class="col-md-6 col-lg-4 col-xl-3 text-center recipe-overview">
-            <ul class="recipe-list recipe-m-overview">
+            <ul class="recipe-info recipe-m-overview">
                 <li><strong>Effort Required:</strong> {{recipe.effort|title}}</li>
                 <li><strong>Preparation Time:</strong> {{recipe.prep_time}} minutes</li>
                 {% if recipe.cooking_time // 60 == 0 %}
@@ -48,52 +48,23 @@
     </div>
 </div>
 
-<div class="row no-gutters">
+<div class="container">
+    <div class="row no-gutters justify-content-center">
 
-    <!-- Desktop View -->
+        <!-- Desktop View -->
 
-    <div class="col-12 justify-content-center large-screen">
-        <div class="col-lg-12 col-xl-8 d-lg-inline-flex">
-            <div class="col-lg-4 p-2 m-2">
-                <h3 class="methods-header">Ingredients</h3>
-                <ul class="list-group">
-                    {% for ingredient in recipe.ingredients %}
-                    <li class="list-group-item">{{ingredient}}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="col-lg-7 r-steps p-2 m-2">
-                <h3 class="methods-header">Steps</h3>
-                <ul class="recipe-list">
-                    {% for steps in recipe.steps %}
-                    <li><span class="recipe-index">{{loop.index}}</span> - {{steps}}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mobile View -->
-
-    <div class="col-12 justify-content-center small-screen">
-        <div class="col-lg-8 d-lg-inline-flex text-center">
-            <div class="col-lg-4">
-                <a class="btn toggle-recipe-list" role="button">
+        <div class="col-lg-12 large-screen">
+            <div class="row no-gutters">
+                <div class="col-lg-4 p-2 m-2">
                     <h3 class="methods-header">Ingredients</h3>
-                </a>
-                <div class="recipe-list-view" id="#recipe-ingredients">
                     <ul class="list-group">
                         {% for ingredient in recipe.ingredients %}
                         <li class="list-group-item">{{ingredient}}</li>
                         {% endfor %}
                     </ul>
                 </div>
-            </div>
-            <div class="col-lg-8">
-                <a class="btn toggle-recipe-list" role="button">
+                <div class="col-lg-7 r-steps p-2 m-2">
                     <h3 class="methods-header">Steps</h3>
-                </a>
-                <div class="recipe-list-view r-steps" id="#recipe-steps">
                     <ul class="recipe-list">
                         {% for steps in recipe.steps %}
                         <li><span class="recipe-index">{{loop.index}}</span> - {{steps}}</li>
@@ -102,28 +73,61 @@
                 </div>
             </div>
         </div>
+
+        <!-- Mobile View -->
+
+        <div class="col-12 justify-content-center small-screen">
+            <div class="row no-gutters text-center">
+                <div class="col-lg-4">
+                    <a class="btn toggle-recipe-list" role="button">
+                        <h3 class="methods-header">Ingredients</h3>
+                    </a>
+                    <div class="recipe-list-view" id="#recipe-ingredients">
+                        <ul class="list-group">
+                            {% for ingredient in recipe.ingredients %}
+                            <li class="list-group-item">{{ingredient}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <a class="btn toggle-recipe-list" role="button">
+                        <h3 class="methods-header">Steps</h3>
+                    </a>
+                    <div class="recipe-list-view r-steps" id="#recipe-steps">
+                        <ul class="recipe-list">
+                            {% for steps in recipe.steps %}
+                            <li><span class="recipe-index">{{loop.index}}</span> - {{steps}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="row no-gutters text-center">
-    <div class="col-12 p-2 my-3">
-        <h4>If you liked this recipe, why not show your appreciation and give it a like?</h4>
-        {% if not session["username"] %}
-        <a class="btn-like disable" role="button"><i class="fas fa-heart"></i></a>
-        <small>{{recipe.likes}}</small>
-        <br>
-        <small>Please log in to give this recipe a like</small>
-        {% else %}
-        {% if session["username"] in recipe.liked_by %}
-        <a class="btn-like" href="{{url_for('like', recipe_id=recipe._id)}}" id="react" role="button"><i
-                class="fas fa-heart"></i></a>
-        <small id="like-count">{{recipe.likes}}</small>
-        {% else %}
-        <a class="btn-like" href="{{url_for('like', recipe_id=recipe._id)}}" id="react" role="button"><i
-                class="far fa-heart"></i></a>
-        <small id="like-count">{{recipe.likes}}</small>
-        {% endif %}
-        {% endif %}
+<div class="container">
+    <div class="row no-gutters text-center">
+        <div class="col-12 p-2 my-3">
+            <h4>If you liked this recipe, why not show your appreciation and give it a like?</h4>
+            {% if not session["username"] %}
+            <a class="btn-like disable" role="button"><i class="fas fa-heart"></i></a>
+            <small>{{recipe.likes}}</small>
+            <br>
+            <small>Please log in to give this recipe a like</small>
+            {% else %}
+            {% if session["username"] in recipe.liked_by %}
+            <a class="btn-like" href="{{url_for('like', recipe_id=recipe._id)}}" id="react" role="button"><i
+                    class="fas fa-heart"></i></a>
+            <small id="like-count">{{recipe.likes}}</small>
+            {% else %}
+            <a class="btn-like" href="{{url_for('like', recipe_id=recipe._id)}}" id="react" role="button"><i
+                    class="far fa-heart"></i></a>
+            <small id="like-count">{{recipe.likes}}</small>
+            {% endif %}
+            {% endif %}
+        </div>
     </div>
 </div>
 
