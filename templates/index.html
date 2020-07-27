@@ -69,8 +69,6 @@ others.{% endblock %}
                     href="{{url_for('get_recipe',recipe_id=dict['_id'],recipe_name=dict['recipe_name'])}}">
                     <div class="front-text text-center recent-text p-1">
                         <p class="recipe-title">{{dict["recipe_name"]|title}}</p>
-                        <hr class="recent-description">
-                        <p class="recent-description">{{dict["recipe_description"]}}</p>
                     </div>
                 </a>
         </div>
