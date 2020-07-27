@@ -1,5 +1,17 @@
 $(document).ready(function () {
 
+    // The below disables the ability for a user to submit the same recipe twice upon creation.
+
+    $(".recipe-submit").on("click", function (event) {
+        let validForm = this.form.checkValidity();
+
+        if (validForm) {
+            event.preventDefault();
+            $(this).attr("disabled", "disabled");
+            $(this).closest("form").submit();
+        }
+    });
+
     /*
     The below AJAX function handles the form request for account update and determines the information sent to 
     server as the account update fields are dynamic and then returns if there is any errors and shows
