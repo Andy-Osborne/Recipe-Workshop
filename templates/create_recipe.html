@@ -4,143 +4,151 @@
 
 {% block mdescription %}Create and add your own recipes for others to see.{% endblock %}
 
-{%block main %}
+{% block main %}
+<div class="container">
+    <div class="row no-gutters text-center">
+        <div class="col-12 p-3">
+            <h1>Add New Recipe</h1>
+            <hr>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center text-sm-center text-lg-left">
+                        <form action="{{url_for('add_recipe')}}" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="recipe_name">Recipe Name</label>
+                                <input class="form-control" type="text" name="recipe_name" id="recipe_name"
+                                    placeholder="Cheesy Beans On Toast" minlength="3" maxlength="35"
+                                    pattern="^[a-zA-Z]+( [a-zA-Z]+)*$"
+                                    title="Only use uppercase and lowercase letters. Cannot start with a space."
+                                    required>
 
-<div class="row no-gutters text-center">
-    <div class="col-12 p-3">
-        <h1>Add New Recipe</h1>
-        <hr>
+                                <!-- Message area for recipe name remaining characters -->
 
-        <div class="row">
-            <div class="col-12 d-flex justify-content-center text-sm-center text-lg-left">
-                <form action="{{url_for('add_recipe')}}" method="POST" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="recipe_name">Recipe Name</label>
-                        <input class="form-control" type="text" name="recipe_name" id="recipe_name"
-                            placeholder="Cheesy Beans On Toast" minlength="3" maxlength="35"
-                            pattern="^[a-zA-Z]+( [a-zA-Z]+)*$" title="Only use uppercase and lowercase letters. Cannot start with a space."
-                            required>
+                                <div class="text-remaining text-left p-2">
+                                    <small class="recipe-name-count"><span class="recipe-count">35</span> characters
+                                        remaining</small>
+                                </div>
 
-                        <!-- Message area for recipe name remaining characters -->
+                            </div>
+                            <div class="form-group">
+                                <label for="dish_type">What is the meal type?</label>
+                                <select class="form-control" name="dish_type" id="dish_type" required>
+                                    <option value="" disabled selected hidden>Please choose a type</option>
+                                    <option value="Breakfast">Breakfast</option>
+                                    <option value="Brunch">Brunch</option>
+                                    <option value="Lunch">Lunch</option>
+                                    <option value="Dinner">Dinner</option>
+                                    <option value="Dessert">Dessert</option>
+                                    <option value="Snack">Snack</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Provide short a description of this dish</label>
+                                <textarea class="form-control" name="description" id="description" cols="30" rows="3"
+                                    minlength="15" maxlength="150" pattern="^[a-zA-Z]+( [a-zA-Z.\,\-]+)*$"
+                                    title="Must start with an uppercase or lowercase word. Acceptable characters are hyphens, commas, and periods. Cannot start with a space."
+                                    required></textarea>
 
-                        <div class="text-remaining text-left p-2">
-                            <small class="recipe-name-count"><span class="recipe-count">35</span> characters
-                                remaining</small>
-                        </div>
+                                <!-- Message area for description remaining characters -->
 
+                                <div class="text-remaining text-left p-2">
+                                    <small class="recipe-description-count"><span class="description-count">150</span>
+                                        characters remaining</small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipe_image">Provide an image for this dish</label>
+                                <input class="form-control image-upload" type="file" name="recipe_image"
+                                    id="recipe_image" accept="image/png, image/jpeg, image/jpg" required>
+                            </div>
+
+                            <!-- Message area for image upload validation -->
+
+                            <div class="p-2 text-center">
+                                <p><strong class="warning"></strong></p>
+                                <p><strong class="successful"></strong></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="preparation_time">How much preparation time is needed? Enter in
+                                    minutes</label>
+                                <input class="form-control" type="number" name="preparation_time" max="1800"
+                                    id="preparation_time" placeholder="15" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cooking_time">How much cooking time does it need? Enter in minutes</label>
+                                <input class="form-control" type="number" name="cooking_time" id="cooking_time"
+                                    max="1800" placeholder="60" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="effort">How complicated is this dish to make?</label>
+                                <select class="form-control" name="effort" id="effort" required>
+                                    <option value="" disabled selected hidden>Please choose a difficulty</option>
+                                    <option value="easy">Easy</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="hard">Hard</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="servings">How many servings will this make?</label>
+                                <input class="form-control" type="number" name="servings" id="servings" max="100"
+                                    placeholder="12" min="0" required>
+                            </div>
+                            <div class="form-group" id="step_inputs">
+                                <label for="step">Provide the steps to create your recipe</label>
+                                <input class="form-control" type="text" name="step" id="step"
+                                    pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9.z\(\)\-\,]+)*$"
+                                    title="Must start with an uppercase or lowercase word. Acceptable characters are hyphens, commas, periods, and brackets. Cannot start with a space."
+                                    required>
+                            </div>
+
+                            <!-- User Interaction Buttons for adding/removing input for steps -->
+
+                            <div class="text-center">
+                                <small class="form-text text-muted">Need to add or remove a row?</small>
+                                <button class="btn-add" id="add_step" type="button" title="Add step row">
+                                    <i class="fas fa-plus-square"></i>
+                                </button>
+                                <button class="btn-remove" id="remove_step" type="button" title="Remove step row">
+                                    <i class="fas fa-minus-square"></i>
+                                </button>
+                            </div>
+
+                            <div class="form-group" id="ingredient">
+                                <label for="ingredient_item">Provide the ingredients to create your recipe</label>
+                                <input class="form-control" type="text" name="ingredients" id="ingredient_item"
+                                    pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9.z\(\)\-\,]+)*$"
+                                    title="Must start with an uppercase or lowercase word. Acceptable characters are hyphens, commas, periods, and brackets. Cannot start with a space."
+                                    required>
+                            </div>
+
+                            <!-- User Interaction Buttons for adding/removing input for ingredients -->
+
+                            <div class="text-center">
+                                <small class="form-text text-muted">Need to add or remove a row?</small>
+                                <button class="btn-add" id="add_ingredient" type="button" title="Add ingredient row">
+                                    <i class="fas fa-plus-square"></i>
+                                </button>
+                                <button class="btn-remove" id="remove_ingredient" type="button"
+                                    title="Remove ingredient row">
+                                    <i class="fas fa-minus-square"></i>
+                                </button>
+                            </div>
+
+                            <br>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-recipe submit-btn recipe-submit">Submit Your
+                                    Recipe</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="dish_type">What is the meal type?</label>
-                        <select class="form-control" name="dish_type" id="dish_type" required>
-                            <option value="" disabled selected hidden>Please choose a type</option>
-                            <option value="Breakfast">Breakfast</option>
-                            <option value="Brunch">Brunch</option>
-                            <option value="Lunch">Lunch</option>
-                            <option value="Dinner">Dinner</option>
-                            <option value="Dessert">Dessert</option>
-                            <option value="Snack">Snack</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Provide short a description of this dish</label>
-                        <textarea class="form-control" name="description" id="description" cols="30" rows="3"
-                            minlength="15" maxlength="150" pattern="^[a-zA-Z]+( [a-zA-Z.]+)*$"
-                            title="Only use uppercase, lowercase letters and periods. Only use uppercase and lowercase letters. Name cannot start with a space." required></textarea>
-
-                        <!-- Message area for description remaining characters -->
-
-                        <div class="text-remaining text-left p-2">
-                            <small class="recipe-description-count"><span class="description-count">150</span>
-                                characters remaining</small>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="recipe_image">Provide an image for this dish</label>
-                        <input class="form-control image-upload" type="file" name="recipe_image" id="recipe_image"
-                            accept="image/png, image/jpeg, image/jpg" required>
-                    </div>
-
-                    <!-- Message area for image upload validation -->
-
-                    <div class="p-2 text-center">
-                        <p><strong class="warning"></strong></p>
-                        <p><strong class="successful"></strong></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="preparation_time">How much preparation time is needed? Enter in minutes</label>
-                        <input class="form-control" type="number" name="preparation_time" max="1800"
-                            id="preparation_time" placeholder="15" min="0" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cooking_time">How much cooking time does it need? Enter in minutes</label>
-                        <input class="form-control" type="number" name="cooking_time" id="cooking_time" max="1800"
-                            placeholder="60" min="0" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="effort">How complicated is this dish to make?</label>
-                        <select class="form-control" name="effort" id="effort" required>
-                            <option value="" disabled selected hidden>Please choose a difficulty</option>
-                            <option value="easy">Easy</option>
-                            <option value="medium">Medium</option>
-                            <option value="hard">Hard</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="servings">How many servings will this make?</label>
-                        <input class="form-control" type="number" name="servings" id="servings" max="100"
-                            placeholder="12" min="0" required>
-                    </div>
-                    <div class="form-group" id="step_inputs">
-                        <label for="step">Provide the steps to create your recipe</label>
-                        <input class="form-control" type="text" name="step" id="step"
-                            pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9.z\(\)\-]+)*$"
-                            title="Must start with an uppercase or lowercase word. Acceptable characters are -, ., and (). Cannot start with a space."
-                            required>
-                    </div>
-
-                    <!-- User Interaction Buttons for adding/removing input for steps -->
-
-                    <div class="text-center">
-                        <small class="form-text text-muted">Need to add or remove a row?</small>
-                        <button class="btn-add" id="add_step" type="button" title="Add step row">
-                            <i class="fas fa-plus-square"></i>
-                        </button>
-                        <button class="btn-remove" id="remove_step" type="button" title="Remove step row">
-                            <i class="fas fa-minus-square"></i>
-                        </button>
-                    </div>
-
-                    <div class="form-group" id="ingredient">
-                        <label for="ingredient_item">Provide the ingredients to create your recipe</label>
-                        <input class="form-control" type="text" name="ingredients" id="ingredient_item"
-                            pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9.z\(\)\-]+)*$"
-                            title="Must start with an uppercase or lowercase word. Acceptable characters are -, ., and (). Cannot start with a space."
-                            required>
-                    </div>
-
-                    <!-- User Interaction Buttons for adding/removing input for ingredients -->
-
-                    <div class="text-center">
-                        <small class="form-text text-muted">Need to add or remove a row?</small>
-                        <button class="btn-add" id="add_ingredient" type="button" title="Add ingredient row">
-                            <i class="fas fa-plus-square"></i>
-                        </button>
-                        <button class="btn-remove" id="remove_ingredient" type="button" title="Remove ingredient row">
-                            <i class="fas fa-minus-square"></i>
-                        </button>
-                    </div>
-
-                    <br>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-recipe submit-btn recipe-submit">Submit Your
-                            Recipe</button>
-                    </div>
-                </form>
+                </div>
             </div>
+
         </div>
     </div>
 </div>
+
 
 {% endblock %}
 

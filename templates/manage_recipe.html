@@ -5,196 +5,216 @@
 {% block mdescription %}Update and amend your uploaded recipe.{% endblock %}
 
 {% block main %}
-<div class="row no-gutters text-center">
-    <div class="col-12 p-3">
-        <h1>Update Recipe</h1>
-        <hr>
+<div class="container">
+    <div class="row no-gutters text-center">
+        <div class="col-12 p-3">
+            <h1>Update Recipe</h1>
+            <hr>
+            <div class="container">
+                <div class="row no-gutters">
+                    <div class="col-12 d-flex justify-content-center text-sm-center text-lg-left">
+                        <form action="{{url_for('update_recipe', recipe_id=recipe._id)}}" method="POST"
+                            id="manage-recipe">
+                            <div class="form-group">
+                                <label for="recipe_name"><strong>Recipe Name</strong></label>
+                                <input class="form-control" type="text" name="recipe_name" id="recipe_name"
+                                    value="{{recipe.recipe_name|title}}" minlength="3" maxlength="35"
+                                    pattern="^[a-zA-Z]+( [a-zA-Z]+)*$"
+                                    title="Only use uppercase and lowercase letters. Cannot start with a space."
+                                    required>
 
-        <div class="row no-gutters">
-            <div class="col-12 d-flex justify-content-center text-sm-center text-lg-left">
-                <form action="{{url_for('update_recipe', recipe_id=recipe._id)}}" method="POST" id="manage-recipe">
-                    <div class="form-group">
-                        <label for="recipe_name"><strong>Recipe Name</strong></label>
-                        <input class="form-control" type="text" name="recipe_name" id="recipe_name"
-                            value="{{recipe.recipe_name|title}}" minlength="3" maxlength="35"
-                            pattern="^[a-zA-Z]+( [a-zA-Z]+)*$" title="Only use uppercase and lowercase letters. Cannot start with a space."
-                            required>
+                                <!-- Message area for recipe name remaining characters -->
 
-                        <!-- Message area for recipe name remaining characters -->
+                                <div class="text-remaining text-left p-2">
+                                    <small class="recipe-name-count"><span class="recipe-count">35</span> characters
+                                        remaining</small>
+                                </div>
 
-                        <div class="text-remaining text-left p-2">
-                            <small class="recipe-name-count"><span class="recipe-count">35</span> characters
-                                remaining</small>
-                        </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="dish_type"><strong>What is the meal type?</strong></label>
+                                <select class="form-control" name="dish_type" id="dish_type" required>
+                                    <option value="" disabled hidden>Please choose a type</option>
+                                    <option value="Breakfast"
+                                        {% if recipe.recipe_course == 'Breakfast'%}selected{% endif %}>
+                                        Breakfast</option>
+                                    <option value="Brunch" {% if recipe.recipe_course == 'Brunch'%}selected{% endif %}>
+                                        Brunch
+                                    </option>
+                                    <option value="Lunch" {% if recipe.recipe_course == 'Lunch'%}selected{% endif %}>
+                                        Lunch
+                                    </option>
+                                    <option value="Dinner" {% if recipe.recipe_course == 'Dinner'%}selected{% endif %}>
+                                        Dinner
+                                    </option>
+                                    <option value="Dessert"
+                                        {% if recipe.recipe_course == 'Dessert'%}selected{% endif %}>Dessert
+                                    </option>
+                                    <option value="Snack" {% if recipe.recipe_course == 'Snack'%}selected{% endif %}>
+                                        Snack
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="description"><strong>Provide a short description of this
+                                        dish</strong></label>
+                                <textarea class="form-control" name="description" id="description" cols="30" rows="3"
+                                    minlength="15" maxlength="150" pattern="^[a-zA-Z]+( [a-zA-Z.\,\-]+)*$"
+                                    title="Must start with an uppercase or lowercase word. Acceptable characters are hyphens, commas, and periods. Cannot start with a space."
+                                    required>{{recipe.recipe_description}}</textarea>
 
+                                <!-- Message area for description remaining characters -->
+
+                                <div class="text-remaining text-left p-2">
+                                    <small class="recipe-description-count"><span class="description-count">150</span>
+                                        characters remaining</small>
+                                </div>
+                            </div>
+                            <div class="form-group d-none" id="current-image">
+                                <label for="recipe_image">Provide an image for this dish</label>
+                                <input class="form-control image-upload" type="file" name="recipe_image"
+                                    id="recipe_image" accept=".png, .jpg, .jpeg">
+                            </div>
+
+                            <!-- Message area for image upload validation -->
+
+                            <div class="p-2 text-center">
+                                <p><strong class="warning"></strong></p>
+                                <p><strong class="successful"></strong></p>
+                            </div>
+
+                            <!-- User Interaction Buttons for amending recipe image -->
+
+                            <div class="text-center mb-2">
+                                <small class="form-text text-muted" id="change-image-text">Do you want to change the
+                                    image?</small>
+
+                                <button class="btn btn-recipe" id="change" type="button" title="Change recipe image">
+                                    Upload New Image
+                                </button>
+
+                                <button class="btn btn-danger d-none" id="cancel-change" type="button"
+                                    title="Cancel recipe image change">
+                                    Cancel
+                                </button>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="preparation_time"><strong>How much preparation time is needed? Enter in
+                                        minutes</strong></label>
+                                <input class="form-control" type="number" name="preparation_time" id="preparation_time"
+                                    min="0" max="1800" value="{{recipe.prep_time}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cooking_time"><strong>How much cooking time does it need? Enter in
+                                        minutes</strong></label>
+                                <input class="form-control" type="number" name="cooking_time" id="cooking_time" min="0"
+                                    max="1800" value="{{recipe.cooking_time}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="effort"><strong>How complicated is this dish to make?</strong></label>
+                                <select class="form-control" name="effort" id="effort" required>
+                                    <option value="" disabled hidden>Please choose a difficulty</option>
+                                    <option value="easy" {% if recipe.effort == 'easy'%}selected{% endif %}>Easy
+                                    </option>
+                                    <option value="medium" {% if recipe.effort == 'medium'%}selected{% endif %}>Medium
+                                    </option>
+                                    <option value="hard" {% if recipe.effort == 'hard'%}selected{% endif %}>Hard
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="servings"><strong>How many servings will this make?</strong></label>
+                                <input class="form-control" type="number" name="servings" id="servings" min="0"
+                                    max="100" value="{{recipe.servings}}" required>
+                            </div>
+                            <div class="form-group" id="step_inputs">
+                                <label for="step"><strong>Provide the steps to create your Recipe</strong></label>
+                                {% for step in recipe.steps %}
+                                <input class="form-control {% if loop.index != 1 %}my-2{% endif %}" type="text"
+                                    name="step" {% if loop.index == 1 %}id="step" {% endif %} value="{{step}}"
+                                    pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9.z\(\)\-\,]+)*$"
+                                    title="Must start with an uppercase or lowercase word. Acceptable characters are hyphens, commas, periods, and brackets. Cannot start with a space."
+                                    required>
+                                {% endfor %}
+                            </div>
+
+                            <!-- User Interaction Buttons for adding/removing input for steps -->
+
+                            <div class="text-center">
+                                <small class="form-text text-muted">Need to add or remove a row?</small>
+                                <button class="btn-add" id="add_step" type="button" title="Add step row">
+                                    <i class="fas fa-plus-square"></i>
+                                </button>
+                                <button class="btn-remove" id="remove_step" type="button" title="Remove step row">
+                                    <i class="fas fa-minus-square"></i>
+                                </button>
+                            </div>
+                            <div class="form-group" id="ingredient">
+                                <label for="ingredient_item"><strong>Provide the ingredients to create your
+                                        Recipe</strong></label>
+                                {% for ingredient in recipe.ingredients %}
+                                <input class="form-control {% if loop.index != 1 %}my-2{% endif %}" type="text"
+                                    name="ingredients" {% if loop.index == 1 %}id="ingredient_item" {% endif %}
+                                    value="{{ingredient}}" pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9.z\(\)\-\,]+)*$"
+                                    title="Must start with an uppercase or lowercase word. Acceptable characters are hyphens, commas, periods, and brackets. Cannot start with a space."
+                                    required>
+                                {% endfor %}
+                            </div>
+
+                            <!-- User Interaction Buttons for adding/removing input for ingredients -->
+
+                            <div class="text-center">
+                                <small class="form-text text-muted">Need to add or remove a row?</small>
+                                <button class="btn-add" id="add_ingredient" type="button" title="Add ingredient row">
+                                    <i class="fas fa-plus-square"></i>
+                                </button>
+                                <button class="btn-remove" id="remove_ingredient" type="button"
+                                    title="Remove ingredient row">
+                                    <i class="fas fa-minus-square"></i>
+                                </button>
+                            </div>
+
+                            <br>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-recipe submit-btn"
+                                    title="Submit recipe updates">Update
+                                    Recipe</button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#delete-modal" title="Delete your recipe">Delete Recipe</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="dish_type"><strong>What is the meal type?</strong></label>
-                        <select class="form-control" name="dish_type" id="dish_type" required>
-                            <option value="" disabled hidden>Please choose a type</option>
-                            <option value="Breakfast" {% if recipe.recipe_course == 'Breakfast'%}selected{% endif %}>
-                                Breakfast</option>
-                            <option value="Brunch" {% if recipe.recipe_course == 'Brunch'%}selected{% endif %}>Brunch
-                            </option>
-                            <option value="Lunch" {% if recipe.recipe_course == 'Lunch'%}selected{% endif %}>Lunch
-                            </option>
-                            <option value="Dinner" {% if recipe.recipe_course == 'Dinner'%}selected{% endif %}>Dinner
-                            </option>
-                            <option value="Dessert" {% if recipe.recipe_course == 'Dessert'%}selected{% endif %}>Dessert
-                            </option>
-                            <option value="Snack" {% if recipe.recipe_course == 'Snack'%}selected{% endif %}>Snack
-                            </option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="description"><strong>Provide a short description of this dish</strong></label>
-                        <textarea class="form-control" name="description" id="description" cols="30" rows="3"
-                            minlength="15" maxlength="150" pattern="^[a-zA-Z]+( [a-zA-Z.]+)*$"
-                            title="Only use uppercase, lowercase letters and periods. Only use uppercase and lowercase letters. Name cannot start with a space." required></textarea>
-                            required>{{recipe.recipe_description}}</textarea>
-
-                        <!-- Message area for description remaining characters -->
-
-                        <div class="text-remaining text-left p-2">
-                            <small class="recipe-description-count"><span class="description-count">150</span>
-                                characters remaining</small>
-                        </div>
-                    </div>
-                    <div class="form-group d-none" id="current-image">
-                        <label for="recipe_image">Provide an image for this dish</label>
-                        <input class="form-control image-upload" type="file" name="recipe_image" id="recipe_image"
-                            accept=".png, .jpg, .jpeg">
-                    </div>
-
-                    <!-- Message area for image upload validation -->
-
-                    <div class="p-2 text-center">
-                        <p><strong class="warning"></strong></p>
-                        <p><strong class="successful"></strong></p>
-                    </div>
-
-                    <!-- User Interaction Buttons for amending recipe image -->
-
-                    <div class="text-center mb-2">
-                        <small class="form-text text-muted" id="change-image-text">Do you want to change the
-                            image?</small>
-
-                        <button class="btn btn-recipe" id="change" type="button" title="Change recipe image">
-                            Upload New Image
-                        </button>
-
-                        <button class="btn btn-danger d-none" id="cancel-change" type="button"
-                            title="Cancel recipe image change">
-                            Cancel
-                        </button>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="preparation_time"><strong>How much preparation time is needed? Enter in
-                                minutes</strong></label>
-                        <input class="form-control" type="number" name="preparation_time" id="preparation_time" min="0"
-                            max="1800" value="{{recipe.prep_time}}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cooking_time"><strong>How much cooking time does it need? Enter in
-                                minutes</strong></label>
-                        <input class="form-control" type="number" name="cooking_time" id="cooking_time" min="0"
-                            max="1800" value="{{recipe.cooking_time}}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="effort"><strong>How complicated is this dish to make?</strong></label>
-                        <select class="form-control" name="effort" id="effort" required>
-                            <option value="" disabled hidden>Please choose a difficulty</option>
-                            <option value="easy" {% if recipe.effort == 'easy'%}selected{% endif %}>Easy</option>
-                            <option value="medium" {% if recipe.effort == 'medium'%}selected{% endif %}>Medium</option>
-                            <option value="hard" {% if recipe.effort == 'hard'%}selected{% endif %}>Hard</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="servings"><strong>How many servings will this make?</strong></label>
-                        <input class="form-control" type="number" name="servings" id="servings" min="0" max="100"
-                            value="{{recipe.servings}}" required>
-                    </div>
-                    <div class="form-group" id="step_inputs">
-                        <label for="step"><strong>Provide the steps to create your Recipe</strong></label>
-                        {% for step in recipe.steps %}
-                        <input class="form-control {% if loop.index != 1 %}my-2{% endif %}" type="text" name="step"
-                            {% if loop.index == 1 %}id="step" {% endif %} value="{{step}}"
-                            pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9.z\(\)\-]+)*$"
-                            title="Must start with an uppercase or lowercase word. Acceptable characters are -, ., and (). Cannot start with a space."
-                            required>
-                        {% endfor %}
-                    </div>
-
-                    <!-- User Interaction Buttons for adding/removing input for steps -->
-
-                    <div class="text-center">
-                        <small class="form-text text-muted">Need to add or remove a row?</small>
-                        <button class="btn-add" id="add_step" type="button" title="Add step row">
-                            <i class="fas fa-plus-square"></i>
-                        </button>
-                        <button class="btn-remove" id="remove_step" type="button" title="Remove step row">
-                            <i class="fas fa-minus-square"></i>
-                        </button>
-                    </div>
-                    <div class="form-group" id="ingredient">
-                        <label for="ingredient_item"><strong>Provide the ingredients to create your
-                                Recipe</strong></label>
-                        {% for ingredient in recipe.ingredients %}
-                        <input class="form-control {% if loop.index != 1 %}my-2{% endif %}" type="text"
-                            name="ingredients" {% if loop.index == 1 %}id="ingredient_item" {% endif %}
-                            value="{{ingredient}}" pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9.z\(\)\-]+)*$"
-                            title="Must start with an uppercase or lowercase word. Acceptable characters are -, ., and (). Cannot start with a space."
-                            required>
-                        {% endfor %}
-                    </div>
-
-                    <!-- User Interaction Buttons for adding/removing input for ingredients -->
-
-                    <div class="text-center">
-                        <small class="form-text text-muted">Need to add or remove a row?</small>
-                        <button class="btn-add" id="add_ingredient" type="button" title="Add ingredient row">
-                            <i class="fas fa-plus-square"></i>
-                        </button>
-                        <button class="btn-remove" id="remove_ingredient" type="button" title="Remove ingredient row">
-                            <i class="fas fa-minus-square"></i>
-                        </button>
-                    </div>
-
-                    <br>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-recipe submit-btn" title="Submit recipe updates">Update
-                            Recipe</button>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal"
-                            title="Delete your recipe">Delete Recipe</button>
-                    </div>
-                </form>
+                </div>
             </div>
-        </div>
 
-        <!-- Delete Button Modal -->
 
-        <div class="modal" tabindex="-1" role="dialog" id="delete-modal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Confirm Delete</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to delete the recipe?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="{{url_for('delete_recipe', recipe_id=recipe._id)}}" class="btn btn-danger">Confirm</a>
-                        <button type="button" class="btn btn-recipe" data-dismiss="modal">Cancel</button>
+            <!-- Delete Button Modal -->
+
+            <div class="modal" tabindex="-1" role="dialog" id="delete-modal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Confirm Delete</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete the recipe?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{{url_for('delete_recipe', recipe_id=recipe._id)}}"
+                                class="btn btn-danger">Confirm</a>
+                            <button type="button" class="btn btn-recipe" data-dismiss="modal">Cancel</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 {% endblock %}
 
