@@ -11,6 +11,18 @@ All code used for Recipe Workshop was extensively tested through manual process 
 3. [**Manual Testing**](#manual-testing)
     - [**Responsive Design Testing**](#responsive-design-testing)
         - [**Overview**](#overview)
+            - [**Navbar**](#navbar)
+            - [**Landing Page**](#landing-page)
+            - [**Search Results Page**](#search-results-page)
+            - [**Recipe Page**](#recipe-page)
+            - [**Registration Page**](#registration-page)
+            - [**Login Page**](#login-page)
+            - [**Profile Page**](#profile-page)
+            - [**Add Recipe Page**](#add-recipe-page)
+            - [**Manage Recipe Page**](#manage-recipe-page)
+            - [**Privacy Policy Page**](#privacy-policy-page)
+            - [**404 Page**](#404-page)
+            - [**Advertise With Us Page**](#advertise-with-us-page)
 
 ## Code Validation
 
@@ -184,4 +196,106 @@ To ensure the website and content remains responsive, I tested the layout at eve
 The overall site was designed using the Bootstrap Framework to make use of their flex layout. In addition to this I used relative measurements in my styling where possible, rather than absolute measurements to allow the elements to adapt to screen size changes before a new media query would need to be introduced.
 
 ![Responsive Testing Summary Table](https://res.cloudinary.com/andy-osborne/image/upload/v1595945531/Recipe_Workshop/Responsive_Testing_n0u6x8.png)
+
+##### Navbar
+
+- I tested to ensure that the Navbar is correctly displayed at all times and the buttons within it responded and acted as intended.
+
+  - Bug Identified - **Navbar Covered Top of Each Pages Content*
+
+    - As the Navbar is fixed to the top of the page, this caused an issue where content was covered by it.
+
+  - Fix Applied:
+
+    - To give the page content some breathing room, I added ``padding-top: 80px;`` to the ``.content`` class which resolved the issue.
+
+##### Landing Page
+
+- I tested that all writing, buttons and images on the landing page remained readable by the user and it adapted accordingly to the device it was being viewed on.
+
+- Where the responsiveness of the website began to degrade, I created a media query to deal with any issues.
+
+- In order to ensure that the site retained cross-browser responsiveness, I used the online CSS [Autoprefixer](https://autoprefixer.github.io/).
+
+  - Bug Identified - **Search Bar Aligned to Left of Screen*
+
+    - At certain media sizes, the search bar aligned itself to the left of the search div which was unintended
+
+  - Fix Applied:
+
+    - In order to correct this issue I used the bootstrap class of ``justify-content-center``
+
+##### Search Results Page
+
+- I tested to ensure that the results shown in the search results page are displayed correctly to the user and that they kept a consistent flow between different media devices.
+
+- No issues were discovered.
+
+##### Recipe Page
+
+- I tested to ensure that the results shown in the search results page are displayed correctly to the user and that they kept a consistent flow between different media devices.
+
+  - Bug Identified - **Recipe Image Displayed Incorrectly on iPhone X*
+
+    - When viewing the recipe page through the emulator the recipe page behaved and looked as expected however; when viewing the page on an actual iPhone X the recipe image became distorted and squished. After researching the issue, I discovered that it is a known bug on how Safari stretches images.
+
+  - Fix Applied:
+
+    - To fix this issue, I applied ``height: 100% !important;`` to the ``.recipe-image`` class which fixed the issue and the image displayed as expected.
+
+##### Registration Page
+
+- I tested to ensure that the registration form, flash messages and background image are displayed correctly to the user and that they kept a consistent flow between different media devices.
+
+- After testing the registration page, a decision was made to remove the background image on smaller screen sizes as the user could either see a small portion of the image or none at all in order to provide a better user experience.
+
+##### Login Page
+
+- I tested to ensure that the login form, flash messages and background image are displayed correctly to the user and that they kept a consistent flow between different media devices.
+
+- The background image was removed on the same screen sizes as the registration page to ensure a consistent flow between the two pages.
+
+- No bugs were discovered.
+
+##### Profile Page
+
+- I tested to ensure that the buttons, profile image, profile text and recipe results are displayed correctly to the user and that they kept a consistent flow between different media devices.
+
+- I tested to ensure that the modal used for Account Management displayed correctly to the user and that the validation messages were clear.
+
+- No issues were discovered.
+
+##### Add Recipe Page
+
+- I tested to ensure that the form content displayed and adjusted appropriately to the user and the media screen size they were viewing the page on.
+
+- I tested to ensure that all validation messages remained clear to the user at all times.
+
+- I test to ensure the buttons used within the page were clear to the user and that it conveyed its purpose.
+
+- No issues were discovered.
+
+##### Manage Recipe Page
+
+- I tested to ensure that the form content displayed and adjusted appropriately to the user and the media screen size they were viewing the page on.
+
+- I tested to ensure that all validation messages remained clear to the user at all times.
+
+- I test to ensure the buttons used within the page were clear to the user and that it conveyed its purpose.
+
+- I tested to ensure that the modal used for confirming the deletion of the recipe displayed correctly to the user and appeared correctly on all media screen sizes.
+
+- No issues were discovered.
+
+##### Privacy Policy Page
+
+- I tested to ensure that the text  content displayed and adjusted appropriately to the user and the media screen size they were viewing the page on.
+
+##### 404 Page
+
+- I tested to ensure that the text content and image displayed and adjusted appropriately to the user and the media screen size they were viewing the page on.
+
+#### Advertise With Us Page
+
+- I tested to ensure that the text content and image displayed and adjusted appropriately to the user and the media screen size they were viewing the page on.
 
