@@ -443,24 +443,6 @@ form #news-email {
     border-bottom: 1px solid rgba(0, 0, 0, .125)
 }
 
-/* 404 Page */
-
-.error-outer {
-    height: 70vh;
-    overflow: hidden;
-    position: relative;
-}
-
-.error-image-inner {
-    background-image: url("/static/images/404.png");
-    height: 100vh;
-    width: 100vw;
-    background-repeat: no-repeat;
-    background-size: cover;
-    -webkit-transform: translate(0%, -18%);
-    -ms-transform: translate(0%, -18%);
-    transform: translate(0%, -18%);
-}
 
 /* Media Queries */
 
