@@ -2,11 +2,21 @@
 
 All code used for Recipe Workshop was extensively tested through manual process during every stage of development to ensure that it works as intended and any bugs found were fixed. The responsive design of the website was tested on various devices and browsers.
 
+## Table of Contents
+
+1. [**Code Validation**](#code-validation)
+
+2. [**Testing Against User Stories**](#testing-against-user-stories)
+
+3. [**Manual Testing**](#manual-testing)
+    - [**Responsive Design Testing**](#responsive-design-testing)
+        - [**Overview**](#overview)
+
 ## Code Validation
 
 All code written has been thoroughly validated and passed through the following online validators:
 
-- HTML - All code was run through the [W3C HTML Validator](https://validator.w3.org/) to ensure it was valid code and no errors were made.
+- HTML - All code was run through the [W3C HTML Validator](https://validator.w3.org/) to ensure it was valid code and no errors were made. I used the [Web Developer](https://chrispederick.com/work/web-developer/) plugin for the chrome browser to pass the local HTML into the W3C validator on every page of the website.
 
 - CSS - All styling was run through the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) to ensure it was valid and no errors were made.
 
@@ -117,3 +127,61 @@ The below goes through of of the user stores listed in the UX section of the [RE
     - When the user updates their profile information to include a short description and profile picture, the information is stored in their user document within the database and the profile image is stored in Cloudinary.
 
     - If the user does not update their profile information then a default profile description and image is used.
+
+## Manual Testing
+
+I have detailed the manual testing undertaken during the development stage to ensure that all aspects of the game work as intended.
+
+### Responsive Design Testing
+
+During every stage of development, I used a variety of tools to test out the layout of the website to ensure that it remained responsive at various screen sizes, that the website retained the correct look, and all elements were displayed correctly and readable by the user.
+
+For testing the various media screen sizes, I used the built-in options that were available through the Chrome browser as well using the [Responsive Test Tool Website](http://responsivetesttool.com/) as this gave access to a wider range of screen and device sizes.
+
+All tests were performed on the following browsers:
+
+- Google Chrome
+- Opera
+- Microsoft Edge
+- Mozilla Firefox
+- Safari
+
+All testing was performed at the following screen sizes:
+
+- Mobile Phones/ Small Devices (Portrait and Landscape) - All available through Chrome and Firefox Dev Tools.
+  - Additional Emulated Devices - Nexus 7, iPod Touch, Galaxy Note 3, Nexus 6P, LG G5
+  - Physical Devices - iPhone X and Samsung S9
+
+- Tablet Devices (Portrait and Landscape) - All available through Chrome and Firefox Dev Tools.
+  - Additional Emulated Devices - Samsung Galaxy Tab 2, iPad Pro 9.7, iPad Pro 9.7, iPad mini, HTC Nexus 9
+  - Physical Devices - iPad Air
+
+- Laptop/Desktop Devices (Portrait and Landscape).
+  - Emulated Screen Sizes - 1024 x 600, 1280 x 800, 1366 x 768, 1440 x 900, 1680 x 1050, 1920 x 1080
+  - Physical Devices - 18" Laptop, 22" Monitor, 14" laptop
+
+Each test was performed using the following table:
+
+| Action                |No User Logged In   |User Logged In    |
+|---|---|---|
+|Landing Page           |Result - Any issues|Result - Any issues|
+|Search Results Page    |Result - Any issues|Result - Any issues|
+|Recipe Page            |Result - Any issues|Result - Any issues|
+|Register Page          |Result - Any issues|Result - Any issues|
+|Log In Page            |Result - Any issues|Result - Any issues|
+|Profile Page - Own     |Result - Any issues|N/A                |
+|Profile Page - Other   |Result - Any issues|N/A                |
+|Add Recipe             |Result - Any issues|Result - Any issues|
+|Manage Recipe          |Result - Any issues|Result - Any issues|
+|Privacy Policy         |Result - Any issues|Result - Any issues|
+
+#### Overview
+
+This website was intended to be responsive across all media devices such as mobile phones, tablets and desktops/laptops as the primary purpose of the website is to enable users to view and create recipes that others can see and users will want to be able to take their chosen media device with them to their kitchen.
+
+To ensure the website and content remains responsive, I tested the layout at every stage of development on the various screen sizes and devices listed in the previous section. If the content did not display as intended, I corrected the styling of the elements and added Media Queries so that the design will adjust to device being viewed.
+
+The overall site was designed using the Bootstrap Framework to make use of their flex layout. In addition to this I used relative measurements in my styling where possible, rather than absolute measurements to allow the elements to adapt to screen size changes before a new media query would need to be introduced.
+
+![Responsive Testing Summary Table](https://res.cloudinary.com/andy-osborne/image/upload/v1595945531/Recipe_Workshop/Responsive_Testing_n0u6x8.png)
+
