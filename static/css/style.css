@@ -230,7 +230,7 @@ button:focus {
 }
 
 .home-image-inner {
-    background-image: url("/static/images/herbs.png");
+    background-image: url("https://res.cloudinary.com/andy-osborne/image/upload/v1595951802/Recipe_Workshop/website%20images/herbs_vqvr76.jpg");
     height: 100vh;
     width: 100vw;
     background-repeat: no-repeat;
@@ -397,11 +397,11 @@ form #news-email {
 /* Registration/Login Pages */
 
 .login-image {
-    background-image: url("/static/images/board.png");
+    background-image: url("https://res.cloudinary.com/andy-osborne/image/upload/v1595951802/Recipe_Workshop/website%20images/board_ubuzf1.jpg");
 }
 
 .register-image {
-    background-image: url("/static/images/asparagus.jpg");
+    background-image: url("https://res.cloudinary.com/andy-osborne/image/upload/v1595951802/Recipe_Workshop/website%20images/asparagus_kdu1yd.jpg");
 }
 
 .b-reg-image,
