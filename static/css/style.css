@@ -905,6 +905,11 @@ form #news-email {
         max-height: 35vh;
     }
 
+    .b-reg-image,
+    .b-login-image {
+        height: 100vh;
+    }
+
 }
 
 @media only screen and (min-width: 1100px) and (orientation: landscape) {
