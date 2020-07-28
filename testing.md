@@ -24,6 +24,15 @@ All code used for Recipe Workshop was extensively tested through manual process 
             - [**404 Page**](#404-page)
             - [**Advertise With Us Page**](#advertise-with-us-page)
 
+    - [**Functionality Testing**](#functionality-testing)
+        - [**Base Template**](#base-template)
+            - [**Breakdown of Jinja Functionality in ``public_base.html``**](#breakdown-of-jinja-functionality-in-public_base.html)
+            - [**Base Template - Breakdown of Views Used`**](#base-template---breakdown-of-views-used)
+        - [**Landing Page Template**](#base-template)
+            - [**Breakdown of Jinja Functionality in ``public_base.html``**](#breakdown-of-jinja-functionality-in-index.html)
+            - [**Breakdown of jQuery Functionality in ``public_base.html``**](#breakdown-of-jquery-functionality-in-index.html)
+            - [**Landing Page Template - Breakdown of Views Used`**](#landing-page---breakdown-of-views-used)
+
 ## Code Validation
 
 All code written has been thoroughly validated and passed through the following online validators:
@@ -299,3 +308,197 @@ The overall site was designed using the Bootstrap Framework to make use of their
 
 - I tested to ensure that the text content and image displayed and adjusted appropriately to the user and the media screen size they were viewing the page on.
 
+### Functionality Testing
+
+#### Base Template
+
+I performed various tests to ensure that the conditional statements used within the base template are working as intended.
+
+I manually tested every link works as intended and directs the user to the relevant page.
+
+##### Breakdown of Jinja functionality in ``public_base.html``
+
+- Conditional Navbar Options
+
+  - Within the base template, there are three conditional statements used to show a user various options:
+
+    - A user who is not logged in should only be able to see the additional options for ``Register`` and ``Login``.
+
+      - I tested that this conditional statement works by logging out of a user account and verifying that the options presented in the navbar are correct.
+
+      - In addition, I logged into an account and tested that a signed in user will not see the options for registering and logging into an account.
+
+      - No issues were found with this functionality.
+
+    - A user who is logged in should be able to see the additional options for ``Add Recipe``, ``Profile`` and ``Logout``.
+
+      - I tested that this conditional statement works as intended by logging into an account and verifying that the options shown are as expected.
+
+      - In addition, I logged out of the account to clear the user session and verified that these options are not shown to a user who is not logged into an account.
+
+      - No issues were found with this functionality.
+
+    - The search option should not be shown to a user when they are on the landing page.
+
+      - I tested this by navigating to the landing page and checking to see if the search bar is shown in the Navbar. The search bar did not appear as the expected.
+
+      - I tested that the search bar will show in the Navbar when the user is on any other page other than the landing page.
+
+      - These tests were performed as a user who is logged into an account and a user who is not logged into an account to ensure there is consistency in the expected results.
+
+      - No issues were found with this functionality.
+
+- Conditional ``active-page`` Class
+
+  - Within the base template navbar links, there are conditional statements in each of the links classes. This essentially assigns the ``active-page`` class to a link if that is the page that the user is on.
+
+  - I manually tested that this works as intended on every page of the website.
+
+  - Note: The active class does not get applied to the profile link when a user is visiting someone elses profile. This is an intended design choice and not a bug.
+
+  - No bugs were discovered with this functionality.
+
+- Search Bar Functionality
+
+  - I manually tested that the search bar functionality works as intended.
+
+  - No bugs were discovered with this functionality.
+
+##### Base Template - Breakdown of Views Used
+
+Associated View - Route: ``/search`` Function: ``get_search()``
+
+Breakdown of ``get_search()`` functionality:
+
+- This takes the input from the search form and then redirects the user to the search results page view by passing in the forms input value as a variable argument:
+
+    ```Python
+    search_term=request.form.get("search_field")
+    ```
+
+- No issues were discovered with the functionality of this view
+
+#### Landing Page Template
+
+I performed various tests to ensure that the conditional statements used within the index.html template are working as intended and that all associated ``views`` and ``jQuery`` functionalities work.
+
+I manually tested every link works as intended and directs the user to the relevant page.
+
+##### Breakdown of Jinja functionality in ``index.html``
+
+- Highest Rated Recipe
+
+  - I verified that the information displayed under the ``Top Rated Recipe`` and the information inputted through the use of ``for`` loop is that of the recipe which has received the most likes.
+
+  - This was done by manually changing the rating of a recipe to allow me to know which recipe details should be displayed.
+
+  - No issues were discovered.
+
+- Most Recent Recipes
+
+  - I verified that the information displayed under the ``Most Recent Recipes`` and their respective Recipe Names and images are recorded against the correct item.
+
+  - This was done by manually checking each recipe individually to ensure that the right name was against the right picture and that when clicking on one of these recipes that it redirected the user to the right recipe.
+
+  - No issues were discovered.
+
+- Newsletter Banner
+
+  - The newsletter banner section uses three conditional statements that checks:
+  
+    - If there is no user in session, then it displays the newsletter banner.
+
+    - If there is a user in session but it's not in the ``signups`` variable that gets passed through from the view then it shows the newsletter banner.
+
+    - If the session username is in the ``signups`` variable then it does not show the banner.
+
+  - I manually checked each conditional statement by doing the following:
+
+    - I tested the first condition by visiting the landing page and not being signed into an account. The newsletter banner was visible. I then inputted an email and submitted the form and moved to a different page and back again to see if the banner still showed.
+
+      - No issues were discovered under this condition as the banner remained visible as no user was in session.
+
+    - I tested the second and third condition by logging in and visiting the landing page as this meant a user was now in session. The newsletter banner was visible. I then inputted an email and submitted the form and moved to a different page and back again to see if the banner still showed.
+
+      - No issues were discovered under this condition as the banner was visible on first visit and then no longer visible on subsequent visits.
+
+##### Breakdown of jQuery functionality in ``index.html``
+
+- Newsletter AJAX Function
+
+  - I verified that when a user enters their email and presses the submit button that the following happens:
+
+    - The form is validated first to ensure it meets requirements setout in the HTML form type - i.e. it must be an email that matches the designated pattern. If the form is validated, then it can proceed to the next step otherwise the standard HTML validation message is shown.
+
+    - The form request is received by the backend and processed.
+
+    - The banner title div and newsletter form is hidden.
+
+    - A response message is displayed to the user.
+
+  - No issues were discovered with the functionality of sending the information to the backend & server however; an unintended bug was discovered before the message could be shown.
+
+  - Bug Identified - **Page Refreshes on submit*
+
+    - When the user submits the form, the default function of the form is to refresh the page which prevents the user from seeing the response message.
+
+  - Fix Applied:
+
+    - In order to correct this issue I used ``event.preventDefault();`` to stop the default function of the form and allow the message to be shown to the user.
+
+##### Landing Page - Breakdown of Views Used
+
+Associated View - Route: ``/`` Function: ``index()``
+
+Breakdown of ``index()`` functionality:
+
+- Highest Rated Recipe Query
+  
+  - I verified that this function works as intended and gets the recipe from the recipe collection that has the most amount of likes by liking various recipes to ensure that 1 recipe had more likes than another recipe. The results of this query is assigned to a Jinja variable and passed into the template as a ``list``.
+
+- Recent Recipes Query
+
+  - I verified that the 8 most recently added recipes to the recipe collection are displayed to users on the landing page and are shown in descending order which starts with the most recently added recipe. The results of this query is assigned to a Jinja variable and passed into the template as a ``list``.
+
+  - **Bug Discovered** - Recipes Not shown in Order
+
+    - This function was displaying the 8 recently added recipes however; if more than 8 recipes were added on the same day then the results shown were not correct as to the 8 **most** recently added recipes.
+
+  - **Fix Applied**
+
+    - This bug was caused by using ``datetime.date`` within the recipe submission field as it was very general. The fix applied was to use ``datetime.now()`` so the date entered against the recipe was much more specific and allowed the correct sorting and retrieving of the most recently added recipes.
+
+- Newsletter Sign Up Query
+
+  - I verified that the newsletter query and conditional statement worked as intended and successful checks to see where the session user has previously signed up for the newsletter.
+
+    - **Bug Discovered** - NoneType Error Returned
+
+      - An error was raised when searching the newsletter collection for either a username that was not in the collection or when there was no user logged into session as this meant that there was no username.
+
+    - **Fix Applied**
+
+      - In order to fix this bug, I created the below conditional statement that first checks to see if there is a username in session and if there is a username then it will run a check in the newsletter collection. If the value of ``newsletter_check`` is ``None`` then it assigns the variable ``signups`` and empty string, else if there is a value in ``newsletter_check`` variable then that username is assigned to the ``signups`` variable. The value of this  variable is then passed into the Jinja template.
+
+      ```Python
+          if "username" in session:
+            newsletter_check = newsletter.find_one({
+              "username": session["username"]})
+
+          if newsletter_check is None:
+              signups = ""
+          else:
+              signups = session["username"]
+        ```
+
+- Associated View - Route: ``/search`` Function: ``get_search()``
+
+- Breakdown of ``get_search()`` functionality:
+
+  - This takes the input from the search form and then redirects the user to the search results page view by passing in the forms input value as a variable argument:
+
+    ```Python
+    search_term=request.form.get("search_field")
+    ```
+
+- No issues were discovered with the functionality of this view
