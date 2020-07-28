@@ -25,18 +25,27 @@ All code used for Recipe Workshop was extensively tested through manual process 
             - [**Advertise With Us Page**](#advertise-with-us-page)
 
     - [**Functionality Testing**](#functionality-testing)
+
         - [**Base Template**](#base-template)
             - [**Breakdown of Jinja Functionality in public_base.html**](#breakdown-of-jinja-functionality-in-public_base.html)
             - [**Breakdown of jQuery Functionality in public_base.html**](#breakdown-of-jquery-functionality-in-public_base.html)
             - [**Base Template - Breakdown of Views Used**](#base-template---breakdown-of-views-used)
+
         - [**Landing Page Template**](#base-template)
             - [**Breakdown of Jinja Functionality in index.html**](#breakdown-of-jinja-functionality-in-index.html)
             - [**Breakdown of jQuery Functionality in index.html**](#breakdown-of-jquery-functionality-in-index.html)
             - [**Landing Page Template - Breakdown of Views Used**](#landing-page---breakdown-of-views-used)
+
         - [**Register Page Template**](#register-template)
             - [**Breakdown of Jinja Functionality in register.html**](#breakdown-of-jinja-functionality-in-register.html)
             - [**Register Page Template - Breakdown of Views Used`**](#register-page---breakdown-of-views-used)
 
+        - [**Login Page Template**](#login-template)
+            - [**Breakdown of Jinja Functionality in login.html**](#breakdown-of-jinja-functionality-in-login.html)
+            - [**Login Page Template - Breakdown of Views Used`**](#login-page---breakdown-of-views-used)
+
+        - [**Logout Functionality**](#logout-functionality)
+            - [**Logout Functionality- Breakdown of Views Used`**](#logout-functionality---breakdown-of-views-used)
 
 
 ## Code Validation
@@ -614,3 +623,97 @@ Breakdown of ``user_registration()`` functionality:
       - On successful registration, the username was placed in the session cookie and redirected to the profile page.
 
       - No issues were discovered in this functionality.
+
+- Salting and Hashing of Password
+
+  - All passwords submitted are salted and hashed through the use of the ``passlib`` library. I verified that any passwords that have been submitted to the database are hashed.
+
+  - No issues were discovered with this functionality.
+
+#### Login Page Template
+
+I performed various tests to ensure that the functionality of the login template works as intended, messages flash to the user and that the validation is completed.
+
+I manually tested the link for the register page works and directs the user to the relevant page.
+
+##### Breakdown of Jinja functionality in ``login.html``
+
+For the login page templating, I used ``flask_wtf`` and it's import ``Flaskform``
+
+- Validation messages
+
+  - I verified that the correct validation messages are shown to the user based on the response from either the forms validation itself or the flash messages sent from the backend.
+
+  - This was done by manually inputting information into each field as follows:
+
+    - Email that was not in the database:
+
+      - The form returned the expected flash message of "Incorrect e-mail/password combination.".
+
+    - I inputted an email that was in the database and an incorrect password.
+
+      - The form returned the expected flash message of "Incorrect e-mail/password combination." and would not log me in.
+
+    - I inputted an email that was in the database and the correct password.
+
+      - The form information was accepted and redirected me to my profile page.
+
+  - No issues were discovered.
+
+##### Login Page - Breakdown of Views Used
+
+Associated View - Route: ``/login`` Function: ``login()``
+
+Breakdown of ``login()`` functionality:
+
+- Checking if user is in session
+  
+  - When a user a loads the page, a conditional statement is run which checks to see whether a user is in session. The result of the conditional statement is saved in a variable.
+
+    - If a user is in session then their session username is saved to the ``username`` variable.
+
+    - If no user is in session then an empty string is saved in the ``username`` variable.
+
+    - If the variable does not contain an empty string, it means a user is logged into a session and then it redirects the user to their profile page as they do not need to access the login page.
+
+      - I verified that this works as intended by logging into a user account and trying to access the login page by entering in the url for it. I was redirected to the profile page of the user in session.
+
+      - I tested the functionality again by logging out the account and accessing the login page. It allowed me to view the page as intended.
+
+      - No issues were discovered in this functionality.
+
+- Validating the form on ``POST``:
+
+  - The ``UserLogin()`` class is instantiated prior to the stage of validating the form data. Once the form information has been received, the ``form.validate_on_submit()`` is run alongside it which is part of ``Flask-WTF``.
+
+  - If the information submitted is validated, a query is run on the user collection in the database to try and find a match for the submitted email.
+
+  - If the user is found, then it uses the ``passlib`` library to verify the password inputted against the password stored in the database.
+
+  - I verified that the conditional statement works as intended by doing the following:
+
+    - I inputted an email that was not in the database, an email with the incorrect password, and an email with the correct password.
+
+      - On each of the scenarios the correct response message was flashed in the form template.
+
+      - On successful login, the username was placed in the session cookie and redirected to the profile page.
+
+      - No issues were discovered in this functionality.
+
+#### Logout Functionality
+
+I tested that when the user clicks on the logout button, clears the session cookie and logs out the user.
+
+##### Logout Functionality - Breakdown of Views Used
+
+Associated View - Route: ``/logout`` Function: ``logout()``
+
+Breakdown of ``login()`` functionality:
+
+- Logs user out of session
+
+  - When a user accesses this view, the ``session.clear()`` function is run and clears the session cookie.
+
+  - I validated that this function works by logging into a user account and then accessing the view.
+
+  - No issues were discovered in this functionality.
