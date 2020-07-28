@@ -567,6 +567,13 @@ def update_account():
 def privacy():
     return render_template("privacy.html")
 
+# Advertise With Us Page
+
+
+@app.route("/advertise")
+def advertise():
+    return render_template("advertise.html")
+
 # Newsletter Sign Up Logic
 
 
