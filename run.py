@@ -337,6 +337,12 @@ def like(recipe_id):
 
 @app.route('/register', methods=["GET", "POST"])
 def user_registration():
+
+    username = session["username"] if "username" in session else ""
+
+    if username != "":
+        return redirect(url_for("profile", username=username))
+
     form = UserRegistration()
 
     if request.method == "POST" and form.validate_on_submit():
@@ -382,6 +388,11 @@ def user_registration():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     form = UserLogin()
+
+    username = session["username"] if "username" in session else ""
+
+    if username != "":
+        return redirect(url_for("profile", username=username))
 
     if request.method == "POST" and form.validate_on_submit():
 
