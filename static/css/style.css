@@ -359,7 +359,7 @@ form #news-email {
 /* Recipe Page */
 
 .recipe-image {
-    width: 250px;
+    width: 100%;
     padding: 0.5rem;
 }
 
