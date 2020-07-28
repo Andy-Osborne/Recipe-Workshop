@@ -26,12 +26,18 @@ All code used for Recipe Workshop was extensively tested through manual process 
 
     - [**Functionality Testing**](#functionality-testing)
         - [**Base Template**](#base-template)
-            - [**Breakdown of Jinja Functionality in ``public_base.html``**](#breakdown-of-jinja-functionality-in-public_base.html)
-            - [**Base Template - Breakdown of Views Used`**](#base-template---breakdown-of-views-used)
+            - [**Breakdown of Jinja Functionality in public_base.html**](#breakdown-of-jinja-functionality-in-public_base.html)
+            - [**Breakdown of jQuery Functionality in public_base.html**](#breakdown-of-jquery-functionality-in-public_base.html)
+            - [**Base Template - Breakdown of Views Used**](#base-template---breakdown-of-views-used)
         - [**Landing Page Template**](#base-template)
-            - [**Breakdown of Jinja Functionality in ``public_base.html``**](#breakdown-of-jinja-functionality-in-index.html)
-            - [**Breakdown of jQuery Functionality in ``public_base.html``**](#breakdown-of-jquery-functionality-in-index.html)
-            - [**Landing Page Template - Breakdown of Views Used`**](#landing-page---breakdown-of-views-used)
+            - [**Breakdown of Jinja Functionality in index.html**](#breakdown-of-jinja-functionality-in-index.html)
+            - [**Breakdown of jQuery Functionality in index.html**](#breakdown-of-jquery-functionality-in-index.html)
+            - [**Landing Page Template - Breakdown of Views Used**](#landing-page---breakdown-of-views-used)
+        - [**Register Page Template**](#register-template)
+            - [**Breakdown of Jinja Functionality in register.html**](#breakdown-of-jinja-functionality-in-register.html)
+            - [**Register Page Template - Breakdown of Views Used`**](#register-page---breakdown-of-views-used)
+
+
 
 ## Code Validation
 
@@ -364,6 +370,14 @@ I manually tested every link works as intended and directs the user to the relev
 
   - No bugs were discovered with this functionality.
 
+##### Breakdown of jQuery functionality in ``public_base.html``
+
+- Adding and Remove ``.btn-zoom``
+
+  - I verified that the jQuery functionality of adding and removing the ``.btn-zoom`` to navbar menu buttons when the mouse hovers over it and removes it once the mouse leaves.
+
+  - No issues were discovered with this functionality.
+
 ##### Base Template - Breakdown of Views Used
 
 Associated View - Route: ``/search`` Function: ``get_search()``
@@ -446,6 +460,14 @@ I manually tested every link works as intended and directs the user to the relev
 
     - In order to correct this issue I used ``event.preventDefault();`` to stop the default function of the form and allow the message to be shown to the user.
 
+- Adding and Remove ``.image-zoom-class``
+
+  - I verified that the jQuery functionality of adding and removing the ``.image-zoom-class`` to recent images on the landing page worked as intended.
+
+  - This was done by moving the over each image to ensure that it zooms in and once the mouse leaves the image, the class is removed so the image reverts back to its default position.
+
+  - No issues were discovered with this functionality.
+
 ##### Landing Page - Breakdown of Views Used
 
 Associated View - Route: ``/`` Function: ``index()``
@@ -502,3 +524,93 @@ Breakdown of ``index()`` functionality:
     ```
 
 - No issues were discovered with the functionality of this view
+
+#### Register Page Template
+
+I performed various tests to ensure that the functionality of the register template works as intended, messages flash to the user and that the validation is completed.
+
+I manually tested the link for the login page works and directs the user to the relevant page.
+
+##### Breakdown of Jinja functionality in ``register.html``
+
+For the registration page templating, I used ``flask_wtf`` and it's import ``Flaskform``
+
+- Validation messages
+
+  - I verified that the correct validation messages are shown to the user based on the response from either the forms validation itself or the flash messages sent from the backend.
+
+  - This was done by manually inputting information into each field and inputting the wrong information. For instance:
+
+    - For the username field:
+
+      - I inputted special characters and whitespace to see if the form would be accepted.
+
+        - The form returned the expected flash message of "Please use only lowercase, uppercase, or numbers" and would not submit the form.
+
+      - I inputted a username that was already in the database which should raise a error message and not submit.
+
+        - The form returned the expected flash message of "Username already taken. Choose a different username." and would not submit the form.
+
+      - I inputted a username that was less than 3 characters in length and one that was more than 20 characters in length which should each raise an error message and not submit.
+
+        - The form returned the expected flash message on each occasion of "Field must be between 3 and 20 characters long." and would not submit the form.
+
+    - For the email field:
+
+      - I inputted a string of text that was not an email format.
+
+        - The form returned the expected flash message of "Invalid email address.`" and would not submit the form.
+
+      - I inputted an email that was already in the database which should raise a error message and not submit.
+
+        - The form returned the expected flash message of "Email already in use. Please use login." and would not submit the form.
+
+    - For the Password and Password Confirmation field:
+
+      - I inputted a password that did not match to see if the form would be accepted.
+
+        - The form returned the expected flash message of "Field must be equal to password." and would not submit the form.
+
+      - I inputted a password that was below the minimum length of 8 characters which should raise a error message and not submit.
+
+        - The form returned the expected flash message of "Field must be at least 8 characters long." and would not submit the form.
+
+  - No issues were discovered.
+
+##### Register Page - Breakdown of Views Used
+
+Associated View - Route: ``/register`` Function: ``user_registration()``
+
+Breakdown of ``user_registration()`` functionality:
+
+- Checking if user is in session
+  
+  - When a user a loads the page, a conditional statement is run which checks to see whether a user is in session. The result of the conditional statement is saved in a variable.
+
+    - If a user is in session then their session username is saved to the ``username`` variable.
+
+    - If no user is in session then an empty string is saved in the ``username`` variable.
+
+    - If the variable does not contain an empty string, it means a user is logged into a session and then it redirects the user to their profile page as they do not need to access the registration page.
+
+      - I verified that this works as intended by logging into a user account and trying to access the registration page by entering in the url for it. I was redirected to the profile page of the user in session.
+
+      - I tested the functionality again by logging out the account and accessing the registration page. It allowed me to view the page as intended.
+
+      - No issues were discovered in this functionality.
+
+- Validating the form on ``POST``:
+
+  - The ``UserRegistration()`` class is instantiated prior to the stage of validating the form data. Once the form information has been received, the ``form.validate_on_submit()`` is run alongside it which is part of ``Flask-WTF``.
+
+  - If the information submitted is validated, two queries on the database are run to count the amount of times the submitted username and email address appear in the user collection. This information is then used in a conditional statement.
+
+  - I verified that the conditional statement works as intended by doing the following:
+
+    - I inputted form data that contained a username that was already database, an email that was already in the database, and a unique username and email.
+
+      - On each of the scenarios the correct response message was flashed in the form template.
+
+      - On successful registration, the username was placed in the session cookie and redirected to the profile page.
+
+      - No issues were discovered in this functionality.
