@@ -138,6 +138,11 @@ def get_recipe(recipe_id, recipe_name):
 @app.route("/create_recipe", methods=["GET", "POST"])
 def add_recipe():
 
+    username = session["username"] if "username" in session else ""
+
+    if username == "":
+        return redirect("/login")
+
     if request.method == "POST":
         req = request.form
         reqf = request.files
@@ -196,10 +201,7 @@ def manage_recipe(recipe_id):
 
     # Prevents user who is not recipe owner from editing recipe
 
-    if "username" in session:
-        username = session["username"]
-    else:
-        username = ""
+    username = session["username"] if "username" in session else ""
 
     if username != edit_recipe["recipe_author"]:
         return redirect("/")
@@ -283,10 +285,7 @@ def delete_recipe(recipe_id):
 
     # Prevents user who is not recipe owner from deleting recipe
 
-    if "username" in session:
-        username = session["username"]
-    else:
-        username = ""
+    username = session["username"] if "username" in session else ""
 
     if username != recipe_check["recipe_author"]:
         return redirect("/")
@@ -448,10 +447,7 @@ def update_profile(username):
 
     # Prevents user who is not profile owner from updating it
 
-    if "username" in session:
-        username = session["username"]
-    else:
-        username = ""
+    username = session["username"] if "username" in session else ""
 
     if username != user_profile["username"]:
         return redirect("/")
@@ -571,10 +567,7 @@ def newsletter_register():
 
     # Checks to see if a username is in session then assigns to variable
 
-    if "username" in session:
-        username = session["username"]
-    else:
-        username = ""
+    username = session["username"] if "username" in session else ""
 
     # Checks to see if email is already in newsletter collection
 
