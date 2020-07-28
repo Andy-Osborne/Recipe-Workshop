@@ -693,7 +693,6 @@ updating form.
 
 
 def upload_image(vairable, folder_string):
-    global uploaded_image
     global image_url
     global image_id
     uploaded_image = cloud.upload(vairable, width=500, height=500,
@@ -752,4 +751,4 @@ def password_update(user_id, new_password):
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=os.environ.get('PORT'),
-            debug=True)
+            debug=False)
