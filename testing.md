@@ -47,6 +47,17 @@ All code used for Recipe Workshop was extensively tested through manual process 
         - [**Logout Functionality**](#logout-functionality)
             - [**Logout Functionality- Breakdown of Views Used`**](#logout-functionality---breakdown-of-views-used)
 
+        - [**Profile Page Template**](#profile-template)
+            - [**Breakdown of Jinja Functionality in profile.html**](#breakdown-of-jinja-functionality-in-profile.html)
+            - [**Breakdown of jQuery Functionality in profile.html**](#breakdown-of-jquery-functionality-in-profile.html)
+            - [**Profile Page Template - Breakdown of Views Used`**](#profile-page---breakdown-of-views-used)
+
+        - [**Helper Functions**](#helper-functions)
+            - [**Image Upload**](#image-upload)
+            - [**No Change In Account Information**](#no-change-in-account-information)
+            - [*New Password Checker**](#new-password-checker)
+            - [*Email Updater**](#email-updater)
+            - [*Password Updater**](#password-updater)
 
 ## Code Validation
 
@@ -389,7 +400,7 @@ I manually tested every link works as intended and directs the user to the relev
 
 ##### Base Template - Breakdown of Views Used
 
-Associated View - Route: ``/search`` Function: ``get_search()``
+**Associated View - Route: ``/search`` Function: ``get_search()``**
 
 Breakdown of ``get_search()`` functionality:
 
@@ -479,7 +490,7 @@ I manually tested every link works as intended and directs the user to the relev
 
 ##### Landing Page - Breakdown of Views Used
 
-Associated View - Route: ``/`` Function: ``index()``
+**Associated View - Route: ``/`` Function: ``index()``**
 
 Breakdown of ``index()`` functionality:
 
@@ -522,7 +533,7 @@ Breakdown of ``index()`` functionality:
               signups = session["username"]
         ```
 
-- Associated View - Route: ``/search`` Function: ``get_search()``
+**Associated View - Route: ``/search`` Function: ``get_search()``**
 
 - Breakdown of ``get_search()`` functionality:
 
@@ -588,7 +599,7 @@ For the registration page templating, I used ``flask_wtf`` and it's import ``Fla
 
 ##### Register Page - Breakdown of Views Used
 
-Associated View - Route: ``/register`` Function: ``user_registration()``
+**Associated View - Route: ``/register`` Function: ``user_registration()``**
 
 Breakdown of ``user_registration()`` functionality:
 
@@ -662,7 +673,7 @@ For the login page templating, I used ``flask_wtf`` and it's import ``Flaskform`
 
 ##### Login Page - Breakdown of Views Used
 
-Associated View - Route: ``/login`` Function: ``login()``
+**Associated View - Route: ``/login`` Function: ``login()``**
 
 Breakdown of ``login()`` functionality:
 
@@ -706,7 +717,7 @@ I tested that when the user clicks on the logout button, clears the session cook
 
 ##### Logout Functionality - Breakdown of Views Used
 
-Associated View - Route: ``/logout`` Function: ``logout()``
+**Associated View - Route: ``/logout`` Function: ``logout()``**
 
 Breakdown of ``login()`` functionality:
 
@@ -717,3 +728,261 @@ Breakdown of ``login()`` functionality:
   - I validated that this function works by logging into a user account and then accessing the view.
 
   - No issues were discovered in this functionality.
+
+#### Profile Page Template
+
+I performed various tests to ensure that the conditional statements used within the profile.html template are working as intended, all modals appear correctly and that all associated ``views`` and ``jQuery`` functionalities work.
+
+I manually tested every link works as intended and directs the user to the relevant page.
+
+##### Breakdown of Jinja functionality in ``profile.html``
+
+- Conditional Check - Profile Visitor
+
+  - The conditional statements used within the profile.html that checks whether the visitor of the page is the profile owner or a visitor. The following is what is expected to show based on each condition (profile owner or visitor):
+
+    - If the person viewing the page is the profile owner, then the following should show to the user:
+
+      - The profile header should say "Welcome USERNAME".
+
+      - It should show the button for account management.
+
+      - It should show the option for updating their profile if they have not updated it yet.
+
+      - If the user has not updated their profile information then a default profile image and text should be shown.
+
+      - The text for the recipe section should say "My Recipes".
+
+      - It should show text under the recipe section and a button to create a recipe if the user has not created one yet, otherwise it should show their recipes.
+
+      - The Account Management Modal should generate within the HTML document.
+
+    - If the person viewing the page is the not the profile owner, then the following should show to the user:
+
+      - The profile header should say "Welcome to the profile of USERNAME".
+
+      - If the user has not updated their profile information then a default profile image and text should be shown.
+
+      - The text for the recipe section should say "Their recipe creations:".
+
+      - It should show text under the recipe section and a default message if the user has not created one yet, otherwise it should show their recipes.
+
+        - In order to verify the above, I logged in as a user and visited my profile. All of the above was generated as expected and no issues were found.
+
+        - In addition, I visited another users profile and could not see the above information as expected as set out in the conditional statements.
+
+        - No issues were discovered.
+
+##### Breakdown of jQuery functionality in ``profile.html``
+
+- Account Information Update AJAX Function
+
+  - I verified that when the profile owner submits information in the Account Update Modal, that the following happens:
+
+    - The form is validated first to ensure it meets requirements setout in the HTML form type - i.e. it must be an email that matches the designated pattern, if there is a password change then it meets the minimum length requirement. If the form is validated, then it can proceed to the next step otherwise the standard HTML validation message is shown.
+
+    - The form request is received by the backend and processed.
+
+    - The modal remains open on form submit so it can display the response message to the user.
+
+    - A response message is displayed to the user based on whether it was an email update, a password update, both of these, no update, or if the current password entered was incorrect.
+
+    - That response message is cleared after any subsequent update requests.
+
+  - No issues were discovered with the functionality of sending the information to the backend & server.
+
+- Account Management Modal - Password Change
+
+  - I verified that the jQuery functionality of:
+
+    - Adding and removing the required form label and password input.
+
+    - The ``Change Password`` button hides on click and shows again if the user presses ``Cancel``.
+
+    - The ``Cancel`` button shows after the user presses ``Change Password`` and hides after pressing ``Cancel``.
+
+  - No issues were discovered with this functionality.
+
+- Profile Update Form
+
+  - I verified that the jQuery functionality of when a user clicks on the update profile button ``Add Now`` that the update profile form has the class ``.d-none`` removed so the user can interact with it.
+
+  - No issues were discovered with this functionality.
+
+- File Validation Function
+
+  - I verified that the jQuery Function for validating image uploads works correctly and that:
+
+    - A message is shown to the user if there is an error with the file upload such as incorrect file or file is too large, or if the image has been accepted.
+
+    - That the submit button is disabled if the file is not acceptable and enabled if the file is acceptable.
+
+    - That the messages disappear on file change to show the new validation message.
+
+    - No issues were discovered with this functionality.
+
+##### Profile Page - Breakdown of Views Used
+
+**Associated View - Route: ``/profile/<username>`` Function: ``profile(username)``**
+
+Breakdown of ``profile(username)`` functionality:
+
+This view generates the profile of a user.
+
+- It runs two queries on the database to find the user and to find any recipes they have made.
+
+  - I verified that this functionality works as intended and no issues were discovered.
+
+**Associated View - Route: ``/profile/update/<username>`` Function: ``update_profile(username)``**
+
+Breakdown of ``update_profile(username)`` functionality:
+
+- The first part of this function checks queries the database to find the user information.
+
+- It then runs a conditional check to see if the person trying to access the view is logged in, and if they are then if their session username matches the username in the request.
+
+  - If there is no username in session or if the username does not match, then the user is redirected to the landing page.
+
+  - No issues were discovered with this functionality.
+
+- The next stage processes the form request and uses [helper function - image upload](#image-upload) to update the users profile and insert the new profile information in the database.
+
+  - I tested to that the information updates correctly and that the new profile image and text is displayed instead of the default information.
+
+  - No issues were discovered with this functionality.
+
+It runs two queries on the database to find the user and to find any recipes they have made.
+
+I verified that this functionality works as intended and no issues were discovered.
+
+**Associated View - Route: ``/profile/account_management`` Function: ``update_account()``**
+
+Breakdown of ``update_account()`` functionality:
+
+- This view processes the information sent from the Account Management modal.
+
+  - It first checks to see if a password has been submitted with the form and assigns the values of the new password and confirmation password to a variable if there has been.
+
+    - No issues were detected with this conditional statement and the correct values are assigned to the variables if the new password has been submitted.
+
+  - It then finds the users document in the user collection and assigns the current email and hashed password to their respective variables.
+
+  - It then runs the [helper function - no change in account information](#no-change-in-account-information) to check to see if there has been a change in the users information and returns a message to the user through the AJAX function.
+
+    - No issues were found when testing either of these functionalities.
+
+  - If there has been a change in the account information, the current hashed password is checked against the entered password through the use of the ``passlib`` library.
+
+    - If the password does not match then a message is shown to the user through the AJAX function.
+
+      - No issues were found when testing this functionality with both matching and non-matching passwords and the correct message was displayed.
+
+    - If the passwords match then it proceeds to update the users account according to what the changes are.
+
+      - If the user is updating their email and password then the helper function [new password checker](#new-password-checker) is run:
+
+        - If the value returned is True, then the helper functions [email updater](#email-updater) and [password updater](#password-updater) are run and a success message is returned.
+
+        - If the value is False, then a error message is returned and shown to the user.
+
+          - I tested that this functionality works correctly and the correct message is shown to the user. Please see the individual helper functions for the tests performed.
+
+      - If the user is only updating their email then a check is run to see if the new email is the same as the old email.
+
+        - If the value returned is True, then the helper functions [email updater](#email-updater) and a success message is returned.
+
+        - If the value is False, then a error message is returned and shown to the user.
+
+          - I tested that this functionality works correctly and the correct message is shown to the user.
+
+      - If the user is only updating their password then the helper function [new password checker](#new-password-checker) is run:
+
+        - If the value returned is True, then the helper function [password updater](#password-updater) is run and a success message is returned.
+
+        - If the value is False, then a error message is returned and shown to the user.
+
+          - I tested that this functionality works correctly and the correct message is shown to the user. Please see the individual helper function for the tests performed.
+
+    - No issues were found when testing either of these functionalities.
+
+#### Helper Functions
+
+Below are the helper functions created to aid in reducing the repetitive code within the ``run.py``.
+
+#### Image Upload
+
+The ``upload_image()`` takes in two arguments:
+
+- ``variable`` - This is the variable with the request.file assigned to it.
+
+- ``folder_string`` - This is the name of the folder of where the image will be uploaded into Cloudinary.
+
+The function will then use the ``global`` variable names ``image_url``, and ``image_id`` which it will assign values too after it has uploaded the image. These variables are then used to be submitted into the database with either the recipe or profile information.
+
+- ``image_url`` - Contains the URL for the uploaded image.
+
+- ``image_id`` - Contains the public image ID for the uploaded image and is used when the picture is being deleted.
+
+I have verified that the functionality with this function works as intended by uploading the required file to Cloudinary and stores the correct information in the variables.
+
+This function is used within [Profile View](#profile-page---breakdown-of-views-used), [Add Recipe View]() and [Manage Recipe View]().
+
+#### No Change In Account Information
+
+The ``no_change_check()`` takes in four arguments:
+
+- email - This is the current email for the users account.
+
+- new_email - This is the new email submitted with the account update.
+
+- password - This is the current password for the users account.
+
+- new_password - This is the new password submitted with the account update.
+
+This function runs conditional checks to see if there has been a change in the information submitted, and makes use of the ``passlib`` to verify the passwords. If there has been a change then a boolean value is returned. If the information is the same as what is held on record then it returns True, else it returns False.
+
+I have verified that this function works correctly by testing against the various scenarios of:
+
+- Same email and same password - returned the expected value of True.
+
+- New email and same password - returned False
+
+- New email and password - returned False
+
+- Same email and new password - returned False
+
+#### New Password Checker
+
+The ``new_pass_check()`` takes two arguments:
+
+- new - This is the new password submitted with the account update.
+
+- conf - This is the confirmation password submitted with the account update.
+
+If both of these values match then a boolean value of True is returned, else it returns False.
+
+I verified this function worked correctly by passing through a matching password and confirmation password, and a non-matching pair of passwords. The expected values were returned.
+
+#### Email Updater
+
+The ``email_update()`` takes two arguments:
+
+- user_id - This is the user id related for the record to be updated.
+
+- new_email - This is the new email submitted with the account update.
+
+This function updates the email in the users document in the user collection.
+
+I have verified that this function correctly updates the users information.
+
+#### Password Updater
+
+The ``password_update()`` takes two arguments:
+
+- user_id - This is the user id related for the record to be updated.
+
+- new_password - This is the new password submitted with the account update.
+
+This function updates the password in the users document in the user collection.
+
+I have verified that this function correctly updates the users information.
