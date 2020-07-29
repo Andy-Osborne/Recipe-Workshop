@@ -688,7 +688,7 @@ def recipe_steps(req):
 This takes in the variable which has been assigned the request file,
 it then uploads the image - resizes and compresses image.
 The folder_string variable is the name of the folder to be used in
-cloudinary's website.
+Cloudinary's website.
 
 The variables used in there are global so they can be accessed by the
 updating form.
@@ -754,4 +754,4 @@ def password_update(user_id, new_password):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=os.environ.get("PORT"),
-            debug=True)
+            debug=False)
