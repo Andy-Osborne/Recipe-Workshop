@@ -36,37 +36,48 @@ All code used for Recipe Workshop was extensively tested through manual process 
             - [**Breakdown of jQuery Functionality in index.html**](#breakdown-of-jquery-functionality-in-index.html)
             - [**Landing Page Template - Breakdown of Views Used**](#landing-page---breakdown-of-views-used)
 
-        - [**Register Page Template**](#register-template)
+        - [**Register Page Template**](#register-page-template)
             - [**Breakdown of Jinja Functionality in register.html**](#breakdown-of-jinja-functionality-in-register.html)
             - [**Register Page Template - Breakdown of Views Used**](#register-page---breakdown-of-views-used)
 
-        - [**Login Page Template**](#login-template)
+        - [**Login Page Template**](#login-page-template)
             - [**Breakdown of Jinja Functionality in login.html**](#breakdown-of-jinja-functionality-in-login.html)
             - [**Login Page Template - Breakdown of Views Used**](#login-page---breakdown-of-views-used)
 
         - [**Logout Functionality**](#logout-functionality)
             - [**Logout Functionality- Breakdown of Views Used**](#logout-functionality---breakdown-of-views-used)
 
-        - [**Profile Page Template**](#profile-template)
+        - [**Profile Page Template**](#profile-page-template)
             - [**Breakdown of Jinja Functionality in profile.html**](#breakdown-of-jinja-functionality-in-profile.html)
             - [**Breakdown of jQuery Functionality in profile.html**](#breakdown-of-jquery-functionality-in-profile.html)
             - [**Profile Page Template - Breakdown of Views Used**](#profile-page---breakdown-of-views-used)
 
-        - [**Search Page Template**](#search-template)
+        - [**Search Page Template**](#search-page-template)
             - [**Breakdown of Jinja Functionality in profile.html**](#breakdown-of-jinja-functionality-in-search.html)
             - [**Profile Page Template - Breakdown of Views Used**](#search-page---breakdown-of-views-used)
 
-        - [**Recipe Page Template**](#recipe-template)
+        - [**Recipe Page Template**](#recipe-page-template)
             - [**Breakdown of Jinja Functionality in recipe.html**](#breakdown-of-jinja-functionality-in-recipe.html)
             - [**Breakdown of jQuery Functionality in recipe.html**](#breakdown-of-jquery-functionality-in-recipe.html)
             - [**Recipe Page Template - Breakdown of Views Used**](#recipe-page---breakdown-of-views-used)
 
-        - [**Add Recipe Page Template**](#add-recipe-template)
+        - [**Add Recipe Page Template**](#add-recipe-page-template)
             - [**Breakdown of Jinja Functionality in create_recipe.html**](#breakdown-of-jinja-functionality-in-create_recipe.html)
             - [**Breakdown of jQuery Functionality in create_recipe.html**](#breakdown-of-jquery-functionality-in-create_recipe.html)
             - [**Add Recipe Page Template - Breakdown of Views Used**](#add-recipe-page---breakdown-of-views-used)
 
+        - [**Manage Recipe Page Template**](#manage-recipe-page-template)
+            - [**Breakdown of Jinja Functionality in create_recipe.html**](#breakdown-of-jinja-functionality-in-manage_recipe.html)
+            - [**Breakdown of jQuery Functionality in create_recipe.html**](#breakdown-of-jquery-functionality-in-manage_recipe.html)
+            - [**Manage Recipe Page Template - Breakdown of Views Used**](#manage-recipe-page---breakdown-of-views-used)
 
+        - [**Privacy Page Template**](#privacy-page-template)
+            - [**Privacy Page Page Template - Breakdown of Views Used**](#privacy-policy-page---breakdown-of-views-used)
+
+        - [**Advertise Page Template**](#advertise-page-template)
+            - [**Advertise Page Page Template - Breakdown of Views Used**](#advertise-policy-page---breakdown-of-views-used)
+
+        - [**404 Page Template**](#404-page-template)
 
         - [**Helper Functions**](#helper-functions)
             - [**Image Upload**](#image-upload)
@@ -625,7 +636,7 @@ Breakdown of ``user_registration()`` functionality:
 
 - Checking if user is in session:
   
-  - When a user a loads the page, a conditional statement is run which checks to see whether a user is in session. The result of the conditional statement is saved in a variable.
+  - When a user loads the page, a conditional statement is run which checks to see whether a user is in session. The result of the conditional statement is saved in a variable.
 
     - If a user is in session then their session username is saved to the ``username`` variable.
 
@@ -699,7 +710,7 @@ Breakdown of ``login()`` functionality:
 
 - Checking if user is in session:
   
-  - When a user a loads the page, a conditional statement is run which checks to see whether a user is in session. The result of the conditional statement is saved in a variable.
+  - When a user loads the page, a conditional statement is run which checks to see whether a user is in session. The result of the conditional statement is saved in a variable.
 
     - If a user is in session then their session username is saved to the ``username`` variable.
 
@@ -1241,7 +1252,7 @@ Breakdown of ``add_recipe()`` functionality:
 
 - Conditional Statement - Verifying User in Session:
   
-  - When a user a loads the page, a conditional statement is run which checks to see whether a user is in session. The result of the conditional statement is saved in a variable.
+  - When a user loads the page, a conditional statement is run which checks to see whether a user is in session. The result of the conditional statement is saved in a variable.
 
     - If a user is in session then their session username is saved to the ``username`` variable.
 
@@ -1263,6 +1274,158 @@ Breakdown of ``add_recipe()`` functionality:
 
     - I verified that all the information submitted from the form correctly gets uploaded to the database and no errors were found.
 
+#### Manage Recipe Page Template
+
+I verified that the manage recipe page displays as expected and that all buttons work as intended.
+
+##### Breakdown of Jinja functionality in ``manage_recipe.html``
+
+- I verified that the current recipe information was correctly populated within the form so the user was able to see their previous information and update it where required.
+
+- I verified that all the validation elements within the form worked as expected.
+
+- I verified that the conditional statement for adding the ``selected`` attribute to the dropdown lists worked correctly and selected the correct option based on the database information.
+
+##### Breakdown of jQuery functionality in ``manage_recipe.html``
+
+- Upload New Image Functionality:
+
+  - I verified that when the user clicks on the "Upload New Image" button that the following happens:
+
+    - The "Upload New Image" button and the text for changing the image has the class ``.d-none`` added and the "Cancel" button has the same class removed.
+
+    - The class of ``.d-none``is removed from the div that holds the form label and input for uploading a new file.
+
+    - The attr ``enctype="multipart/form-data"`` is added onto the form.
+
+    - The user is able to upload an image which is verified accordingly and has any relevant message displayed to them.
+
+    - The image is submitted with the form when the user updates the recipe.
+
+  - I verified that when the user presses the the "Cancel" button then the following happens:
+
+    - The "Upload New Image" button and the text for changing the image has the class ``.d-none`` removed and the "Cancel" button has the same class added.
+
+    - The class of ``.d-none``is added from the div that holds the form label and input for uploading a new file.
+
+    - The attr ``enctype="multipart/form-data"`` is removed from the form.
+
+    - Any image added to the file input by the user is not submitted with the form if they press submit.
+
+- Delete Recipe Modal:
+
+  - I verified that the modal is launched when the user presses delete recipe.
+
+  - I verified that when the user presses cancel in the modal, the modal closes.
+
+  - I verified that when the user presses the confirmation button that the recipe is deleted.
+
+- For the remaining functionalities, please refer to [**Breakdown of jQuery Functionality in create_recipe.html**](#breakdown-of-jquery-functionality-in-create_recipe.html) as the same functionalities used within there are applicable to this as well.
+
+  - Each function was individually verified to ensure that they work as intended and no additional bugs or errors were raised.
+
+##### Manage Recipe Page - Breakdown of Views Used
+
+**Associated View - Route: ``/manage/<recipe_id>`` Function: ``manage_recipe(recipe_id)``**
+
+Breakdown of ``manage_recipe(recipe_id)`` functionality:
+
+- Querying Recipe Details
+
+  - A Query is run to obtain the details of the recipe that has been sent along to the route and this information is assigned to a variable ``edit_recipe`` which is then passed to the passed into the template to show the recipe information for the user.
+
+- Conditional Statement - Verifying User in Session:
+  
+  - When a user loads the page, a conditional statement is run which checks to see whether there is a user in session and if so, if that user is the same as the ``recipe_author``. The result of the conditional statement is saved in a variable.
+
+    - If a user is in session then their session username is saved to the ``username`` variable.
+
+    - If no user is in session then an empty string is saved in the ``username`` variable.
+
+    - If there is no user in session, then they are redirected to the login page as only logged in users can submit recipes.
+
+      - I tested this functionality by trying to access the add recipe page when not logged in and using an account that is logged in. This functionality works as intended.
+
+**Associated View - Route: ``/update/<recipe_id>`` Function: ``update_recipe(recipe_id)``**
+
+Breakdown of ``update_recipe(recipe_id)`` functionality:
+
+- Inserting Form Information into the Database:
+
+  - When the form information has been validated and submitted to the backend, the fields from the form are assigned to variables which can be used to create a new document that is inserted into the database.
+
+    - Two helper functions are used for the steps and ingredient fields as these can be dynamic according to what the user has inputted.
+
+      - The helper functions are [**Recipe Steps**](#recipe-steps) and [**Recipe Ingredients**](#recipe-ingredients).
+
+      - The form request information is then used to update the existing record in the database.
+
+        - I verified that this functionality works correctly and that the information is correctly updated.
+
+    - If a new image has been submitted then the following happens:
+
+      - The existing ``image_id`` is queried from the database, then it is assigned to a variable ``public_id``.
+
+      - The old image is deleted from Cloudinary using ``cloud.destroy(public_id)``
+
+      - The file request then uses the helper function - [image upload](#image-upload) to upload the new image for the recipe and store the ``image_url`` and ``image_id`` in the associated variables within the document to be updated.
+
+      - The new information for the image is then used to update the existing image details within the database.
+
+        - I verified that this functionality works correctly, the image is deleted from Cloudinary and that the information in the database for the image is correctly updated.
+
+**Associated View - Route: ``/delete/<recipe_id>`` Function: ``delete_recipe(recipe_id)``**
+
+Breakdown of ``delete_recipe(recipe_id)`` functionality:
+
+- Querying Recipe Details
+
+  - A Query is run to obtain the details of the recipe that has been sent along to the route and this information is assigned to a variable ``recipe_check``. This variable is then used to obtain the ``recipe_author`` value.
+
+- Conditional Statement - Verifying User in Session:
+  
+  - When tries to access this view, a conditional statement is run which checks to see whether there is a user in session and if so, if that user is the same as the ``recipe_author``. The result of the conditional statement is saved in a variable.
+
+    - If a user is in session then their session username is saved to the ``username`` variable.
+
+    - If no user is in session then an empty string is saved in the ``username`` variable.
+
+    - If there is no user in session, then they are redirected to the login page as only logged in users can submit recipes.
+
+      - I tested this functionality by trying to access it when not logged in and using an account that is logged in. This functionality works as intended.
+
+    - If the session user accessing this view is the recipe author then it proceeds to delete the recipe from the database and remove the image from Cloudinary.
+
+      - I verified that this functionality works as intended, the recipe is removed from the database and the image is removed from Cloudinary.
+  
+#### Privacy Policy Page Template
+
+I verified that the privacy policy page displays as expected.
+
+##### Privacy Policy Page - Breakdown of Views Used
+
+**Associated View - Route: ``/privacy`` Function: ``privacy()``**
+
+Breakdown of ``privacy()`` functionality:
+
+I verified that this work works correctly and when the user access it, they are redirected the relevant page.
+
+#### Advertise Page Template
+
+I verified that the advertise with us page displays as expected.
+
+##### Advertise Page - Breakdown of Views Used
+
+**Associated View - Route: ``/advertise`` Function: ``advertise()``**
+
+Breakdown of ``advertise()`` functionality:
+
+I verified that this work works correctly and when the user access it, they are redirected the relevant page.
+
+### 404 Page Template
+
+I verified that the custom 404 page correctly generates and is displayed to the user when they access a view that does not exist.
+
 #### Helper Functions
 
 Below are the helper functions created to aid in reducing the repetitive code within the ``run.py``.
@@ -1283,7 +1446,7 @@ The function will then use the ``global`` variable names ``image_url``, and ``im
 
 I have verified that the functionality with this function works as intended by uploading the required file to Cloudinary and stores the correct information in the variables.
 
-This function is used within [Profile View](#profile-page---breakdown-of-views-used), [Add Recipe View](#add-recipe-page---breakdown-of-views-used) and [Manage Recipe View]().
+This function is used within [Profile View](#profile-page---breakdown-of-views-used), [Add Recipe View](#add-recipe-page---breakdown-of-views-used) and [Manage Recipe View](manage-recipe-page---breakdown-of-views-used).
 
 ##### No Change In Account Information
 
