@@ -57,7 +57,8 @@
                             <ul class="search-list">
                                 <li><i class="fas fa-heart heart"></i> by {% if result["likes"] == 0 %}
                                     {{result["likes"]}}
-                                    user{% else %} {{result["likes"]}} users{% endif %}</li>
+                                    users {% elif result["likes"] == 1 %}{{result["likes"]}} user {% else %}
+                                    {{result["likes"]}} users{% endif %}</li>
                                 <li><strong>Total Time: {{result["cooking_time"] + result["prep_time"]}}mins |
                                         Effort: {{result["effort"]|title}}</strong></li>
                                 <li>{{result["recipe_description"]|truncate(60)}} </li>
