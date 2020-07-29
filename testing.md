@@ -31,7 +31,7 @@ All code used for Recipe Workshop was extensively tested through manual process 
             - [**Breakdown of jQuery Functionality in public_base.html**](#breakdown-of-jquery-functionality-in-public_base.html)
             - [**Base Template - Breakdown of Views Used**](#base-template---breakdown-of-views-used)
 
-        - [**Landing Page Template**](#base-template)
+        - [**Landing Page Template**](#landing-page-template)
             - [**Breakdown of Jinja Functionality in index.html**](#breakdown-of-jinja-functionality-in-index.html)
             - [**Breakdown of jQuery Functionality in index.html**](#breakdown-of-jquery-functionality-in-index.html)
             - [**Landing Page Template - Breakdown of Views Used**](#landing-page---breakdown-of-views-used)
@@ -52,12 +52,22 @@ All code used for Recipe Workshop was extensively tested through manual process 
             - [**Breakdown of jQuery Functionality in profile.html**](#breakdown-of-jquery-functionality-in-profile.html)
             - [**Profile Page Template - Breakdown of Views Used`**](#profile-page---breakdown-of-views-used)
 
+        - [**Search Page Template**](#search-template)
+            - [**Breakdown of Jinja Functionality in profile.html**](#breakdown-of-jinja-functionality-in-search.html)
+            - [**Profile Page Template - Breakdown of Views Used`**](#search-page---breakdown-of-views-used)
+
+        - [**Recipe Page Template**](#recipe-template)
+            - [**Breakdown of Jinja Functionality in recipe.html**](#breakdown-of-jinja-functionality-in-recipe.html)
+            - [**Breakdown of jQuery Functionality in recipe.html**](#breakdown-of-jquery-functionality-in-recipe.html)
+            - [**Recipe Page Template - Breakdown of Views Used`**](#recipe-page---breakdown-of-views-used)
+
+
         - [**Helper Functions**](#helper-functions)
             - [**Image Upload**](#image-upload)
             - [**No Change In Account Information**](#no-change-in-account-information)
-            - [*New Password Checker**](#new-password-checker)
-            - [*Email Updater**](#email-updater)
-            - [*Password Updater**](#password-updater)
+            - [**New Password Checker**](#new-password-checker)
+            - [**Email Updater**](#email-updater)
+            - [**Password Updater**](#password-updater)
 
 ## Code Validation
 
@@ -344,7 +354,7 @@ I manually tested every link works as intended and directs the user to the relev
 
 ##### Breakdown of Jinja functionality in ``public_base.html``
 
-- Conditional Navbar Options
+- Conditional Navbar Options:
 
   - Within the base template, there are three conditional statements used to show a user various options:
 
@@ -374,7 +384,7 @@ I manually tested every link works as intended and directs the user to the relev
 
       - No issues were found with this functionality.
 
-- Conditional ``active-page`` Class
+- Conditional ``active-page`` Class:
 
   - Within the base template navbar links, there are conditional statements in each of the links classes. This essentially assigns the ``active-page`` class to a link if that is the page that the user is on.
 
@@ -392,7 +402,7 @@ I manually tested every link works as intended and directs the user to the relev
 
 ##### Breakdown of jQuery functionality in ``public_base.html``
 
-- Adding and Remove ``.btn-zoom``
+- Adding and Remove ``.btn-zoom``:
 
   - I verified that the jQuery functionality of adding and removing the ``.btn-zoom`` to navbar menu buttons when the mouse hovers over it and removes it once the mouse leaves.
 
@@ -420,7 +430,7 @@ I manually tested every link works as intended and directs the user to the relev
 
 ##### Breakdown of Jinja functionality in ``index.html``
 
-- Highest Rated Recipe
+- Highest Rated Recipe:
 
   - I verified that the information displayed under the ``Top Rated Recipe`` and the information inputted through the use of ``for`` loop is that of the recipe which has received the most likes.
 
@@ -428,7 +438,7 @@ I manually tested every link works as intended and directs the user to the relev
 
   - No issues were discovered.
 
-- Most Recent Recipes
+- Most Recent Recipes:
 
   - I verified that the information displayed under the ``Most Recent Recipes`` and their respective Recipe Names and images are recorded against the correct item.
 
@@ -436,7 +446,7 @@ I manually tested every link works as intended and directs the user to the relev
 
   - No issues were discovered.
 
-- Newsletter Banner
+- Newsletter Banner:
 
   - The newsletter banner section uses three conditional statements that checks:
   
@@ -458,7 +468,7 @@ I manually tested every link works as intended and directs the user to the relev
 
 ##### Breakdown of jQuery functionality in ``index.html``
 
-- Newsletter AJAX Function
+- Newsletter AJAX Function:
 
   - I verified that when a user enters their email and presses the submit button that the following happens:
 
@@ -480,7 +490,7 @@ I manually tested every link works as intended and directs the user to the relev
 
     - In order to correct this issue I used ``event.preventDefault();`` to stop the default function of the form and allow the message to be shown to the user.
 
-- Adding and Remove ``.image-zoom-class``
+- Adding and Remove ``.image-zoom-class``:
 
   - I verified that the jQuery functionality of adding and removing the ``.image-zoom-class`` to recent images on the landing page worked as intended.
 
@@ -494,11 +504,11 @@ I manually tested every link works as intended and directs the user to the relev
 
 Breakdown of ``index()`` functionality:
 
-- Highest Rated Recipe Query
+- Highest Rated Recipe Query:
   
   - I verified that this function works as intended and gets the recipe from the recipe collection that has the most amount of likes by liking various recipes to ensure that 1 recipe had more likes than another recipe. The results of this query is assigned to a Jinja variable and passed into the template as a ``list``.
 
-- Recent Recipes Query
+- Recent Recipes Query:
 
   - I verified that the 8 most recently added recipes to the recipe collection are displayed to users on the landing page and are shown in descending order which starts with the most recently added recipe. The results of this query is assigned to a Jinja variable and passed into the template as a ``list``.
 
@@ -510,7 +520,7 @@ Breakdown of ``index()`` functionality:
 
     - This bug was caused by using ``datetime.date`` within the recipe submission field as it was very general. The fix applied was to use ``datetime.now()`` so the date entered against the recipe was much more specific and allowed the correct sorting and retrieving of the most recently added recipes.
 
-- Newsletter Sign Up Query
+- Newsletter Sign Up Query:
 
   - I verified that the newsletter query and conditional statement worked as intended and successful checks to see where the session user has previously signed up for the newsletter.
 
@@ -555,7 +565,7 @@ I manually tested the link for the login page works and directs the user to the 
 
 For the registration page templating, I used ``flask_wtf`` and it's import ``Flaskform``
 
-- Validation messages
+- Validation messages:
 
   - I verified that the correct validation messages are shown to the user based on the response from either the forms validation itself or the flash messages sent from the backend.
 
@@ -603,7 +613,7 @@ For the registration page templating, I used ``flask_wtf`` and it's import ``Fla
 
 Breakdown of ``user_registration()`` functionality:
 
-- Checking if user is in session
+- Checking if user is in session:
   
   - When a user a loads the page, a conditional statement is run which checks to see whether a user is in session. The result of the conditional statement is saved in a variable.
 
@@ -635,7 +645,7 @@ Breakdown of ``user_registration()`` functionality:
 
       - No issues were discovered in this functionality.
 
-- Salting and Hashing of Password
+- Salting and Hashing of Password:
 
   - All passwords submitted are salted and hashed through the use of the ``passlib`` library. I verified that any passwords that have been submitted to the database are hashed.
 
@@ -651,7 +661,7 @@ I manually tested the link for the register page works and directs the user to t
 
 For the login page templating, I used ``flask_wtf`` and it's import ``Flaskform``
 
-- Validation messages
+- Validation messages:
 
   - I verified that the correct validation messages are shown to the user based on the response from either the forms validation itself or the flash messages sent from the backend.
 
@@ -677,7 +687,7 @@ For the login page templating, I used ``flask_wtf`` and it's import ``Flaskform`
 
 Breakdown of ``login()`` functionality:
 
-- Checking if user is in session
+- Checking if user is in session:
   
   - When a user a loads the page, a conditional statement is run which checks to see whether a user is in session. The result of the conditional statement is saved in a variable.
 
@@ -721,7 +731,7 @@ I tested that when the user clicks on the logout button, clears the session cook
 
 Breakdown of ``login()`` functionality:
 
-- Logs user out of session
+- Logs user out of session:
 
   - When a user accesses this view, the ``session.clear()`` function is run and clears the session cookie.
 
@@ -737,7 +747,17 @@ I manually tested every link works as intended and directs the user to the relev
 
 ##### Breakdown of Jinja functionality in ``profile.html``
 
-- Conditional Check - Profile Visitor
+- Conditional Check - Profile Exists:
+
+  - A conditional check is run on the value of ``user_profile`` variable passed in by the view.
+
+    - If the variable contains an empty string, then a message is displayed to the user saying that we could not find the profile they were looking for.
+
+    - If the variable contains the user information then the profile is generated accordingly.
+
+      - No issues were discovered with this functionality.
+
+- Conditional Check - Profile View:
 
   - The conditional statements used within the profile.html that checks whether the visitor of the page is the profile owner or a visitor. The following is what is expected to show based on each condition (profile owner or visitor):
 
@@ -775,7 +795,7 @@ I manually tested every link works as intended and directs the user to the relev
 
 ##### Breakdown of jQuery functionality in ``profile.html``
 
-- Account Information Update AJAX Function
+- Account Information Update AJAX Function:
 
   - I verified that when the profile owner submits information in the Account Update Modal, that the following happens:
 
@@ -791,7 +811,7 @@ I manually tested every link works as intended and directs the user to the relev
 
   - No issues were discovered with the functionality of sending the information to the backend & server.
 
-- Account Management Modal - Password Change
+- Account Management Modal - Password Change:
 
   - I verified that the jQuery functionality of:
 
@@ -803,13 +823,13 @@ I manually tested every link works as intended and directs the user to the relev
 
   - No issues were discovered with this functionality.
 
-- Profile Update Form
+- Profile Update Form:
 
   - I verified that the jQuery functionality of when a user clicks on the update profile button ``Add Now`` that the update profile form has the class ``.d-none`` removed so the user can interact with it.
 
   - No issues were discovered with this functionality.
 
-- File Validation Function
+- File Validation Function:
 
   - I verified that the jQuery Function for validating image uploads works correctly and that:
 
@@ -829,7 +849,7 @@ Breakdown of ``profile(username)`` functionality:
 
 This view generates the profile of a user.
 
-- It runs two queries on the database to find the user and to find any recipes they have made.
+- It runs two queries on the database to find the user and to find any recipes they have made and hasa conditional statement that assigns a value to the ``user_profile`` variable based on whether the username is found in the user collection.
 
   - I verified that this functionality works as intended and no issues were discovered.
 
@@ -905,11 +925,212 @@ Breakdown of ``update_account()`` functionality:
 
     - No issues were found when testing either of these functionalities.
 
+#### Search Page Template
+
+I performed various tests to ensure that the functionality of the search template works as intended and that the pagination works as intended.
+
+I manually tested the link for the login page works and directs the user to the relevant page.
+
+##### Breakdown of Jinja functionality in ``search.html``
+
+For the search page templating, I used a mixture of conditional statements and the pagination styling from ``flask-pagination``
+
+- Conditional Statement - Search Results:
+
+  - The conditional statement works as follows:
+
+    - If a user searches for key word that does not exist in the database then a message should appear to the user saying that there are no results and a message.
+
+      - If the user is logged in it should suggest they add their own recipe to the database.
+
+      - If a user is not logged in then it should suggest they login to their account and add their own recipe to share with others.
+
+      - There were no issues with this functionality and the expected message showed when testing against both scenarios as listed above.
+
+    - If the user searches for a key word that does exist in the database, then the a page with search results should be shown and the results should be displayed in order according to the ``textScore``.
+
+      - I tested the results are shown correctly and in order by testing it with different terms such as ``egg`` and ``chicken``.
+
+      - No issues were found with this functionality.
+
+- Pagination:
+
+  - The pagination for the page is handled by ``flask-pagination``.
+
+    - I verified that the pagination feature was working as expected as within the search results page, a variable is passed through and displayed to the user which shows the amount of search results found.
+
+    - The amount of results per page is limited to 4. I verified that the correct amount of results are displayed and that the right amount of pages are generated based on the returned results - i.e. 8 results generated 2 pages.
+
+    - If the results are less than 4 then all results are shown on one page and the pagination links do not show as they are not required.
+
+    - No issues were discovered with this functionality.
+
+- Conditional Statement - Like Count Text
+
+  - A conditional statement has been used to change the text for the amount of likes a recipe has:
+
+    - If the like count for a recipe is 0, then the text shown is liked by no users.
+
+    - If the like count for a recipe 1, then the text shown is liked by 1 user.
+
+    - If the like count is greater than 1, the text shown is liked by X users.
+
+      - I tested this functionality by checking various recipes that have 0 likes, 1 like, and recipes with likes that are greater than 1 to ensure the statement works correctly.
+
+      - No issues were discovered.
+
+##### Search Page - Breakdown of Views Used
+
+**Associated View - Route: ``/search/<search_term>`` Function: ``search_recipes(search_term)``**
+
+Breakdown of ``search_recipes(search_term)`` functionality:
+
+- Creating a text index:
+  
+  - The first part of this view creates the index which is used for the ``search_results`` query.
+
+  - I verified that his works correctly as the results generated from the search query look for the search term in the defined indexes.
+
+- Search Result Query:
+
+  - The ``search_result`` query takes the ``search_term`` passed in from the ``/search`` view mentioned in the [**Base Template**](#base-template) and [**Landing Page Template**](#landing-page-template).
+
+  - This uses the MongoDB ``$meta`` projection operator and ``textScore`` metadata to:
+
+    - Search for the ``search_term`` within the defined index
+
+    - Sort the results by the ``textScore`` value.
+
+    - Skips ``X`` results defined by the ``per_page`` variable used for ``Flask-paginate`` less 1.
+
+    - Limits results by 4 which is the value of ``per_page``
+
+    - No issues were discovered by the functionality of this query and it returned the expected results.
+
+  - In addition to the above, another variable used is to count the number of documents that contain the ``search_term`` used and is passed into the ``search.html`` template.
+
+    - No issues were discovered with this query.
+
+- Flask-paginate:
+
+  - This is an extension that has been imported into the application and works as intended.
+
+  - No issues were discovered with the results shown from this extension within the ``search.html`` template.
+
+#### Recipe Page Template
+
+I verified that the recipe page displays the correct recipe information as expected and that all buttons work as intended.
+
+I manually tested every link works as intended and directs the user to the relevant page.
+
+##### Breakdown of Jinja functionality in ``recipe.html``
+
+- Conditional Check - Recipe Author:
+
+  - A conditional statement is run to check whether the viewer of the recipe is the recipe author.
+
+    - If the username in session of the person viewing the page is the same as the ``recipe_author`` field then it must generate the ``Manage Your Recipe`` button in the HTML code.
+
+    - If the user is not, then this button should not be generated.
+
+      - I tested that this functionality works as intended by viewing a recipe I create to check if the button is generated and viewable to me.
+
+      - I tested that I was not able to see this button within the page and the HTML code by viewing a recipe that was not created by me.
+
+        - I verified that this works as intended and found no issues.
+
+- Recipe Information:
+
+  - I verified that the information is correctly inputted into the recipe document, including the amount of steps and ingredients, as per the recipe document in the database.
+
+    - No issues were discovered.
+
+- Conditional Check - Like Function:
+
+  - I verified that the conditional statement for like function works as intended:
+
+    - If a user is not logged in, then it shows the amount of likes the recipe has and displays a message saying that the user needs to log into their account to like this recipe.
+
+    - If a user is logged into their account has not liked the recipe then it shows an empty heart with the amount of likes next to it.
+
+    - If the user is logged into their account and has like the recipe then it shows a coloured in heart and the number of likes next to it.
+
+      - I verified each of these conditions works intended and no errors were found in this functionality.
+
+##### Breakdown of jQuery functionality in ``recipe.html``
+
+- Like Update AJAX Function:
+
+  - I verified that when a user clicks on the "Like" button within the recipe page, the following happens:
+  
+    - The correct information is sent to the backend and processes.
+
+    - The "Like" icon and like count update accordingly:
+
+      - If a user who hasn't like the recipe before clicks on the button, the HTML icon is changed to a coloured in heart and the new like count is displayed.
+
+      - If a user who has liked the recipe before clicks on the button, the HTML icon is changed to a empty heart and the new like count is displayed.
+
+        - I tested this functionality by pressing the like button multiple times to ensure that it updates and displays the correct information.
+
+        - No issues were discovered with this functionality.
+  
+- Recipe Steps and Ingredient Toggle Button:
+
+  - I verified that this functionality works as intended and that when a user clicks on the button, the relevant information (step list or ingredient) is shown or hidden from the user.
+
+    - No issues were discovered with this functionality.
+
+##### Recipe Page - Breakdown of Views Used
+
+**Associated View - Route: ``/recipe/<recipe_id>/<recipe_name>`` Function: ``get_recipe(recipe_id, recipe_name)``**
+
+Breakdown of ``get_recipe(recipe_id, recipe_name)`` functionality:
+
+This view generates the recipe page for the intended recipe.
+
+- It runs a query on the database to find the queried recipe based on its ``recipe_id`` and then returns the found recipe which is based into the recipe template.
+
+  - No issues were discovered with this query functionality and the correct information was returned.
+
+**Associated View - Route: ``/like/<recipe_id>`` Function: ``like(recipe_id))``**
+
+Breakdown of ``like(recipe_id)`` functionality:
+
+This view handles the recipe like functionality which is used in the ``recipe.html`` template and works alongside the AJAX function.
+
+- ``find_recipe`` Query:
+
+  - When the form information is received from the AJAX function, it queries the database to find the recipe that is being liked and saves the information to the ``find_recipe`` variable which is then used later in the view.
+
+    - No issues were discovered with this query functionality and the correct information was returned.
+
+- Conditional Statement - Updating Document and Returning Like Count:
+
+  - A conditional statement is run to check whether the user liking the recipe is in the ``liked_by`` field within the recipes document.
+
+    - If the user is not in the ``liked_by`` field then it adds the username to the field, increments the ``likes`` field by 1.
+
+    - If the user is in the ``liked_by`` field then it removes the username from the field and decrements the ``likes`` field by 1.
+
+    - In both instance, the new ``likes`` count is returned to the AJAX functionality to enable it to update the HTML and display the new count.
+
+      - Bug Identified - **New value for likes not being sent through*
+
+        - After a user liked/unliked the recipe, the new value for ``likes`` was not being sent through to the AJAX function.
+
+      - Fix Applied:
+
+        - To fix this issue, I moved the variable ``new_like`` which queries the ``likes`` field in the recipes document, to after the ``update_one`` has been completed to ensure the query is using the latest value.
+
+
+
+
 #### Helper Functions
 
 Below are the helper functions created to aid in reducing the repetitive code within the ``run.py``.
 
-#### Image Upload
+##### Image Upload
 
 The ``upload_image()`` takes in two arguments:
 
@@ -927,7 +1148,7 @@ I have verified that the functionality with this function works as intended by u
 
 This function is used within [Profile View](#profile-page---breakdown-of-views-used), [Add Recipe View]() and [Manage Recipe View]().
 
-#### No Change In Account Information
+##### No Change In Account Information
 
 The ``no_change_check()`` takes in four arguments:
 
@@ -951,7 +1172,7 @@ I have verified that this function works correctly by testing against the variou
 
 - Same email and new password - returned False
 
-#### New Password Checker
+##### New Password Checker
 
 The ``new_pass_check()`` takes two arguments:
 
@@ -963,7 +1184,7 @@ If both of these values match then a boolean value of True is returned, else it 
 
 I verified this function worked correctly by passing through a matching password and confirmation password, and a non-matching pair of passwords. The expected values were returned.
 
-#### Email Updater
+##### Email Updater
 
 The ``email_update()`` takes two arguments:
 
@@ -975,7 +1196,7 @@ This function updates the email in the users document in the user collection.
 
 I have verified that this function correctly updates the users information.
 
-#### Password Updater
+##### Password Updater
 
 The ``password_update()`` takes two arguments:
 
