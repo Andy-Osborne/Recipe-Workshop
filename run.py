@@ -11,7 +11,7 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
-if os.path.exists('env.py'):
+if os.path.exists("env.py"):
     import env
 
 
@@ -91,7 +91,7 @@ def search_recipes(search_term):
     # Below is used for flask-paginate
 
     search = False
-    q = request.args.get('q')
+    q = request.args.get("q")
     if q:
         search = True
 
@@ -108,8 +108,8 @@ def search_recipes(search_term):
     """
 
     search_result = recipe.find({"$text": {"$search": search_term}},
-                                {'score': {'$meta': 'textScore'}}).sort([
-                                    ('score', {'$meta': 'textScore'})]).skip(
+                                {"score": {"$meta": "textScore"}}).sort([
+                                    ("score", {"$meta": "textScore"})]).skip(
                                         (page - 1) * per_page).limit(per_page)
 
     # Records the amount of items that match the search criteria
@@ -117,10 +117,10 @@ def search_recipes(search_term):
     search_count = recipe.count_documents({"$text": {"$search": search_term}})
 
     pagination = Pagination(page=page, per_page=per_page, total=search_count,
-                            search=search, record_name='search_result',
-                            css_framework='bootstrap4')
+                            search=search, record_name="search_result",
+                            css_framework="bootstrap4")
 
-    return render_template('search.html', search_term=search_term,
+    return render_template("search.html", search_term=search_term,
                            search_result=search_result, count=search_count,
                            pagination=pagination)
 
@@ -303,7 +303,7 @@ def delete_recipe(recipe_id):
 
 # Handles the logic of a user liking or removing their like from a recipe
 
-@app.route("/like/<recipe_id>", methods=["GET", "POST"])
+@app.route("/like/<recipe_id>", methods=["POST"])
 def like(recipe_id):
     find_recipe = recipe.find_one({"_id": ObjectId(recipe_id)})
 
@@ -315,27 +315,27 @@ def like(recipe_id):
 
     if session["username"] not in find_recipe["liked_by"]:
         recipe.update_one(
-            {'_id': ObjectId(recipe_id)},
+            {"_id": ObjectId(recipe_id)},
             {
                 "$inc": {"likes": 1},
                 "$push": {"liked_by": session["username"]}
             })
         new_like = recipe.find_one({"_id": ObjectId(recipe_id)})["likes"]
-        return jsonify({'add': new_like})
+        return jsonify({"add": new_like})
     else:
         recipe.update_one(
-            {'_id': ObjectId(recipe_id)},
+            {"_id": ObjectId(recipe_id)},
             {
                 "$inc": {"likes": -1},
                 "$pull": {"liked_by": session["username"]}
             })
         new_like = recipe.find_one({"_id": ObjectId(recipe_id)})["likes"]
-        return jsonify({'remove': new_like})
+        return jsonify({"remove": new_like})
 
 
 # Registration
 
-@app.route('/register', methods=["GET", "POST"])
+@app.route("/register", methods=["GET", "POST"])
 def user_registration():
 
     username = session["username"] if "username" in session else ""
@@ -364,9 +364,9 @@ def user_registration():
                 "password": p256.hash(req["password"])
                 }
             user.insert_one(new_user)
-            session['username'] = req["username"]
+            session["username"] = req["username"]
             return redirect(url_for("profile",
-                                    username=session['username']))
+                                    username=session["username"]))
 
         # If username / email count is greater than 0, message is shown to user
 
@@ -415,7 +415,7 @@ def login():
 
                 session["username"] = existing_user["username"]
                 return redirect(
-                                url_for("profile", username=session['username']
+                                url_for("profile", username=session["username"]
                                         ))
             else:
                 flash(u"Incorrect e-mail/password combination.",
@@ -431,7 +431,7 @@ def login():
 # Logout
 
 
-@app.route("/logout", methods=["POST", "GET"])
+@app.route("/logout")
 def logout():
     session.clear()
     return redirect(url_for("index"))
@@ -439,9 +439,12 @@ def logout():
 # User Profile Page
 
 
-@app.route("/profile/<username>", methods=["GET"])
+@app.route("/profile/<username>")
 def profile(username):
-    user_profile = user.find_one({"username": username})
+    user_profile_check = user.find_one({"username": username})
+
+    # Assigns a value tt the variable based on whether the user exists or not
+    user_profile = user_profile_check if user_profile_check is not None else ""
     recipe_count = recipe.count_documents({"recipe_author": username})
 
     return render_template("profile.html", username=user_profile,
@@ -511,7 +514,7 @@ def update_account():
 
     if no_change_check(current_email, new_email, current_pass, new_pass):
         return jsonify(
-            {'error': "Account not updated - no new information given."})
+            {"error": "Account not updated - no new information given."})
 
     # Verifies the password entered matches the one registered
 
@@ -529,17 +532,17 @@ def update_account():
                 email_update(user_id, new_email)
                 password_update(user_id, new_pass)
                 return jsonify(
-                    {'success': "Account successfully updated!"})
+                    {"success": "Account successfully updated!"})
             else:
                 return jsonify(
-                    {'error': "New passwords do not match."})
+                    {"error": "New passwords do not match."})
 
         # If no new password is entered, it runs the update email function
 
         elif current_email != new_email:
 
             email_update(user_id, new_email)
-            return jsonify({'success': "Email successfully updated!"})
+            return jsonify({"success": "Email successfully updated!"})
 
         # If no new email entered, checks to see if new password was entered
 
@@ -548,16 +551,16 @@ def update_account():
             # If new pass match then it updates pass
             password_update(user_id, new_pass)
             return jsonify(
-                {'success': "Password successfully updated!"})
+                {"success": "Password successfully updated!"})
 
         else:
             return jsonify(
-                {'error': "New passwords do not match."})
+                {"error": "New passwords do not match."})
 
     # If account password does not match. Below is shown to user.
 
     else:
-        return jsonify({'error': "Incorrect current password entered."})
+        return jsonify({"error": "Incorrect current password entered."})
 
 
 # Privacy Page
@@ -600,7 +603,7 @@ def newsletter_register():
 
             newsletter.insert_one(new_signup)
             return jsonify(
-                {'success': "Thank you! You've joined our newsletter list."})
+                {"success": "Thank you! You've joined our newsletter list."})
 
         # If there is info in username variable, inserts email and username
 
@@ -612,7 +615,7 @@ def newsletter_register():
 
             newsletter.insert_one(new_signup)
             return jsonify(
-                {'success': "Thank you! You've joined our newsletter list."})
+                {"success": "Thank you! You've joined our newsletter list."})
 
     else:
 
@@ -627,19 +630,19 @@ def newsletter_register():
                                     })
 
             return jsonify(
-                {'error': "Looks like you're already in our newsletter list!"})
+                {"error": "Looks like you're already in our newsletter list!"})
 
         else:
 
             # If no given username & email is already in newsletter collection
 
             return jsonify(
-                {'error': "Looks like you're already in our newsletter list!"})
+                {"error": "Looks like you're already in our newsletter list!"})
 
 # Below code taken from a rip tutorial and edited to only show the DD/MM/YYYY
 
 
-@app.template_filter('formatdatetime')
+@app.template_filter("formatdatetime")
 def format_datetime(value, format="%d %b %Y"):
     if value is None:
         return ""
@@ -748,7 +751,7 @@ def password_update(user_id, new_password):
                     })
 
 
-if __name__ == '__main__':
-    app.run(host=os.environ.get('IP'),
-            port=os.environ.get('PORT'),
-            debug=False)
+if __name__ == "__main__":
+    app.run(host=os.environ.get("IP"),
+            port=os.environ.get("PORT"),
+            debug=True)
