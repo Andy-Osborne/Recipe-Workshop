@@ -31,29 +31,46 @@ $(document).ready(function () {
     });
 
     /*
-    The below adds an extra line for recipe ingredient/step form in the new_recipe.html
-    when the corresponding button is clicked.
+    The below adds an extra input for recipe ingredient/step form in the new_recipe.html
+    when the corresponding button is clicked and it removes the disabled attribute from
+    the corresponding remove button.
     */
 
     $("#add_ingredient").on("click", () => {
+        $("#remove_ingredient").removeAttr("disabled", "disabled");
         $("#ingredient").append('<input class="form-control my-2" type="text" name="ingredients" pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9.z\(\)\-\,]+)*$" title="Must start with an uppercase or lowercase word. Acceptable characters are hyphens, commas, periods, and brackets. Cannot start with a space." required>');
     });
 
     $("#add_step").on("click", () => {
+        $("#remove_step").removeAttr("disabled", "disabled");
         $("#step_inputs").append('<input class="form-control my-2" type="text" name="step" pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9.z\(\)\-\,]+)*$" title="Must start with an uppercase or lowercase word. Acceptable characters are hyphens, commas, periods, and brackets. Cannot start with a space." required>');
     });
 
     /* 
-    The below removes a line for recipe ingredient/step form in the new_recipe.html
-    when the corresponding button is clicked.
+    The below removes an input for recipe ingredient/step form in the new_recipe.html
+    when the corresponding button is clicked. If there is only one input then the 
+    remove button is disabled, and can be re-enabled when the user adds an extra input
     */
 
     $("#remove_ingredient").on("click", () => {
-        $("#ingredient input:last-child").remove();
+        let ingredientLength = $("#ingredient").children("input").length;
+
+        if( ingredientLength <= 1) {
+            $("#remove_ingredient").attr("disabled", "disabled");
+        } else {
+            $("#ingredient input:last-child").remove();
+        }
     });
 
     $("#remove_step").on("click", () => {
-        $("#step_inputs input:last-child").remove();
+        let stepLength = $("#step_inputs").children("input").length;
+
+        if( stepLength <= 1) {
+            $("#remove_step").attr("disabled", "disabled");
+        } else {
+            $("#step_inputs input:last-child").remove();
+        }
+
     });
 
     /*
