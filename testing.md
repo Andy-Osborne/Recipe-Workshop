@@ -38,28 +38,34 @@ All code used for Recipe Workshop was extensively tested through manual process 
 
         - [**Register Page Template**](#register-template)
             - [**Breakdown of Jinja Functionality in register.html**](#breakdown-of-jinja-functionality-in-register.html)
-            - [**Register Page Template - Breakdown of Views Used`**](#register-page---breakdown-of-views-used)
+            - [**Register Page Template - Breakdown of Views Used**](#register-page---breakdown-of-views-used)
 
         - [**Login Page Template**](#login-template)
             - [**Breakdown of Jinja Functionality in login.html**](#breakdown-of-jinja-functionality-in-login.html)
-            - [**Login Page Template - Breakdown of Views Used`**](#login-page---breakdown-of-views-used)
+            - [**Login Page Template - Breakdown of Views Used**](#login-page---breakdown-of-views-used)
 
         - [**Logout Functionality**](#logout-functionality)
-            - [**Logout Functionality- Breakdown of Views Used`**](#logout-functionality---breakdown-of-views-used)
+            - [**Logout Functionality- Breakdown of Views Used**](#logout-functionality---breakdown-of-views-used)
 
         - [**Profile Page Template**](#profile-template)
             - [**Breakdown of Jinja Functionality in profile.html**](#breakdown-of-jinja-functionality-in-profile.html)
             - [**Breakdown of jQuery Functionality in profile.html**](#breakdown-of-jquery-functionality-in-profile.html)
-            - [**Profile Page Template - Breakdown of Views Used`**](#profile-page---breakdown-of-views-used)
+            - [**Profile Page Template - Breakdown of Views Used**](#profile-page---breakdown-of-views-used)
 
         - [**Search Page Template**](#search-template)
             - [**Breakdown of Jinja Functionality in profile.html**](#breakdown-of-jinja-functionality-in-search.html)
-            - [**Profile Page Template - Breakdown of Views Used`**](#search-page---breakdown-of-views-used)
+            - [**Profile Page Template - Breakdown of Views Used**](#search-page---breakdown-of-views-used)
 
         - [**Recipe Page Template**](#recipe-template)
             - [**Breakdown of Jinja Functionality in recipe.html**](#breakdown-of-jinja-functionality-in-recipe.html)
             - [**Breakdown of jQuery Functionality in recipe.html**](#breakdown-of-jquery-functionality-in-recipe.html)
-            - [**Recipe Page Template - Breakdown of Views Used`**](#recipe-page---breakdown-of-views-used)
+            - [**Recipe Page Template - Breakdown of Views Used**](#recipe-page---breakdown-of-views-used)
+
+        - [**Add Recipe Page Template**](#add-recipe-template)
+            - [**Breakdown of Jinja Functionality in create_recipe.html**](#breakdown-of-jinja-functionality-in-create_recipe.html)
+            - [**Breakdown of jQuery Functionality in create_recipe.html**](#breakdown-of-jquery-functionality-in-create_recipe.html)
+            - [**Add Recipe Page Template - Breakdown of Views Used**](#add-recipe-page---breakdown-of-views-used)
+
 
 
         - [**Helper Functions**](#helper-functions)
@@ -68,6 +74,8 @@ All code used for Recipe Workshop was extensively tested through manual process 
             - [**New Password Checker**](#new-password-checker)
             - [**Email Updater**](#email-updater)
             - [**Password Updater**](#password-updater)
+            - [**Recipe Steps**](#recipe-steps)
+            - [**Recipe Ingredients**](#recipe-ingredients)
 
 ## Code Validation
 
@@ -246,11 +254,11 @@ The overall site was designed using the Bootstrap Framework to make use of their
 
 - I tested to ensure that the Navbar is correctly displayed at all times and the buttons within it responded and acted as intended.
 
-  - Bug Identified - **Navbar Covered Top of Each Pages Content*
+  - **Bug Identified** - Navbar Covered Top of Each Pages Content
 
     - As the Navbar is fixed to the top of the page, this caused an issue where content was covered by it.
 
-  - Fix Applied:
+  - **Fix Applied**:
 
     - To give the page content some breathing room, I added ``padding-top: 80px;`` to the ``.content`` class which resolved the issue.
 
@@ -262,11 +270,11 @@ The overall site was designed using the Bootstrap Framework to make use of their
 
 - In order to ensure that the site retained cross-browser responsiveness, I used the online CSS [Autoprefixer](https://autoprefixer.github.io/).
 
-  - Bug Identified - **Search Bar Aligned to Left of Screen*
+  - **Bug Identified** - Search Bar Aligned to Left of Screen
 
     - At certain media sizes, the search bar aligned itself to the left of the search div which was unintended
 
-  - Fix Applied:
+  - **Fix Applied**:
 
     - In order to correct this issue I used the bootstrap class of ``justify-content-center``
 
@@ -280,11 +288,11 @@ The overall site was designed using the Bootstrap Framework to make use of their
 
 - I tested to ensure that the results shown in the search results page are displayed correctly to the user and that they kept a consistent flow between different media devices.
 
-  - Bug Identified - **Recipe Image Displayed Incorrectly on iPhone X*
+  - **Bug Identified** - Recipe Image Displayed Incorrectly on iPhone X
 
     - When viewing the recipe page through the emulator the recipe page behaved and looked as expected however; when viewing the page on an actual iPhone X the recipe image became distorted and squished. After researching the issue, I discovered that it is a known bug on how Safari stretches images.
 
-  - Fix Applied:
+  - **Fix Applied**:
 
     - To fix this issue, I applied ``height: 100% !important;`` to the ``.recipe-image`` class which fixed the issue and the image displayed as expected.
 
@@ -345,6 +353,8 @@ The overall site was designed using the Bootstrap Framework to make use of their
 - I tested to ensure that the text content and image displayed and adjusted appropriately to the user and the media screen size they were viewing the page on.
 
 ### Functionality Testing
+
+At all instances within the below testing summaries, I ensured that the correct information was displayed within the jinja ``{% block TAG_NAME %}`` tags.
 
 #### Base Template
 
@@ -482,11 +492,11 @@ I manually tested every link works as intended and directs the user to the relev
 
   - No issues were discovered with the functionality of sending the information to the backend & server however; an unintended bug was discovered before the message could be shown.
 
-  - Bug Identified - **Page Refreshes on submit*
+  - **Bug Identified** - Page Refreshes on submit
 
     - When the user submits the form, the default function of the form is to refresh the page which prevents the user from seeing the response message.
 
-  - Fix Applied:
+  - **Fix Applied**:
 
     - In order to correct this issue I used ``event.preventDefault();`` to stop the default function of the form and allow the message to be shown to the user.
 
@@ -865,7 +875,7 @@ Breakdown of ``update_profile(username)`` functionality:
 
   - No issues were discovered with this functionality.
 
-- The next stage processes the form request and uses [helper function - image upload](#image-upload) to update the users profile and insert the new profile information in the database.
+- The next stage processes the file request and uses helper function - [image upload](#image-upload) to update the users profile and insert the new profile information in the database.
 
   - I tested to that the information updates correctly and that the new profile image and text is displayed instead of the default information.
 
@@ -1115,16 +1125,143 @@ This view handles the recipe like functionality which is used in the ``recipe.ht
 
     - In both instance, the new ``likes`` count is returned to the AJAX functionality to enable it to update the HTML and display the new count.
 
-      - Bug Identified - **New value for likes not being sent through*
+      - **Bug Identified**- New value for likes not being sent through
 
         - After a user liked/unliked the recipe, the new value for ``likes`` was not being sent through to the AJAX function.
 
-      - Fix Applied:
+      - **Fix Applied**:
 
         - To fix this issue, I moved the variable ``new_like`` which queries the ``likes`` field in the recipes document, to after the ``update_one`` has been completed to ensure the query is using the latest value.
 
+#### Add Recipe Page Template
 
+I verified that the add recipe page displays as expected and that all buttons work as intended.
 
+##### Breakdown of Jinja functionality in ``create_recipe.html``
+
+No additional Jinja statements were used within the creation of this page outside of the required block tags.
+
+I verified that all HTML input elements with required tags and patterns worked as intended.
+
+- **Bug Identified** - Recipe Could be Submitted Twice
+
+  - When a user submitted the recipe, they could accidentally submit the same hitting the submit button twice within quick succession.
+
+- **Fix Applied**
+
+  - To address this issue I added a jQuery function to disable the submit button after a valid form has been submitted once.
+
+##### Breakdown of jQuery functionality in ``create_recipe.html``
+
+- Remaining Character Length - Recipe Name & Recipe Description
+
+  - I verified that the function that updates the HTML text for both the Recipe Name & Recipe Description remaining characters works as intended and that the remaining characters are displayed to the user.
+
+  - I verified that when the max character count is reached that the HTML text turns red for that field.
+
+    - **Bug Identified** - Keyup Event Not Working for Mobile Devices
+
+      - The keyup event worked correctly for Desktops and displayed the correct information to the user however on a mobile phone, the keyup events were not being registered.
+
+    - **Fix Applied**
+
+      - To address this issue I amended the jQuery to include input, as follows:
+
+      ```Javascript
+      .on("keyup input", ...)
+      ```
+
+- File Validation Function:
+
+  - I verified that the jQuery Function for validating image uploads works correctly and that:
+
+    - A message is shown to the user if there is an error with the file upload such as incorrect file or file is too large, or if the image has been accepted.
+
+    - That the submit button is disabled if the file is not acceptable and enabled if the file is acceptable.
+
+    - That the messages disappear on file change to show the new validation message.
+
+    - No issues were discovered with this functionality.
+
+- Adding / Removing Input Fields for Steps and Ingredient:
+
+  - I verified that when a user presses the "+" or "-" under the relevant ingredient or step input that it adds or removes a field input.
+  
+    - When an input was added, I made sure that the input element was correct and had the necessary attributes.
+
+    - When an input was removed, I made sure that it was the last child input that was removed.
+
+    - **Bug Identified** - User could remove all the inputs from the respective ingredient/step field
+
+      - A user could keep on clicking the remove button and remove all inputs for either the steps or/and ingredient field.
+
+    - **Fix Applied**
+
+      - To address this I applied a conditional statement that adds the ``disabled`` attribute to the corresponding remove button when there is only one input remaining and this attribute is removed when a user adds an input as follows:
+
+      ```Javascript
+      $("#remove_ingredient").on("click", () => {
+          let ingredientLength = $("#ingredient").children("input").length;
+
+          if( ingredientLength <= 1) {
+              $("#remove_ingredient").attr("disabled", "disabled");
+          } else {
+              $("#ingredient input:last-child").remove();
+          }
+      });
+      ```
+
+    - The following line of code was added to the corresponding add button:
+
+    ```Javascript
+    $("#remove_ingredient").removeAttr("disabled", "disabled");
+    ```
+  
+- Functionality to Address Double Submit Bug:
+
+  - As mentioned in the previous section, a bug was identified that allowed a user to submit the same recipe twice if they clicks on the submit button in quick succession. This led to implementing the below code which resolved that bug:
+
+    ```Javascript
+      $(".recipe-submit").on("click", function (event) {
+        let validForm = this.form.checkValidity();
+
+        if (validForm) {
+            event.preventDefault();
+            $(this).attr("disabled", "disabled");
+            $(this).closest("form").submit();
+        }
+    });
+    ```  
+
+##### Add Recipe Page - Breakdown of Views Used
+
+**Associated View - Route: ``/create_recipe`` Function: ``add_recipe()``**
+
+Breakdown of ``add_recipe()`` functionality:
+
+- Conditional Statement - Verifying User in Session:
+  
+  - When a user a loads the page, a conditional statement is run which checks to see whether a user is in session. The result of the conditional statement is saved in a variable.
+
+    - If a user is in session then their session username is saved to the ``username`` variable.
+
+    - If no user is in session then an empty string is saved in the ``username`` variable.
+
+    - If there is no user in session, then they are redirected to the login page as only logged in users can submit recipes.
+
+      - I tested this functionality by trying to access the add recipe page when not logged in and using an account that is logged in. This functionality works as intended.
+
+- Inserting Form Information into the Database:
+
+  - When the form information has been validated and submitted to the backend, the fields from the form are assigned to variables which can be used to create a new document that is inserted into the database.
+
+    - Two helper functions are used for the steps and ingredient fields as these can be dynamic according to what the user has inputted.
+
+      - The helper functions are [**Recipe Steps**](#recipe-steps) and [**Recipe Ingredients**](#recipe-ingredients).
+
+    - The file request uses the helper function - [image upload](#image-upload) to upload the image for the recipe and store the ``image_url`` and ``image_id`` in the associated variables within  the document to be inserted.
+
+    - I verified that all the information submitted from the form correctly gets uploaded to the database and no errors were found.
 
 #### Helper Functions
 
@@ -1132,7 +1269,7 @@ Below are the helper functions created to aid in reducing the repetitive code wi
 
 ##### Image Upload
 
-The ``upload_image()`` takes in two arguments:
+The ``upload_image()`` function takes in two arguments:
 
 - ``variable`` - This is the variable with the request.file assigned to it.
 
@@ -1146,11 +1283,11 @@ The function will then use the ``global`` variable names ``image_url``, and ``im
 
 I have verified that the functionality with this function works as intended by uploading the required file to Cloudinary and stores the correct information in the variables.
 
-This function is used within [Profile View](#profile-page---breakdown-of-views-used), [Add Recipe View]() and [Manage Recipe View]().
+This function is used within [Profile View](#profile-page---breakdown-of-views-used), [Add Recipe View](#add-recipe-page---breakdown-of-views-used) and [Manage Recipe View]().
 
 ##### No Change In Account Information
 
-The ``no_change_check()`` takes in four arguments:
+The ``no_change_check()`` function takes in four arguments:
 
 - email - This is the current email for the users account.
 
@@ -1174,7 +1311,7 @@ I have verified that this function works correctly by testing against the variou
 
 ##### New Password Checker
 
-The ``new_pass_check()`` takes two arguments:
+The ``new_pass_check()`` function takes two arguments:
 
 - new - This is the new password submitted with the account update.
 
@@ -1186,7 +1323,7 @@ I verified this function worked correctly by passing through a matching password
 
 ##### Email Updater
 
-The ``email_update()`` takes two arguments:
+The ``email_update()`` function takes two arguments:
 
 - user_id - This is the user id related for the record to be updated.
 
@@ -1198,7 +1335,7 @@ I have verified that this function correctly updates the users information.
 
 ##### Password Updater
 
-The ``password_update()`` takes two arguments:
+The ``password_update()`` function takes two arguments:
 
 - user_id - This is the user id related for the record to be updated.
 
@@ -1207,3 +1344,27 @@ The ``password_update()`` takes two arguments:
 This function updates the password in the users document in the user collection.
 
 I have verified that this function correctly updates the users information.
+
+##### Recipe Steps
+
+The ``recipe_steps()`` function takes one argument:
+
+- req - This is request.form.
+
+This function uses the global variable ``steps_list`` and then assigns a list to it.
+
+The function then iterates over the request.form, looks for the key ``step`` then appends the value to the ``steps_list`` variable.
+
+I have verified that this function correctly and assigns all the steps to the right variable which is then used by the relevant view.
+
+##### Recipe Ingredients
+
+The ``recipe_ingredients()`` function takes one argument:
+
+- req - This is request.form.
+
+This function uses the global variable ``ingredients_list`` and then assigns a list to it.
+
+The function then iterates over the request.form, looks for the key ``ingredients`` then appends the value to the ``ingredients_list`` variable.
+
+I have verified that this function correctly and assigns all the ingredients to the right variable which is then used by the relevant view.
