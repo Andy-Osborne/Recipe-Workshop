@@ -108,7 +108,10 @@ The below goes through of of the user stores listed in the UX section of the [RE
 
 1. I want the landing page of the website to be visually appealing to me as this sets my expectation for the rest of the website.
 
-    - The landing page of the website does things but how does it do this?
+    - The landing page of the website uses soft colours that compliment each other to make the user feel at home.
+    - There are various pictures of food such as the search banner and the recipe images that are uploaded by users to help reinforce to the user that the site is about food and sharing recipes.
+    - The user is not bombarded by blocks of text and images but has enough white space to help them focus on the main elements of the website as they scroll through the landing page.
+    - The interactivity of the landing page helps the user understand immediately what they can interact with - such as expanding navbar buttons, images that zoom in as the cursor scrolls over it, and buttons/links that change colour on hover.
 
 2. I want to be able to see the most liked recipe on the landing page of the website so I am able to try this recipe out for myself.
 
