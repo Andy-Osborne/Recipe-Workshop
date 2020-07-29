@@ -5,6 +5,28 @@
 {% block mdescription %}View the latest recipes created by {{username.username|title}}.{% endblock %}
 
 {% block main %}
+
+{% if username == "" %}
+
+<!-- Shows if profile does not exist -->
+
+<div class="container-fluid p-0">
+    <div class="row no-gutters">
+        <div class="col-12">
+            <div class="no-results-container">
+                <div class="no-results p-2 text-center">
+                    <h1>Looks like this chef is currently unavailable</h1>
+                    <p>We couldn't find the chef you were looking for.</p>
+
+                    <img class="no-results-logo" src="/static/images/logo.png" alt="Recipe Workshop">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% else %}
+
 <div class="container">
     <div class="row no-gutters">
         <div class="col-12 text-center mt-3">
@@ -221,6 +243,8 @@
         </div>
     </div>
 </div>
+
+{% endif %}
 
 {% endif %}
 
