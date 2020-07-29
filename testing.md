@@ -576,6 +576,32 @@ Breakdown of ``index()`` functionality:
 
 - No issues were discovered with the functionality of this view
 
+**Associated View - Route: ``/newsletter`` Function: ``newsletter_register()``**
+
+- Breakdown of ``newsletter_register()`` functionality:
+
+  - This view processes the form information sent by the AJAX function:
+
+    - It saves the email address associated with form and saves it to variable ``email``.
+
+    - It queries the newsletter collection to see if this email address exists.
+
+    - It uses the variable ``username`` and runs a conditional check to see if there is a user in session. If there is a user in session then it saves the username in this variable, otherwise an empty string is saved.
+
+    - A conditional statement is then run based on whether the email already exists in the database collection and the appropriate message is then sent back to the AJAX functionality and displayed to the user.
+
+      - I validated that this functionality works as intended and the correct message is shown to the user in the following scenarios:
+
+        - A user who is not logged in and has not signed up before.
+
+        - A user who is not logged in and has signed up before.
+
+        - A user who is logged in and not signed up before.
+
+        - A user who previously signed up when not logged in, and then tries to sign up once they have logged in.
+
+- No issues were discovered with the functionality of this view and the database collection updated as expected.
+
 #### Register Page Template
 
 I performed various tests to ensure that the functionality of the register template works as intended, messages flash to the user and that the validation is completed.
@@ -1422,7 +1448,7 @@ Breakdown of ``advertise()`` functionality:
 
 I verified that this work works correctly and when the user access it, they are redirected the relevant page.
 
-### 404 Page Template
+#### 404 Page Template
 
 I verified that the custom 404 page correctly generates and is displayed to the user when they access a view that does not exist.
 
