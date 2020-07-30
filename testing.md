@@ -79,6 +79,10 @@ All code used for Recipe Workshop was extensively tested through manual process 
 
         - [**404 Page Template**](#404-page-template)
 
+        - [**404 Page Template**](#410-page-template)
+
+        - [**404 Page Template**](#500-page-template)
+
         - [**Helper Functions**](#helper-functions)
             - [**Image Upload**](#image-upload)
             - [**No Change In Account Information**](#no-change-in-account-information)
@@ -1454,6 +1458,14 @@ I verified that this work works correctly and when the user access it, they are 
 #### 404 Page Template
 
 I verified that the custom 404 page correctly generates and is displayed to the user when they access a view that does not exist.
+
+#### 410 Page Template
+
+I have not verified that the page correctly catches the error as I was unable to generate the 410 error. I did create a view to test that the 410.html displays correctly.
+
+#### 500 Page Template
+
+I verified that the custom 500 page correctly generates and is displayed to the user when they access a view that does not exist. I tested this view by adding a recipe, copying the URL, deleting the recipe, then trying to access this URL.
 
 #### Helper Functions
 
