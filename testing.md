@@ -67,8 +67,8 @@ All code used for Recipe Workshop was extensively tested through manual process 
             - [**Add Recipe Page Template - Breakdown of Views Used**](#add-recipe-page---breakdown-of-views-used)
 
         - [**Manage Recipe Page Template**](#manage-recipe-page-template)
-            - [**Breakdown of Jinja Functionality in create_recipe.html**](#breakdown-of-jinja-functionality-in-manage_recipe.html)
-            - [**Breakdown of jQuery Functionality in create_recipe.html**](#breakdown-of-jquery-functionality-in-manage_recipe.html)
+            - [**Breakdown of Jinja Functionality in manage_recipe.html**](#breakdown-of-jinja-functionality-in-manage_recipe.html)
+            - [**Breakdown of jQuery Functionality in manage_recipe.html**](#breakdown-of-jquery-functionality-in-manage_recipe.html)
             - [**Manage Recipe Page Template - Breakdown of Views Used**](#manage-recipe-page---breakdown-of-views-used)
 
         - [**Privacy Page Template**](#privacy-page-template)
@@ -376,7 +376,7 @@ I performed various tests to ensure that the conditional statements used within 
 
 I manually tested every link works as intended and directs the user to the relevant page.
 
-##### Breakdown of Jinja functionality in ``public_base.html``
+##### Breakdown of Jinja functionality in public_base.html
 
 - Conditional Navbar Options:
 
@@ -424,7 +424,7 @@ I manually tested every link works as intended and directs the user to the relev
 
   - No bugs were discovered with this functionality.
 
-##### Breakdown of jQuery functionality in ``public_base.html``
+##### Breakdown of jQuery functionality in public_base.html
 
 - Adding and Remove ``.btn-zoom``:
 
@@ -452,7 +452,7 @@ I performed various tests to ensure that the conditional statements used within 
 
 I manually tested every link works as intended and directs the user to the relevant page.
 
-##### Breakdown of Jinja functionality in ``index.html``
+##### Breakdown of Jinja functionality in index.html
 
 - Highest Rated Recipe:
 
@@ -490,7 +490,7 @@ I manually tested every link works as intended and directs the user to the relev
 
       - No issues were discovered under this condition as the banner was visible on first visit and then no longer visible on subsequent visits.
 
-##### Breakdown of jQuery functionality in ``index.html``
+##### Breakdown of jQuery functionality in index.html
 
 - Newsletter AJAX Function:
 
@@ -611,7 +611,7 @@ I performed various tests to ensure that the functionality of the register templ
 
 I manually tested the link for the login page works and directs the user to the relevant page.
 
-##### Breakdown of Jinja functionality in ``register.html``
+##### Breakdown of Jinja functionality in register.html
 
 For the registration page templating, I used ``flask_wtf`` and it's import ``Flaskform``
 
@@ -707,7 +707,7 @@ I performed various tests to ensure that the functionality of the login template
 
 I manually tested the link for the register page works and directs the user to the relevant page.
 
-##### Breakdown of Jinja functionality in ``login.html``
+##### Breakdown of Jinja functionality in login.html
 
 For the login page templating, I used ``flask_wtf`` and it's import ``Flaskform``
 
@@ -795,7 +795,7 @@ I performed various tests to ensure that the conditional statements used within 
 
 I manually tested every link works as intended and directs the user to the relevant page.
 
-##### Breakdown of Jinja functionality in ``profile.html``
+##### Breakdown of Jinja functionality in profile.html
 
 - Conditional Check - Profile Exists:
 
@@ -843,7 +843,7 @@ I manually tested every link works as intended and directs the user to the relev
 
         - No issues were discovered.
 
-##### Breakdown of jQuery functionality in ``profile.html``
+##### Breakdown of jQuery functionality in profile.html
 
 - Account Information Update AJAX Function:
 
@@ -981,7 +981,7 @@ I performed various tests to ensure that the functionality of the search templat
 
 I manually tested the link for the login page works and directs the user to the relevant page.
 
-##### Breakdown of Jinja functionality in ``search.html``
+##### Breakdown of Jinja functionality in search.html
 
 For the search page templating, I used a mixture of conditional statements and the pagination styling from ``flask-pagination``
 
@@ -1073,7 +1073,7 @@ I verified that the recipe page displays the correct recipe information as expec
 
 I manually tested every link works as intended and directs the user to the relevant page.
 
-##### Breakdown of Jinja functionality in ``recipe.html``
+##### Breakdown of Jinja functionality in recipe.html
 
 - Conditional Check - Recipe Author:
 
@@ -1107,7 +1107,7 @@ I manually tested every link works as intended and directs the user to the relev
 
       - I verified each of these conditions works intended and no errors were found in this functionality.
 
-##### Breakdown of jQuery functionality in ``recipe.html``
+##### Breakdown of jQuery functionality in recipe.html
 
 - Like Update AJAX Function:
 
@@ -1177,7 +1177,7 @@ This view handles the recipe like functionality which is used in the ``recipe.ht
 
 I verified that the add recipe page displays as expected and that all buttons work as intended.
 
-##### Breakdown of Jinja functionality in ``create_recipe.html``
+##### Breakdown of Jinja functionality in create_recipe.html
 
 No additional Jinja statements were used within the creation of this page outside of the required block tags.
 
@@ -1191,7 +1191,7 @@ I verified that all HTML input elements with required tags and patterns worked a
 
   - To address this issue I added a jQuery function to disable the submit button after a valid form has been submitted once.
 
-##### Breakdown of jQuery functionality in ``create_recipe.html``
+##### Breakdown of jQuery functionality in create_recipe.html
 
 - Remaining Character Length - Recipe Name & Recipe Description
 
@@ -1307,7 +1307,7 @@ Breakdown of ``add_recipe()`` functionality:
 
 I verified that the manage recipe page displays as expected and that all buttons work as intended.
 
-##### Breakdown of Jinja functionality in ``manage_recipe.html``
+##### Breakdown of Jinja functionality in manage_recipe.html
 
 - I verified that the current recipe information was correctly populated within the form so the user was able to see their previous information and update it where required.
 
@@ -1315,7 +1315,7 @@ I verified that the manage recipe page displays as expected and that all buttons
 
 - I verified that the conditional statement for adding the ``selected`` attribute to the dropdown lists worked correctly and selected the correct option based on the database information.
 
-##### Breakdown of jQuery functionality in ``manage_recipe.html``
+##### Breakdown of jQuery functionality in manage_recipe.html
 
 - Upload New Image Functionality:
 
