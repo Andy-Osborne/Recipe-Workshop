@@ -27,8 +27,8 @@ All code used for Recipe Workshop was extensively tested through manual process 
     - [**Functionality Testing**](#functionality-testing)
 
         - [**Base Template**](#base-template)
-            - [**Breakdown of Jinja Functionality in public_base.html**](#breakdown-of-jinja-functionality-in-public_base.html)
-            - [**Breakdown of jQuery Functionality in public_base.html**](#breakdown-of-jquery-functionality-in-public_base.html)
+            - [**Breakdown of Jinja Functionality in public_base.html**](#breakdown-of-jinja-functionality-in-base-template)
+            - [**Breakdown of jQuery Functionality in public_base.html**](#breakdown-of-jquery-functionality-in-base-template)
             - [**Base Template - Breakdown of Views Used**](#base-template---breakdown-of-views-used)
 
         - [**Landing Page Template**](#landing-page-template)
@@ -376,7 +376,7 @@ I performed various tests to ensure that the conditional statements used within 
 
 I manually tested every link works as intended and directs the user to the relevant page.
 
-##### Breakdown of Jinja functionality in public_base.html
+##### Breakdown of Jinja functionality in Base Template
 
 - Conditional Navbar Options:
 
@@ -424,7 +424,7 @@ I manually tested every link works as intended and directs the user to the relev
 
   - No bugs were discovered with this functionality.
 
-##### Breakdown of jQuery functionality in public_base.html
+##### Breakdown of jQuery functionality in Base Template
 
 - Adding and Remove ``.btn-zoom``:
 
