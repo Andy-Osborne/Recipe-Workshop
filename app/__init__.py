@@ -10,4 +10,4 @@ from app import user
 from app import search
 from app import recipe
 from app import footerviews
-from app import error
+from app import errors

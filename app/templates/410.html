@@ -1,0 +1,22 @@
+{% extends 'public_base.html' %}
+
+{% block title%}RW | Page Gone{% endblock %}
+
+{% block main %}
+
+<div class="container-fluid p-0">
+    <div class="row no-gutters">
+        <div class="col-12">
+            <div class="no-results-container">
+                <div class="no-results p-2 text-center">
+                    <h1>Oh Dear! It looks like we've misplaced this page!</h1>
+                    <p>We're going to get the chefs looking for it but let's get you back <a href="{{url_for('index')}}">home</a></p>
+
+                    <img class="no-results-logo" src="/static/images/logo.png" alt="Recipe Workshop">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
