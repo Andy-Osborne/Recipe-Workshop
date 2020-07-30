@@ -1467,7 +1467,7 @@ The ``upload_image()`` function takes in two arguments:
 
 - ``folder_string`` - This is the name of the folder of where the image will be uploaded into Cloudinary.
 
-The function will then use the ``global`` variable names ``image_url``, and ``image_id`` which it will assign values too after it has uploaded the image. These variables are then used to be submitted into the database with either the recipe or profile information.
+This function is then assigned to the relevant variable names ``image_url``, and ``image_id`` which it will assign values too after it has uploaded the image. These variables are then used to be submitted into the database with either the recipe or profile information.
 
 - ``image_url`` - Contains the URL for the uploaded image.
 
@@ -1543,7 +1543,7 @@ The ``recipe_steps()`` function takes one argument:
 
 - req - This is request.form.
 
-This function uses the global variable ``steps_list`` and then assigns a list to it.
+This function is then assigned to the relevant variable ``steps_list`` the value of the list.
 
 The function then iterates over the request.form, looks for the key ``step`` then appends the value to the ``steps_list`` variable.
 
@@ -1555,7 +1555,7 @@ The ``recipe_ingredients()`` function takes one argument:
 
 - req - This is request.form.
 
-This function uses the global variable ``ingredients_list`` and then assigns a list to it.
+This function is then assigned to the relevant variable ``ingredients_list`` the value of the list.
 
 The function then iterates over the request.form, looks for the key ``ingredients`` then appends the value to the ``ingredients_list`` variable.
 
