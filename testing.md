@@ -27,48 +27,48 @@ All code used for Recipe Workshop was extensively tested through manual process 
     - [**Functionality Testing**](#functionality-testing)
 
         - [**Base Template**](#base-template)
-            - [**Breakdown of Jinja Functionality in public_base.html**](#breakdown-of-jinja-functionality-in-base-template)
-            - [**Breakdown of jQuery Functionality in public_base.html**](#breakdown-of-jquery-functionality-in-base-template)
+            - [**Breakdown of Jinja Functionality in Base Template**](#breakdown-of-jinja-functionality-in-base-template)
+            - [**Breakdown of jQuery Functionality in Base Template**](#breakdown-of-jquery-functionality-in-base-template)
             - [**Base Template - Breakdown of Views Used**](#base-template---breakdown-of-views-used)
 
         - [**Landing Page Template**](#landing-page-template)
-            - [**Breakdown of Jinja Functionality in index.html**](#breakdown-of-jinja-functionality-in-index.html)
-            - [**Breakdown of jQuery Functionality in index.html**](#breakdown-of-jquery-functionality-in-index.html)
+            - [**Breakdown of Jinja Functionality in Landing Page Template**](#breakdown-of-jinja-functionality-in-landing-page-template)
+            - [**Breakdown of jQuery Functionality in Landing Page Template**](#breakdown-of-jquery-functionality-in-landing-page-template)
             - [**Landing Page Template - Breakdown of Views Used**](#landing-page---breakdown-of-views-used)
 
         - [**Register Page Template**](#register-page-template)
-            - [**Breakdown of Jinja Functionality in register.html**](#breakdown-of-jinja-functionality-in-register.html)
+            - [**Breakdown of Jinja Functionality in Register Page Template**](#breakdown-of-jinja-functionality-in-register-page-template)
             - [**Register Page Template - Breakdown of Views Used**](#register-page---breakdown-of-views-used)
 
         - [**Login Page Template**](#login-page-template)
-            - [**Breakdown of Jinja Functionality in login.html**](#breakdown-of-jinja-functionality-in-login.html)
+            - [**Breakdown of Jinja Functionality in Login Page Template**](#breakdown-of-jinja-functionality-in-login-page-template)
             - [**Login Page Template - Breakdown of Views Used**](#login-page---breakdown-of-views-used)
 
         - [**Logout Functionality**](#logout-functionality)
             - [**Logout Functionality- Breakdown of Views Used**](#logout-functionality---breakdown-of-views-used)
 
         - [**Profile Page Template**](#profile-page-template)
-            - [**Breakdown of Jinja Functionality in profile.html**](#breakdown-of-jinja-functionality-in-profile.html)
-            - [**Breakdown of jQuery Functionality in profile.html**](#breakdown-of-jquery-functionality-in-profile.html)
+            - [**Breakdown of Jinja Functionality in Profile Page Template**](#breakdown-of-jinja-functionality-in-profile-page-template)
+            - [**Breakdown of jQuery Functionality in Profile Page Template**](#breakdown-of-jquery-functionality-in-profile-page-template)
             - [**Profile Page Template - Breakdown of Views Used**](#profile-page---breakdown-of-views-used)
 
         - [**Search Page Template**](#search-page-template)
-            - [**Breakdown of Jinja Functionality in profile.html**](#breakdown-of-jinja-functionality-in-search.html)
-            - [**Profile Page Template - Breakdown of Views Used**](#search-page---breakdown-of-views-used)
+            - [**Breakdown of Jinja Functionality in Search Page Template**](#breakdown-of-jinja-functionality-in-search-page-template)
+            - [**Search Page Template - Breakdown of Views Used**](#search-page---breakdown-of-views-used)
 
         - [**Recipe Page Template**](#recipe-page-template)
-            - [**Breakdown of Jinja Functionality in recipe.html**](#breakdown-of-jinja-functionality-in-recipe.html)
-            - [**Breakdown of jQuery Functionality in recipe.html**](#breakdown-of-jquery-functionality-in-recipe.html)
+            - [**Breakdown of Jinja Functionality in Recipe Page Template**](#breakdown-of-jinja-functionality-in-recipe-page-template)
+            - [**Breakdown of jQuery Functionality in Recipe Page Template**](#breakdown-of-jquery-functionality-in-recipe-page-template)
             - [**Recipe Page Template - Breakdown of Views Used**](#recipe-page---breakdown-of-views-used)
 
         - [**Add Recipe Page Template**](#add-recipe-page-template)
-            - [**Breakdown of Jinja Functionality in create_recipe.html**](#breakdown-of-jinja-functionality-in-create_recipe.html)
-            - [**Breakdown of jQuery Functionality in create_recipe.html**](#breakdown-of-jquery-functionality-in-create_recipe.html)
+            - [**Breakdown of Jinja Functionality in Add Recipe Page Template**](#breakdown-of-jinja-functionality-in-add-recipe-page-template)
+            - [**Breakdown of jQuery Functionality in Add Recipe Page Template**](#breakdown-of-jquery-functionality-in-add-recipe-page-template)
             - [**Add Recipe Page Template - Breakdown of Views Used**](#add-recipe-page---breakdown-of-views-used)
 
         - [**Manage Recipe Page Template**](#manage-recipe-page-template)
-            - [**Breakdown of Jinja Functionality in manage_recipe.html**](#breakdown-of-jinja-functionality-in-manage_recipe.html)
-            - [**Breakdown of jQuery Functionality in manage_recipe.html**](#breakdown-of-jquery-functionality-in-manage_recipe.html)
+            - [**Breakdown of Jinja Functionality in Manage Recipe Page Template**](#breakdown-of-jinja-functionality-in-manage-recipe-page-template)
+            - [**Breakdown of jQuery Functionality in Manage Recipe Page Template**](#breakdown-of-jquery-functionality-in-manage-recipe-page-template)
             - [**Manage Recipe Page Template - Breakdown of Views Used**](#manage-recipe-page---breakdown-of-views-used)
 
         - [**Privacy Page Template**](#privacy-page-template)
@@ -376,7 +376,7 @@ I performed various tests to ensure that the conditional statements used within 
 
 I manually tested every link works as intended and directs the user to the relevant page.
 
-##### Breakdown of Jinja functionality in Base Template
+##### Breakdown of Jinja Functionality in Base Template
 
 - Conditional Navbar Options:
 
@@ -424,7 +424,7 @@ I manually tested every link works as intended and directs the user to the relev
 
   - No bugs were discovered with this functionality.
 
-##### Breakdown of jQuery functionality in Base Template
+##### Breakdown of jQuery Functionality in Base Template
 
 - Adding and Remove ``.btn-zoom``:
 
@@ -452,7 +452,7 @@ I performed various tests to ensure that the conditional statements used within 
 
 I manually tested every link works as intended and directs the user to the relevant page.
 
-##### Breakdown of Jinja functionality in index.html
+##### Breakdown of Jinja Functionality in Landing Page Template
 
 - Highest Rated Recipe:
 
@@ -490,7 +490,7 @@ I manually tested every link works as intended and directs the user to the relev
 
       - No issues were discovered under this condition as the banner was visible on first visit and then no longer visible on subsequent visits.
 
-##### Breakdown of jQuery functionality in index.html
+##### Breakdown of jQuery Functionality in Landing Page Template
 
 - Newsletter AJAX Function:
 
@@ -611,7 +611,7 @@ I performed various tests to ensure that the functionality of the register templ
 
 I manually tested the link for the login page works and directs the user to the relevant page.
 
-##### Breakdown of Jinja functionality in register.html
+##### Breakdown of Jinja Functionality in Register Page Template
 
 For the registration page templating, I used ``flask_wtf`` and it's import ``Flaskform``
 
@@ -707,7 +707,7 @@ I performed various tests to ensure that the functionality of the login template
 
 I manually tested the link for the register page works and directs the user to the relevant page.
 
-##### Breakdown of Jinja functionality in login.html
+##### Breakdown of Jinja Functionality in Login Page Template
 
 For the login page templating, I used ``flask_wtf`` and it's import ``Flaskform``
 
@@ -795,7 +795,7 @@ I performed various tests to ensure that the conditional statements used within 
 
 I manually tested every link works as intended and directs the user to the relevant page.
 
-##### Breakdown of Jinja functionality in profile.html
+##### Breakdown of Jinja Functionality in Profile Page Template
 
 - Conditional Check - Profile Exists:
 
@@ -843,7 +843,7 @@ I manually tested every link works as intended and directs the user to the relev
 
         - No issues were discovered.
 
-##### Breakdown of jQuery functionality in profile.html
+##### Breakdown of jQuery Functionality in Profile Page Template
 
 - Account Information Update AJAX Function:
 
@@ -981,7 +981,7 @@ I performed various tests to ensure that the functionality of the search templat
 
 I manually tested the link for the login page works and directs the user to the relevant page.
 
-##### Breakdown of Jinja functionality in search.html
+##### Breakdown of Jinja Functionality in Search Page Template
 
 For the search page templating, I used a mixture of conditional statements and the pagination styling from ``flask-pagination``
 
@@ -1073,7 +1073,7 @@ I verified that the recipe page displays the correct recipe information as expec
 
 I manually tested every link works as intended and directs the user to the relevant page.
 
-##### Breakdown of Jinja functionality in recipe.html
+##### Breakdown of Jinja Functionality in Recipe Page Template
 
 - Conditional Check - Recipe Author:
 
@@ -1107,7 +1107,7 @@ I manually tested every link works as intended and directs the user to the relev
 
       - I verified each of these conditions works intended and no errors were found in this functionality.
 
-##### Breakdown of jQuery functionality in recipe.html
+##### Breakdown of jQuery Functionality in Recipe Page Template
 
 - Like Update AJAX Function:
 
@@ -1177,7 +1177,7 @@ This view handles the recipe like functionality which is used in the ``recipe.ht
 
 I verified that the add recipe page displays as expected and that all buttons work as intended.
 
-##### Breakdown of Jinja functionality in create_recipe.html
+##### Breakdown of Jinja Functionality in Add Recipe Page Template
 
 No additional Jinja statements were used within the creation of this page outside of the required block tags.
 
@@ -1191,7 +1191,7 @@ I verified that all HTML input elements with required tags and patterns worked a
 
   - To address this issue I added a jQuery function to disable the submit button after a valid form has been submitted once.
 
-##### Breakdown of jQuery functionality in create_recipe.html
+##### Breakdown of jQuery Functionality in Add Recipe Page Template
 
 - Remaining Character Length - Recipe Name & Recipe Description
 
@@ -1307,7 +1307,7 @@ Breakdown of ``add_recipe()`` functionality:
 
 I verified that the manage recipe page displays as expected and that all buttons work as intended.
 
-##### Breakdown of Jinja functionality in manage_recipe.html
+##### Breakdown of Jinja Functionality in Manage Recipe Page Template
 
 - I verified that the current recipe information was correctly populated within the form so the user was able to see their previous information and update it where required.
 
@@ -1315,7 +1315,7 @@ I verified that the manage recipe page displays as expected and that all buttons
 
 - I verified that the conditional statement for adding the ``selected`` attribute to the dropdown lists worked correctly and selected the correct option based on the database information.
 
-##### Breakdown of jQuery functionality in manage_recipe.html
+##### Breakdown of jQuery Functionality in Manage Recipe Page Template
 
 - Upload New Image Functionality:
 
